@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user_sql">
+	<insert id="insert" parameterType="java.util.List">
+		INSERT INTO user_tbl
+		(
+			idx,
+			mId,
+			mName,
+			department_id,
+			department_name,
+			team_id,
+			team_name,
+			job_code,
+			job_name,
+			job_spot,
+			job_detail,
+			job_rank,
+			email,
+			uLevel
+		)
+		VALUES
+		<foreach collection="list" open="(" close=")" separator="),(" item="item">
+			${item.idx},
+			'${item.mId}',
+			'${item.mName}',
+			'${item.department_id}',
+			'${item.department_name}',
+			'${item.team_id}',
+			'${item.team_name}',
+			'${item.job_code}',
+			'${item.job_name}',
+			'${item.job_spot}',
+			'${item.job_detail}',
+			'${item.job_rank}',
+			'${item.email}',
+			'${item.uLevel}'
+		</foreach>
+		ON DUPLICATE KEY UPDATE mName = mName, department_id = department_id
+	</insert> 
+</mapper>

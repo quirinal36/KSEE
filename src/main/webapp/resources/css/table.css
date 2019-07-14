@@ -1,0 +1,4 @@
+table { width:50%; border-collapse:collapse; border-bottom:2px solid #6bc2ae; }
+th, td { padding:5px 0; text-align:center; }
+thead th { width:10%; background:#6bc2ae; color:#fff; font-weight:bold; }
+tbody tr:nth-child(even) { background:#f5f5f5; }

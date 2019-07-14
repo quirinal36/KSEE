@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CharSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<fields>
+	<field>
+		<idx>1912</idx>
+		<mId>aaa</mId>
+		<mName>mName12</mName>
+		<department_id>department_id12</department_id>
+		<department_name>department_name</department_name>
+		<team_id>team_id</team_id>
+		<team_name>team_name</team_name>
+		<job_code>job_code</job_code>
+		<job_name>job_name</job_name>
+		<job_spot>job_spot</job_spot>
+		<job_detail>job_detail</job_detail>
+		<job_rank>job_rank</job_rank>
+		<email>email</email>
+		<uLevel>uLevel</uLevel>
+		<signDate>signDate</signDate>
+	</field>
+	<field>
+		<idx>1913</idx>
+		<mId>aaa01</mId>
+		<mName>mName13</mName>
+		<department_id>department_id13</department_id>
+		<department_name>department_name01</department_name>
+		<team_id>team_id01</team_id>
+		<team_name>team_name01</team_name>
+		<job_code>job_code01</job_code>
+		<job_name>job_name01</job_name>
+		<job_spot>job_spot01</job_spot>
+		<job_detail>job_detail01</job_detail>
+		<job_rank>job_rank01</job_rank>
+		<email>email01</email>
+		<uLevel>uLevel01</uLevel>
+		<signDate>signDate01</signDate>
+	</field>
+</fields>
+</CharSet>
