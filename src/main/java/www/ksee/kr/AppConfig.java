@@ -54,7 +54,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @EnableWebMvc
 @EnableScheduling
 @PropertySource("classpath:db.properties")
-@MapperScan("org.mybatis.spring.sample.mapper")
+@MapperScan(basePackages = {"www.ksee.kr"})
 public class AppConfig implements WebMvcConfigurer {
 
 	// db.properties 파일을 읽어옴

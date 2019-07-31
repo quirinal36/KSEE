@@ -75,134 +75,37 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		mv.addObject("serverTime", formattedDate);
-		
-		mv.setViewName("home");
+		mv.setViewName("index");
 		return mv;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/getdata")
-	public String getData(@RequestParam(value="service_id")Optional<String> serviceId,
-			@RequestParam(value="operation_id")Optional<String> operationId,
-			@RequestParam(value="authKey")Optional<String> auth_key,
-			@RequestParam(value="system_id")Optional<String> system_id) {
-		JSONObject json = new JSONObject();
-		json.put("service_id", serviceId.get());
-		json.put("operationId", operationId.get());
-		json.put("authKey", auth_key.get());
-		json.put("system_id", system_id.get());
-		
-		return json.toString();
+	@RequestMapping(value = "/company", method = RequestMethod.GET)
+	public ModelAndView getCompanyView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("company");
+		return mv;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/load/data", method=RequestMethod.GET)
-	public String loadData(@RequestParam(value="service_id")Optional<String> serviceId,
-			@RequestParam(value="operation_id")Optional<String> operationId) {
-		String response = new String();
-		try {
-			File file = ResourceUtils.getFile("classpath:connect.properties");
-			String data = FileUtils.readFileToString(file, Config.ENCODING);
-			JSONObject connectInfo = new JSONObject(data);
-			
-//			StringBuilder uriBuilder = new StringBuilder()
-//					.append(connectInfo.getString("connect.url"))
-//					.append("?system_id=").append(connectInfo.getString("connect.system_id"))
-//					.append("&authKey=").append(connectInfo.getString("connect.auth_key"))
-//					.append("&service_id=").append(connectInfo.getString("connect.service_id"))
-//					.append("&operation_id=").append(connectInfo.getString("connect.operation_id"));
-//			URI uri = new URI(uriBuilder.toString());
-//			
-//			response = restTemplate.getForObject(uri, String.class);
-//			logger.info(response);
-			
-			
-			MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-			params.add("system_id", connectInfo.getString("connect.system_id"));
-			params.add("authKey", connectInfo.getString("connect.auth_key"));
-			params.add("service_id", connectInfo.getString("connect.service_id"));
-			params.add("operation_id", connectInfo.getString("connect.operation_id"));
-			UriComponents uriComp = UriComponentsBuilder.fromHttpUrl(connectInfo.getString("connect.url")).queryParams(params).build();
-			
-			RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
-			response = restTemplate.getForObject(uriComp.toUri(), String.class);
-			logger.info(response);
-			
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		
-		return response;
+	@RequestMapping(value = "/information", method = RequestMethod.GET)
+	public ModelAndView getInformationView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("information");
+		return mv;
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/data/save", method=RequestMethod.GET)
-	public String dataSave() {
-		logger.info("data save");
-		List<UserVO> list = new ArrayList<>();
-		
-		try {
-			File file = ResourceUtils.getFile("classpath:data.xml");
-			String data = FileUtils.readFileToString(file, Config.ENCODING);
-			
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true);
-			DocumentBuilder builder;
-			Document doc = null;
-
-			builder = factory.newDocumentBuilder();
-            doc = builder.parse(new InputSource(new StringReader(data)));
-            XPathFactory xpathFactory = XPathFactory.newInstance();
-            XPath xpath = xpathFactory.newXPath();
-            XPathExpression expr = xpath.compile("//fields/field");
-            NodeList nodeList = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
-            logger.info("logger length : "+nodeList.getLength());
-            for(int i=0; i<nodeList.getLength(); i++) {
-            	logger.info("____________________________");
-            	NodeList child = nodeList.item(i).getChildNodes();
-            	Map<String, String> map = new HashMap<>();
-            	for(int j=0; j<child.getLength(); j++) {
-            		
-            		Node node = child.item(j);
-            		if(node.getNodeType() == Node.ELEMENT_NODE) {
-	            		map.put(node.getNodeName(), node.getTextContent());
-            		}
-            	}
-            	UserVO user = UserVO.parse(map);
-            	logger.info(user.toString());
-            	list.add(user);
-            }
-		}catch(FileNotFoundException e) {
-			logger.info(e.getLocalizedMessage());
-		} catch (IOException e) {
-			logger.info(e.getLocalizedMessage());
-		} catch (ParserConfigurationException e) {
-			logger.info(e.getLocalizedMessage());
-		} catch (SAXException e) {
-			logger.info(e.getLocalizedMessage());
-		} catch (XPathExpressionException e) {
-			logger.info(e.getLocalizedMessage());
-		}
-		
-		JSONObject json = new JSONObject();
-		JSONArray array = new JSONArray();
-		Iterator<UserVO> iter = list.iterator();
-		while(iter.hasNext()) {
-			array.put(new JSONObject(iter.next().toString()));
-		}
-		json.put("list", list);
-		json.put("result", userService.insert(list));
-		
-		return json.toString();
+	@RequestMapping(value = "/notice", method = RequestMethod.GET)
+	public ModelAndView getNoticeView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("notice");
+		return mv;
+	}
+	@RequestMapping(value = "/picture", method = RequestMethod.GET)
+	public ModelAndView getPictureView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("picture");
+		return mv;
+	}
+	@RequestMapping(value = "/symposium", method = RequestMethod.GET)
+	public ModelAndView getSymposiumView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("symposium");
+		return mv;
 	}
 }
