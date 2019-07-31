@@ -16,10 +16,10 @@
 			</div>
 			<div class="gnb_wrap">
 				<ul>
-					<li><a href="#">연구회 소개</a></li>
-					<li><a href="#">학회소식</a></li>
-					<li><a href="#">학술대회</a></li>
-					<li><a href="/notice">커뮤니티</a></li>
+					<li><a href="<c:url value="/about/greet"/>">연구회 소개</a></li>
+					<li><a href="<c:url value="/group/"/>">학회소식</a></li>
+					<li><a href="<c:url value="/symposium/"/>">학술대회</a></li>
+					<li><a href="<c:url value="/community/board"/>">커뮤니티</a></li>
 				</ul>
 				<div class="gnb_menu">
 					<div>
@@ -27,27 +27,27 @@
 						<ul class="dep1">
 							<li>
 								<ul class="dep2">
-									<li><a href="/about/greet">인사말</a></li>
-									<li><a href="#">연혁</a></li>
-									<li><a href="#">정관</a></li>
-									<li><a href="#">임원진</a></li>
+									<li><a href="<c:url value="/about/greet"/>">인사말</a></li>
+									<li><a href="<c:url value="/about/history"/>">연혁</a></li>
+									<li><a href="<c:url value="/about/term"/>">정관</a></li>
+									<li><a href="<c:url value="/about/member"/>">임원진</a></li>
 								</ul>
 							</li>
 							<li>
 								<ul class="dep2">
-									<li><a href="#">공지사항</a></li>
-									<li><a href="#">관련소식</a></li>
+									<li><a href="<c:url value="/group/notice"/>">공지사항</a></li>
+									<li><a href="<c:url value="/group/news"/>">관련소식</a></li>
 								</ul>
 							</li>
 							<li>
 								<ul class="dep2">
-									<li><a href="#">국내 학술대회</a></li>
-									<li><a href="#">한중일 학술대회</a></li>
+									<li><a href="<c:url value="/symposium/history"/>">국내 학술대회</a></li>
+									<li><a href="<c:url value="/symposium/international"/>">한중일 학술대회</a></li>
 								</ul>
 							</li>
 							<li>
 								<ul class="dep2">
-									<li><a href="#">자유게시판</a></li>
+									<li><a href="<c:url value="/community/board"/>">자유게시판</a></li>
 								</ul>
 							</li>
 						</ul>

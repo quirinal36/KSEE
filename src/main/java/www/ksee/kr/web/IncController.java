@@ -32,4 +32,16 @@ public class IncController {
 		mv.setViewName("/inc/head");
 		return mv;
 	}
+	@RequestMapping(value = "/lnb_wrap", method = RequestMethod.GET)
+	public ModelAndView getLnbWrapView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("/inc/lnb_wrap");
+		return mv;
+	}
+	@RequestMapping(value = "/contentsTitle", method = RequestMethod.GET)
+	public ModelAndView getContentsTitleView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("/inc/contentsTitle");
+		return mv;
+	}
 }

@@ -11,6 +11,7 @@ public class BoardController {
 	@RequestMapping(value = "/board_edit")
 	public ModelAndView getBoardEditView(ModelAndView mv) {
 		mv.setViewName("/board/board_edit");
+		
 		return mv;
 	}
 

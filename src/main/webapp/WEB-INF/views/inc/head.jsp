@@ -1,2 +1,29 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<meta charset="utf-8">
+<meta name="Referrer" content="origin">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=1300">
+<meta name="apple-mobile-web-app-title" content="NAVER" />
+<meta name="robots" content="index,nofollow"/>
+<meta name="description" content="한국효소공학연구회입니다."/>
+<meta property="og:title" content="한국효소공학연구회">
+<meta property="og:url" content="https://www.ksee.kr/">
+<meta property="og:image" content="/resources/img/comm/og.jpg">
+<meta property="og:description" content="한국효소공학연구회입니다."/>
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="한국효소공학연구회">
+<meta name="twitter:url" content="https://www.ksee.kr/">
+<meta name="twitter:image" content="/resources/img/comm/og.jpg">
+<meta name="twitter:description" content="한국효소공학연구회입니다."/>
+	
+<link rel="shortcut icon" href="<c:url value="/resources/img/comm/favicon.ico"/>">
+<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.12.1.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery.bxslider.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery.bxslider.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/fonts/NotoSans.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/reset.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
