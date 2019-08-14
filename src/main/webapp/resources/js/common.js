@@ -45,7 +45,7 @@ $(function(){
 		$(".header_search").show();
 	});
 	$(".bt_header_search_close").click(function(){
-		$(".header_search").fadeOut();
+		$(".header_search").fadeOut(1000);
 	});
 });
 
@@ -61,7 +61,13 @@ $(function(){
 	});
 });
 
-
+// 정관
+$(function(){
+	$(".term_bt").click(function(){
+		$(this).toggleClass("on");
+		$(this).parent().find("+ .content").slideToggle();
+	});
+});
 
 
 

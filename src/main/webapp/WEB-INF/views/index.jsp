@@ -25,13 +25,10 @@
                     <div class="idx_popup_wrap">
 						<div class="idx_popup">
 							<div class="item">
-								<a href="#" style="background: url(/resources/img/temp/7.png);">팝업 제목</a>
+								<a href="#" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
 							</div>
 							<div class="item">
-								<a href="#" style="background: url(/resources/img/temp/8.jpg);">팝업 제목</a>
-							</div>
-							<div class="item">
-								<a href="#" style="background: url(/resources/img/temp/9.jpg);">팝업 제목</a>
+								<a href="#" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
 							</div>
 						</div>
                     </div>

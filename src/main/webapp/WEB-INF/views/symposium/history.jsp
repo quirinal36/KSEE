@@ -14,7 +14,86 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-			
+            	<div class="symposium_title_img"><a href="#"><img src="/resources/img/contents/2019_symposium.png" alt="2019 심포지엄"></a></div>
+				<div class="board_list board_list_typeB symposium">
+					<ul class="list">
+						<li class="head">
+							<div class="num">번호</div>
+							<div class="title">행사명</div>
+							<div class="period">행사기간</div>
+							<div class="place">장소</div>
+							<div class="apply">참가신청</div>
+						</li>
+						<li>
+							<div class="num">8</div>
+							<div class="title"><a href="#">제8회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 on">참가신청</a></div>
+						</li>
+						<li>
+							<div class="num">7</div>
+							<div class="title"><a href="#">제7회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2">신청대기</a></div>
+						</li>
+						<li>
+							<div class="num">6</div>
+							<div class="title"><a href="#">제6회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">5</div>
+							<div class="title"><a href="#">제5회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">4</div>
+							<div class="title"><a href="#">제4회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">3</div>
+							<div class="title"><a href="#">제3회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">2</div>
+							<div class="title"><a href="#">제2회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">1</div>
+							<div class="title"><a href="#">제1회 한국효소공학연구회 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+						</li>
+					</ul>
+					<div class="page">
+						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
+						<a href="#" class="bt prev">이전 페이지로 가기</a>
+						<a href="#" class="num on">1</a>
+						<a href="#" class="num">2</a>
+						<a href="#" class="num">3</a>
+						<a href="#" class="bt next">다음 페이지로 가기</a>
+						<a href="#" class="bt last">마지막 페이지로 가기</a>
+					</div>
+					<div class="bt_wrap">
+						<input type="button" class="bt1 bt_write popup_password_opener" value="등록">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

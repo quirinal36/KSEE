@@ -1,0 +1,59 @@
+/* 공통속성 */
+a.bt1,
+input.bt1 {
+	display: inline-block;
+	min-width: 100px;
+	margin-left: 5px;
+	padding: 6px 10px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	border: 1px solid #325cb2;
+	background: #fff;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 400;
+	color: #325cb2;
+}
+a.bt1:first-child,
+input.bt1:first-child {
+	margin-left: 0;
+}
+a.bt1.on,
+input.bt1.on {
+	background-color: #325cb2 !important;
+	color: #fff;
+}
+a.bt2,
+input.bt2 {
+	display: inline-block;
+	min-width: 70px;
+	margin-left: 5px;
+	padding: 3px 4px 4px 4px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	border: 1px solid #325cb2;
+	background: #fff;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #325cb2;
+}
+a.bt2:first-child,
+input.bt2:first-child {
+	margin-left: 0;
+}
+a.bt2.on,
+input.bt2.on {
+	background-color: #325cb2 !important;
+	color: #fff;
+}
+a.bt2.off,
+input.bt2.off {
+	border-color: #999;
+	color: #999;
+}
+
+/* 검색창 공통 */
+.search_ipt { position: relative; display: inline-block; vertical-align: middle; }
+.search_ipt input[type="text"] { display: block; width: 360px; padding: 10px 60px 11px 15px; box-sizing: border-box; background: #fff; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); font-size: 20px; color: #222; }
+.search_ipt input[type="button"] { position: absolute; top: 15px; right: 15px; display: inline-block; width: 21px; height: 21px; vertical-align: middle; background: transparent url(/resources/img/comm/gnb_search.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
