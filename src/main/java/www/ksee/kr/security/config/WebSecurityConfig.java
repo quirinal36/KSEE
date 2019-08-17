@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //			.maximumSessions(1);
 		http
 			.formLogin()
-			.loginPage("/login")
+			.loginPage("/member/login")
 			.loginProcessingUrl("/j_spring_security_check")
 			.usernameParameter("loginid")
 			.passwordParameter("loginpwd")
@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.authorizeRequests()
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/login", "/**").permitAll()
+			.antMatchers("/member/login", "/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.httpBasic()

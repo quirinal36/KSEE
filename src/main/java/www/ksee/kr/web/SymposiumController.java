@@ -16,7 +16,7 @@ public class SymposiumController {
 	@RequestMapping(value="/history")
 	public ModelAndView getHistoryView(ModelAndView mv) {
 		mv.setViewName("/symposium/history");
-		mv.addObject("title", "지난 학술대회");
+		mv.addObject("title", "국내 학술대회");
 		return mv;
 	}
 	@RequestMapping(value="/international")

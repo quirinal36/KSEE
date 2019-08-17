@@ -108,4 +108,9 @@ public class HomeController {
 		mv.setViewName("symposium");
 		return mv;
 	}
+	@RequestMapping(value="/links")
+	public ModelAndView getLinksView(ModelAndView mv) {
+		mv.setViewName("/links");
+		return mv;
+	}
 }
