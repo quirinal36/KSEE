@@ -41,7 +41,7 @@
 							</li>
 							<li>
 								<ul class="dep2">
-									<li><a href="<c:url value="/symposium/history"/>">국내 학술대회</a></li>
+									<li><a href="<c:url value="/symposium/domestic"/>">국내 학술대회</a></li>
 									<li><a href="<c:url value="/symposium/international"/>">한중일 학술대회</a></li>
 								</ul>
 							</li>

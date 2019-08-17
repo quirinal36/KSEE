@@ -102,12 +102,7 @@ public class HomeController {
 		mv.setViewName("picture");
 		return mv;
 	}
-	@RequestMapping(value = "/symposium", method = RequestMethod.GET)
-	public ModelAndView getSymposiumView(Locale locale, ModelAndView mv,
-			HttpServletRequest req, Authentication authentication) {
-		mv.setViewName("symposium");
-		return mv;
-	}
+	
 	@RequestMapping(value="/links")
 	public ModelAndView getLinksView(ModelAndView mv) {
 		mv.setViewName("/links");

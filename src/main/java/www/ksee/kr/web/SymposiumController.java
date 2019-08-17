@@ -7,15 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value="/symposium")
 @Controller
 public class SymposiumController {
-	@RequestMapping(value="/")
-	public ModelAndView getHomeView(ModelAndView mv) {
-		mv.setViewName("/symposium/home");
-		mv.addObject("title", "2019 학술대회");
-		return mv;
-	}
-	@RequestMapping(value="/history")
+	
+	@RequestMapping(value= {"/", "/domestic"})
 	public ModelAndView getHistoryView(ModelAndView mv) {
-		mv.setViewName("/symposium/history");
+		mv.setViewName("/symposium/domestic");
 		mv.addObject("title", "국내 학술대회");
 		return mv;
 	}
