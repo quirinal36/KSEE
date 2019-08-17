@@ -267,7 +267,22 @@
 		    <artifactId>imgscalr-lib</artifactId>
 		    <version>4.2</version>
 		</dependency>
-		
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <optional>true</optional>
+		    <version>1.18.8</version>
+		</dependency>
+		<dependency>
+		   <groupId>org.springframework.data</groupId>
+		   <artifactId>spring-data-jpa</artifactId>
+		   <version>2.1.10.RELEASE</version>
+		</dependency>
+		<dependency>
+		   <groupId>org.hibernate</groupId>
+		   <artifactId>hibernate-entitymanager</artifactId>
+		   <version>5.2.17.Final</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

@@ -94,6 +94,51 @@
 						<input type="button" class="bt1 bt_write popup_password_opener" value="등록">
 					</div>
 				</div>
+				<div class="board_view">
+					<div class="board_view_title">
+						<div class="title">2019 하계 중국 심포지엄</div>
+						<div class="file">1</div>
+						<div class="view">123</div>
+					</div>
+					<div class="board_view_tab">
+						<div class="tab">
+							<ul>
+								<li><a href="#" class="on">행사개요</a></li>
+								<li><a href="#">인사말</a></li>
+								<li><a href="#">조직위원회</a></li>
+								<li><a href="#">프로그램</a></li>
+								<li><a href="#">발표요강</a></li>
+								<li><a href="#">등록 및 숙박</a></li>
+								<li><a href="#">투어안내</a></li>
+								<li><a href="#">후원</a></li>
+								<li><a href="#">학회장소 및 교통</a></li>
+								<li><a href="#">문의</a></li>
+							</ul>
+						</div>
+						<div class="cont">
+							<div class="symposium_intro">
+								<div class="title">
+									<strong>행사개요</strong>
+									<p>2019년 KSEE 중국 심포지엄에 여러분을 초대합니다.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="board_view_file">
+						<div class="title">첨부파일</div>
+						<div class="file_list">
+							<ul>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.hwp</a></li>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.pdf</a></li>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.ppt</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="bt_wrap">
+						<a href="/notice.jsp" class="bt1 on">목록</a>
+						<input type="button" class="bt1 popup_password_opener" value="수정">
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

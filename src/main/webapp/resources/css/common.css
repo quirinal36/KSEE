@@ -1,4 +1,6 @@
 /* 공통속성 */
+.mt-10 { margin-top: 10px !important; }
+
 a.bt1,
 input.bt1 {
 	display: inline-block;
@@ -52,8 +54,54 @@ input.bt2.off {
 	border-color: #999;
 	color: #999;
 }
+a.bt3,
+input.bt3 {
+	display: inline-block;
+	width: 100%;
+	margin-top: 30px;
+	padding: 12px 0 13px 0;
+	box-sizing: border-box;
+	border-radius: 2px;
+	background: #325cb2;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 400;
+	color: #fff;
+}
+
+
+
+input.ipt1 { padding: 0 10px 10px 10px; box-sizing: border-box; border-bottom: 1px solid #333; font-size: 15px; }
 
 /* 검색창 공통 */
 .search_ipt { position: relative; display: inline-block; vertical-align: middle; }
 .search_ipt input[type="text"] { display: block; width: 360px; padding: 10px 60px 11px 15px; box-sizing: border-box; background: #fff; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); font-size: 20px; color: #222; }
 .search_ipt input[type="button"] { position: absolute; top: 15px; right: 15px; display: inline-block; width: 21px; height: 21px; vertical-align: middle; background: transparent url(/resources/img/comm/gnb_search.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
+
+/* 표 */
+.tbl1 { width: 100%; border-top: 1px solid #325cb2; }
+.tbl1 tr { border-bottom: 1px solid #ddd; }
+.tbl1 th, .tbl1 td { padding: 10px; font-size: 15px; }
+.tbl1 th { background: #f5f5f5; }
+
+/* 메시지 */
+.message { margin-top: 10px; font-size: 14px; color: #000; }
+.message.error { color: red; }
+.message.confirm { color: #325cb2; }
+
+/* 체크박스, 라디오버튼 */
+.chk1,
+.radio1 {
+	display: none;
+}
+.chk1 + label,
+.radio1 + label {
+	padding-left: 24px;
+	line-height: 100%;
+	font-size: 15px;
+	cursor: pointer;
+}
+.chk1 + label { background: url(/resources/img/contents/chk1.png) no-repeat 0 3px; background-size: 16px; }
+.chk1:checked + label { background-image: url(/resources/img/contents/chk1_on.png); }
+.radio1 + label { background: url(/resources/img/contents/radio1.png) no-repeat 0 3px; background-size: 16px; }
+.radio1:checked + label { background-image: url(/resources/img/contents/radio1_on.png); }

@@ -10,12 +10,12 @@
 <meta name="robots" content="index,nofollow"/>
 <meta name="description" content="한국효소공학연구회입니다."/>
 <meta property="og:title" content="한국효소공학연구회">
-<meta property="og:url" content="https://www.ksee.kr/">
+<meta property="og:url" content="//www.ksee.kr/">
 <meta property="og:image" content="/resources/img/comm/og.jpg">
 <meta property="og:description" content="한국효소공학연구회입니다."/>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="한국효소공학연구회">
-<meta name="twitter:url" content="https://www.ksee.kr/">
+<meta name="twitter:url" content="//www.ksee.kr/">
 <meta name="twitter:image" content="/resources/img/comm/og.jpg">
 <meta name="twitter:description" content="한국효소공학연구회입니다."/>
 	

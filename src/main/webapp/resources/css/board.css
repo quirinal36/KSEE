@@ -56,6 +56,18 @@
 .board_view_file .file_list { width: 880px; padding: 20px 0; line-height: 160%; }
 .board_view_file .file_list a { font-size: 14px; font-weight: 300; }
 .board_view_file .file_list a:hover { text-decoration: underline; }
+.board_view_tab { padding: 30px 0; border-bottom: 1px solid #ccc; line-height: 160%; font-size: 15px; overflow: auto; }
+.board_view_tab .tab { float: left; }
+.board_view_tab .tab ul { background: #325cb2; }
+.board_view_tab .tab ul li { width: 185px; border: 1px solid #333; border-top: 0; }
+.board_view_tab .tab ul li:first-child { border-top: 1px solid #333; }
+.board_view_tab .tab ul li a { display: block; width: 100%; padding: 12px 0; text-align: center; font-size: 16px; font-weight: 400; color: #fff; }
+.board_view_tab .tab ul li a.on { background: #fff; font-weight: 800; color: #325cb2; }
+.board_view_tab .cont { padding-left: 250px; }
+.board_view_tab .cont .title { padding: 20px 0; }
+.board_view_tab .cont .title strong { font-size: 32px; font-weight: 600; }
+.board_view_tab .cont .title p { margin-top: 15px; font-size: 15px; }
+
 
 /* 게시판 글쓰기 */
 .board_write { width: 90%; min-width: 1000px; max-width: 1300px; }
@@ -142,7 +154,7 @@
 .board_list_typeB { width: 90%; min-width: 1000px; max-width: 1300px; }
 .board_list_typeB .list { border-top: 1px solid #325cb2; }
 .board_list_typeB .list > li { padding: 18px 0; border-bottom: 1px solid #ddd; font-size: 0; }
-.board_list_typeB .list > li.head > div { text-align: center; font-size: 14px; color: #888; }
+.board_list_typeB .list > li.head > div { text-align: center; font-size: 14px; font-weight: 400; color: #888; }
 .board_list_typeB .list > li > div { display: inline-block; vertical-align: middle; text-align: center; font-size: 14px; font-weight: 300; color: #888; }
 .board_list_typeB .list .num { width: 8%; }
 .board_list_typeB .list .title { width: 52%; text-align: left; font-size: 16px; font-weight: 400; color: #222; }
