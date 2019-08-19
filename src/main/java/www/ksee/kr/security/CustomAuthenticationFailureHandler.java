@@ -30,7 +30,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		this.loginpasswordname = "loginpwd";
 		this.loginredirectname = "loginRedirect";
 		this.exceptionmsgname = "securityexceptionmsg";
-		this.defaultFailureUrl = "/login";
+		this.defaultFailureUrl = "/member/loginProcess";
 	}
 	
 	@Override

@@ -22,6 +22,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.MessageCodesResolver;
@@ -74,7 +76,7 @@ public class AppConfig implements WebMvcConfigurer {
 		dataSource.setPassword(env.getProperty("mysql.password"));
 		return dataSource;
 	}
-
+	
 	/**
 	 * MyBatis 설정과, mapper 위치를 지정해준다. 
 	 * @param applicationContext
@@ -172,6 +174,11 @@ public class AppConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
+		
+		BongInterceptor uffdaInterceptor = new BongInterceptor();
+		
+		registry.addInterceptor(uffdaInterceptor)
+				.addPathPatterns("/**");
 	}
 
 	@Bean

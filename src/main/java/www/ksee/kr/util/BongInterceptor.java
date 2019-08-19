@@ -1,5 +1,7 @@
 package www.ksee.kr.util;
 
+import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,17 @@ public class BongInterceptor implements HandlerInterceptor{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {	
+			throws Exception {
+		Map<String, String[]> parameters = request.getParameterMap();
+		Iterator<String> keys = parameters.keySet().iterator();
+		while(keys.hasNext()) {
+			final String key = keys.next();
+			for(String value : parameters.get(key)) {
+				logger.info("key : "+key + "|" + "value : "+value);
+			}
+		}
+		
+		
 //		if(request.isUserInRole("ROLE_USER") || request.isUserInRole("ROLE_ADMIN"))
 //		{
 //			logger.info("preHandle : isUserInRole_True");
@@ -29,15 +41,11 @@ public class BongInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		// TODO Auto-generated method stub
-		logger.info("post Handle");
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

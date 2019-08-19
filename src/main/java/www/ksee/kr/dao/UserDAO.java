@@ -15,11 +15,10 @@ public class UserDAO implements DataAccess<UserVO> {
 	final String namespace = "user_sql";
 	@Override
 	public int insert(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert(namespace+".insert", input);
 	}
 	public int insert(List<UserVO> input) {
-		return sqlSession.insert(namespace+".insert", input);
+		return sqlSession.insert(namespace+".insert_list", input);
 	}
 	@Override
 	public int update(UserVO input) {
@@ -41,14 +40,12 @@ public class UserDAO implements DataAccess<UserVO> {
 
 	@Override
 	public List<UserVO> select(UserVO input) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace +".select", input);
 	}
 
 	@Override
 	public UserVO selectOne(UserVO input) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace +".select_one", input);
 	}
 
 	@Override

@@ -23,6 +23,8 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.12.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bxslider.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
+<script src="<c:url value="/resources/js/sweetalert2.all.min.js"><c:param name="dt" value="${nowDate }"/></c:url>"></script>
+<script src="<c:url value="/resources/js/clientDetective.js"><c:param name="dt" value="${nowDate }"/></c:url>"></script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/jquery.bxslider.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/fonts/NotoSans.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/reset.css"/>">

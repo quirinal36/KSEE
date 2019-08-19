@@ -85,7 +85,7 @@ input.ipt1 { padding: 0 10px 10px 10px; box-sizing: border-box; border-bottom: 1
 .tbl1 th { background: #f5f5f5; }
 
 /* 메시지 */
-.message { margin-top: 10px; font-size: 14px; color: #000; }
+.message { margin-top: 10px; font-size: 14px; color: #000; display:none;}
 .message.error { color: red; }
 .message.confirm { color: #325cb2; }
 
