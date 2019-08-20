@@ -44,13 +44,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		try {
 			user = userService.loadUserByUsername(username);
 			
-			boolean loginResult = passwordEncoder.matches(password, user.getPassword());
-			
-			if(!loginResult) {
-				throw new BadCredentialsException(Config.NOT_MATCHED_PWD);
+			if(user != null && user.getUsername()!= null) {
+				boolean loginResult = passwordEncoder.matches(password, user.getPassword());
+
+				if(!loginResult) {
+					throw new BadCredentialsException(Config.NOT_MATCHED_PWD);
+				}else {
+					authorities = user.getAuthorities();
+				}
+			}else {
+				throw new UsernameNotFoundException("존재하지 않는 아이디입니다.");
 			}
-			
-			authorities = user.getAuthorities();
 		}catch(UsernameNotFoundException e) {
 			logger.info(e.toString());
 			throw new UsernameNotFoundException(e.getMessage());
@@ -61,7 +65,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			logger.info(e.toString());
 			throw new RuntimeException(e.getMessage());
 		}
-		return new UsernamePasswordAuthenticationToken(user, password, authorities);
+		return new UsernamePasswordAuthenticationToken(user, null, authorities);
 	}
 
 	@Override

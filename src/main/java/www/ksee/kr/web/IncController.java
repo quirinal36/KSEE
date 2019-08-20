@@ -14,31 +14,31 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IncController {
 
-	@RequestMapping(value = "/header", method = RequestMethod.GET)
+	@RequestMapping(value = "/header", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getHeaderView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("/inc/header");
 		return mv;
 	}
-	@RequestMapping(value = "/footer", method = RequestMethod.GET)
+	@RequestMapping(value = "/footer", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getFooterView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("/inc/footer");
 		return mv;
 	}
-	@RequestMapping(value = "/head", method = RequestMethod.GET)
+	@RequestMapping(value = "/head", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getHeadView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("/inc/head");
 		return mv;
 	}
-	@RequestMapping(value = "/lnb_wrap", method = RequestMethod.GET)
+	@RequestMapping(value = "/lnb_wrap", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getLnbWrapView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("/inc/lnb_wrap");
 		return mv;
 	}
-	@RequestMapping(value = "/contentsTitle", method = RequestMethod.GET)
+	@RequestMapping(value = "/contentsTitle", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getContentsTitleView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("/inc/contentsTitle");

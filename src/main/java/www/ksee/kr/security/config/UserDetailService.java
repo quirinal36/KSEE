@@ -25,16 +25,18 @@ public class UserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
 		UserVO user = new UserVO();
 		user.setLogin(username);
 		user = dao.selectOne(user);
-		
-		GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole_name());
-		UserDetails userDetails = (UserDetails)new User(user.getLogin()
-				,user.getPassword(), Arrays.asList(authority));
-				
-		return userDetails;
+		if(user != null) {
+			GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole_name());
+			UserDetails userDetails = (UserDetails)new User(user.getLogin()
+					,user.getPassword(), Arrays.asList(authority));
+					
+			return userDetails;
+		}else {
+			return null;
+		}
 	}
 	
 	/**

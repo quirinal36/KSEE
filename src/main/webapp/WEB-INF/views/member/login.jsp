@@ -21,17 +21,17 @@
 						<dl>
 							<dt>아이디</dt>
 							<dd>
-								<input type="text" placeholder="아이디 입력" class="ipt1" name="loginid">
-								<p class="message error">존재하지 않는 아이디입니다.</p>
+								<input type="text" placeholder="아이디 입력" class="ipt1" name="loginid" value="${loginid }">
 							</dd>
 						</dl>
 						<dl>
 							<dt>비밀번호</dt>
 							<dd>
 								<input type="password" placeholder="비밀번호 입력" class="ipt1" name="loginpwd">
-								<p class="message error">비밀번호가 일치하지 않습니다.</p>
 							</dd>
 						</dl>
+						
+						<p class="message error" <c:if test="${not empty securityexceptionmsg }">style="display:block"</c:if>>${securityexceptionmsg }</p>
 						<input type="hidden" name="loginRedirect" value="<c:url value="/"/>"/>
 						<input type="submit" value="로그인" class="bt3 on">
 						<div class="bt_wrap">

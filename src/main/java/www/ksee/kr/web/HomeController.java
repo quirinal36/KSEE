@@ -108,12 +108,12 @@ public class HomeController {
 		mv.setViewName("/links");
 		return mv;
 	}
-	@RequestMapping(value="/error_404")
+	@RequestMapping(value="/error_400")
 	public ModelAndView getError404View(ModelAndView mv) {
 		mv.setViewName("/error/404");
 		return mv;
 	}
-	@RequestMapping(value="/error_503")
+	@RequestMapping(value="/error_500")
 	public ModelAndView getError503View(ModelAndView mv) {
 		mv.setViewName("/error/503");
 		return mv;

@@ -30,7 +30,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		this.loginpasswordname = "loginpwd";
 		this.loginredirectname = "loginRedirect";
 		this.exceptionmsgname = "securityexceptionmsg";
-		this.defaultFailureUrl = "/member/loginProcess";
+		this.defaultFailureUrl = "/member/login";
 	}
 	
 	@Override
@@ -41,15 +41,14 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 		String loginRedirect = request.getParameter(this.loginredirectname);
 		
 		request.setAttribute(this.loginidname, loginId);
-		request.setAttribute(this.loginpasswordname, loginPwd);
 		request.setAttribute(this.loginredirectname, loginRedirect);
 		
-		logger.info("fail : " + loginRedirect);
+		logger.info("onAuthenticationFailure " + loginId +"/" +loginPwd +"/" + loginRedirect);
 		
 		String exceptionMsg = exception.getMessage();
-		if(exceptionMsg.equalsIgnoreCase(EXCEPTION_MSG_SESSION)) {
-			exceptionMsg = Config.SESSION_LOGIN_FAIL;
-		}
+//		if(exceptionMsg.equalsIgnoreCase(EXCEPTION_MSG_SESSION)) {
+//			exceptionMsg = Config.SESSION_LOGIN_FAIL;
+//		}
 		request.setAttribute(this.exceptionmsgname, exceptionMsg);
 		
 		request.getRequestDispatcher(this.defaultFailureUrl).forward(request, response);
@@ -90,10 +89,4 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 	public String getDefaultFailureUrl() {
 		return defaultFailureUrl;
 	}
-
-	public void setDefaultFailureUrl(String defaultFailureUrl) {
-		this.defaultFailureUrl = defaultFailureUrl;
-	}
-	
-	
 }
