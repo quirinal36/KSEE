@@ -36,6 +36,9 @@ html, body, #wrap { min-height: 100%; }
 #header .gnb_menu a { font-size: 14px; color: #222; }
 #header .gnb_menu > div { position: relative; width: 90%; max-width: 1300px; min-width: 1000px; margin: 0 auto; font-size: 0; }
 #header .gnb_menu > div > .image { position: absolute; top: 0; left: 0; width: 420px; height: 100%; background: url(/resources/img/comm/gnb_menu_img.png) no-repeat 0 80%; background-size: cover; }
+@media ( max-width: 1270px ) {
+	#header .gnb_menu > div > .image { width: 300px; }
+}
 #header .gnb_menu > div > ul { padding-right: 47px; }
 #header .gnb_menu > div > ul > li { display: inline-block; width: 150px; vertical-align: top; text-align: left; }
 #header .gnb_menu > div > ul > li:first-child { width: 175px; }

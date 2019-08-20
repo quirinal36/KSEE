@@ -14,10 +14,9 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-				
 				<!-- 아이디 찾기 -->
 				<div class="member member_form1">
-					<div>
+					<div class="paper">
 						<dl>
 							<dt>이름</dt>
 							<dd>
@@ -32,17 +31,16 @@
 								<p class="message error">휴대전화 번호를 입력하세요.</p>
 							</dd>
 						</dl>
-						<input type="button" value="아이디 찾기" class="bt3">
+						<input type="button" value="아이디 찾기" class="bt3 on">
 						<div class="result">
 							<p>회원님의 아이디는 <span>withi5</span>입니다.</p>
 							<div class="bt_wrap">
-								<a href="#">로그인</a>
-								<a href="#">비밀번호 찾기</a>
+								<a href="/member/login">로그인</a>
+								<a href="/member/findPwd">비밀번호 찾기</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>

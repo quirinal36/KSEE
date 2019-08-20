@@ -17,7 +17,7 @@
 				
 				<!-- 새 비밀번호 -->
 				<div class="member member_form1">
-					<div>
+					<div class="paper">
 						<dl>
 							<dt>새 비밀번호</dt>
 							<dd>

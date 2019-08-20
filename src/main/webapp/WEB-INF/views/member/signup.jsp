@@ -69,6 +69,15 @@ $(document).ready(function(){
 			
 		});
 	}
+	// 다음 단계로
+	$(".join_step1 .bt3").click(function(){
+		$(".join_step1").hide();
+		$(".join_step2").show();
+	});
+	$(".join_step2 .bt3").click(function(){
+		$(".join_step2").hide();
+		$(".join_step3").show();
+	});
 });
 </script>
 </head>
@@ -82,7 +91,13 @@ $(document).ready(function(){
 			<div id="contentsPrint">
 				<!-- 회원가입 - 동의 -->
 				<div class="member join_step1">
-					<div>
+					<!-- 현재상태 -->
+					<div class="location">
+						<div class="on">약관동의</div>
+						<div>정보입력</div>
+						<div>가입완료</div>
+					</div>
+					<div class="paper">
 						<strong>이용약관</strong>
 						<div class="term"></div>
 						<div class="chk_wrap">
@@ -95,12 +110,18 @@ $(document).ready(function(){
 							<input type="checkbox" id="term_chk2" class="chk1">
 							<label for="term_chk2">동의합니다.</label>
 						</div>
-						<input type="button" value="다음 단계로" class="bt3" onclick="">
+						<input type="button" value="다음 단계로" class="bt3 on" onclick="">
 					</div>
 				</div>
 				<!-- 회원가입 - 정보 입력 -->
-				<div class="member member_form1">
-					<div>
+				<div class="member member_form1 join_step2">
+					<!-- 현재상태 -->
+					<div class="location">
+						<div>약관동의</div>
+						<div class="on">정보입력</div>
+						<div>가입완료</div>
+					</div>
+					<div class="paper">
 						<form action="<c:url value="/member/signup"/>" method="post">
 							<dl class="member_chk">
 								<dt>회원구분</dt>
@@ -190,8 +211,16 @@ $(document).ready(function(){
 									<p class="message error">상세주소가 입력되지 않았습니다.</p>
 								</dd>
 							</dl>
-							<input type="button" value="회원가입" class="bt3" id="submit">
+							<input type="button" value="회원가입" class="bt3 on" id="submit">
 						</form>
+					</div>
+				</div>
+				<!-- 회원가입 - 가입 완료 -->
+				<div class="member join_complete">
+					<div class="paper">
+						환영합니다!<br>
+						한국효소공학연구회 회원가입이 완료되었습니다.
+						<a href="/" class="bt3 on">HOME</a>
 					</div>
 				</div>
 			</div>

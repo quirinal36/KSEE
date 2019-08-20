@@ -14,10 +14,9 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-				
 				<!-- 회원가입 - 내 정보 수정 -->
 				<div class="member member_form1">
-					<div>
+					<div class="paper">
 						<dl class="member_chk">
 							<dt>회원구분</dt>
 							<dd>
@@ -81,7 +80,6 @@
 						<input type="button" value="수정완료" class="bt3">
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>

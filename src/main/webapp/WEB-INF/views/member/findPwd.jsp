@@ -14,10 +14,9 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-				
 				<!-- 비밀번호 찾기 -->
 				<div class="member member_form1">
-					<div>
+					<div class="paper">
 						<dl>
 							<dt>아이디</dt>
 							<dd>
@@ -39,20 +38,23 @@
 								<p class="message error">휴대전화 번호를 입력하세요.</p>
 							</dd>
 						</dl>
-						<input type="button" value="비밀번호 찾기" class="bt3">
+						<input type="button" value="비밀번호 찾기" class="bt3 on">
 						<div class="result">
 							<p>
 								회원님의 이메일 주소(with**@d***.***)로<br>
 								비밀번호 변경 링크를 보내드렸습니다.<br>
 								메일이 오지 않는 경우 스팸/광고메일함을 확인해주세요.
 							</p>
+							<p>
+								메일 발송 횟수(10회) 초과로 인해 메일을 보낼 수 없습니다.<br>
+								내일 다시 시도하시거나 관리자에게 문의하세요.
+							</p>
 							<div class="bt_wrap">
-								<a href="#">로그인</a>
+								<a href="/member/login">로그인</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>

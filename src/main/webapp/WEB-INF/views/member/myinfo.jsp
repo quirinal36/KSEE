@@ -17,7 +17,7 @@
 				
 				<!-- 회원가입 - 내 정보 -->
 				<div class="member member_form1">
-					<div>
+					<div class="paper">
 						<dl>
 							<dt>회원구분</dt>
 							<dd>학생회원</dd>

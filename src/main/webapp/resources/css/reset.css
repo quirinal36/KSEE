@@ -28,6 +28,9 @@ input {
 	-webkit-appearance: none;
 	-webkit-border-radius: 0;
 }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fff inset;
+}
 input[type="password"] { font-family: Arial; }
 
 
