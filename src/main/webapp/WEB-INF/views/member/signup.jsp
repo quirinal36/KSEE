@@ -47,7 +47,8 @@ $(document).ready(function(){
 			if(json.result > 0){
 				if(jscd.browser.indexOf('msie') != -1  ){
 					if(confirm("가입 완료되었습니다.")){
-						window.location.replace("/");
+						//window.location.replace("/");
+						move(2);
 					}
 				}else{
 					swal({
@@ -58,7 +59,8 @@ $(document).ready(function(){
 						animation: false
 					}).then(function(result){
 						if(result.value){
-							window.location.replace("/");
+							//window.location.replace("/");
+							move(2);
 						}
 					});
 				}
@@ -69,15 +71,10 @@ $(document).ready(function(){
 			
 		});
 	}
-	// 다음 단계로
-	$(".join_step1 .bt3").click(function(){
-		$(".join_step1").hide();
-		$(".join_step2").show();
-	});
-	$(".join_step2 .bt3").click(function(){
-		$(".join_step2").hide();
-		$(".join_step3").show();
-	});
+});
+$(window).on("beforeunload", function(){
+	var msg = "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+	return msg;
 });
 </script>
 </head>
@@ -110,7 +107,7 @@ $(document).ready(function(){
 							<input type="checkbox" id="term_chk2" class="chk1">
 							<label for="term_chk2">동의합니다.</label>
 						</div>
-						<input type="button" value="다음 단계로" class="bt3 on" onclick="">
+						<input type="button" value="다음 단계로" class="bt3 on" onclick="javascript:move(1);">
 					</div>
 				</div>
 				<!-- 회원가입 - 정보 입력 -->
@@ -153,14 +150,14 @@ $(document).ready(function(){
 							<dl>
 								<dt>비밀번호</dt>
 								<dd>
-									<input type="password" placeholder="비밀번호 입력" class="ipt1" name="password">
+									<input type="password" placeholder="비밀번호 입력" class="ipt1" name="password" autocomplete="off">
 									<p class="message error">6자리 이상 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
 								<dt>비밀번호 확인</dt>
 								<dd>
-									<input type="password" placeholder="비밀번호 재입력" class="ipt1" name="password_confirm">
+									<input type="password" placeholder="비밀번호 재입력" class="ipt1" name="password_confirm" autocomplete="off">
 									<p class="message error">비밀번호가 일치하지 않습니다.</p>
 									<p class="message confirm">비밀번호가 일치합니다.</p>
 								</dd>

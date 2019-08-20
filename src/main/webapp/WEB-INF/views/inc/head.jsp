@@ -33,3 +33,12 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/contents.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/board.css"/>">
+
+<script type="text/javascript">
+const toast = swal.mixin({
+	toast : true,
+	position : 'center',
+	showConfirmButton : false,
+	timer : 1500
+});
+</script>

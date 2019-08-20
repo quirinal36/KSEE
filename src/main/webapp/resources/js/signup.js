@@ -31,13 +31,13 @@ $(document).ready(function(){
 			$(this).parent().find(".error").hide();
 		}else{
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("8자 이상으로 입력해주세요.");
+			$(this).parent().find(".error").text("8자 이상으로 입력하세요.");
 		}
 	});
 	$("input[name='password_confirm']").blur(function(e){
 		var passwordInput = $("input[name='password']");
 		var passwordConfirmInput = $(this);
-		if(passwordInput.val() == passwordConfirmInput.val()){
+		if(passwordInput.val().length >= 8 == passwordConfirmInput.val().length >= 8){
 			passwordConfirmInput.parent().find(".confirm").show();
 			passwordConfirmInput.parent().find(".error").hide();
 			passwordConfirmInput.parent().find(".confirm").text('비밀번호가 일치합니다.');
@@ -45,10 +45,17 @@ $(document).ready(function(){
 			passwordConfirmInput.parent().find(".confirm").hide();
 			passwordConfirmInput.parent().find(".error").show();
 			passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
-			passwordConfirmInput.focus();
+			// passwordConfirmInput.focus();
 		}
 	});
-	$("input[name='phone']").blur(function(e){
+	$("input[name='phone']").keyup(function(e){
+		console.log(e.keyCode);
+		if(e.keyCode >= 96 && e.keyCode <=105){
+			
+		}else{
+			$(this).val($(this).val().replace(/[^0-9]/g,""));
+		}
+	}).blur(function(e){
 		var input = $(this).val();
 		if(input.length >= 10){
 			var regPhone = /^\d{3}\d{3,4}\d{4}$/;
@@ -76,7 +83,7 @@ $(document).ready(function(){
 		var input = $(this).val();
 		if(input == '' || input=='undefined'){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("소속을 입력 해주세요.");
+			$(this).parent().find(".error").text("소속을 입력하세요.");
 		}else{
 			$(this).parent().find(".error").hide();
 		}
@@ -85,7 +92,7 @@ $(document).ready(function(){
 		var input = $(this).val();
 		if(input == '' || input=='undefined'){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("직위를 입력 해주세요.");
+			$(this).parent().find(".error").text("직위를 입력하세요.");
 		}else{
 			$(this).parent().find(".error").hide();
 		}
@@ -110,8 +117,6 @@ function validate(data){
 	var result = true;
 	var jsonObj = parse(data);
 
-	console.log(jsonObj);
-	
 	var loginInput = $("input[name='login']");
 	if(jsonObj['login'] != ''){
 		loginInput.parent().find(".error").hide(); 
@@ -125,10 +130,10 @@ function validate(data){
 	
 	var passwordInput = $("input[name='password']");
 	if(jsonObj['password'] != ''){
-		if(jsonObj['password'].length < 6){
+		if(jsonObj['password'].length < 8){
 			passwordInput.parent().find(".confirm").hide();
 			passwordInput.parent().find(".error").show();
-			passwordInput.parent().find(".error").text('6자리 이상 입력하세요.');
+			passwordInput.parent().find(".error").text('8자 이상으로 입력하세요.');
 			passwordInput.focus();
 			return false;
 		}else{
@@ -152,7 +157,6 @@ function validate(data){
 			passwordConfirmInput.parent().find(".confirm").hide();
 			passwordConfirmInput.parent().find(".error").show();
 			passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
-			passwordConfirmInput.focus();
 			return false;
 		}
 	}else{
@@ -258,7 +262,6 @@ function fn_setAddr(){
 	daum.postcode.load(function(){
 	    new daum.Postcode({
 	        oncomplete: function(data) {
-	        	console.log(data);
 	        	var addressText = "["+data.zonecode+"]" + data.address;
 	        	$("input[name='address']").val(addressText);
 	        	$("input[name='addressDetail']").val(data.buildingName);
@@ -268,4 +271,41 @@ function fn_setAddr(){
 	    	top : (window.screen.height / 2) - (height / 2),
 	    });
 	});
+}
+function move(nextPage){
+	if(nextPage == 1){
+		var check1 = $("#term_chk1").is(":checked");
+		var check2 = $("#term_chk2").is(":checked");
+		
+		if(check1 && check2){
+			$(".join_step1").hide();
+			$(".join_step2").show();
+		}else {
+			if(!check1){
+				var message = "이용약관에 동의해주세요.";
+				if(jscd.browser.indexOf('msie') != -1){
+					alert(message);
+				}else{
+					toast({
+						text : message
+					});
+				}
+				return false;
+			}
+			if(!check2){
+				var message = "개인정보처리방침에 동의해주세요.";
+				if(jscd.browser.indexOf('msie') != -1){
+					alert(message);
+				}else{
+					toast({
+						text : message
+					});
+				}
+				return false;
+			}
+		}
+	}else if(nextPage == 2){
+		$(".join_step2").hide();
+		$(".join_step3").show();
+	}
 }
