@@ -10,7 +10,7 @@
 				<a href="<c:url value="/member/login"/>">LOGIN</a>
 			</sec:authorize>
 			<a href="#">CONTACT US</a>
-			<a href="#">ADMIN</a>
+			<a href="<c:url value="/admin/"/>">ADMIN</a>
 			<a href="#" class="language on">KOR</a>
 			<a href="#" class="language">ENG</a>
 		</div>

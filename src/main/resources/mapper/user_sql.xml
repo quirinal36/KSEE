@@ -14,7 +14,8 @@
 			email,
 			classification,
 			level,
-			address
+			address,
+			telephone
 		)
 		VALUES
 		(
@@ -26,7 +27,8 @@
 			'${email}',
 			'${classification}',
 			'${level}',
-			'${address}'
+			'${address}',
+			'${telephone}'
 		)
 		
 	</insert> 

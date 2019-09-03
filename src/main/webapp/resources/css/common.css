@@ -28,9 +28,8 @@ input.bt1.on {
 a.bt2,
 input.bt2 {
 	display: inline-block;
-	min-width: 70px;
 	margin-left: 5px;
-	padding: 3px 4px 4px 4px;
+	padding: 3px 7px 4px 7px;
 	box-sizing: border-box;
 	border-radius: 2px;
 	border: 1px solid #325cb2;

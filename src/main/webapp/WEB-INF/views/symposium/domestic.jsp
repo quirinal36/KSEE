@@ -26,59 +26,59 @@
 						</li>
 						<li>
 							<div class="num">8</div>
-							<div class="title"><a href="#">제8회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제8회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 on">참가신청</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/8"/>" class="bt2 on">참가신청</a></div>
 						</li>
 						<li>
 							<div class="num">7</div>
-							<div class="title"><a href="#">제7회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제7회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2">신청대기</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/7"/>" class="bt2">신청대기</a></div>
 						</li>
 						<li>
 							<div class="num">6</div>
-							<div class="title"><a href="#">제6회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제6회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/6"/>" class="bt2 off">신청종료</a></div>
 						</li>
 						<li>
 							<div class="num">5</div>
-							<div class="title"><a href="#">제5회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제5회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/5"/>" class="bt2 off">신청종료</a></div>
 						</li>
 						<li>
 							<div class="num">4</div>
-							<div class="title"><a href="#">제4회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제4회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/4"/>" class="bt2 off">신청종료</a></div>
 						</li>
 						<li>
 							<div class="num">3</div>
-							<div class="title"><a href="#">제3회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제3회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/3"/>" class="bt2 off">신청종료</a></div>
 						</li>
 						<li>
 							<div class="num">2</div>
-							<div class="title"><a href="#">제2회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제2회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/2"/>" class="bt2 off">신청종료</a></div>
 						</li>
 						<li>
 							<div class="num">1</div>
-							<div class="title"><a href="#">제1회 한국효소공학연구회 심포지엄</a></div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제1회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="#" class="bt2 off">신청종료</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/1"/>" class="bt2 off">신청종료</a></div>
 						</li>
 					</ul>
 					<div class="page">
@@ -92,51 +92,6 @@
 					</div>
 					<div class="bt_wrap">
 						<input type="button" class="bt1 bt_write popup_password_opener" value="등록">
-					</div>
-				</div>
-				<div class="board_view">
-					<div class="board_view_title">
-						<div class="title">2019 하계 중국 심포지엄</div>
-						<div class="file">1</div>
-						<div class="view">123</div>
-					</div>
-					<div class="board_view_tab">
-						<div class="tab">
-							<ul>
-								<li><a href="#" class="on">행사개요</a></li>
-								<li><a href="#">인사말</a></li>
-								<li><a href="#">조직위원회</a></li>
-								<li><a href="#">프로그램</a></li>
-								<li><a href="#">발표요강</a></li>
-								<li><a href="#">등록 및 숙박</a></li>
-								<li><a href="#">투어안내</a></li>
-								<li><a href="#">후원</a></li>
-								<li><a href="#">학회장소 및 교통</a></li>
-								<li><a href="#">문의</a></li>
-							</ul>
-						</div>
-						<div class="cont">
-							<div class="symposium_intro">
-								<div class="title">
-									<strong>행사개요</strong>
-									<p>2019년 KSEE 중국 심포지엄에 여러분을 초대합니다.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="board_view_file">
-						<div class="title">첨부파일</div>
-						<div class="file_list">
-							<ul>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.hwp</a></li>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.pdf</a></li>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.ppt</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="bt_wrap">
-						<a href="/notice.jsp" class="bt1 on">목록</a>
-						<input type="button" class="bt1 popup_password_opener" value="수정">
 					</div>
 				</div>
 			</div>

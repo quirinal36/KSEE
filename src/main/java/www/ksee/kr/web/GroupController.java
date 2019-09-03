@@ -1,6 +1,7 @@
 package www.ksee.kr.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -8,16 +9,22 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class GroupController {
 
-	@RequestMapping(value="/")
-	public ModelAndView getHomeView(ModelAndView mv) {
-		mv.setViewName("/group/home");
+	@RequestMapping(value= {"/", "/notice"})
+	public ModelAndView getNoticeView(ModelAndView mv) {
+		mv.setViewName("/group/notice");
 		mv.addObject("title", "학회소식");
 		return mv;
 	}
-	@RequestMapping(value="/notice")
-	public ModelAndView getNoticeView(ModelAndView mv) {
-		mv.setViewName("/group/notice");
-		mv.addObject("title", "공지사항");
+	@RequestMapping(value="/notice/write")
+	public ModelAndView getWriteNoticeView(ModelAndView mv) {
+		mv.setViewName("/board/write");
+		return mv;
+	}
+	@RequestMapping(value="/notice/view/{id}")
+	public ModelAndView getDetailNoticeView(ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		
+		mv.setViewName("/board/detail");
 		return mv;
 	}
 	@RequestMapping(value="/news")

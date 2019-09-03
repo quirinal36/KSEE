@@ -21,6 +21,7 @@ public class UserVO {
 	String address;
 	String addressDetail;
 	String role_name;
+	String telephone;
 	
 	public UserVO () {
 		
