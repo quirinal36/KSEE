@@ -18,4 +18,26 @@
 			${boardType}
 		)
 	</insert>
+	
+	<select id="select" parameterType="board" resultType="board">
+		SELECT 
+			board.*,
+			(SELECT COUNT(*) FROM FileInfo WHERE boardId = board.id) AS fileCnt,
+			(SELECT COUNT(*) FROM PhotoInfo WHERE boardId = board.id) AS pictureCnt,
+			usr.username AS writerName
+		FROM 
+			Board board LEFT JOIN users usr ON (board.writer = usr.id)
+		<where>
+			board.boardType = ${boardType}
+		</where>
+		order by board.id desc
+		LIMIT ${from}, ${pageSize}
+	</select>
+	
+	<select id="count" parameterType="board" resultType="int">
+		SELECT COUNT(*) FROM Board
+		<where>
+			boardType = ${boardType}
+		</where>
+	</select>
 </mapper>

@@ -52,8 +52,6 @@
 		var title = $("input[name='title']").val();
 		var content = CKEDITOR.instances.editor1.getData();
 		var boardType = $("input[name='board_type']").val();
-		console.log(title);
-		console.log(content);
 		var pictures = [];
 		var files = [];
 		$("#picture_ul").find(".bt_del_img").each(function(i, item){
@@ -75,7 +73,10 @@
 			type: "POST",
 			dataType : "json"
 		}).done(function(json){
-			console.log(json);
+			if(json.result > 0){
+				alert("글 작성이 완료되었습니다.");
+				window.location.replace($("input[name='listUrl']").val());
+			}
 		});
 	}
 	</script>
@@ -90,6 +91,7 @@
 				<input type="hidden" name="isLoginUrl" value="<c:url value="/member/isLogin"/>"/>
 				<input type="hidden" name="loginUrl" value="<c:url value="/member/login"/>"/>
 				<input type="hidden" name="currentUrl" value="${current }"/>
+				<input type="hidden" name="listUrl" value="${listUrl }"/>
 				
 				<div class="board_write">
 					<div class="board_write_title">

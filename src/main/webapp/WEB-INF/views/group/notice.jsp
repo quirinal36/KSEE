@@ -1,11 +1,13 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/js/notice.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 </head>
 <body>
 <div id="wrap">
@@ -15,44 +17,64 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
+				
 				<div class="board_search">
+				
 					<div class="search_ipt">
-						<input type="text" placeholder="검색어를 입력하세요.">
-						<input type="button" value="검색">
+						<form action="<c:url value="/group/"/>">
+							<input type="text" placeholder="검색어를 입력하세요.">
+							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
+							<input type="button" value="검색">
+						</form>
 					</div>
 				</div>
 				<div class="search_result_message">
-					<p><span>“연구회”</span> 검색 결과입니다.</p>
+					<c:if test="${not empty paging.query }">
+						<p><span>“연구회”</span> 검색 결과입니다.</p>
+					</c:if>
 				</div>
 				
 				<div class="board_list board_list_typeA">
 					<ul>
-						<c:forEach begin="0" end="8" step="1">
+						<c:forEach items="${list}" var="item">
 							<li>
-								<a href="<c:url value="/group/notice/view/121"/>">
+								<a href="<c:url value="/group/notice/view/${item.id }"/>">
 									<div class="top">
-										<span class="num">No. 121</span>
-										<span class="file">1</span>
+										<span class="num">No. ${item.id }</span>
+										<span class="file">${item.fileCnt }</span>
 										<span class="view">123</span>
 									</div>
 									<div class="cont">
-										<strong class="title">한국효소공학연구회 공지사항입니다.</strong>
+										<strong class="title">${item.title }</strong>
 										<div class="info">
-											<span class="writer">이승구</span>
-											<span class="date">2019-08-11</span>
+											<span class="writer">${item.writerName }</span>
+											<span class="date">
+												<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
+											</span>
 										</div>								   
-										<p class="content">한국효소공학연구회 공지사항입니다. 한국효소공학연구회 공지사항입니다. 한국효소공학연구회 공지사항입니다.</p>
+										<p class="content">
+											<c:out value='${item.content.replaceAll("\\\<.*?\\\>","") }'/>
+										</p>
 									</div>
 								</a>
 							</li>
 						</c:forEach>
 					</ul>
 					<div class="page">
-						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
-						<a href="#" class="bt prev">이전 페이지로 가기</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
+						<a href="javascript:pageGo(${paging.firstPageNo})" class="bt first">맨 처음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.prevPageNo})" class="bt prev">이전 페이지로 가기</a>
+						<c:choose>
+							<c:when test="${paging.finalPageNo eq 0}">
+								<a href="javascript:pageGo(1)" class="num on">1</a>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${paging.startPageNo }" end="${paging.endPageNo}" varStatus="loop">
+									<a href="javascript:pageGo(${loop.current })" class="num <c:if test="${loop.current eq paging.pageNo }">on</c:if>">
+									${loop.current }
+									</a>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 						<a href="#" class="bt next">다음 페이지로 가기</a>
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>

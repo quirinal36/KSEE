@@ -38,8 +38,7 @@ public class BoardService implements DataService<Board>{
 
 	@Override
 	public List<Board> select(Board input) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select(input);
 	}
 
 	@Override
@@ -50,8 +49,7 @@ public class BoardService implements DataService<Board>{
 
 	@Override
 	public int count(Board input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.count(input);
 	}
 
 }

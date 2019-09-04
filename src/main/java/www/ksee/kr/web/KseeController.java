@@ -25,8 +25,6 @@ public class KseeController {
 	protected PhotoInfoService photoInfoService;
 	@Resource(name="fileInfoService")
 	protected FileInfoService fileInfoService;
-	@Resource(name="fileMetaService")
-	protected FileMetaService fileMetaService;
 	@Autowired
 	AuthenticationManager authenticationManager;
 	

@@ -39,8 +39,7 @@ public class BoardDAO implements DataAccess<Board>{
 
 	@Override
 	public List<Board> select(Board input) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace +".select", input);
 	}
 
 	@Override
@@ -51,8 +50,7 @@ public class BoardDAO implements DataAccess<Board>{
 
 	@Override
 	public int count(Board input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne(namespace+".count", input);
 	}
 
 }
