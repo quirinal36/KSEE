@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import www.ksee.kr.security.AuthenticationFacade;
+import www.ksee.kr.service.FileInfoService;
 import www.ksee.kr.service.FileMetaService;
 import www.ksee.kr.service.PhotoInfoService;
 import www.ksee.kr.service.UserService;
@@ -22,6 +23,8 @@ public class KseeController {
 	protected final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
 	@Resource(name="photoInfoService")
 	protected PhotoInfoService photoInfoService;
+	@Resource(name="fileInfoService")
+	protected FileInfoService fileInfoService;
 	@Resource(name="fileMetaService")
 	protected FileMetaService fileMetaService;
 	@Autowired

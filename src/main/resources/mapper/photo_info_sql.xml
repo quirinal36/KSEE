@@ -74,4 +74,21 @@
 			id=${id}
 		</where>
 	</update>
+	
+	<update id="update_list" parameterType="java.util.List">
+		UPDATE PhotoInfo
+		<set>
+			boardId =
+			<foreach collection="list" item="item" open="CASE" close="END">
+				WHEN id = ${item.id} THEN ${item.boardId}
+			</foreach>
+			
+		</set>
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach> 
+		</where>
+	</update>
 </mapper>

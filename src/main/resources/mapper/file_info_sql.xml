@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="file_info_sql">
+	<insert id="insert_list" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+		INSERT into FileInfo 
+		(
+			url,
+			name,
+			newFilename,
+			size,
+			contentType,
+			uploader
+		)
+		values
+		
+		<foreach collection="list" item="elem" index="i" open="(" separator="),(" close=")">
+			'${elem.url}',
+			'${elem.name}',
+			'${elem.newFilename}',
+			${elem.size},
+			'${elem.contentType}',
+			${elem.uploader}
+		</foreach>
+		
+	</insert>
+	<insert id="insert" parameterType="fileinfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT into FileInfo 
+		(
+			url,
+			name,
+			newFilename,
+			size,
+			contentType,
+			uploader
+		)
+		values
+		
+		(
+			'${url}',
+			'${name}',
+			'${newFilename}',
+			${size},
+			'${contentType}',
+			${uploader}
+		)
+		
+	</insert>
+	<select id = "select_one" parameterType="fileinfo" resultType="fileinfo">
+		select *
+		from FileInfo
+		<where>
+			id = ${id}
+		</where>
+		
+	</select>
+	
+	<update id="update" parameterType="fileinfo">
+		UPDATE FileInfo
+		<set>
+			url = '${url}',
+		</set>
+		<where>
+			id=${id}
+		</where>
+	</update>
+	
+	<update id="update_list" parameterType="java.util.List">
+		UPDATE FileInfo
+		<set>
+			boardId =
+			<foreach collection="list" item="item" open="CASE" close="END">
+				WHEN id = ${item.id} THEN ${item.boardId}
+			</foreach>
+			
+		</set>
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach> 
+		</where>
+	</update>
+</mapper>

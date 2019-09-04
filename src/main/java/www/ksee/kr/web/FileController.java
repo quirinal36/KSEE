@@ -5,23 +5,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import www.ksee.kr.security.AuthenticationFacade;
-import www.ksee.kr.service.FileMetaService;
-import www.ksee.kr.service.PhotoInfoService;
-import www.ksee.kr.service.UserService;
+import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.FileMeta;
 import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.UserVO;
@@ -42,9 +35,50 @@ import www.ksee.kr.vo.UserVO;
 @Controller
 public class FileController extends KseeController {
 	
+	@ResponseBody
+	@RequestMapping(value="/upload/file", method = {RequestMethod.GET, RequestMethod.POST})
+	public Map uploadFile(MultipartHttpServletRequest request, 
+    		HttpServletResponse response) {
+		UserVO user = getUser();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Iterator<String> itr = request.getFileNames();
+        MultipartFile mpf;
+        if (itr.hasNext()) {
+            mpf = request.getFile(itr.next());
+            String newFilenameBase = UUID.randomUUID().toString();
+            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+            String newFilename = newFilenameBase + originalFileExtension;
+            String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+			
+			File newFile = new File(srcPath + "/" + newFilename);
+            try {
+                mpf.transferTo(newFile);
+                FileInfo fileInfo = new FileInfo();
+                fileInfo.setUploader(user.getId());
+                fileInfo.setName(mpf.getOriginalFilename());
+                fileInfo.setNewFilename(newFilename);
+                fileInfo.setSize((int)mpf.getSize());
+                fileInfo.setContentType(mpf.getContentType());
+                int result = fileInfoService.insert(fileInfo);
+                fileInfo.setUrl("/upload/get/"+fileInfo.getId());
+                map.put("url", fileInfo.getUrl());
+                map.put("result", result);
+                map.put("type", "file");
+                map.put("file", fileInfo);
+            }catch(IOException e) {
+            	e.printStackTrace();
+            	map.put("result", 0);
+            }
+        }
+        
+        return map;
+	}
+	
 	@ResponseBody 
-	@RequestMapping(value = "/upload", method = {RequestMethod.GET, RequestMethod.POST})
-    public Map upload2(MultipartHttpServletRequest request, 
+	@RequestMapping(value = "/upload/image", method = {RequestMethod.GET, RequestMethod.POST})
+    public Map uploadImage(MultipartHttpServletRequest request, 
     		HttpServletResponse response) {
 		UserVO user = getUser();
 		
@@ -85,6 +119,7 @@ public class FileController extends KseeController {
                 
                 map.put("url", photo.getUrl());
                 map.put("result", result);
+                map.put("type", "image");
                 map.put("file", photo);
             } catch(IOException e) {
                 logger.info("Could not upload file "+mpf.getOriginalFilename() + e.getLocalizedMessage());
@@ -172,17 +207,22 @@ public class FileController extends KseeController {
 	 * @param response : passed by the server
 	 * @param value : value from the URL
 	 * @return void
+	 * @throws UnsupportedEncodingException 
 	 ****************************************************/
 	@RequestMapping(value = "/upload/get/{value}", method = RequestMethod.GET)
-	public void get(HttpServletResponse response, @PathVariable String value){
-		FileMeta param = FileMeta.newInstance(Integer.parseInt(value));
-		FileMeta getFile = fileMetaService.selectOne(param);
-		
+	public void get(HttpServletResponse response, @PathVariable String value,
+			HttpServletRequest request) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8");
+		FileInfo fileInfo = new FileInfo();
+		fileInfo.setId(Integer.parseInt(value));
+		fileInfo = fileInfoService.selectOne(fileInfo);
 		try {      
-			response.setContentType(getFile.getFileType());
-			response.setContentLength(getFile.getSize());
-			response.setHeader("Content-disposition", "attachment; filename=\""+getFile.getFileName()+"\"");
-			InputStream is = new FileInputStream(new File(getFile.getUrl()));
+			response.setContentType(fileInfo.getContentType());
+			response.setContentLength(fileInfo.getSize());
+			response.setHeader("Content-disposition", "attachment; charset=UTF-8; filename=\""+URLEncoder.encode(fileInfo.getName(), "UTF-8")+"\"");
+			
+			String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+			InputStream is = new FileInputStream(new File(srcPath +File.separator + fileInfo.getNewFilename()));
 			FileCopyUtils.copy(is, response.getOutputStream());
 		}catch (IOException e) {
 			e.printStackTrace();

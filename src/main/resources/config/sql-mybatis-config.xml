@@ -6,5 +6,7 @@
     <typeAliases>
 		<typeAlias type="www.ksee.kr.vo.UserVO" alias="user"/>
 		<typeAlias type="www.ksee.kr.vo.PhotoInfo" alias="photoinfo"/>
+		<typeAlias type="www.ksee.kr.vo.FileInfo" alias="fileinfo"/>
+		<typeAlias type="www.ksee.kr.vo.Board" alias="board"/>
     </typeAliases>
 </configuration>

@@ -5,58 +5,54 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import www.ksee.kr.dao.PhotoInfoDAO;
+import www.ksee.kr.dao.FileInfoDAO;
+import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 
-
-@Component("photoInfoService")
-public class PhotoInfoService implements DataService<PhotoInfo> {
+@Component("fileInfoService")
+public class FileInfoService implements DataService<FileInfo>{
 	@Autowired
-	PhotoInfoDAO dao;
+	FileInfoDAO dao;
 	
 	@Override
-	public int insert(PhotoInfo input) {
-		// TODO Auto-generated method stub
+	public int insert(FileInfo input) {
 		return dao.insert(input);
 	}
-	
 	public int insert(List<PhotoInfo> input) {
 		return dao.insert(input);
 	}
-
 	@Override
-	public int update(PhotoInfo input) {
+	public int update(FileInfo input) {
 		return dao.update(input);
 	}
-	public int update(List<PhotoInfo> list) {
+	public int update(List<FileInfo> list) {
 		return dao.update(list);
 	}
 	@Override
-	public int delete(PhotoInfo input) {
+	public int delete(FileInfo input) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public List<PhotoInfo> select() {
+	public List<FileInfo> select() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<PhotoInfo> select(PhotoInfo input) {
+	public List<FileInfo> select(FileInfo input) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PhotoInfo selectOne(PhotoInfo input) {
-		// TODO Auto-generated method stub
+	public FileInfo selectOne(FileInfo input) {
 		return dao.selectOne(input);
 	}
 
 	@Override
-	public int count(PhotoInfo input) {
+	public int count(FileInfo input) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

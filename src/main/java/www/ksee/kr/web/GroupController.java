@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.vo.UserVO;
+
 @RequestMapping(value="/group")
 @Controller
 public class GroupController extends KseeController {
@@ -19,7 +21,10 @@ public class GroupController extends KseeController {
 	}
 	@RequestMapping(value="/notice/write")
 	public ModelAndView getWriteNoticeView(ModelAndView mv, HttpServletRequest request) {
+		UserVO user = getUser();
+		
 		mv.addObject("current", request.getServletPath());
+		mv.addObject("user", user);
 		mv.setViewName("/board/write");
 		return mv;
 	}
