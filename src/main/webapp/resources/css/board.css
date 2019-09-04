@@ -64,9 +64,9 @@
 .board_view_tab .tab ul li a { display: block; width: 100%; padding: 12px 0; text-align: center; font-size: 16px; font-weight: 400; color: #fff; }
 .board_view_tab .tab ul li a.on { background: #fff; font-weight: 800; color: #325cb2; }
 .board_view_tab .cont { padding-left: 250px; }
-.board_view_tab .cont .title { padding: 20px 0; }
-.board_view_tab .cont .title strong { font-size: 32px; font-weight: 600; }
-.board_view_tab .cont .title p { margin-top: 15px; font-size: 15px; }
+.board_view_tab .cont .detail_title { padding: 20px 0; }
+.board_view_tab .cont .detail_title strong { font-size: 32px; font-weight: 600; }
+.board_view_tab .cont .detail_title p { margin-top: 15px; font-size: 15px; }
 
 
 /* 게시판 글쓰기 */
@@ -168,10 +168,12 @@
 .board_list_typeB.news .list .category { width: 12%; }
 .board_list_typeB.news .list .title { width: 41%; }
 
-/* 공지사항 */
+/* 심포지엄 목록 */
 .board_list_typeB.symposium { margin-top: 60px; }
 .board_list_typeB.symposium .list .num { width: 9% }
 .board_list_typeB.symposium .list .title { width: 30%; }
 .board_list_typeB.symposium .list .period { width: 25%; }
 .board_list_typeB.symposium .list .place { width: 20%; }
 .board_list_typeB.symposium .list .apply { width: 16%; }
+
+.board_view.symposium { margin-top: 60px; }
