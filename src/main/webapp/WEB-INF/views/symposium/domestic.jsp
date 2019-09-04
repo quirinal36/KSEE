@@ -29,7 +29,7 @@
 							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제8회 한국효소공학연구회 심포지엄</a></div>
 							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
 							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/8"/>" class="bt2 on">참가신청</a></div>
+                            <div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
 						</li>
 						<li>
 							<div class="num">7</div>

@@ -35,4 +35,10 @@ public class SymposiumController {
 		mv.addObject("title", "한중일 학술대회");
 		return mv;
 	}
+	
+	@RequestMapping(value="/apply")
+	public ModelAndView getApplyView(ModelAndView mv) {
+		mv.setViewName("/symposium/apply");
+		return mv;
+	}
 }
