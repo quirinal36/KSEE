@@ -5,37 +5,33 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import www.ksee.kr.service.UserService;
 import www.ksee.kr.vo.UserVO;
 
 @RequestMapping("/member")
 @Controller
-public class MemberController {
-	final Logger logger = LoggerFactory.getLogger(getClass());
-	
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	AuthenticationManager authenticationManager;
+public class MemberController extends KseeController{
 	
 	@RequestMapping("/login")
-	public ModelAndView getLoginView(ModelAndView mv) {
+	public ModelAndView getLoginView(ModelAndView mv,
+			HttpServletRequest request,
+			@RequestParam(value = "loginRedirect", required = false) String redirectUrl) {
+		String refererUrl = request.getHeader("Referer");
+		if (redirectUrl != null) {
+			mv.addObject("loginRedirect", redirectUrl);
+		}else {
+			mv.addObject("loginRedirect", refererUrl);
+		}
 		mv.setViewName("/member/login");
 		return mv;
 	}
@@ -127,9 +123,13 @@ public class MemberController {
 		mv.setViewName("/member/login");
 		return mv;
 	}
-	@RequestMapping(value="/loginProcess", method= RequestMethod.GET)
-	public ModelAndView getLoginProcessView(ModelAndView mv) {
-		mv.setViewName("/member/login");
-		return mv;
+	
+	@ResponseBody
+	@RequestMapping(value="/isLogin")
+	public String isLoginedUserView(HttpServletRequest request) {
+		JSONObject json = new JSONObject();
+		json.put("result", isLoginedUser(request));
+		
+		return json.toString();
 	}
 }

@@ -13,26 +13,19 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PhotoInfo implements Cloneable{
-	private int id;
-	private String patientId;
-	private String doctor;
-	private String uploader;
-	private String classification;
-	private Date date;
-	private String photoUrl;
-	private int sync;
-	private String comment;
-	private String name;
-	private String thumbnailFilename;
-	private String newFilename;
-	private int size;
-	private int thumbnailSize;
-	private String url;
-	private String thumbnailUrl;
-	private String contentType;
-	private String search;
-	private int orderById;
-	private String [] photo;
+	int id;
+	int uploader;
+	Date wdate;
+	String url;
+	String name;
+	String thumbnailFilename;
+	String newFilename;
+	int size;
+	int thumbnailSize;
+	String thumbnailUrl;
+	String contentType;
+	String search;
+	int orderById;
 	
 	@Override
 	public Object clone() throws CloneNotSupportedException {

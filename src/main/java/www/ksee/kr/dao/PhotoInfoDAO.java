@@ -26,8 +26,7 @@ public class PhotoInfoDAO implements DataAccess<PhotoInfo> {
 	
 	@Override
 	public int update(PhotoInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(namespace +".update", input);
 	}
 	@Override
 	public int delete(PhotoInfo input) {

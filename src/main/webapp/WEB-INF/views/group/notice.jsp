@@ -27,7 +27,7 @@
 				
 				<div class="board_list board_list_typeA">
 					<ul>
-						<c:forEach begin="0" end="9" step="1">
+						<c:forEach begin="0" end="8" step="1">
 							<li>
 								<a href="<c:url value="/group/notice/view/121"/>">
 									<div class="top">

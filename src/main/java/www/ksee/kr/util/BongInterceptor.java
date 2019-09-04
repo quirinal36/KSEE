@@ -1,5 +1,6 @@
 package www.ksee.kr.util;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -7,6 +8,8 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +27,6 @@ public class BongInterceptor implements HandlerInterceptor{
 				logger.info("key : "+key + "|" + "value : "+value);
 			}
 		}
-		
 		
 //		if(request.isUserInRole("ROLE_USER") || request.isUserInRole("ROLE_ADMIN"))
 //		{

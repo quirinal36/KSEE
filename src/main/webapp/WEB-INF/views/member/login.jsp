@@ -32,7 +32,7 @@
 						</dl>
 						
 						<p class="message error" <c:if test="${not empty securityexceptionmsg }">style="display:block"</c:if>>${securityexceptionmsg }</p>
-						<input type="hidden" name="loginRedirect" value="<c:url value="/"/>"/>
+						<input type="hidden" name="loginRedirect" value="${loginRedirect}"/>
 						<input type="submit" value="로그인" class="bt3 on">
 						<div class="bt_wrap">
 							<a href="<c:url value="/member/signup"/>">회원가입</a>

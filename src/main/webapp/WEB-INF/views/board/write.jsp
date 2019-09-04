@@ -11,12 +11,31 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		var url = $("#clearUrl").val();
-		
+		/*
 		$.ajax({
 			url : url,
 			type : "GET"
 		}).done(function(resp){
 			alert("clear ok~!");
+		});
+		*/
+		
+		var isLoginUrl = $("input[name='isLoginUrl']").val();
+		var loginUrl = $("input[name='loginUrl']").val();
+		var redirectUrl = $("input[name='currentUrl']").val();
+		$.ajax({
+			url : isLoginUrl,
+			type: "GET",
+			dataType: 'json'
+		}).done(function(json){
+			console.log(json);
+			
+			if(json.result){
+				
+			}else{
+				alert("로그인 해주세요");
+				window.location.replace(loginUrl +"?loginRedirect=" + redirectUrl);
+			}
 		});
 	});
 	</script>
@@ -26,6 +45,11 @@
 		<c:import url="/inc/header"></c:import>
 		<div class="container_wrap">
 			<div class="container">
+				<form>
+				<input type="hidden" name="isLoginUrl" value="<c:url value="/member/isLogin"/>"/>
+				<input type="hidden" name="loginUrl" value="<c:url value="/member/login"/>"/>
+				<input type="hidden" name="currentUrl" value="${current }"/>
+				
 				<div class="board_write">
 					<div class="board_write_title">
 						<div class="title">제목</div>
@@ -77,13 +101,21 @@
 							<dt>사진</dt>
 							<dd>
 								<!-- 사진 목록 -->
-								<ul>
+								<ul id="picture_ul">
+									<!-- 
 									<li style="background-image: url(/resources/img/temp/3.png);">
 										<input type="button" title="삭제" class="bt_del_img">
 									</li>
+									 -->
 								</ul>
-								<!-- 사진등록 버튼 -->
-								<input type="button" value="사진등록" class="bt2">
+								<!-- 첨부하기 버튼 -->
+								<input id="fileupload" type="file" name="files[]" 
+									accept="image/x-png, image/gif, image/jpeg" data-url="<c:url value="/upload"/>" multiple>
+							    <div id="progress">
+							        <div style="width: 0%;"></div>
+							    </div>
+							    <input type="hidden" value="<c:url value="/upload/get"/>" name="uploadUrl">
+								<input type="hidden" value="<c:url value="/upload/clear"/>" name="clearUrl">
 							</dd>
 						</dl>
 					</div>
@@ -98,8 +130,6 @@
 										<input type="button" value="삭제" class="bt_del_file">
 									</li>
 								</ul>
-								<!-- 첨부하기 버튼 -->
-								<input type="button" value="첨부하기" class="bt2">
 							</dd>
 						</dl>
 					</div>
@@ -108,26 +138,37 @@
 						<a href="#" onClick="history.back();" class="bt1">취소</a>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 		<c:import url="/inc/footer"></c:import>
 	</div>
 	<script type="text/javascript">
-	$(function () {
+	$(document).ready(function(){
 	    $('#fileupload').fileupload({
 	    	imageCrop: true,
 	        dataType: 'json',
 	        done: function (e, data) {
-	        	var url = $("input[name='uploadUrl']").val();
+	        	console.log(data);
 	        	
-	            $("#uploaded-files tr:has(td)").remove();
+	        	var url = $("input[name='uploadUrl']").val();
+	        	if(data.result > 0){
+	        		$("#picture_ul").append($("<li>").attr("style", "background-image: url(" + data.url + ");"));
+	        	}else{
+	        		alert("업로드 실패");
+	        	}
+	            // $("#uploaded-files tr:has(td)").remove();
+	            /*
 	            $.each(data.result, function (index, file) {
+	            	console.log(file);
+	            	
 	                $("#uploaded-files").append(
 	                        $('<tr/>')
 	                        .append($('<td/>').text(file.fileName))
 	                        .append($('<td/>').text(file.fileSize))
 	                        .append($('<td/>').text(file.fileType))
 	                        )//end $("#uploaded-files").append()
+	                */
 	            }); 
 	        },
 	 		
@@ -142,9 +183,6 @@
 	        dropZone: $('#dropzone')
 	    });
 	});
-	function insertBoard(){
-		$("#write").submit();
-	}
 	</script>
 	<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>

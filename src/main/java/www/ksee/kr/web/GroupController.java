@@ -1,5 +1,7 @@
 package www.ksee.kr.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping(value="/group")
 @Controller
-public class GroupController {
+public class GroupController extends KseeController {
 
 	@RequestMapping(value= {"/", "/notice"})
 	public ModelAndView getNoticeView(ModelAndView mv) {
@@ -16,7 +18,8 @@ public class GroupController {
 		return mv;
 	}
 	@RequestMapping(value="/notice/write")
-	public ModelAndView getWriteNoticeView(ModelAndView mv) {
+	public ModelAndView getWriteNoticeView(ModelAndView mv, HttpServletRequest request) {
+		mv.addObject("current", request.getServletPath());
 		mv.setViewName("/board/write");
 		return mv;
 	}

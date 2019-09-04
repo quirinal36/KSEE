@@ -6,48 +6,52 @@
 	<insert id="insert_list" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
 		INSERT into PhotoInfo 
 		(
-			photoUrl,
+			url,
 			name,
 			thumbnailFilename,
 			newFilename,
 			size,
 			thumbnailSize,
-			contentType
+			contentType,
+			uploader
 		)
 		values
 		
 		<foreach collection="list" item="elem" index="i" open="(" separator="),(" close=")">
-			'${elem.photoUrl}',
+			'${elem.url}',
 			'${elem.name}',
 			'${elem.thumbnailFilename}',
 			'${elem.newFilename}',
 			${elem.size},
 			${elem.thumbnailSize},
-			'${elem.contentType}'
+			'${elem.contentType}',
+			${elem.uploader}
 		</foreach>
 		
 	</insert>
 	<insert id="insert" parameterType="photoinfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT into PhotoInfo 
 		(
-			photoUrl,
+			url,
 			name,
 			thumbnailFilename,
 			newFilename,
 			size,
 			thumbnailSize,
-			contentType
+			contentType,
+			uploader
 		)
 		values
 		
 		(
-			'${photoUrl}',
+			'${url}',
 			'${name}',
 			'${thumbnailFilename}',
 			'${newFilename}',
 			${size},
 			${thumbnailSize},
-			'${contentType}'
+			'${contentType}',
+			${uploader}
 		)
 		
 	</insert>
@@ -59,4 +63,15 @@
 		</where>
 		
 	</select>
+	
+	<update id="update" parameterType="photoinfo">
+		UPDATE PhotoInfo
+		<set>
+			url = '${url}',
+			thumbnailUrl = '${thumbnailUrl}'
+		</set>
+		<where>
+			id=${id}
+		</where>
+	</update>
 </mapper>

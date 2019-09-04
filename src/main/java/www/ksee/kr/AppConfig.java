@@ -30,6 +30,7 @@ import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -117,9 +118,12 @@ public class AppConfig implements WebMvcConfigurer {
 	}
 	
 	@Bean
-	public CommonsMultipartResolver multipartResolver() {
+	public MultipartResolver multipartResolver() {
+		long maxSize = 1024 * 1024 * 10;
+		
 	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
 	    resolver.setDefaultEncoding("utf-8");
+	    resolver.setMaxUploadSize(maxSize);
 	    return resolver;
 	}
 	

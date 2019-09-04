@@ -23,6 +23,12 @@ public class UserVO {
 	String role_name;
 	String telephone;
 	
+	public static final int ROLE_ADMIN = 1;
+	public static final int ROLE_USER = 2;
+	public static final String ADMIN = "ROLE_ADMIN";
+	public static final String USER = "ROLE_USER";
+	public static final String[] ROLES = {"", ADMIN, USER};
+	
 	public UserVO () {
 		
 	}

@@ -26,8 +26,7 @@ public class PhotoInfoService implements DataService<PhotoInfo> {
 
 	@Override
 	public int update(PhotoInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(input);
 	}
 
 	@Override
