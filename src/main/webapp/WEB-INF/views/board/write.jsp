@@ -111,6 +111,7 @@
 								<!-- 첨부하기 버튼 -->
 								<input id="fileupload" type="file" name="files[]" 
 									accept="image/x-png, image/gif, image/jpeg" data-url="<c:url value="/upload"/>" multiple>
+								<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
 							    <div id="progress">
 							        <div style="width: 0%;"></div>
 							    </div>
@@ -149,19 +150,20 @@
 	    	imageCrop: true,
 	        dataType: 'json',
 	        done: function (e, data) {
-	        	console.log(data);
 	        	
-	        	var url = $("input[name='uploadUrl']").val();
-	        	if(data.result > 0){
-	        		$("#picture_ul").append($("<li>").attr("style", "background-image: url(" + data.url + ");"));
-	        	}else{
-	        		alert("업로드 실패");
-	        	}
-	            // $("#uploaded-files tr:has(td)").remove();
-	            /*
-	            $.each(data.result, function (index, file) {
-	            	console.log(file);
+	        	var file = data.result.file;
+	        	console.log(file);
+	            //$.each(data.files, function (index, file) {
+	            	console.log(file.name +"/" + file.size +"/" + file.contentType);
 	            	
+		        	$("#picture_ul").append(
+		        			$("<li>").attr("style", "background-image: url(" + file.url + ");")
+		        				.append(
+		        						$("<input>").attr("type","button").attr("title","삭제").addClass("bt_del_img")
+		        				)
+		        			);
+		        	
+	            	/*
 	                $("#uploaded-files").append(
 	                        $('<tr/>')
 	                        .append($('<td/>').text(file.fileName))
@@ -169,7 +171,9 @@
 	                        .append($('<td/>').text(file.fileType))
 	                        )//end $("#uploaded-files").append()
 	                */
-	            }); 
+	                
+	            //}); 
+	        	
 	        },
 	 		
 	        progressall: function (e, data) {

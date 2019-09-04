@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping(value="/symposium")
 @Controller
-public class SymposiumController {
+public class SymposiumController extends KseeController{
 	
 	@RequestMapping(value= {"/", "/domestic"})
 	public ModelAndView getHistoryView(ModelAndView mv) {

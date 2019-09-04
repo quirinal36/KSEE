@@ -44,11 +44,12 @@ public class FileController extends KseeController {
 	
 	@ResponseBody 
 	@RequestMapping(value = "/upload", method = {RequestMethod.GET, RequestMethod.POST})
-    public String upload2(MultipartHttpServletRequest request, 
+    public Map upload2(MultipartHttpServletRequest request, 
     		HttpServletResponse response) {
 		UserVO user = getUser();
 		
-		JSONObject json = new JSONObject();
+		// JSONObject json = new JSONObject();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
@@ -82,22 +83,22 @@ public class FileController extends KseeController {
                 
                 result = photoInfoService.update(photo);
                 
-                json.put("url", photo.getUrl());
-                json.put("result", result);
-                
+                map.put("url", photo.getUrl());
+                map.put("result", result);
+                map.put("file", photo);
             } catch(IOException e) {
                 logger.info("Could not upload file "+mpf.getOriginalFilename() + e.getLocalizedMessage());
-                json.put("result", 0);
+                map.put("result", 0);
             }
         }
-        return json.toString();
+        return map;
 	}
 	private File makeThumbnail(File originFile, String newFilenameBase)throws IOException{
 		// 저장된 원본파일로부터 BufferedImage 객체를 생성합니다.
 		// File originFile = new File(filePath);
 		BufferedImage srcImg = ImageIO.read(originFile); 
 		// 썸네일의 너비와 높이 입니다. 
-		int dw = 250, dh = 250; 
+		int dw = 150, dh = 120; 
 		// 원본 이미지의 너비와 높이 입니다. 
 		int ow = srcImg.getWidth(); 
 		int oh = srcImg.getHeight(); 
