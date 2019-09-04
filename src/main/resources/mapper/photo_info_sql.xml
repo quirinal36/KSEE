@@ -91,4 +91,12 @@
 			</foreach> 
 		</where>
 	</update>
+	
+	<select id="select" parameterType="photoinfo" resultType="photoinfo">
+		SELECT * 
+		FROM PhotoInfo
+		<where>
+			boardId = ${boardId}
+		</where>
+	</select>
 </mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html>
 <head>
@@ -12,26 +14,29 @@
 			<div class="container">
 				<div class="board_view">
 					<div class="board_view_title">
-						<div class="title">2019 하계 중국 심포지움</div>
-						<div class="writer">이승구</div>
-						<div class="date">2019-08-11</div>						
-						<div class="file">1</div>					
+						<div class="title">${board.title }</div>
+						<div class="writer">${board.writerName }</div>
+						<div class="date">
+							<fmt:formatDate value="${board.wdate}" pattern="yyyy-MM-dd" />
+						</div>						
+						<div class="file">${fn:length(fileList) }</div>					
 						<div class="view">123</div>
 					</div>
 					<div class="board_view_cont">
 						<div class="board_view_img">
-							<img src="/resources/img/temp/2.png" alt="게시글 제목">
+							<c:forEach items="${photoList }" var="item">
+								<img src="/picture/${item.id }" alt="게시글 제목">
+							</c:forEach>
 						</div>
-						과학<br>
-						보편적인 진리나 법칙의 발견을 목적으로 한 체계적인 지식. 넓은 뜻으로는 학(學)을 이르고, 좁은 뜻으로는 자연 과학을 이른다.
+						${board.content }
 					</div>
 					<div class="board_view_file">
 						<div class="title">첨부파일</div>
 						<div class="file_list">
 							<ul>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.hwp</a></li>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.pdf</a></li>
-								<li><a href="#">2019 하계 중국 심포지움 안내파일.ppt</a></li>
+								<c:forEach items="${fileList }" var="item">
+									<li><a href="/upload/get/${item.id }">${item.name }</a></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>

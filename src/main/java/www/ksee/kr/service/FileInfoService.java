@@ -42,8 +42,7 @@ public class FileInfoService implements DataService<FileInfo>{
 
 	@Override
 	public List<FileInfo> select(FileInfo input) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select(input);
 	}
 
 	@Override

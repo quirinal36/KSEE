@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.BoardService;
 import www.ksee.kr.vo.Board;
+import www.ksee.kr.vo.FileInfo;
+import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.UserVO;
 
 @RequestMapping(value="/group")
@@ -47,7 +49,13 @@ public class GroupController extends KseeController {
 	@RequestMapping(value="/notice/view/{id}")
 	public ModelAndView getDetailNoticeView(ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
 		
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
 		mv.setViewName("/board/detail");
 		return mv;
 	}

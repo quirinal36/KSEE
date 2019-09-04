@@ -43,8 +43,7 @@ public class FileInfoDAO implements DataAccess<FileInfo>{
 
 	@Override
 	public List<FileInfo> select(FileInfo input) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList(namespace+".select", input);
 	}
 
 	@Override

@@ -8,6 +8,7 @@
 <c:import url="/inc/head"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/js/notice.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
+
 </head>
 <body>
 <div id="wrap">
@@ -22,15 +23,15 @@
 				
 					<div class="search_ipt">
 						<form action="<c:url value="/group/"/>">
-							<input type="text" placeholder="검색어를 입력하세요.">
+							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
-							<input type="button" value="검색">
+							<input type="button" value="검색" onclick="search();">
 						</form>
 					</div>
 				</div>
 				<div class="search_result_message">
 					<c:if test="${not empty paging.query }">
-						<p><span>“연구회”</span> 검색 결과입니다.</p>
+						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
 					</c:if>
 				</div>
 				

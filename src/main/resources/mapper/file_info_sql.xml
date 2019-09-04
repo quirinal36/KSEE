@@ -82,4 +82,12 @@
 			</foreach> 
 		</where>
 	</update>
+	
+	<select id="select" parameterType="fileinfo" resultType="fileinfo">
+		SELECT * 
+		FROM FileInfo
+		<where>
+			boardId = ${boardId}
+		</where>
+	</select>
 </mapper>

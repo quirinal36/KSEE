@@ -44,8 +44,7 @@ public class BoardDAO implements DataAccess<Board>{
 
 	@Override
 	public Board selectOne(Board input) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(namespace +".selectOne", input);
 	}
 
 	@Override

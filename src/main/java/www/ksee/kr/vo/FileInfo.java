@@ -10,6 +10,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class FileInfo {
+	public static FileInfo newInstance(int boardId) {
+		FileInfo result = new FileInfo();
+		result.setBoardId(boardId);
+		return result;
+	}
 	int id;
 	int uploader;
 	int boardId;

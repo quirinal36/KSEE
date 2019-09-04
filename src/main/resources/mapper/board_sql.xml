@@ -29,6 +29,14 @@
 			Board board LEFT JOIN users usr ON (board.writer = usr.id)
 		<where>
 			board.boardType = ${boardType}
+			<if test="query != ''">
+			and 
+				(
+				board.title like '%${query}%'
+				or
+				board.content like '%${query}%'
+				)
+			</if>
 		</where>
 		order by board.id desc
 		LIMIT ${from}, ${pageSize}
@@ -38,6 +46,17 @@
 		SELECT COUNT(*) FROM Board
 		<where>
 			boardType = ${boardType}
+		</where>
+	</select>
+	
+	<select id="selectOne" parameterType="board" resultType="board">
+		SELECT 
+			board.*,
+			usr.username AS writerName
+		FROM 
+			Board board LEFT JOIN users usr ON (board.writer = usr.id)
+		<where>
+			board.id = ${id}
 		</where>
 	</select>
 </mapper>

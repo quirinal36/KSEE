@@ -43,8 +43,7 @@ public class BoardService implements DataService<Board>{
 
 	@Override
 	public Board selectOne(Board input) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectOne(input);
 	}
 
 	@Override

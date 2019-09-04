@@ -10,6 +10,12 @@ import lombok.ToString;
 @Setter
 @ToString
 public class PhotoInfo implements Cloneable{
+	public static PhotoInfo newInstance(int boardId) {
+		PhotoInfo result = new PhotoInfo();
+		result.setBoardId(boardId);
+		return result;
+	}
+	
 	int id;
 	int uploader;
 	Date wdate;

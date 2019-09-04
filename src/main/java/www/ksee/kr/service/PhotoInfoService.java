@@ -45,8 +45,7 @@ public class PhotoInfoService implements DataService<PhotoInfo> {
 
 	@Override
 	public List<PhotoInfo> select(PhotoInfo input) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select(input);
 	}
 
 	@Override
