@@ -26,43 +26,47 @@ $(function(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<h2 class="cont_title notice">공지사항</h2>
-			<div class="board_view">
-				<div class="board_view_title">
-					<div class="title">2019 하계 중국 심포지움</div>
-					<div class="writer">
-						<dl>
-							<dt>작성자</dt>
-							<dd>이승구</dd>
-						</dl>
+			<c:import url="/inc/lnb_wrap"></c:import>
+			<c:import url="/inc/contentsTitle"></c:import>
+			<div id="contentsPrint">
+				<h2 class="cont_title notice">공지사항</h2>
+				<div class="board_view">
+					<div class="board_view_title">
+						<div class="title">2019 하계 중국 심포지움</div>
+						<div class="writer">
+							<dl>
+								<dt>작성자</dt>
+								<dd>이승구</dd>
+							</dl>
+						</div>
+						<div class="date">
+							<dl>
+								<dt>작성일</dt>
+								<dd>2019-07-09</dd>
+							</dl>
+						</div>
 					</div>
-					<div class="date">
-						<dl>
-							<dt>작성일</dt>
-							<dd>2019-07-09</dd>
-						</dl>
+					<div class="board_view_cont">
+						<div class="board_view_img">
+							<img src="/img/temp/2.png" alt="게시글 제목">
+						</div>
+						과학<br>
+						보편적인 진리나 법칙의 발견을 목적으로 한 체계적인 지식. 넓은 뜻으로는 학(學)을 이르고, 좁은 뜻으로는 자연 과학을 이른다.
 					</div>
-				</div>
-				<div class="board_view_cont">
-					<div class="board_view_img">
-						<img src="/img/temp/2.png" alt="게시글 제목">
+					<div class="board_view_file">
+						<div class="title">첨부파일</div>
+						<div class="file_list">
+							<ul>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.hwp</a></li>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.pdf</a></li>
+								<li><a href="#">2019 하계 중국 심포지움 안내파일.ppt</a></li>
+							</ul>
+						</div>
 					</div>
-					과학<br>
-					보편적인 진리나 법칙의 발견을 목적으로 한 체계적인 지식. 넓은 뜻으로는 학(學)을 이르고, 좁은 뜻으로는 자연 과학을 이른다.
-				</div>
-				<div class="board_view_file">
-					<div class="title">첨부파일</div>
-					<div class="file_list">
-						<ul>
-							<li><a href="#">2019 하계 중국 심포지움 안내파일.hwp</a></li>
-							<li><a href="#">2019 하계 중국 심포지움 안내파일.pdf</a></li>
-							<li><a href="#">2019 하계 중국 심포지움 안내파일.ppt</a></li>
-						</ul>
+					<div class="board_view_bt">
+						<a href="/notice.jsp" class="bt1 on w100">목록</a>
+						<input type="button" class="bt1 w100 popup_password_opener" value="수정">
 					</div>
-				</div>
-				<div class="board_view_bt">
-					<a href="/notice.jsp" class="bt1 on w100">목록</a>
-					<input type="button" class="bt1 w100 popup_password_opener" value="수정">
 				</div>
 			</div>
 		</div>

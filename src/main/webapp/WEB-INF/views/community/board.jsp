@@ -14,6 +14,20 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
+				<div class="board_search">
+					<div class="search_ipt">
+						<form action="<c:url value="/group/"/>">
+							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
+							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
+							<input type="button" value="검색" onclick="search();">
+						</form>
+					</div>
+				</div>
+				<div class="search_result_message">
+					<c:if test="${not empty paging.query }">
+						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
+					</c:if>
+				</div>
 				<div class="board_list board_list_typeB">
 					<ul class="list">
 						<li class="head">

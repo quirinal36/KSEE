@@ -82,177 +82,181 @@
 	</script>
 </head>
 <body>
-	<div class="wrap">
-		<c:import url="/inc/header"></c:import>
-		<div class="container_wrap">
-			<div class="container">
+<div class="wrap">
+	<c:import url="/inc/header"></c:import>
+	<div class="container_wrap">
+		<div class="container">
+			<c:import url="/inc/lnb_wrap"></c:import>
+			<c:import url="/inc/contentsTitle"></c:import>
+			<div id="contentsPrint">
 				<form action="<c:url value="/board/insertBoard"/>" method="post">
-				<input type="hidden" name="board_type" value="1"/>
-				<input type="hidden" name="isLoginUrl" value="<c:url value="/member/isLogin"/>"/>
-				<input type="hidden" name="loginUrl" value="<c:url value="/member/login"/>"/>
-				<input type="hidden" name="currentUrl" value="${current }"/>
-				<input type="hidden" name="listUrl" value="${listUrl }"/>
-				
-				<div class="board_write">
-					<div class="board_write_title">
-						<div class="title">제목</div>
-						<div class="title_ipt"><input type="text" placeholder="제목 입력" name="title"></div>
-						<div class="writer">작성자</div>
-						<div class="writer_ipt"><input type="text" placeholder="작성자 입력" value="${user.username }" readonly></div>
+					<input type="hidden" name="board_type" value="1"/>
+					<input type="hidden" name="isLoginUrl" value="<c:url value="/member/isLogin"/>"/>
+					<input type="hidden" name="loginUrl" value="<c:url value="/member/login"/>"/>
+					<input type="hidden" name="currentUrl" value="${current }"/>
+					<input type="hidden" name="listUrl" value="${listUrl }"/>
+					
+					<div class="board_write">
+						<div class="board_write_title">
+							<div class="title">제목</div>
+							<div class="title_ipt"><input type="text" placeholder="제목 입력" name="title" autocomplete="off"></div>
+							<div class="writer">작성자</div>
+							<div class="writer_ipt"><input type="text" placeholder="작성자 입력" value="${user.username }" readonly autocomplete="off"></div>
+						</div>
+						<div class="board_write_cont">
+							<textarea name="editor1" id="editor1" rows="30" cols="80"></textarea>
+	                        <script>
+			                CKEDITOR.replace( 'editor1' ,{
+			                	toolbarGroups: [{
+			                        "name": "basicstyles",
+			                        "groups": ["basicstyles"]
+			                      },
+			                      {
+			                        "name": "links",
+			                        "groups": ["links"]
+			                      },
+			                      {
+			                        "name": "paragraph",
+			                        "groups": ["list", "blocks"]
+			                      },
+			                      {
+			                        "name": "document",
+			                        "groups": ["mode"]
+			                      },
+			                      {
+			                        "name": "insert",
+			                        "groups": ["insert"]
+			                      },
+			                      {
+			                        "name": "styles",
+			                        "groups": ["styles"]
+			                      },
+			                      {
+			                        "name": "about",
+			                        "groups": ["about"]
+			                      }
+			                    ],
+			                    // Remove the redundant buttons from toolbar groups defined above.
+			                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'
+			                	,height: 630
+			                });
+			            	</script>
+						</div>
+						<div class="board_write_img">
+							<dl>
+								<dt>사진</dt>
+								<dd>
+									<!-- 사진 목록 -->
+									<ul id="picture_ul">
+										<!-- 
+										<li style="background-image: url(/resources/img/temp/3.png);">
+											<input type="button" title="삭제" class="bt_del_img">
+										</li>
+										 -->
+									</ul>
+									<!-- 첨부하기 버튼 -->
+									<input id="imageupload" type="file" name="files[]" 
+										accept="image/*" data-url="<c:url value="/upload/image"/>" multiple>
+									<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
+								    <div id="progress">
+								        <div style="width: 0%;"></div>
+								    </div>
+								</dd>
+							</dl>
+						</div>
+						<div class="board_write_file">
+							<dl>
+								<dt>첨부파일</dt>
+								<dd>
+									<!-- 첨부파일 목록 -->
+									<ul id = "file_ul">
+										<!-- 
+										<li>
+											<span>2019 하계 중국 심포지움 안내파일.hwp</span>
+											<input type="button" value="삭제" class="bt_del_file">
+										</li>
+										 -->
+									</ul>
+									<input id="fileupload" type="file" name="files[]" 
+										data-url="<c:url value="/upload/file"/>" multiple>
+									<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
+								    <div id="progress">
+								        <div style="width: 0%;"></div>
+								    </div>
+								</dd>
+							</dl>
+						</div>
+						<div class="bt_wrap">
+							<a href="javascript:void(0);" onclick="javascript:insertBoard();" class="bt1 on">등록</a>
+							<a href="javascript:void(0);" onClick="history.back();" class="bt1">취소</a>
+						</div>
 					</div>
-					<div class="board_write_cont">
-						<textarea name="editor1" id="editor1" rows="30" cols="80"></textarea>
-                        <script>
-		                CKEDITOR.replace( 'editor1' ,{
-		                	toolbarGroups: [{
-		                        "name": "basicstyles",
-		                        "groups": ["basicstyles"]
-		                      },
-		                      {
-		                        "name": "links",
-		                        "groups": ["links"]
-		                      },
-		                      {
-		                        "name": "paragraph",
-		                        "groups": ["list", "blocks"]
-		                      },
-		                      {
-		                        "name": "document",
-		                        "groups": ["mode"]
-		                      },
-		                      {
-		                        "name": "insert",
-		                        "groups": ["insert"]
-		                      },
-		                      {
-		                        "name": "styles",
-		                        "groups": ["styles"]
-		                      },
-		                      {
-		                        "name": "about",
-		                        "groups": ["about"]
-		                      }
-		                    ],
-		                    // Remove the redundant buttons from toolbar groups defined above.
-		                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'
-		                	,height: 630
-		                });
-		            	</script>
-					</div>
-					<div class="board_write_img">
-						<dl>
-							<dt>사진</dt>
-							<dd>
-								<!-- 사진 목록 -->
-								<ul id="picture_ul">
-									<!-- 
-									<li style="background-image: url(/resources/img/temp/3.png);">
-										<input type="button" title="삭제" class="bt_del_img">
-									</li>
-									 -->
-								</ul>
-								<!-- 첨부하기 버튼 -->
-								<input id="imageupload" type="file" name="files[]" 
-									accept="image/*" data-url="<c:url value="/upload/image"/>" multiple>
-								<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
-							    <div id="progress">
-							        <div style="width: 0%;"></div>
-							    </div>
-							</dd>
-						</dl>
-					</div>
-					<div class="board_write_file">
-						<dl>
-							<dt>첨부파일</dt>
-							<dd>
-								<!-- 첨부파일 목록 -->
-								<ul id = "file_ul">
-									<!-- 
-									<li>
-										<span>2019 하계 중국 심포지움 안내파일.hwp</span>
-										<input type="button" value="삭제" class="bt_del_file">
-									</li>
-									 -->
-								</ul>
-								<input id="fileupload" type="file" name="files[]" 
-									data-url="<c:url value="/upload/file"/>" multiple>
-								<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
-							    <div id="progress">
-							        <div style="width: 0%;"></div>
-							    </div>
-							</dd>
-						</dl>
-					</div>
-					<div class="bt_wrap">
-						<a href="javascript:void(0);" onclick="javascript:insertBoard();" class="bt1 on">등록</a>
-						<a href="javascript:void(0);" onClick="history.back();" class="bt1">취소</a>
-					</div>
-				</div>
 				</form>
 			</div>
 		</div>
-		<c:import url="/inc/footer"></c:import>
 	</div>
-	<script type="text/javascript">
-	$(document).ready(function(){
-	    $('#imageupload').fileupload({
-	    	imageCrop: true,
-	        dataType: 'json',
-	        done: function (e, data) {
-	        	
-	        	var file = data.result.file;
-	        	$("#picture_ul").append(
-        			$("<li>").attr("style", "background-image: url(" + file.url + ");")
-        				.append(
-        						$("<input>").attr("type","button").attr("title","삭제").addClass("bt_del_img")
-        						.attr("onclick", "delButtonClick(this);").val(file.id)
-        				)
-        			);
+	<c:import url="/inc/footer"></c:import>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#imageupload').fileupload({
+    	imageCrop: true,
+        dataType: 'json',
+        done: function (e, data) {
+        	
+        	var file = data.result.file;
+        	$("#picture_ul").append(
+       			$("<li>").attr("style", "background-image: url(" + file.url + ");")
+       				.append(
+       						$("<input>").attr("type","button").attr("title","삭제").addClass("bt_del_img")
+       						.attr("onclick", "delButtonClick(this);").val(file.id)
+       				)
+       			);
 
-	        },
-	        progressall: function (e, data) {
-	            var progress = parseInt(data.loaded / data.total * 100, 10);
-	            $('#progress .bar').css(
-	                'width',
-	                progress + '%'
-	            );
-	        },
-	 
-	        dropZone: $('#dropzone')
-	    });
-	    $('#fileupload').fileupload({
-	    	imageCrop: true,
-	        dataType: 'json',
-	        done: function (e, data) {
-	        	
-	        	var file = data.result.file;
-	            
-            	$("#file_ul").append(
-            		$("<li>").append(
-            			$("<span>").text(file.name)
-            		).append(
-            			$("<input>").attr("type","button").addClass("bt_del_file").attr("title","삭제")
-            				.attr("onclick", "delButtonClick(this);").val(file.id)
-            		)
-            	);
-	        },
-	        progressall: function (e, data) {
-	            var progress = parseInt(data.loaded / data.total * 100, 10);
-	            $('#progress .bar').css(
-	                'width',
-	                progress + '%'
-	            );
-	        },
-	 
-	        dropZone: $('#dropzone')
-	    });
-	});
-	
-	</script>
-	<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery.iframe-transport.js"/>"></script>
-	<script src="<c:url value="/resources/js/jquery.fileupload.js"/>"></script>
-	<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+ 
+        dropZone: $('#dropzone')
+    });
+    $('#fileupload').fileupload({
+    	imageCrop: true,
+        dataType: 'json',
+        done: function (e, data) {
+        	
+        	var file = data.result.file;
+            
+           	$("#file_ul").append(
+           		$("<li>").append(
+           			$("<span>").text(file.name)
+           		).append(
+           			$("<input>").attr("type","button").addClass("bt_del_file").attr("title","삭제")
+           				.attr("onclick", "delButtonClick(this);").val(file.id)
+           		)
+           	);
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .bar').css(
+                'width',
+                progress + '%'
+            );
+        },
+ 
+        dropZone: $('#dropzone')
+    });
+});
+
+</script>
+<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.iframe-transport.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.fileupload.js"/>"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 </body>
 </html>

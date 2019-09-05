@@ -54,7 +54,7 @@
 							<dt>직장주소</dt>
 							<dd>대전광역시 유성구 대학로 291, 생명과학과 3201호(구성동, 한국과학기술원) </dd>
 						</dl>
-						<input type="button" value="내 정보 수정" class="bt3">
+						<input type="button" value="내 정보 수정" class="bt3 on">
 					</div>
 				</div>
 				

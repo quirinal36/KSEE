@@ -17,27 +17,28 @@
 				<form action="<c:url value="/member/loginProcess"/>" method="POST">
 					<!-- 로그인 -->
 					<div class="member member_form1 login">
-					<div class="paper">
-						<dl>
-							<dt>아이디</dt>
-							<dd>
-								<input type="text" placeholder="아이디 입력" class="ipt1" name="loginid" value="${loginid }">
-							</dd>
-						</dl>
-						<dl>
-							<dt>비밀번호</dt>
-							<dd>
-								<input type="password" placeholder="비밀번호 입력" class="ipt1" name="loginpwd">
-							</dd>
-						</dl>
-						
-						<p class="message error" <c:if test="${not empty securityexceptionmsg }">style="display:block"</c:if>>${securityexceptionmsg }</p>
-						<input type="hidden" name="loginRedirect" value="${loginRedirect}"/>
-						<input type="submit" value="로그인" class="bt3 on">
-						<div class="bt_wrap">
-							<a href="<c:url value="/member/signup"/>">회원가입</a>
-							<a href="<c:url value="/member/findId"/>">아이디 찾기</a>
-							<a href="<c:url value="/member/findPwd"/>">비밀번호 찾기</a>
+						<div class="paper">
+							<dl>
+								<dt>아이디</dt>
+								<dd>
+									<input type="text" placeholder="아이디 입력" class="ipt1" name="loginid" value="${loginid }" autocomplete="off">
+								</dd>
+							</dl>
+							<dl>
+								<dt>비밀번호</dt>
+								<dd>
+									<input type="password" placeholder="비밀번호 입력" class="ipt1" name="loginpwd" autocomplete="off">
+								</dd>
+							</dl>
+							
+							<p class="message error" <c:if test="${not empty securityexceptionmsg }">style="display:block"</c:if>>${securityexceptionmsg }</p>
+							<input type="hidden" name="loginRedirect" value="${loginRedirect}"/>
+							<input type="submit" value="로그인" class="bt3 on">
+							<div class="bt_wrap">
+								<a href="<c:url value="/member/signup"/>">회원가입</a>
+								<a href="<c:url value="/member/findId"/>">아이디 찾기</a>
+								<a href="<c:url value="/member/findPwd"/>">비밀번호 찾기</a>
+							</div>
 						</div>
 					</div>
 				</form>

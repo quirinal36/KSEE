@@ -29,10 +29,7 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/fonts/NotoSans.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/reset.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/common.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/contents.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/board.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/admin.css"/>">
 
 <script type="text/javascript">
 const toast = swal.mixin({

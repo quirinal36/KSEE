@@ -118,4 +118,9 @@ public class HomeController {
 		mv.setViewName("/error/503");
 		return mv;
 	}
+	@RequestMapping(value="/inc/head_admin")
+	public ModelAndView getAdminHeadView(ModelAndView mv) {
+		mv.setViewName("/inc/head_admin");
+		return mv;
+	}
 }

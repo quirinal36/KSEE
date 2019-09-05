@@ -211,7 +211,7 @@ $(window).on("beforeunload", function(){
 							<dl class="company_tel">
 								<dt>직장 유선번호</dt>
 								<dd>
-									<input type="text" placeholder="직장 유선번호" class="mt-10 ipt1" name="telephone">
+									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone">
 								</dd>
 							</dl>
 							<input type="button" value="회원가입" class="bt3 on" id="submit">

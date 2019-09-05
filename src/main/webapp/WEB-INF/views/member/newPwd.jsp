@@ -33,7 +33,7 @@
 								<p class="message confirm">비밀번호가 일치합니다.</p>
 							</dd>
 						</dl>
-						<input type="button" value="비밀번호 변경" class="bt3">
+						<input type="button" value="비밀번호 변경" class="bt3 on">
 					</div>
 				</div>
 				

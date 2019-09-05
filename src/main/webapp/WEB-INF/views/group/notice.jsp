@@ -18,9 +18,7 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-				
 				<div class="board_search">
-				
 					<div class="search_ipt">
 						<form action="<c:url value="/group/"/>">
 							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
@@ -34,7 +32,6 @@
 						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
 					</c:if>
 				</div>
-				
 				<div class="board_list board_list_typeA">
 					<ul>
 						<c:forEach items="${list}" var="item">
