@@ -38,6 +38,7 @@ public class SymposiumController extends KseeController{
 	
 	@RequestMapping(value="/apply")
 	public ModelAndView getApplyView(ModelAndView mv) {
+		mv.addObject("title", "참가신청");
 		mv.setViewName("/symposium/apply");
 		return mv;
 	}

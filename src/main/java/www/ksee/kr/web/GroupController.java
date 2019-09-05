@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.BoardService;
@@ -16,13 +17,19 @@ import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.UserVO;
 
-@RequestMapping(value="/group")
 @Controller
+@RequestMapping(value="/group")
 public class GroupController extends KseeController {
 	@Autowired
 	BoardService boardService;
 	
-	@RequestMapping(value= {"/", "/notice"})
+	@RequestMapping(value= "/", method = RequestMethod.GET)
+	public ModelAndView getGroupView(ModelAndView mv) {
+		mv.addObject("title", "학회소식");
+		mv.setViewName("/group/home");
+		return mv;
+	}
+	@RequestMapping(value= "/notice")
 	public ModelAndView getNoticeView(ModelAndView mv,
 			Board board) {
 		board.setBoardType(Board.TYPE_NOTICE);
@@ -33,7 +40,7 @@ public class GroupController extends KseeController {
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
 		mv.setViewName("/group/notice");
-		mv.addObject("title", "학회소식");
+		mv.addObject("title", "공지사항");
 		return mv;
 	}
 	@RequestMapping(value="/notice/write")
@@ -60,7 +67,15 @@ public class GroupController extends KseeController {
 		return mv;
 	}
 	@RequestMapping(value="/news")
-	public ModelAndView getNewsView(ModelAndView mv) {
+	public ModelAndView getNewsView(ModelAndView mv,
+			Board board) {
+		board.setBoardType(Board.TYPE_NEWS);
+		int totalCount = boardService.count(board);
+		board.setTotalCount(totalCount);
+		List<Board> boardList = boardService.select(board);
+		
+		mv.addObject("list", boardList);
+		mv.addObject("paging", board);
 		mv.setViewName("/group/news");
 		mv.addObject("title", "관련소식");
 		return mv;

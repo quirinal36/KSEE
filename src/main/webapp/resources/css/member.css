@@ -29,7 +29,7 @@
 #findEdit input[type="submit"] { width: 70%; }
 
 /* 회원가입 */
-#join_step2 label span { color: #6bc2ae; }
+#form_step2 label span { color: #6bc2ae; }
 
 /* 회원탈퇴 */
 #delete dl { width: 270px; margin: 0 auto; font-size: 0; }

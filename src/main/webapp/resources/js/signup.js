@@ -278,8 +278,8 @@ function move(nextPage){
 		var check2 = $("#term_chk2").is(":checked");
 		
 		if(check1 && check2){
-			$(".join_step1").hide();
-			$(".join_step2").show();
+			$(".form_step1").hide();
+			$(".form_step2").show();
 		}else {
 			if(!check1){
 				var message = "이용약관에 동의해주세요.";
@@ -305,7 +305,7 @@ function move(nextPage){
 			}
 		}
 	}else if(nextPage == 2){
-		$(".join_step2").hide();
-		$(".join_step3").show();
+		$(".form_step2").hide();
+		$(".form_step3").show();
 	}
 }

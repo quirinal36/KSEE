@@ -9,8 +9,15 @@
 				<a href="<c:url value="/member/signup"/>">JOIN</a>
 				<a href="<c:url value="/member/login"/>">LOGIN</a>
 			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<a href="<c:url value="/j_spring_security_logout"/>">LOGOUT</a>
+			</sec:authorize>
+			
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="<c:url value="/admin/"/>">ADMIN</a>
+			</sec:authorize>
 			<a href="#">CONTACT US</a>
-			<a href="<c:url value="/admin/"/>">ADMIN</a>
+			
 			<a href="#" class="language on">KOR</a>
 			<a href="#" class="language">ENG</a>
 		</div>

@@ -11,48 +11,9 @@
 </head>
 <body>
 	<div id="wrap">
-	<header>
-		<div id="header_wrap">
-			<div id="header">
-				<div>
-					<div>
-						<h1><a href="#">한국효소공학연구회 관리자</a></h1>
-						<ul>
-							<li><a href="#">한국효소공학연구회</a></li>
-							<li><a href="#">로그아웃</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	</header>
+	<c:import url="/inc/header_admin"></c:import>
 	<div id="container_wrap">
-		<aside>
-			<div id="sidebar">
-				<ul>
-					<li>
-						<a href="#">회원관리</a>
-					</li>
-					<li class="on">
-						<a href="javascript:void(0)">학술대회 관리</a>
-						<ul>
-							<li><a href="#">국내 학술대회</a></li>
-							<li><a href="#">한중일 학술대회</a></li>
-						</ul>
-					</li>
-					<li>
-						<a href="#">팝업 관리</a>
-						<ul>
-							<li><a href="#">신청내역</a></li>
-							<li><a href="#">신청내역</a></li>
-							<li><a href="#">신청내역</a></li>
-							<li><a href="#">신청내역</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</aside>
+		<c:import url="/admin/sidebar"></c:import>
 		<div id="container">
 			<!-- 회원관리 -->
 			<div>

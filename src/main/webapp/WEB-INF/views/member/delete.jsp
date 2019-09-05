@@ -15,7 +15,7 @@
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
 				<!-- 회원탈퇴 -->
-				<div class="member join_step1">
+				<div class="member form_step1">
 					<div class="paper">
 						<strong>안내사항</strong>
 						<div class="term"></div>

@@ -86,8 +86,9 @@ $(window).on("beforeunload", function(){
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
+				
 				<!-- 회원가입 - 동의 -->
-				<div class="member join_step1">
+				<div class="member form_step1">
 					<!-- 현재상태 -->
 					<div class="location">
 						<div class="on">약관동의</div>
@@ -110,8 +111,9 @@ $(window).on("beforeunload", function(){
 						<input type="button" value="다음 단계로" class="bt3 on" onclick="javascript:move(1);">
 					</div>
 				</div>
+				
 				<!-- 회원가입 - 정보 입력 -->
-				<div class="member member_form1 join_step2">
+				<div class="member member_form1 form_step2">
 					<!-- 현재상태 -->
 					<div class="location">
 						<div>약관동의</div>
@@ -219,7 +221,7 @@ $(window).on("beforeunload", function(){
 					</div>
 				</div>
 				<!-- 회원가입 - 가입 완료 -->
-				<div class="member join_complete">
+				<div class="member form_complete">
 					<div class="paper">
 						환영합니다!<br>
 						한국효소공학연구회 회원가입이 완료되었습니다.

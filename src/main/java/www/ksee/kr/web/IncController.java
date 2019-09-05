@@ -20,6 +20,12 @@ public class IncController {
 		mv.setViewName("/inc/header");
 		return mv;
 	}
+	@RequestMapping(value = "/header_admin", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView getHeaderAdminView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.setViewName("/inc/header_admin");
+		return mv;
+	}
 	@RequestMapping(value = "/footer", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getFooterView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {

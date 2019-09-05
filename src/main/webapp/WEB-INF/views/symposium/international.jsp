@@ -16,7 +16,7 @@
 			<div id="contentsPrint">
             	<div class="symposium_title_img"><a href="#"><img src="/resources/img/contents/2019_symposium2.png" alt="2019 심포지엄"></a></div>
 				<!-- 심포지엄 참가신청 - 동의 -->
-				<div class="member join_step1">
+				<div class="member form_step1">
 					<!-- 현재상태 -->
 					<div class="location">
 						<div class="on">동의</div>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 				<!-- 심포지엄 참가신청 - 정보 입력 -->
-				<div class="member member_form1 join_step2" style="display: block;">
+				<div class="member member_form1 form_step2" style="display: block;">
 					<!-- 현재상태 -->
 					<div class="location">
 						<div>동의</div>
@@ -100,7 +100,7 @@
 					</div>
 				</div>
 				<!-- 심포지엄 참가신청 - 신청완료 -->
-				<div class="member join_complete">
+				<div class="member form_complete">
 					<div class="paper">
 						환영합니다!<br>
 						한국효소공학연구회 회원가입이 완료되었습니다.
