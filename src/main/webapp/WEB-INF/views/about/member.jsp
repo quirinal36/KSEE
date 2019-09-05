@@ -14,7 +14,7 @@
 			<c:import url="/inc/lnb_wrap"></c:import>
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
-			
+				<img src="/resources/img/temp/12.png" style="display: block; width: 80%; max-width: 1000px; margin: 60px auto;">
 			</div>
 		</div>
 	</div>

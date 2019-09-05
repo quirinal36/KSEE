@@ -21,7 +21,7 @@
 				<div class="member form_step1">
 					<!-- 현재상태 -->
 					<div class="location">
-						<div class="on">동의</div>
+						<div class="on">안내사항</div>
 						<div>정보입력</div>
 						<div>신청완료</div>
 					</div>
@@ -49,28 +49,28 @@
 							<dl>
 								<dt>이름</dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username">
+									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off">
 									<p class="message error">이름을 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
 								<dt>휴대전화 번호</dt>
 								<dd>
-									<input type="text" placeholder="휴대전화번호 입력" class="ipt1" name="phone">
+									<input type="text" placeholder="휴대전화번호 입력" class="ipt1" name="phone" autocomplete="off">
 									<p class="message error">휴대전화 번호를 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
 								<dt>소속</dt>
 								<dd>
-									<input type="text" placeholder="소속 입력" class="ipt1" name="classification">
+									<input type="text" placeholder="소속 입력" class="ipt1" name="classification" autocomplete="off">
 									<p class="message error">소속을 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
 								<dt>직위</dt>
 								<dd>
-									<input type="text" placeholder="직위 입력" class="ipt1" name="level">
+									<input type="text" placeholder="직위 입력" class="ipt1" name="level" autocomplete="off">
 									<p class="message error">직위를 입력하세요.</p>
 								</dd>
 							</dl>
@@ -79,22 +79,22 @@
 								<dd>
 									<input type="button" value="주소찾기" class="bt2" onclick="javascript:fn_setAddr()">
 									<input type="text" placeholder="주소" class="mt-10 ipt1" readonly name="address">
-									<input type="text" placeholder="상세주소 입력" class="mt-10 ipt1" name="addressDetail">
+									<input type="text" placeholder="상세주소 입력" class="mt-10 ipt1" name="addressDetail" autocomplete="off">
 									<p class="message error">상세주소가 입력되지 않았습니다.</p>
 								</dd>
 							</dl>
 							<dl class="company_tel">
 								<dt>직장 유선번호</dt>
 								<dd>
-									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone">
+									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone" autocomplete="off">
 								</dd>
 							</dl>
 							<dl class="email">
 								<dt>이메일 주소</dt>
 								<dd>
-									<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email">
+									<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email" autocomplete="off">
 									<span>@</span>
-									<input type="text" placeholder="도메인 입력" class="ipt1" name="domain">
+									<input type="text" placeholder="도메인 입력" class="ipt1" name="domain" autocomplete="off">
 									<p class="message error">이메일 아이디를 입력하세요.</p>
 								</dd>
 							</dl>

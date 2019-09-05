@@ -15,97 +15,83 @@
 			<c:import url="/inc/contentsTitle"></c:import>
 			<div id="contentsPrint">
             	<div class="symposium_title_img"><a href="#"><img src="/resources/img/contents/2019_symposium2.png" alt="2019 심포지엄"></a></div>
-				<!-- 심포지엄 참가신청 - 동의 -->
-				<div class="member form_step1">
-					<!-- 현재상태 -->
-					<div class="location">
-						<div class="on">동의</div>
-						<div>정보입력</div>
-						<div>신청완료</div>
+				<div class="board_list board_list_typeB symposium">
+					<ul class="list">
+						<li class="head">
+							<div class="num">번호</div>
+							<div class="title">행사명</div>
+							<div class="period">행사기간</div>
+							<div class="place">장소</div>
+							<div class="apply">참가신청</div>
+						</li>
+						<li>
+							<div class="num">8</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제8회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
+						</li>
+						<li>
+							<div class="num">7</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제7회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/7"/>" class="bt2">신청대기</a></div>
+						</li>
+						<li>
+							<div class="num">6</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제6회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/6"/>" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">5</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제5회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/5"/>" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">4</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제4회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/4"/>" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">3</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제3회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/3"/>" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">2</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제2회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/2"/>" class="bt2 off">신청종료</a></div>
+						</li>
+						<li>
+							<div class="num">1</div>
+							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제1회 한중일 효소공학 심포지엄</a></div>
+							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
+							<div class="place">고성 델피노</div>
+                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/1"/>" class="bt2 off">신청종료</a></div>
+						</li>
+					</ul>
+					<!--
+					<div class="page">
+						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
+						<a href="#" class="bt prev">이전 페이지로 가기</a>
+						<a href="#" class="num on">1</a>
+						<a href="#" class="num">2</a>
+						<a href="#" class="num">3</a>
+						<a href="#" class="bt next">다음 페이지로 가기</a>
+						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>
-					<div class="paper">
-						<strong>개인정보처리방침</strong>
-						<div class="term"></div>
-						<div class="chk_wrap">
-							<input type="checkbox" id="term_chk2" class="chk1">
-							<label for="term_chk2">동의합니다.</label>
-						</div>
-						<input type="button" value="다음 단계로" class="bt3 on" onclick="javascript:move(1);">
-					</div>
-				</div>
-				<!-- 심포지엄 참가신청 - 정보 입력 -->
-				<div class="member member_form1 form_step2" style="display: block;">
-					<!-- 현재상태 -->
-					<div class="location">
-						<div>동의</div>
-						<div class="on">정보입력</div>
-						<div>신청완료</div>
-					</div>
-					<div class="paper">
-						<form action="<c:url value="/member/signup"/>" method="post">
-							<dl>
-								<dt>이름</dt>
-								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username">
-									<p class="message error">이름을 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl>
-								<dt>휴대전화 번호</dt>
-								<dd>
-									<input type="text" placeholder="휴대전화번호 입력" class="ipt1" name="phone">
-									<p class="message error">휴대전화 번호를 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl>
-								<dt>소속</dt>
-								<dd>
-									<input type="text" placeholder="소속 입력" class="ipt1" name="classification">
-									<p class="message error">소속을 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl>
-								<dt>직위</dt>
-								<dd>
-									<input type="text" placeholder="직위 입력" class="ipt1" name="level">
-									<p class="message error">직위를 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl class="company_address">
-								<dt>직장주소</dt>
-								<dd>
-									<input type="button" value="주소찾기" class="bt2" onclick="javascript:fn_setAddr()">
-									<input type="text" placeholder="주소" class="mt-10 ipt1" readonly name="address">
-									<input type="text" placeholder="상세주소 입력" class="mt-10 ipt1" name="addressDetail">
-									<p class="message error">상세주소가 입력되지 않았습니다.</p>
-								</dd>
-							</dl>
-							<dl class="email">
-								<dt>이메일 주소</dt>
-								<dd>
-									<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email">
-									<span>@</span>
-									<input type="text" placeholder="도메인 입력" class="ipt1" name="domain">
-									<p class="message error">이메일 아이디를 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl class="file">
-								<dt>학술대회 초록</dt>
-								<dd>
-									<input type="button" value="등록" class="bt2">
-								</dd>
-							</dl>
-							<input type="button" value="회원가입" class="bt3 on" id="submit">
-						</form>
-					</div>
-				</div>
-				<!-- 심포지엄 참가신청 - 신청완료 -->
-				<div class="member form_complete">
-					<div class="paper">
-						환영합니다!<br>
-						한국효소공학연구회 회원가입이 완료되었습니다.
-						<a href="/" class="bt3 on">HOME</a>
-					</div>
+					-->
 				</div>
 			</div>
 		</div>

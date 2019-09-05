@@ -81,6 +81,7 @@
                             <div class="apply"><a href="<c:url value="/symposium/domestic/view/1"/>" class="bt2 off">신청종료</a></div>
 						</li>
 					</ul>
+					<!--
 					<div class="page">
 						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
 						<a href="#" class="bt prev">이전 페이지로 가기</a>
@@ -90,9 +91,7 @@
 						<a href="#" class="bt next">다음 페이지로 가기</a>
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>
-					<div class="bt_wrap">
-						<input type="button" class="bt1 bt_write popup_password_opener" value="등록">
-					</div>
+					-->
 				</div>
 			</div>
 		</div>

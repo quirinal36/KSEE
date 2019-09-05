@@ -17,7 +17,7 @@
 				<div class="board_search">
 					<div class="search_ipt">
 						<form action="<c:url value="/group/"/>">
-							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
+							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }" autocomplete="off" />
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search();">
 						</form>
@@ -73,6 +73,7 @@
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
+						<input type="hidden" name="write_url" value="/group/notice/write">
 						<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
 					</div>
 				</div>

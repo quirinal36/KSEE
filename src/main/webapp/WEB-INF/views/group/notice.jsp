@@ -76,10 +76,6 @@
 						<a href="#" class="bt next">다음 페이지로 가기</a>
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>
-					<div class="bt_wrap">
-						<input type="hidden" name="write_url" value="<c:url value="/group/notice/write"/>"/>
-						<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
-					</div>
 				</div>
 			</div>
 		</div>

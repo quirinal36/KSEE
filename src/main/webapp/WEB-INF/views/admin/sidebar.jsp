@@ -6,7 +6,7 @@
 	<div id="sidebar">
 		<ul>
 			<li>
-				<a href="<c:url value="/admin/members"/>">회원관리</a>
+				<a href="<c:url value="/admin/members"/>">회원 관리</a>
 			</li>
 			<li class="on">
 				<a href="javascript:void(0)">학술대회 관리</a>
