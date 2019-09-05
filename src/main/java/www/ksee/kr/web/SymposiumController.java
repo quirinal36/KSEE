@@ -21,6 +21,7 @@ public class SymposiumController extends KseeController{
 	@RequestMapping(value= {"/domestic/view/{id}/{tab}", "/domestic/view/{id}"})
 	public ModelAndView getDetailView(ModelAndView mv, @PathVariable(value="id", required = true)Integer id,
 			@PathVariable(value="tab", required = false)Optional<Integer>tab) {
+		mv.addObject("title", "국내 학술대회");
 		if(tab.isPresent()) {
 			mv.addObject("tab", tab.get());
 		}else {

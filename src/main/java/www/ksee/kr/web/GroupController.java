@@ -59,6 +59,7 @@ public class GroupController extends KseeController {
 		Board board= boardService.selectOne(Board.newInstance(id));
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		mv.addObject("title", "공지사항");
 		
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);

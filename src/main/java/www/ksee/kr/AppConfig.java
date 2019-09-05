@@ -133,7 +133,7 @@ public class AppConfig implements WebMvcConfigurer {
 		SessionLocaleResolver localeResolver=new SessionLocaleResolver();
 		//쿠키 기준(세션이 끊겨도 브라우져에 설정된 쿠키 기준으로)
 		// CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-
+		
 		//최초 기본 로케일을 강제로 설정이 가능 하다.
 		localeResolver.setDefaultLocale(Locale.KOREA);
 		return localeResolver;

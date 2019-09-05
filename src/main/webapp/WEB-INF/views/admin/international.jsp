@@ -45,49 +45,49 @@
 								<td>제8회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제7회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제6회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제5회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제4회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제3회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제2회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 							<tr>
 								<td>제1회 한중일 효소공학 심포지엄</td>
 								<td>2019-08-11(월) ~ 2019-08-13(수)</td>
 								<td>고성 델피노</td>
-								<td><a href="#" class="bt2">신청현황</a></td>
+								<td><a href="<c:url value="/admin/international/list"/>" class="bt2">신청현황</a></td>
 							</tr>
 						</tbody>
 					</table>

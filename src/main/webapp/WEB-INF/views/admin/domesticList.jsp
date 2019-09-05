@@ -17,7 +17,7 @@
 		<div id="container">
 			<div id="contentsPrint">
 				<div>
-					<div class="admin_title">신청현황 - 제8회 한국효소공학연구회 심포지엄</div>
+					<div class="admin_title">${title}</div>
 					<table class="tbl1 td_center">
 						<colgroup>
 							<col width="20%">

@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import www.ksee.kr.security.AuthenticationFacade;
 import www.ksee.kr.service.FileInfoService;
-import www.ksee.kr.service.FileMetaService;
 import www.ksee.kr.service.PhotoInfoService;
 import www.ksee.kr.service.UserService;
 import www.ksee.kr.vo.UserVO;
@@ -27,6 +27,8 @@ public class KseeController {
 	protected FileInfoService fileInfoService;
 	@Autowired
 	AuthenticationManager authenticationManager;
+	@Autowired
+	protected MessageSource messageSource;
 	
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();

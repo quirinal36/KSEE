@@ -16,12 +16,14 @@
 			<div id="contentsPrint">
 				<div class="board_search">
 					<div class="search_ipt">
-						<input type="text" placeholder="검색어를 입력하세요.">
+						<input type="text" placeholder="검색어를 입력하세요." value="${paging.query }">
 						<input type="button" value="검색">
 					</div>
 				</div>
 				<div class="search_result_message">
-					<p><span>“연구회”</span> 검색 결과입니다.</p>
+					<c:if test="${not empty paging.query }">
+						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
+					</c:if>
 				</div>
 				<div class="board_list board_list_typeB news">
 					<ul class="list">

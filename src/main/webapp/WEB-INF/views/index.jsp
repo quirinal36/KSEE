@@ -25,17 +25,17 @@
                     <div class="idx_popup_wrap">
 						<div class="idx_popup">
 							<div class="item">
-								<a href="#" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
+								<a href="<c:url value="/symposium/domestic/"/>" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
 							</div>
 							<div class="item">
-								<a href="#" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
+								<a href="<c:url value="/symposium/domestic/"/>" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
 							</div>
 						</div>
                     </div>
                     <div class="idx_notice_list">
                         <div class="title">
-                            <a href="#" class="name">학회소식</a>
-                            <a href="#" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/notice/"/>" class="name">공지사항</a>
+                            <a href="<c:url value="/group/notice/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
                         <div class="list">
                             <ul>
@@ -45,8 +45,8 @@
                                         <span>2019.07</span>
                                     </div>
                                     <div class="cont">
-                                        <a href="#" class="title">2019 하계 심포지움 개최안내</a><br>
-                                        <a href="#" class="text">2019 하계 심포지움 개최안내 2019 하계 심포지움 개최안내</a>
+                                        <a href="#" class="title">공지사항 게시글</a><br>
+                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
                                     </div>
                                 </li>
                                 <li>
@@ -55,8 +55,8 @@
                                         <span>2019.07</span>
                                     </div>
                                     <div class="cont">
-                                        <a href="#" class="title">2019 하계 심포지움 개최안내</a><br>
-                                        <a href="#" class="text">2019 하계 심포지움 개최안내 2019 하계 심포지움 개최안내</a>
+                                        <a href="#" class="title">공지사항 게시글</a><br>
+                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
                                     </div>
                                 </li>
                                 <li>
@@ -65,8 +65,8 @@
                                         <span>2019.07</span>
                                     </div>
                                     <div class="cont">
-                                        <a href="#" class="title">2019 하계 심포지움 개최안내</a><br>
-                                        <a href="#" class="text">2019 하계 심포지움 개최안내 2019 하계 심포지움 개최안내</a>
+                                        <a href="#" class="title">공지사항 게시글</a><br>
+                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
                                     </div>
                                 </li>
                             </ul>
@@ -74,29 +74,29 @@
                     </div>
                     <div class="idx_board_list">
                         <div class="title">
-                            <a href="#" class="name">학술대회</a>
-                            <a href="#" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/news/"/>" class="name">관련소식</a>
+                            <a href="<c:url value="/group/news/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
                         <div class="list">
                             <div class="first">
-                                <a href="#">2019 하계 심포지움 개최안내</a>
+								<a href="#">관련소식 게시글</a>
                                 <span>2019-07-20</span>
                             </div>
                             <ul>
                                 <li>
-                                    <a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">관련소식 게시글</a>
                                     <span>2019-07-20</span>
                                 </li>
                                 <li>
-                                    <a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">관련소식 게시글</a>
                                     <span>2019-07-20</span>
                                 </li>
                                 <li>
-                                    <a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">관련소식 게시글</a>
                                     <span>2019-07-20</span>
                                 </li>
                                 <li>
-                                    <a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">관련소식 게시글</a>
                                     <span>2019-07-20</span>
                                 </li>
                             </ul>
@@ -104,29 +104,29 @@
 					</div>
                     <div class="idx_board_list">
                         <div class="title">
-                            <a href="#" class="name">커뮤니티</a>
-                            <a href="#" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/community/board/"/>" class="name">자유게시판</a>
+                            <a href="<c:url value="/community/board/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
 						<div class="list">
 							<div class="first">
-								<a href="#">2019 하계 심포지움 개최안내</a>
+								<a href="#">자유게시판 게시글</a>
 								<span>2019-07-20</span>
 							</div>
 							<ul>
 								<li>
-									<a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">자유게시판 게시글</a>
 									<span>2019-07-20</span>
 								</li>
 								<li>
-									<a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">자유게시판 게시글</a>
 									<span>2019-07-20</span>
 								</li>
 								<li>
-									<a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">자유게시판 게시글</a>
 									<span>2019-07-20</span>
 								</li>
 								<li>
-									<a href="#">2019 하계 심포지움 개최안내</a>
+									<a href="#">자유게시판 게시글</a>
 									<span>2019-07-20</span>
 								</li>
 							</ul>

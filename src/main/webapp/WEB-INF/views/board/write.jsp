@@ -96,7 +96,7 @@
 					<input type="hidden" name="currentUrl" value="${current }"/>
 					<input type="hidden" name="listUrl" value="${listUrl }"/>
 					
-					<div class="board_write">
+					<div class="board_write" style="margin-top:60px;">
 						<div class="board_write_title">
 							<div class="title">제목</div>
 							<div class="title_ipt"><input type="text" placeholder="제목 입력" name="title" autocomplete="off"></div>

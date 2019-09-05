@@ -57,6 +57,7 @@ import org.xml.sax.SAXException;
 import www.ksee.kr.Config;
 import www.ksee.kr.security.config.UserDetailService;
 import www.ksee.kr.service.UserService;
+import www.ksee.kr.vo.Board;
 import www.ksee.kr.vo.UserVO;
 
 /**
@@ -76,6 +77,16 @@ public class HomeController {
 	public ModelAndView home(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
 		mv.setViewName("index");
+		return mv;
+	}
+	@RequestMapping(value="/search")
+	public ModelAndView getCompanyView(Locale locale, ModelAndView mv,
+			Board board) {
+		logger.info(locale.toString());
+		
+		mv.addObject("title", "검색");
+		mv.addObject("paging", board);
+		mv.setViewName("/group/home");
 		return mv;
 	}
 	@RequestMapping(value = "/company", method = RequestMethod.GET)

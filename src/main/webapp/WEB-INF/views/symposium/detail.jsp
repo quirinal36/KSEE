@@ -43,7 +43,7 @@
 									</div>
 									<div class="detail_cont">
 										<div>
-											<img src="/resources/img/contents/symposium/main_8th.png" alt="제8회 한국효소공학연구회 심포지엄">
+											<img src="/resources/img/contents/symposium/main_8th.png" style="width: 100%;" alt="제8회 한국효소공학연구회 심포지엄">
 										</div>
 										<div>
 										
@@ -143,7 +143,7 @@
 									<strong>프로그램</strong>
 								</div>
 								<div class="detail_cont">
-									<img src="/resources/img/contents/symposium/temp1.png" alt="제8회 한국효소공학연구회 심포지엄">
+									<img src="/resources/img/contents/symposium/temp1.png" style="width: 100%;" alt="제8회 한국효소공학연구회 심포지엄">
 								</div>
 							</c:when>
 							<c:when test="${tab eq 5}">

@@ -167,7 +167,7 @@ $(window).on("beforeunload", function(){
 							<dl>
 								<dt>이름</dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username">
+									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off">
 									<p class="message error">이름을 입력하세요.</p>
 								</dd>
 							</dl>

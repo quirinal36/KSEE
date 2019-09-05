@@ -16,7 +16,8 @@ public class AdminController {
 	@RequestMapping("/")
 	public ModelAndView getAdminIndex(ModelAndView mv) {
 		mv.addObject("title", "관리자페이지");
-		mv.setViewName("/admin/index");
+		//mv.setViewName("/admin/index");
+		mv.setViewName("redirect:/admin/members");
 		return mv;
 	}
 	
@@ -28,7 +29,15 @@ public class AdminController {
 	@RequestMapping(value="/members")
 	public ModelAndView getAdminMembers(ModelAndView mv) {
 		mv.addObject("title", "회원관리");
+		mv.addObject("menu", 0);
 		mv.setViewName("/admin/members");
+		return mv;
+	}
+	@RequestMapping(value="/members/view")
+	public ModelAndView getAdminMemberView(ModelAndView mv) {
+		mv.addObject("title", "회원관리");
+		mv.addObject("menu", 0);
+		mv.setViewName("/admin/memberView");
 		return mv;
 	}
 	
@@ -40,12 +49,21 @@ public class AdminController {
 	@RequestMapping(value="/domestic")
 	public ModelAndView getAdminDomestic(ModelAndView mv) {
 		mv.addObject("title", "국내 학술대회");
+		mv.addObject("menu", 1);
 		mv.setViewName("/admin/domestic");
 		return mv;
 	}
 	@RequestMapping(value="/domestic/list")
 	public ModelAndView getAdminDomesticList(ModelAndView mv) {
 		mv.addObject("title", "신청현황 - 제8회 한국효소공학연구회 심포지엄");
+		mv.addObject("menu", 1);
+		mv.setViewName("/admin/domesticList");
+		return mv;
+	}
+	@RequestMapping(value="/international/list")
+	public ModelAndView getAdminInternationalList(ModelAndView mv) {
+		mv.addObject("title", "신청현황 - 제8회 한중일 효소공학 심포지엄");
+		mv.addObject("menu", 2);
 		mv.setViewName("/admin/domesticList");
 		return mv;
 	}
@@ -58,6 +76,7 @@ public class AdminController {
 	@RequestMapping(value="/international")
 	public ModelAndView getAdminInternational(ModelAndView mv) {
 		mv.addObject("title", "한중일 학술대회");
+		mv.addObject("menu", 2);
 		mv.setViewName("/admin/international");
 		return mv;
 	}
@@ -70,6 +89,7 @@ public class AdminController {
 	@RequestMapping(value="/popup")
 	public ModelAndView getAdminPopup(ModelAndView mv) {
 		mv.addObject("title", "팝업관리");
+		mv.addObject("menu", 3);
 		mv.setViewName("/admin/popup");
 		return mv;
 	}
