@@ -1,5 +1,5 @@
 /* idx_intro */
-.idx_intro { width: 100%; min-width: 1000px; padding: 100px 0; background: url(/resources/img/index/intro_bg.jpg) no-repeat 50% 50%; background-size: cover; text-align: center; }
+.idx_intro { width: 100%; min-width: 1000px; padding: 80px 0; background: url(/resources/img/index/intro_bg.jpg) no-repeat 50% 50%; background-size: cover; text-align: center; }
 .idx_intro > .title span { display: inline-block; vertical-align: top; font-size: 54px; font-weight: 500; color: #fff; }
 .idx_intro > .title span:first-child { margin: -16px 20px 0 0; font-size: 72px; font-weight: 600; color: #0d2880; }
 .idx_intro > .text { font-size: 24px; font-weight: 500; color: #fff; letter-spacing: 1.5px; }
