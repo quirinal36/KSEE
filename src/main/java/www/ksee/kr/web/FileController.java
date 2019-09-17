@@ -39,8 +39,10 @@ public class FileController extends KseeController {
 	@RequestMapping(value="/upload/file", method = {RequestMethod.GET, RequestMethod.POST})
 	public Map uploadFile(MultipartHttpServletRequest request, 
     		HttpServletResponse response) {
-		UserVO user = getUser();
-		
+		UserVO user = null;
+		if(request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) {
+			user = getUser();
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Iterator<String> itr = request.getFileNames();
@@ -50,13 +52,16 @@ public class FileController extends KseeController {
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
-            String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+            String srcPath = makeUserPath();
+            //request.getSession().getServletContext().getRealPath("/upload");
 			
 			File newFile = new File(srcPath + "/" + newFilename);
             try {
                 mpf.transferTo(newFile);
                 FileInfo fileInfo = new FileInfo();
-                fileInfo.setUploader(user.getId());
+                if(user != null) {
+                	fileInfo.setUploader(user.getId());
+                }
                 fileInfo.setName(mpf.getOriginalFilename());
                 fileInfo.setNewFilename(newFilename);
                 fileInfo.setSize((int)mpf.getSize());
@@ -80,9 +85,11 @@ public class FileController extends KseeController {
 	@RequestMapping(value = "/upload/image", method = {RequestMethod.GET, RequestMethod.POST})
     public Map uploadImage(MultipartHttpServletRequest request, 
     		HttpServletResponse response) {
-		UserVO user = getUser();
+		UserVO user = null;
+		if(request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) {
+			user = getUser();
+		}
 		
-		// JSONObject json = new JSONObject();
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		Iterator<String> itr = request.getFileNames();
@@ -93,7 +100,7 @@ public class FileController extends KseeController {
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
             
-            String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+            String srcPath = makeUserPath();
 			String contentType = mpf.getContentType();
 			
 			File newFile = new File(srcPath + "/" + newFilename);
@@ -103,7 +110,9 @@ public class FileController extends KseeController {
                 File thumbnailFile = makeThumbnail(newFile, newFilenameBase);
                 
                 PhotoInfo photo = new PhotoInfo();
-                photo.setUploader(user.getId());
+                if(user != null) {
+                	photo.setUploader(user.getId());
+                }
                 photo.setName(mpf.getOriginalFilename());
                 photo.setThumbnailFilename(thumbnailFile.getName());
                 photo.setNewFilename(newFilename);
@@ -168,7 +177,8 @@ public class FileController extends KseeController {
 		param.setId(id);
 
         PhotoInfo image = photoInfoService.selectOne(param);
-        String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+        String srcPath = makeUserPath();
+        //request.getSession().getServletContext().getRealPath("/upload");
         File imageFile = new File(srcPath+"/"+image.getNewFilename());
         response.setContentType(image.getContentType());
         response.setContentLength(image.getSize());
@@ -184,7 +194,8 @@ public class FileController extends KseeController {
     		HttpServletResponse response, @PathVariable int id) {
 		PhotoInfo param = new PhotoInfo();
 		param.setId(id);
-		String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+		String srcPath = makeUserPath(); 
+		//request.getSession().getServletContext().getRealPath("/upload");
 		
 		PhotoInfo image = photoInfoService.selectOne(param);
         File imageFile = new File(srcPath+"/"+image.getThumbnailFilename());
@@ -202,7 +213,7 @@ public class FileController extends KseeController {
 	
 	
 	/***************************************************
-	 * URL: /rest/controller/get/{value}
+	 * URL: /upload/get/{value}
 	 * get(): get file as an attachment
 	 * @param response : passed by the server
 	 * @param value : value from the URL
@@ -212,7 +223,7 @@ public class FileController extends KseeController {
 	@RequestMapping(value = "/upload/get/{value}", method = RequestMethod.GET)
 	public void get(HttpServletResponse response, @PathVariable String value,
 			HttpServletRequest request) throws UnsupportedEncodingException{
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8"); // 한글파일 깨지지 않게
 		FileInfo fileInfo = new FileInfo();
 		fileInfo.setId(Integer.parseInt(value));
 		fileInfo = fileInfoService.selectOne(fileInfo);
@@ -221,7 +232,7 @@ public class FileController extends KseeController {
 			response.setContentLength(fileInfo.getSize());
 			response.setHeader("Content-disposition", "attachment; charset=UTF-8; filename=\""+URLEncoder.encode(fileInfo.getName(), "UTF-8")+"\"");
 			
-			String srcPath = request.getSession().getServletContext().getRealPath("/upload");
+			String srcPath = makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
 			InputStream is = new FileInputStream(new File(srcPath +File.separator + fileInfo.getNewFilename()));
 			FileCopyUtils.copy(is, response.getOutputStream());
 		}catch (IOException e) {
@@ -229,5 +240,24 @@ public class FileController extends KseeController {
 		}
 	}
 	
-	
+	/**
+	 * 사진 파일을 저장할 디렉터리 가져오기
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	private String makeUserPath() {
+		String path = System.getProperty("user.dir");
+		logger.info(path);
+		
+		StringBuilder builder = new StringBuilder()
+				.append(path.substring(0, path.lastIndexOf(File.separator)))
+				.append(File.separator).append("webapps").append(File.separator)
+				.append("repository").append(File.separator)
+				.append("upload").append(File.separator);
+		
+		File file = new File(builder.toString());
+		file.mkdirs();
+		return file.getAbsolutePath();
+	}
 }
