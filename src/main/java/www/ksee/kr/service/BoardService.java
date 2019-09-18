@@ -20,8 +20,7 @@ public class BoardService implements DataService<Board>{
 
 	@Override
 	public int update(Board input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(input);
 	}
 
 	@Override

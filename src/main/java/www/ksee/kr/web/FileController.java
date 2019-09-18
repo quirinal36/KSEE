@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -210,7 +211,13 @@ public class FileController extends KseeController {
         }
     }
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/delete/{value}")
+	public String deleteFile(@PathVariable String value) {
+		JSONObject json = new JSONObject();
+		
+		return json.toString();
+	}
 	
 	/***************************************************
 	 * URL: /upload/get/{value}
@@ -248,8 +255,6 @@ public class FileController extends KseeController {
 	 */
 	private String makeUserPath() {
 		String path = System.getProperty("user.dir");
-		logger.info(path);
-		
 		StringBuilder builder = new StringBuilder()
 				.append(path.substring(0, path.lastIndexOf(File.separator)))
 				.append(File.separator).append("webapps").append(File.separator)

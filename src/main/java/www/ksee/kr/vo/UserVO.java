@@ -24,10 +24,15 @@ public class UserVO {
 	String telephone;
 	
 	public static final int ROLE_ADMIN = 1;
-	public static final int ROLE_USER = 2;
+	public static final int ROLE_STUDENT = 2;
+	public static final int ROLE_PHD = 2;
+	public static final int ROLE_COMPANY = 2;
 	public static final String ADMIN = "ROLE_ADMIN";
-	public static final String USER = "ROLE_USER";
-	public static final String[] ROLES = {"", ADMIN, USER};
+	public static final String STUDENT = "ROLE_STUDENT";
+	public static final String PHD = "ROLE_PHD";
+	public static final String COMPANY = "ROLE_COMPANY";
+	
+	public static final String[] ROLES = {"", ADMIN, STUDENT, PHD, COMPANY};
 	
 	public UserVO () {
 		

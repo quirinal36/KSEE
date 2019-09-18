@@ -1,10 +1,12 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 </head>
 <body>
 <div id="wrap">
@@ -16,8 +18,11 @@
 			<div id="contentsPrint">
 				<div class="board_search">
 					<div class="search_ipt">
-						<input type="text" placeholder="검색어를 입력하세요." value="${paging.query }">
-						<input type="button" value="검색">
+						<form action="<c:url value="/group/"/>">
+							<input type="text" placeholder="검색어를 입력하세요." value="${paging.query }">
+							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
+							<input type="button" value="검색" onclick="search();">
+						</form>
 					</div>
 				</div>
 				<div class="search_result_message">
@@ -36,58 +41,33 @@
 							<div class="file">첨부파일</div>
 							<div class="view">조회</div>
 						</li>
-						<li>
-							<div class="num">5</div>
-							<div class="category">공지사항</div>
-							<div class="title"><a href="#">한국효소공학연구회 공지사항입니다.</a></div>
-							<div class="writer">이승구</div>
-							<div class="date">2019-08-11</div>
-							<div class="file">1</div>
-							<div class="view">123</div>
-						</li>
-						<li>
-							<div class="num">4</div>
-							<div class="category">관련소식</div>
-							<div class="title"><a href="#">한국효소공학연구회 공지사항입니다.</a></div>
-							<div class="writer">이승구</div>
-							<div class="date">2019-08-11</div>
-							<div class="file">1</div>
-							<div class="view">123</div>
-						</li>
-						<li>
-							<div class="num">3</div>
-							<div class="category">공지사항</div>
-							<div class="title"><a href="#">한국효소공학연구회 공지사항입니다.</a></div>
-							<div class="writer">이승구</div>
-							<div class="date">2019-08-11</div>
-							<div class="file">1</div>
-							<div class="view">123</div>
-						</li>
-						<li>
-							<div class="num">2</div>
-							<div class="category">관련소식</div>
-							<div class="title"><a href="#">한국효소공학연구회 공지사항입니다.</a></div>
-							<div class="writer">이승구</div>
-							<div class="date">2019-08-11</div>
-							<div class="file">1</div>
-							<div class="view">123</div>
-						</li>
-						<li>
-							<div class="num">1</div>
-							<div class="category">공지사항</div>
-							<div class="title"><a href="#">한국효소공학연구회 공지사항입니다.</a></div>
-							<div class="writer">이승구</div>
-							<div class="date">2019-08-11</div>
-							<div class="file">1</div>
-							<div class="view">123</div>
-						</li>
+						<c:forEach items="${list }" var="item" varStatus="sts">
+							<li>
+								<div class="num">${sts.count }</div>
+								<div class="category">${item.boardName }</div>
+								<div class="title"><a href="#">${item.title }</a></div>
+								<div class="writer">${item.writerName }</div>
+								<div class="date"><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></div>
+								<div class="file">${item.fileCnt }</div>
+								<div class="view">${item.viewCount }</div>
+							</li>
+						</c:forEach>
 					</ul>
 					<div class="page">
-						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
-						<a href="#" class="bt prev">이전 페이지로 가기</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
+						<a href="javascript:pageGo(${paging.firstPageNo})" class="bt first">맨 처음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.prevPageNo})" class="bt prev">이전 페이지로 가기</a>
+						<c:choose>
+							<c:when test="${paging.finalPageNo eq 0}">
+								<a href="javascript:pageGo(1)" class="num on">1</a>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${paging.startPageNo }" end="${paging.endPageNo}" varStatus="loop">
+									<a href="javascript:pageGo(${loop.current })" class="num <c:if test="${loop.current eq paging.pageNo }">on</c:if>">
+									${loop.current }
+									</a>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 						<a href="#" class="bt next">다음 페이지로 가기</a>
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>

@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -20,7 +21,7 @@
 			<div id="contentsPrint">
 				<div class="board_search">
 					<div class="search_ipt">
-						<form action="<c:url value="/group/"/>">
+						<form action="<c:url value="${listUrl }"/>">
 							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search();">
@@ -34,13 +35,13 @@
 				</div>
 				<div class="board_list board_list_typeA">
 					<ul>
-						<c:forEach items="${list}" var="item">
+						<c:forEach items="${list}" var="item" varStatus="sts">
 							<li>
-								<a href="<c:url value="/group/notice/view/${item.id }"/>">
+								<a href="<c:url value="${viewUrl }${item.id }"/>">
 									<div class="top">
-										<span class="num">No. ${item.id }</span>
+										<span class="num">No. ${paging.totalCount - (sts.index) - (paging.pageSize * (paging.pageNo-1))}</span>
 										<span class="file">${item.fileCnt }</span>
-										<span class="view">123</span>
+										<span class="view">${item.viewCount }</span>
 									</div>
 									<div class="cont">
 										<strong class="title">${item.title }</strong>
@@ -49,7 +50,7 @@
 											<span class="date">
 												<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 											</span>
-										</div>								   
+										</div>						   
 										<p class="content">
 											<c:out value='${item.content.replaceAll("\\\<.*?\\\>","") }'/>
 										</p>
@@ -77,8 +78,10 @@
 						<a href="#" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
-						<input type="hidden" name="write_url" value="/group/notice/write">
-						<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
+						<input type="hidden" name="write_url" value="${writeUrl }">
+						<sec:authorize access="isAuthenticated()">
+							<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
+						</sec:authorize>
 					</div>
 				</div>
 			</div>

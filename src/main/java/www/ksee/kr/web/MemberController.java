@@ -124,12 +124,32 @@ public class MemberController extends KseeController{
 		return mv;
 	}
 	
+	/**
+	 * 로그인 한 유저인지 판별
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/isLogin")
 	public String isLoginedUserView(HttpServletRequest request) {
 		JSONObject json = new JSONObject();
 		json.put("result", isLoginedUser(request));
 		
+		return json.toString();
+	}
+	
+	/**
+	 * 관리자 유저인지 판별
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/isAdmin")
+	public String isAdminUser(HttpServletRequest request) {
+		JSONObject json = new JSONObject();
+		json.put("result", request.isUserInRole(UserVO.ADMIN));
 		return json.toString();
 	}
 }

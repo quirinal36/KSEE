@@ -18,17 +18,35 @@
 			${boardType}
 		)
 	</insert>
-	
+	<update id="update" parameterType="board">
+		UPDATE Board
+		<set>
+			viewCount = ${viewCount}
+		</set>
+		<where>
+			id=${id}
+		</where>
+	</update>
 	<select id="select" parameterType="board" resultType="board">
 		SELECT 
 			board.*,
 			(SELECT COUNT(*) FROM FileInfo WHERE boardId = board.id) AS fileCnt,
 			(SELECT COUNT(*) FROM PhotoInfo WHERE boardId = board.id) AS pictureCnt,
+			(SELECT boardName FROM BoardType WHERE id = board.boardType) AS boardName,
 			usr.username AS writerName
 		FROM 
 			Board board LEFT JOIN users usr ON (board.writer = usr.id)
 		<where>
-			board.boardType = ${boardType}
+			<choose>
+				<when test="boardType eq 7">
+					board.boardType = 1 or
+					board.boardType = 2 or
+					board.boardType = 3
+				</when>
+				<otherwise>
+					board.boardType = ${boardType}
+				</otherwise>
+			</choose>
 			<if test="query != ''">
 			and 
 				(
@@ -45,7 +63,16 @@
 	<select id="count" parameterType="board" resultType="int">
 		SELECT COUNT(*) FROM Board
 		<where>
-			boardType = ${boardType}
+			<choose>
+				<when test="boardType eq 7">
+					boardType = 1 or
+					boardType = 2 or
+					boardType = 3
+				</when>
+				<otherwise>
+					boardType = ${boardType}
+				</otherwise>
+			</choose>
 		</where>
 	</select>
 	

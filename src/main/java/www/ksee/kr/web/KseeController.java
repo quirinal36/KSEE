@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import www.ksee.kr.security.AuthenticationFacade;
+import www.ksee.kr.service.BoardService;
 import www.ksee.kr.service.FileInfoService;
 import www.ksee.kr.service.PhotoInfoService;
 import www.ksee.kr.service.UserService;
@@ -29,7 +30,8 @@ public class KseeController {
 	AuthenticationManager authenticationManager;
 	@Autowired
 	protected MessageSource messageSource;
-	
+	@Autowired
+	BoardService boardService;
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();
 		
@@ -39,6 +41,7 @@ public class KseeController {
 		
 		return user;
 	}
+	
 	/**
 	 * 로그인한 사용자
 	 * @param request
@@ -46,7 +49,7 @@ public class KseeController {
 	 */
 	protected boolean isLoginedUser(HttpServletRequest request) {
 		boolean result = false;
-		for(int i=1; i<UserVO.ROLES.length-1; i++) {
+		for(int i=1; i<UserVO.ROLES.length; i++) {
 			if(request.isUserInRole(UserVO.ROLES[i])) {
 				result = true;
 				break;

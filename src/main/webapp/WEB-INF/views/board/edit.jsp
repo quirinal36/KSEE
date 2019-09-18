@@ -32,6 +32,7 @@
 		var id = $(button).val();
 		$(".bt_del_img").each(function(index, item){
 			if(id == $(item).val()){
+				
 				$(item).parent().remove();
 				return;
 			}
@@ -92,13 +93,13 @@
 						<div class="board_write_title">
 							<div class="title">제목</div>
 							<div class="title_ipt">
-								<input type="text" placeholder="제목 입력" name="title" autocomplete="off" >
+								<input type="text" placeholder="제목 입력" name="title" autocomplete="off" value="${board.title }">
 							</div>
 							<div class="writer">작성자</div>
-							<div class="writer_ipt"><input type="text" placeholder="작성자 입력" value="${user.username }" readonly autocomplete="off"></div>
+							<div class="writer_ipt"><input type="text" placeholder="작성자 입력" value="${board.writerName }" readonly autocomplete="off"></div>
 						</div>
 						<div class="board_write_cont">
-							<textarea name="editor1" id="editor1" rows="30" cols="80"></textarea>
+							<textarea name="editor1" id="editor1" rows="30" cols="80">${board.content }</textarea>
 	                        <script>
 			                CKEDITOR.replace( 'editor1' ,{
 			                	toolbarGroups: [{
@@ -142,6 +143,11 @@
 								<dd>
 									<!-- 사진 목록 -->
 									<ul id="picture_ul">
+										<c:forEach items="${photoList }" var="item">
+											<li style="background-image: url(${item.url});">
+												<input type="button" title="삭제" class="bt_del_img" value="${item.id }">
+											</li>
+										</c:forEach>
 										<!-- 
 										<li style="background-image: url(/resources/img/temp/3.png);">
 											<input type="button" title="삭제" class="bt_del_img">
@@ -164,6 +170,12 @@
 								<dd>
 									<!-- 첨부파일 목록 -->
 									<ul id = "file_ul">
+										<c:forEach items="${fileList }" var="item">
+											<li>
+												<span>${item.name }</span>
+												<input type="button" title="삭제" class="bt_del_file" value="${item.id }">
+											</li>
+										</c:forEach>
 										<!-- 
 										<li>
 											<span>2019 하계 중국 심포지움 안내파일.hwp</span>

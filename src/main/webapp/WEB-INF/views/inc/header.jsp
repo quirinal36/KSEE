@@ -60,12 +60,14 @@ function search(){
 								<ul class="dep2">
 									<li><a href="<c:url value="/group/notice"/>">공지사항</a></li>
 									<li><a href="<c:url value="/group/news"/>">관련소식</a></li>
+									<li><a href="<c:url value="/group/member"/>">회원동정</a></li>
 								</ul>
 							</li>
 							<li>
 								<ul class="dep2">
 									<li><a href="<c:url value="/symposium/domestic"/>">국내 학술대회</a></li>
 									<li><a href="<c:url value="/symposium/international"/>">한중일 학술대회</a></li>
+									<li><a href="<c:url value="/symposium/speaker"/>">연사제안</a></li>
 								</ul>
 							</li>
 							<li>

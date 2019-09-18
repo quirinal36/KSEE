@@ -6,6 +6,7 @@
 <html>
 <head>
 	<c:import url="/inc/head"></c:import>
+	<script type="text/javascript" src="<c:url value="/resources/js/boardDetail.js"/>"></script>
 </head>
 <body>
 <div class="wrap">
@@ -22,7 +23,7 @@
 						<fmt:formatDate value="${board.wdate}" pattern="yyyy-MM-dd" />
 					</div>						
 					<div class="file">${fn:length(fileList) }</div>					
-					<div class="view">123</div>
+					<div class="view">${board.viewCount}</div>
 				</div>
 				<div class="board_view_cont">
 					<div class="board_view_img">
@@ -43,8 +44,9 @@
 					</div>
 				</div>
 				<div class="bt_wrap">
-					<a href="<c:url value="/group/notice/"/>" class="bt1 on">목록</a>
-					<input type="button" class="bt1 popup_password_opener" value="수정">
+					<a href="${listUrl }" class="bt1 on">목록</a>
+					<input type="hidden" name="edit_url" value="${edit_url }${board.id}"/>
+					<input type="button" class="bt1 btn_edit" value="수정">
 				</div>
 			</div>
 		</div>

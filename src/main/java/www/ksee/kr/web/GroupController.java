@@ -20,15 +20,44 @@ import www.ksee.kr.vo.UserVO;
 @Controller
 @RequestMapping(value="/group")
 public class GroupController extends KseeController {
-	@Autowired
-	BoardService boardService;
 	
+	/**
+	 * 공지사항, 자유게시판, 관련소식 모두 보여주기
+	 * 
+	 * @param mv
+	 * @param board
+	 * @return
+	 */
 	@RequestMapping(value= "/", method = RequestMethod.GET)
-	public ModelAndView getGroupView(ModelAndView mv) {
+	public ModelAndView getGroupView(ModelAndView mv, Board board) {
 		mv.addObject("title", "학회소식");
+		
+		board.setBoardType(Board.TYPE_GROUP);
+		board.setPageSize(10);
+		
+		int totalCount = boardService.count(board);
+		board.setTotalCount(totalCount);
+		List<Board> list = boardService.select(board);
+		
+		mv.addObject("paging", board);
+		mv.addObject("list", list);
 		mv.setViewName("/group/home");
 		return mv;
 	}
+
+	/************************************************************************
+	 * 	공지사항 관련 메소드
+	 * 	1. /notice			: 게시판 리스트
+	 *  2. /notice/write	: 게시판 글 쓰기
+	 *  3. /notice/view		: 게시판 글 상세보기
+	 *  4. /notice/edit		: 게시판 글 수정
+	 ************************************************************************/
+	/**
+	 * 공지사항 리스트 
+	 * @param mv
+	 * @param board
+	 * @return
+	 */
 	@RequestMapping(value= "/notice")
 	public ModelAndView getNoticeView(ModelAndView mv,
 			Board board) {
@@ -39,34 +68,97 @@ public class GroupController extends KseeController {
 		
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
-		mv.setViewName("/group/notice");
+		mv.addObject("listUrl", "/group/notice/");
+		mv.addObject("viewUrl", "/group/notice/view/");
+		mv.addObject("writeUrl", "/group/notice/write/");
+		mv.setViewName("/group/list");
 		mv.addObject("title", "공지사항");
 		return mv;
 	}
+	/**
+	 * 공지사항 글쓰기 화면
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/notice/write")
-	public ModelAndView getWriteNoticeView(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView getWriteNoticeView(ModelAndView mv, 
+			HttpServletRequest request) {
 		UserVO user = getUser();
 		
 		mv.addObject("current", request.getServletPath());
 		mv.addObject("listUrl", request.getContextPath() +"/group/notice");
+		mv.addObject("authUrl", "/member/isAdmin");
 		mv.addObject("user", user);
+		mv.addObject("boardType", Board.TYPE_NOTICE);
 		mv.setViewName("/board/write");
 		return mv;
 	}
+	/**
+	 * 공지사항 상세보기
+	 * @param request
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/notice/view/{id}")
-	public ModelAndView getDetailNoticeView(ModelAndView mv,
+	public ModelAndView getDetailNoticeView(HttpServletRequest request,
+			ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
 		Board board= boardService.selectOne(Board.newInstance(id));
+		board.setViewCount(board.getViewCount() + 1);
+		boardService.update(board);
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
 		mv.addObject("title", "공지사항");
 		
+		mv.addObject("listUrl", request.getContextPath() +"/group/notice");
+		mv.addObject("edit_url", request.getContextPath()+"/group/notice/edit/");
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);
 		mv.setViewName("/board/detail");
 		return mv;
 	}
+	
+	/**
+	 * 공지사항 수정하기 화면
+	 * 
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/notice/edit/{id}")
+	public ModelAndView getNoticeEditView(ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
+		mv.addObject("title", "공지사항");
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
+		
+		mv.setViewName("/board/edit");
+		return mv;
+	}
+	
+	/************************************************************************
+	 * 	관련소식 관련 메소드
+	 * 	1. /news		: 게시판 리스트
+	 *  2. /news/write	: 게시판 글 쓰기
+	 *  3. /news/view	: 게시판 글 상세보기
+	 *  4. /news/edit	: 게시판 글 수정
+	 ************************************************************************/
+	
+	/**
+	 * 관련소식 리스트
+	 * @param mv
+	 * @param board
+	 * @return
+	 */
 	@RequestMapping(value="/news")
 	public ModelAndView getNewsView(ModelAndView mv,
 			Board board) {
@@ -77,8 +169,180 @@ public class GroupController extends KseeController {
 		
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
-		mv.setViewName("/group/news");
+		mv.addObject("listUrl", "/group/news/");
+		mv.addObject("viewUrl", "/group/news/view/");
+		mv.addObject("writeUrl", "/group/news/write/");
+		mv.setViewName("/group/list");
 		mv.addObject("title", "관련소식");
+		return mv;
+	}
+	/**
+	 * 관련소식 글작성 화면
+	 * 
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/news/write")
+	public ModelAndView getWriteNewsView(ModelAndView mv, HttpServletRequest request) {
+		UserVO user = getUser();
+		
+		mv.addObject("current", request.getServletPath());
+		mv.addObject("listUrl", request.getContextPath() +"/group/news");
+		mv.addObject("authUrl", "/member/isLogin");
+		mv.addObject("boardType", Board.TYPE_NEWS);
+		mv.addObject("user", user);
+		mv.setViewName("/board/write");
+		return mv;
+	}
+	
+	/**
+	 * 관련소식 상세보기 화면
+	 * 
+	 * @param request
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/news/view/{id}")
+	public ModelAndView getDetailNewsView(HttpServletRequest request, ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		board.setViewCount(board.getViewCount() + 1);
+		boardService.update(board);
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
+		mv.addObject("title", "관련소식");
+		
+		mv.addObject("listUrl", request.getContextPath() +"/group/news");
+		mv.addObject("edit_url", request.getContextPath()+"/group/news/edit/");
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
+		mv.setViewName("/board/detail");
+		return mv;
+	}
+	/**
+	 * 관련소식 수정하기 화면
+	 * 
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/news/edit/{id}")
+	public ModelAndView getNewsEditView(ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
+		mv.addObject("title", "관련소식");
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
+		
+		mv.setViewName("/board/edit");
+		return mv;
+	}
+	
+	/************************************************************************
+	 * 	회원동정 관련 메소드
+	 * 	1. /member			: 게시판 리스트
+	 *  2. /member/write	: 게시판 글 쓰기
+	 *  3. /member/view		: 게시판 글 상세보기
+	 *  4. /member/edit		: 게시판 글 수정
+	 ************************************************************************/
+	/**
+	 * 회원동정 리스트 
+	 * @param mv
+	 * @param board
+	 * @return
+	 */
+	@RequestMapping(value= "/member")
+	public ModelAndView getMemberView(ModelAndView mv,
+			Board board) {
+		board.setBoardType(Board.TYPE_MEMBER);
+		int totalCount = boardService.count(board);
+		board.setTotalCount(totalCount);
+		List<Board> boardList = boardService.select(board);
+		
+		mv.addObject("list", boardList);
+		mv.addObject("paging", board);
+		mv.addObject("listUrl", "/group/member/");
+		mv.addObject("viewUrl", "/group/member/view/");
+		mv.addObject("writeUrl", "/group/member/write/");
+		mv.setViewName("/group/list");
+		mv.addObject("title", "회원동정");
+		return mv;
+	}
+	/**
+	 * 회원동정 글쓰기 화면
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/member/write")
+	public ModelAndView getWriteMemberView(ModelAndView mv, 
+			HttpServletRequest request) {
+		UserVO user = getUser();
+		
+		mv.addObject("current", request.getServletPath());
+		mv.addObject("listUrl", request.getContextPath() +"/group/member");
+		mv.addObject("authUrl", "/member/isLogin");
+		mv.addObject("user", user);
+		mv.addObject("boardType", Board.TYPE_MEMBER);
+		mv.setViewName("/board/write");
+		return mv;
+	}
+	/**
+	 * 회원동정 상세보기
+	 * @param request
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/member/view/{id}")
+	public ModelAndView getDetailMemberView(HttpServletRequest request,
+			ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		board.setViewCount(board.getViewCount() + 1);
+		boardService.update(board);
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
+		mv.addObject("title", "회원동정");
+		
+		mv.addObject("listUrl", request.getContextPath() +"/group/member");
+		mv.addObject("edit_url", request.getContextPath()+"/group/member/edit/");
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
+		mv.setViewName("/board/detail");
+		return mv;
+	}
+	
+	/**
+	 * 회원동정 수정하기 화면
+	 * 
+	 * @param mv
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/member/edit/{id}")
+	public ModelAndView getMemberEditView(ModelAndView mv,
+			@PathVariable(value="id", required = true)Integer id) {
+		Board board= boardService.selectOne(Board.newInstance(id));
+		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+		
+		mv.addObject("title", "회원동정");
+		mv.addObject("fileList", fileList);
+		mv.addObject("photoList", photoList);
+		mv.addObject("board", board);
+		
+		mv.setViewName("/board/edit");
 		return mv;
 	}
 }

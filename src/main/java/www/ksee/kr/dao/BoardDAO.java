@@ -21,8 +21,7 @@ public class BoardDAO implements DataAccess<Board>{
 
 	@Override
 	public int update(Board input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(namespace +".update", input);
 	}
 
 	@Override
