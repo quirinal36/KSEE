@@ -106,15 +106,17 @@
 	width: 90%;
 	margin-left: 0;
 }
-.board_write_img ul { margin-bottom: 10px; text-align: left; font-size: 0; }
-.board_write_img ul li { position: relative; display: inline-block; width: 15%; height: 126px; margin: 20px 0 0 2%; box-sizing: border-box; border: 1px solid #eee; background-repeat: no-repeat; background-position: relative; background-size: cover; }
+
+.board_write_img ul { text-align: left; font-size: 0; }
+.board_write_img ul li { position: relative; display: inline-block; width: 15%; height: 126px; margin: 0 0 20px 2%; box-sizing: border-box; border: 1px solid #eee; background-repeat: no-repeat; background-position: relative; background-size: cover; }
 .board_write_img ul li:first-child { margin-left: 0; }
 .board_write_img ul li:nth-child(6n-5) { margin-left: 0; }
 .board_write_img ul li:nth-child(-n+5) { margin-top: 0; }
 .board_write_img ul li .bt_del_img { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2) url(/resources/img/contents/board_img_del.png) no-repeat 50% 50%; background-size: 10px; text-indent: -1000px; overflow: hidden; }
 .board_write_img ul li:hover .bt_del_img { display: block; }
-.board_write_file ul { margin-bottom: 10px; line-height: 160%; }
+.board_write_file ul { line-height: 160%; }
 .board_write_file ul li { font-size: 14px; font-weight: 300; }
+.board_write_file ul li:last-child { margin-bottom: 20px; }
 .board_write_file .bt_del_file { display: inline-block; width: 16px; height: 16px; margin-left: 5px; vertical-align: middle; background: url(/resources/img/contents/board_file_icon.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
 
 /* 게시판 리스트 - 카드형 */

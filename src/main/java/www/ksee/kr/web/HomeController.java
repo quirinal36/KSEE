@@ -64,18 +64,28 @@ import www.ksee.kr.vo.UserVO;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
-	@Autowired
-	private UserService userService;
-	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+public class HomeController extends KseeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
+		Board notice = Board.newInstance(0, Board.TYPE_NOTICE);
+		notice.setTotalCount(boardService.count(notice));
+		List<Board> noticeList = boardService.select(notice);
+		mv.addObject("noticeList", noticeList);
+		
+		Board freeBoard = Board.newInstance(0, Board.TYPE_FREE);
+		freeBoard.setTotalCount(boardService.count(freeBoard));
+		List<Board> freeBoardList = boardService.select(freeBoard);
+		mv.addObject("freeBoardList", freeBoardList);
+		
+		Board newsBoard = Board.newInstance(0, Board.TYPE_NEWS);
+		newsBoard.setTotalCount(boardService.count(newsBoard));
+		List<Board> newsBoardList = boardService.select(newsBoard);
+		mv.addObject("newsBoardList", newsBoardList);
+		
 		mv.setViewName("index");
 		return mv;
 	}

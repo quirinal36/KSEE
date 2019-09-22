@@ -27,6 +27,13 @@ public class Board extends Paging{
 	public static final int TYPE_GROUP = 7;
 	public static final int PAGE_SIZE_NORMAL = 10;
 	public static final int PAGE_SIZE_CARD = 9;
+	
+	public static Board newInstance(int id, int boardType) {
+		Board board = new Board();
+		board.setId(id);
+		board.setBoardType(boardType);
+		return board;
+	}
 	public static Board newInstance(int id) {
 		Board board = new Board();
 		board.setId(id);

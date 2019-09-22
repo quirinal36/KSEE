@@ -79,10 +79,10 @@ public class SymposiumController extends KseeController{
 		
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
-		mv.addObject("listUrl", "/speaker");
-		mv.addObject("viewUrl", "/speaker/view/");
-		mv.addObject("writeUrl", "/speaker/write/");
-		mv.setViewName("/group/list");
+		mv.addObject("listUrl", "/symposium/speaker");
+		mv.addObject("viewUrl", "/symposium/speaker/view/");
+		mv.addObject("writeUrl", "/symposium/speaker/write/");
+		mv.setViewName("/community/board");
 		
 		return mv;
 	}

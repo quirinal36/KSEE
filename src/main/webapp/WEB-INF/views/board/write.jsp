@@ -136,7 +136,7 @@
 			                });
 			            	</script>
 						</div>
-						<div class="board_write_img">
+						<div class="board_write_img" id="dropzone-img">
 							<dl>
 								<dt>사진</dt>
 								<dd>
@@ -151,14 +151,13 @@
 									<!-- 첨부하기 버튼 -->
 									<input id="imageupload" type="file" name="files[]" 
 										accept="image/*" data-url="<c:url value="/upload/image"/>" multiple>
-									<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
 								    <div id="progress">
 								        <div style="width: 0%;"></div>
 								    </div>
 								</dd>
 							</dl>
 						</div>
-						<div class="board_write_file">
+						<div class="board_write_file"  id="dropzone-file">
 							<dl>
 								<dt>첨부파일</dt>
 								<dd>
@@ -173,7 +172,6 @@
 									</ul>
 									<input id="fileupload" type="file" name="files[]" 
 										data-url="<c:url value="/upload/file"/>" multiple>
-									<div id="dropzone" class="fade well" style="display:none;">Drop files here</div>
 								    <div id="progress">
 								        <div style="width: 0%;"></div>
 								    </div>
@@ -216,7 +214,7 @@ $(document).ready(function(){
             );
         },
  
-        dropZone: $('#dropzone')
+        dropZone: $('#dropzone-img')
     });
     $('#fileupload').fileupload({
     	imageCrop: true,
@@ -242,7 +240,7 @@ $(document).ready(function(){
             );
         },
  
-        dropZone: $('#dropzone')
+        dropZone: $('#dropzone-file')
     });
 });
 

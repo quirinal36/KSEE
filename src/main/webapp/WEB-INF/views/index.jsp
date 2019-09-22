@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -39,36 +41,18 @@
                         </div>
                         <div class="list">
                             <ul>
-                                <li>
-                                    <div class="date">
-                                        <strong>29</strong>
-                                        <span>2019.07</span>
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#" class="title">공지사항 게시글</a><br>
-                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="date">
-                                        <strong>29</strong>
-                                        <span>2019.07</span>
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#" class="title">공지사항 게시글</a><br>
-                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="date">
-                                        <strong>29</strong>
-                                        <span>2019.07</span>
-                                    </div>
-                                    <div class="cont">
-                                        <a href="#" class="title">공지사항 게시글</a><br>
-                                        <a href="#" class="text">공지사항 게시글 상세내용</a>
-                                    </div>
-                                </li>
+                            	<c:forEach items="${noticeList }" var="item" begin="0" end="2">
+	                            	<li>
+	                                    <div class="date">
+	                                        <strong><fmt:formatDate value="${item.wdate}" pattern="dd" /></strong>
+	                                        <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM" /></span>
+	                                    </div>
+	                                    <div class="cont">
+	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">${item.title }</a><br>
+	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">${item.content }</a>
+	                                    </div>
+	                                </li>
+                            	</c:forEach>
                             </ul>
                         </div>
                     </div>
@@ -78,27 +62,20 @@
                             <a href="<c:url value="/group/news/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
                         <div class="list">
-                            <div class="first">
-								<a href="#">관련소식 게시글</a>
-                                <span>2019-07-20</span>
-                            </div>
+                        	<c:forEach items="${newsBoardList }" var="item" begin="0" end="0">
+	                            <div class="first">
+									<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
+	                                <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+	                            </div>
+                            </c:forEach>
                             <ul>
-                                <li>
-									<a href="#">관련소식 게시글</a>
-                                    <span>2019-07-20</span>
-                                </li>
-                                <li>
-									<a href="#">관련소식 게시글</a>
-                                    <span>2019-07-20</span>
-                                </li>
-                                <li>
-									<a href="#">관련소식 게시글</a>
-                                    <span>2019-07-20</span>
-                                </li>
-                                <li>
-									<a href="#">관련소식 게시글</a>
-                                    <span>2019-07-20</span>
-                                </li>
+                            	<c:forEach items="${newsBoardList }" var="item" begin="1" end="4">
+	                                <li>
+										<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
+	                                    <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+	                                </li>
+                                </c:forEach>
+                                
                             </ul>
                         </div>
 					</div>
@@ -108,27 +85,21 @@
                             <a href="<c:url value="/community/board/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
 						<div class="list">
-							<div class="first">
-								<a href="#">자유게시판 게시글</a>
-								<span>2019-07-20</span>
-							</div>
+							<c:forEach items="${freeBoardList }" var="item" begin="0" end="0">
+								<div class="first">
+									<a href="<c:url value="/community/board/view/${item.id }"/>">${item.title }</a>
+									<span>
+										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
+									</span>
+								</div>
+							</c:forEach>
 							<ul>
-								<li>
-									<a href="#">자유게시판 게시글</a>
-									<span>2019-07-20</span>
-								</li>
-								<li>
-									<a href="#">자유게시판 게시글</a>
-									<span>2019-07-20</span>
-								</li>
-								<li>
-									<a href="#">자유게시판 게시글</a>
-									<span>2019-07-20</span>
-								</li>
-								<li>
-									<a href="#">자유게시판 게시글</a>
-									<span>2019-07-20</span>
-								</li>
+								<c:forEach items="${freeBoardList }" var="item" begin="1" end="4">
+									<li>
+										<a href="<c:url value="/community/board/view/${item.id }"/>">${item.title }</a>
+										<span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
                     </div>

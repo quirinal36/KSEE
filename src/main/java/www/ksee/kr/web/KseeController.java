@@ -32,6 +32,7 @@ public class KseeController {
 	protected MessageSource messageSource;
 	@Autowired
 	BoardService boardService;
+	
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();
 		
