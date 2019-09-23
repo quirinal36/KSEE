@@ -3,6 +3,7 @@ package www.ksee.kr.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +19,12 @@ import www.ksee.kr.vo.UserVO;
 @Controller
 public class CommunityController extends KseeController{
 	
-	@RequestMapping(value="/board")
+	@RequestMapping(value= {"/","/board"})
 	public ModelAndView getFreeBoardView(ModelAndView mv,
-			Board board) {
+			Board board, HttpServletRequest request, HttpServletResponse response) {
+		final String currentUrl = "/community/board";
+		
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		mv.addObject("title", "자유게시판");
 		
 		board.setBoardType(Board.TYPE_FREE);
@@ -49,6 +53,10 @@ public class CommunityController extends KseeController{
 	@RequestMapping(value="/board/write")
 	public ModelAndView getWriteFreeBoardView(ModelAndView mv, 
 			HttpServletRequest request) {
+		final String currentUrl = "/community/board";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("title", "자유게시판");
+		
 		UserVO user = getUser();
 		
 		mv.addObject("current", request.getServletPath());
@@ -70,6 +78,9 @@ public class CommunityController extends KseeController{
 	public ModelAndView getDetailFreeBoardView(HttpServletRequest request,
 			ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
+		final String currentUrl = "/community/board";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		Board board= boardService.selectOne(Board.newInstance(id));
 		board.setViewCount(board.getViewCount() + 1);
 		boardService.update(board);
@@ -96,12 +107,16 @@ public class CommunityController extends KseeController{
 	 */
 	@RequestMapping(value="/board/edit/{id}")
 	public ModelAndView getMemberEditView(ModelAndView mv,
+			HttpServletRequest request,
 			@PathVariable(value="id", required = true)Integer id) {
+		final String currentUrl = "/community/board";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		Board board= boardService.selectOne(Board.newInstance(id));
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
 		
-		mv.addObject("title", "회원동정");
+		mv.addObject("title", "자유게시판");
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);

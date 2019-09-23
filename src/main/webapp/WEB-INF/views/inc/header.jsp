@@ -39,42 +39,25 @@ function search(){
 			</div>
 			<div class="gnb_wrap">
 				<ul>
-					<li><a href="<c:url value="/about/greet"/>">연구회 소개</a></li>
-					<li><a href="<c:url value="/group/"/>">학회소식</a></li>
-					<li><a href="<c:url value="/symposium/"/>">학술대회</a></li>
-					<li><a href="<c:url value="/community/board"/>">커뮤니티</a></li>
+					<c:forEach items="${parents}" var="item">
+						<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+					</c:forEach>
 				</ul>
 				<div class="gnb_menu">
 					<div>
 						<div class="image"></div>
 						<ul class="dep1">
-							<li>
-								<ul class="dep2">
-									<li><a href="<c:url value="/about/greet"/>">인사말</a></li>
-									<li><a href="<c:url value="/about/history"/>">연혁</a></li>
-									<li><a href="<c:url value="/about/term"/>">정관</a></li>
-									<li><a href="<c:url value="/about/member"/>">임원진</a></li>
-								</ul>
-							</li>
-							<li>
-								<ul class="dep2">
-									<li><a href="<c:url value="/group/notice"/>">공지사항</a></li>
-									<li><a href="<c:url value="/group/news"/>">관련소식</a></li>
-									<li><a href="<c:url value="/group/member"/>">회원동정</a></li>
-								</ul>
-							</li>
-							<li>
-								<ul class="dep2">
-									<li><a href="<c:url value="/symposium/domestic"/>">국내 학술대회</a></li>
-									<li><a href="<c:url value="/symposium/international"/>">한중일 학술대회</a></li>
-									<li><a href="<c:url value="/symposium/speaker"/>">연사제안</a></li>
-								</ul>
-							</li>
-							<li>
-								<ul class="dep2">
-									<li><a href="<c:url value="/community/board"/>">자유게시판</a></li>
-								</ul>
-							</li>
+							<c:forEach items="${parents}" var="pmenu">
+								<li>
+									<ul class="dep2">
+										<c:forEach items="${children }" var="item">
+											<c:if test="${pmenu.id eq item.parent}">
+												<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>

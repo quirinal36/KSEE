@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>${title }</title>
+<title>${curMenu.title }</title>
 <c:import url="/inc/head"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/js/notice.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
@@ -14,12 +14,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap?id=${curMenu.id }"></c:import>
+			<c:import url="/inc/contentsTitle?id=${curMenu.id }"></c:import>
 			<div id="contentsPrint">
 				<div class="board_search">
 					<div class="search_ipt">
-						<form action="<c:url value="/group/"/>">
+						<form action="<c:url value="${listUrl }"/>">
 							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }" autocomplete="off" />
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search();">

@@ -16,8 +16,8 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap?id=${curMenu.id }"></c:import>
+			<c:import url="/inc/contentsTitle?id=${curMenu.id }"></c:import>
 			<div id="contentsPrint">
 				<div class="board_search">
 					<div class="search_ipt">

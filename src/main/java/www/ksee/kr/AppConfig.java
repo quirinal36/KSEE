@@ -117,9 +117,13 @@ public class AppConfig implements WebMvcConfigurer {
 	    return new BCryptPasswordEncoder(11);
 	}
 	
+	/**
+	 * max file upload size : 500 MBytes
+	 * @return
+	 */
 	@Bean
 	public MultipartResolver multipartResolver() {
-		long maxSize = 1024 * 1024 * 10;
+		long maxSize = 1024 * 1024 * 500;
 		
 	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
 	    resolver.setDefaultEncoding("utf-8");

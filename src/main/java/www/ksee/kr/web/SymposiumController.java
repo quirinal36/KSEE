@@ -20,7 +20,10 @@ import www.ksee.kr.vo.UserVO;
 public class SymposiumController extends KseeController{
 	
 	@RequestMapping(value= {"/", "/domestic"})
-	public ModelAndView getHistoryView(ModelAndView mv) {
+	public ModelAndView getHistoryView(ModelAndView mv, HttpServletRequest request) {
+		final String currentUrl = "/symposium/domestic";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.setViewName("/symposium/domestic");
 		mv.addObject("title", "국내 학술대회");
 		return mv;
@@ -28,7 +31,11 @@ public class SymposiumController extends KseeController{
 	
 	@RequestMapping(value= {"/domestic/view/{id}/{tab}", "/domestic/view/{id}"})
 	public ModelAndView getDetailView(ModelAndView mv, @PathVariable(value="id", required = true)Integer id,
-			@PathVariable(value="tab", required = false)Optional<Integer>tab) {
+			@PathVariable(value="tab", required = false)Optional<Integer>tab,
+			HttpServletRequest request) {
+		final String currentUrl = "/symposium/domestic";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.addObject("title", "국내 학술대회");
 		if(tab.isPresent()) {
 			mv.addObject("tab", tab.get());
@@ -39,7 +46,11 @@ public class SymposiumController extends KseeController{
 		return mv;
 	}
 	@RequestMapping(value="/international")
-	public ModelAndView getInternationalView(ModelAndView mv) {
+	public ModelAndView getInternationalView(ModelAndView mv,
+			HttpServletRequest request) {
+		final String currentUrl = "/symposium/international";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.setViewName("/symposium/international");
 		mv.addObject("title", "한중일 학술대회");
 		return mv;
@@ -67,7 +78,10 @@ public class SymposiumController extends KseeController{
 	 */
 	@RequestMapping(value= "/speaker")
 	public ModelAndView getSpeakerView(ModelAndView mv,
-			Board board) {
+			Board board,HttpServletRequest request) {
+		final String currentUrl = "/symposium/speaker";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.addObject("title", "연사제안");
 		
 		board.setBoardType(Board.TYPE_SPEAKER);
@@ -95,6 +109,9 @@ public class SymposiumController extends KseeController{
 	@RequestMapping(value="/speaker/write")
 	public ModelAndView getWriteSpeakerView(ModelAndView mv, 
 			HttpServletRequest request) {
+		final String currentUrl = "/symposium/speaker";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		UserVO user = getUser();
 		
 		mv.addObject("current", request.getServletPath());
@@ -116,6 +133,9 @@ public class SymposiumController extends KseeController{
 	public ModelAndView getDetailSpeakerView(HttpServletRequest request,
 			ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
+		final String currentUrl = "/symposium/speaker";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		Board board= boardService.selectOne(Board.newInstance(id));
 		board.setViewCount(board.getViewCount() + 1);
 		boardService.update(board);
@@ -142,7 +162,11 @@ public class SymposiumController extends KseeController{
 	 */
 	@RequestMapping(value="/speaker/edit/{id}")
 	public ModelAndView getSpeakerEditView(ModelAndView mv,
+			HttpServletRequest request,
 			@PathVariable(value="id", required = true)Integer id) {
+		final String currentUrl = "/symposium/speaker";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		Board board= boardService.selectOne(Board.newInstance(id));
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));

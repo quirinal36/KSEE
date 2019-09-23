@@ -151,8 +151,8 @@
 									<!-- 첨부하기 버튼 -->
 									<input id="imageupload" type="file" name="files[]" 
 										accept="image/*" data-url="<c:url value="/upload/image"/>" multiple>
-								    <div id="progress">
-								        <div style="width: 0%;"></div>
+								    <div id="progress_img" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+								        <div class="progress-bar" style="width: 0%;" ></div>
 								    </div>
 								</dd>
 							</dl>
@@ -172,8 +172,8 @@
 									</ul>
 									<input id="fileupload" type="file" name="files[]" 
 										data-url="<c:url value="/upload/file"/>" multiple>
-								    <div id="progress">
-								        <div style="width: 0%;"></div>
+								    <div id="progress_file">
+								        <div class="progress-bar" style="width: 0%;"></div>
 								    </div>
 								</dd>
 							</dl>
@@ -208,10 +208,14 @@ $(document).ready(function(){
         },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .bar').css(
+            
+            $('#progress_img .progress-bar').css(
                 'width',
                 progress + '%'
             );
+            if(progress == 100){
+            	$('#progress_img .progress-bar').css('width','0%');
+            }
         },
  
         dropZone: $('#dropzone-img')
@@ -234,10 +238,14 @@ $(document).ready(function(){
         },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .bar').css(
+            
+            $('#progress_file .progress-bar').css(
                 'width',
                 progress + '%'
             );
+            if(progress == 100){
+            	$('#progress_file .progress-bar').css('width','0%');
+            }
         },
  
         dropZone: $('#dropzone-file')

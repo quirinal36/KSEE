@@ -8,16 +8,25 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.dao.MenusDAO;
+import www.ksee.kr.service.MenuService;
+import www.ksee.kr.vo.Menus;
+
 public class BongInterceptor implements HandlerInterceptor{
 	Logger logger = Logger.getLogger(getClass().getSimpleName());
+	@Autowired
+	SqlSessionTemplate sqlSession;
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	public boolean preHandle(HttpServletRequest request, 
+			HttpServletResponse response, Object handler)
 			throws Exception {
 		Map<String, String[]> parameters = request.getParameterMap();
 		Iterator<String> keys = parameters.keySet().iterator();
@@ -41,8 +50,10 @@ public class BongInterceptor implements HandlerInterceptor{
 	}
 
 	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
+	public void postHandle(HttpServletRequest request, 
+			HttpServletResponse response, Object handler,
+			ModelAndView mv) throws Exception {
+		
 	}
 
 	@Override

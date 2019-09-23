@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="menu_sql">
+	<select id="select" parameterType="menus" resultType="menus">
+		SELECT * FROM Menus
+		<where>
+			<choose>
+				<when test="parent lte 0">
+					parent is null
+				</when>
+				<otherwise>
+					parent = ${parent}
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="select_list" parameterType="java.util.List" resultType="menus">
+		SELECT * FROM Menus
+		<where>
+			parent IN
+			<foreach collection="list" separator="," open="(" close=")" item="item">
+				${item.id}
+			</foreach>
+		</where>
+	</select>
+	
+	<select id="select_one" parameterType="menus" resultType="menus">
+		SELECT * FROM Menus
+		<where>
+			<choose>
+				<when test="id gt 0">
+					id = ${id}
+				</when>
+				<otherwise>
+					url = '${url}'
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+	
+	<select id="select_siblings" parameterType="menus" resultType="menus">
+		SELECT * FROM Menus
+		<where>
+			parent = (SELECT parent FROM Menus WHERE id = ${id})
+		</where>
+	</select>
+</mapper>

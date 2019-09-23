@@ -8,5 +8,6 @@
 		<typeAlias type="www.ksee.kr.vo.PhotoInfo" alias="photoinfo"/>
 		<typeAlias type="www.ksee.kr.vo.FileInfo" alias="fileinfo"/>
 		<typeAlias type="www.ksee.kr.vo.Board" alias="board"/>
+		<typeAlias type="www.ksee.kr.vo.Menus" alias="menus"/>
     </typeAliases>
 </configuration>

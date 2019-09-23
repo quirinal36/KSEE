@@ -11,8 +11,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div id="contentsPrint">
 				<img src="/resources/img/temp/11.png" style="display: block; width: 75%; max-width: 1000px; margin: 60px auto;">
 			</div>

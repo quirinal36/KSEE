@@ -12,8 +12,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import www.ksee.kr.security.AuthenticationFacade;
 import www.ksee.kr.service.BoardService;
 import www.ksee.kr.service.FileInfoService;
+import www.ksee.kr.service.MenuService;
 import www.ksee.kr.service.PhotoInfoService;
 import www.ksee.kr.service.UserService;
+import www.ksee.kr.vo.Menus;
 import www.ksee.kr.vo.UserVO;
 
 public class KseeController {
@@ -32,7 +34,8 @@ public class KseeController {
 	protected MessageSource messageSource;
 	@Autowired
 	BoardService boardService;
-	
+	@Autowired
+	MenuService menuService;
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();
 		
@@ -57,5 +60,14 @@ public class KseeController {
 			}
 		}
 		return result;
+	}
+	
+	protected Menus getCurMenus(String currentUrl, HttpServletRequest request) {
+		logger.info((String)request.getAttribute("javax.servlet.forward.request_uri"));
+		
+		Menus curMenu = new Menus();
+		curMenu.setUrl(currentUrl);
+		curMenu = menuService.selectOne(curMenu);
+		return curMenu;
 	}
 }

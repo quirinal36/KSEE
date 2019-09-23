@@ -11,8 +11,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div id="contentsPrint">
             	<div class="symposium_title_img"><a href="#"><img src="/resources/img/contents/2019_symposium2.png" alt="2019 심포지엄"></a></div>
 				<div class="board_list board_list_typeB symposium">
