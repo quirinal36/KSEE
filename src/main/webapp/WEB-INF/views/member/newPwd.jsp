@@ -17,9 +17,6 @@ $(document).ready(function(){
 		}else{
 			var pwdConfirm = $("input[name='password_confirm']").val();
 			
-			console.log("pwd: " + pwd);			
-			console.log("pwdConfirm: " + pwdConfirm);
-			
 			if(pwdConfirm.length > 0){
 				if(pwd == pwdConfirm){
 					$(".message").hide();
@@ -74,7 +71,8 @@ function changePwd(){
 		dataType: 'json'
 	}).done(function(json){
 		if(json.result > 0){
-			
+			var myInfoUrl = $("input[name='my-info-url']").val();
+			location.replace(myInfoUrl);
 		}else{
 			alert(json.message);
 		}
@@ -117,6 +115,8 @@ function changePwd(){
 									<p class="message confirm">비밀번호가 일치합니다.</p>
 								</dd>
 							</dl>
+							<input type="hidden" name="login" value="${user.login }"/>
+							<input type="hidden" name="my-info-url" value="<c:url value="/member/myinfo"/>"/>
 							<input type="button" value="비밀번호 변경" class="bt3" onclick="javascript:changePwd();" disabled>
 						</div>
 					</div>

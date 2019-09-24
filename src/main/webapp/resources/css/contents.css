@@ -74,7 +74,6 @@
 .form_step1 .term { height: 200px; margin-bottom: 10px; padding: 10px; background: #f5f6f7; overflow-y: scroll; }
 .form_step1 .chk_wrap { text-align: right; }
 .form_step2 { display: none; }
-.form_complete { display: none; }
 .form_complete .paper { font-size: 16px; }
 
 

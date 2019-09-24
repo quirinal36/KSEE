@@ -1,6 +1,7 @@
 package www.ksee.kr.web;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,11 +41,19 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/login");
 		return mv;
 	}
-	@RequestMapping(value="/signup", method = RequestMethod.GET)
+	@RequestMapping(value= {"/signup", "/signup/{complete}"}, method = RequestMethod.GET)
 	public ModelAndView getSignupView(ModelAndView mv,
-			HttpServletRequest request) {
+			HttpServletRequest request, @PathVariable(value="complete")Optional<String> complete) {
 		final String currentUrl = "/member/signup";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("title", "회원가입");
+		
+		logger.info("isLoginedUser(request): " + isLoginedUser(request));
+		logger.info("complete.isPresent(): " + complete.isPresent());
+		if(isLoginedUser(request) && complete.isPresent()) {
+			logger.info("afterSignup present");
+			mv.addObject("afterSignup", complete.get());
+		}
 		
 		mv.setViewName("/member/signup");
 		return mv;
@@ -141,7 +151,8 @@ public class MemberController extends KseeController{
 	public ModelAndView getNewPwdView(ModelAndView mv, HttpServletRequest request) {
 		final String currentUrl = "/member/newPwd";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		
+		UserVO user = getUser();
+		mv.addObject("user", user);
 		mv.setViewName("/member/newPwd");
 		return mv;
 	}

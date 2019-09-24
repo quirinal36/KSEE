@@ -26,14 +26,14 @@ public class UserVO {
 	
 	public static final int ROLE_ADMIN = 1;
 	public static final int ROLE_STUDENT = 2;
-	public static final int ROLE_PHD = 2;
-	public static final int ROLE_COMPANY = 2;
+	public static final int ROLE_GENERAL = 3;
+	public static final int ROLE_COMPANY = 4;
 	public static final String ADMIN = "ROLE_ADMIN";
 	public static final String STUDENT = "ROLE_STUDENT";
-	public static final String PHD = "ROLE_PHD";
+	public static final String GENERAL = "ROLE_GENERAL";
 	public static final String COMPANY = "ROLE_COMPANY";
 	
-	public static final String[] ROLES = {"", ADMIN, STUDENT, PHD, COMPANY};
+	public static final String[] ROLES = {"", ADMIN, STUDENT, GENERAL, COMPANY};
 	
 	public UserVO () {
 		

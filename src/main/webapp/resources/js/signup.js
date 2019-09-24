@@ -26,26 +26,45 @@ $(document).ready(function(){
 			
 		});
 	});
-	$("input[name='password']").blur(function(e){
-		if($(this).val().length >= 8){
+	$("input[name='password']").keyup(function(e){
+		var passwordInput = $(this).val();
+		var passwordConfirmInput = $("input[name='password_confirm']").val();
+		
+		if(passwordInput.length >= 6 && 
+				passwordInput == passwordConfirmInput){
 			$(this).parent().find(".error").hide();
-		}else{
+			$(this).parent().find(".confirm").text('비밀번호가 일치합니다.');
+		}else if(passwordInput.length < 6 && passwordInput.length > 0){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("8자 이상으로 입력하세요.");
+			$(this).parent().find(".error").text("6자 이상으로 입력하세요.");
+		}else if(passwordInput != passwordConfirmInput
+				&& passwordInput.length > 0
+				&& passwordConfirmInput.length > 0){
+			$(this).parent().find(".confirm").hide();
+			$(this).parent().find(".error").show();
+			$(this).parent().find(".error").text('비밀번호가 일치하지 않습니다.');
 		}
 	});
-	$("input[name='password_confirm']").blur(function(e){
+	
+	$("input[name='password_confirm']").keyup(function(e){
 		var passwordInput = $("input[name='password']");
 		var passwordConfirmInput = $(this);
-		if(passwordInput.val().length >= 8 == passwordConfirmInput.val().length >= 8){
+		if(passwordInput.val().length >= 6 
+				&& passwordConfirmInput.val().length >= 6
+				&& passwordInput.val() == passwordConfirmInput.val()){
 			passwordConfirmInput.parent().find(".confirm").show();
 			passwordConfirmInput.parent().find(".error").hide();
 			passwordConfirmInput.parent().find(".confirm").text('비밀번호가 일치합니다.');
-		}else{
+		}else if(passwordInput.val().length >= 6 
+				&& passwordConfirmInput.val().length >= 6
+				&& passwordInput.val() != passwordConfirmInput.val()){
 			passwordConfirmInput.parent().find(".confirm").hide();
 			passwordConfirmInput.parent().find(".error").show();
 			passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
 			// passwordConfirmInput.focus();
+		}else if(passwordInput.val().length == 0 
+				&& passwordConfirmInput.val().length == 0){
+			passwordConfirmInput.parent().find(".error").hide();
 		}
 	});
 	$("input[name='phone']").keyup(function(e){
@@ -130,10 +149,10 @@ function validate(data){
 	
 	var passwordInput = $("input[name='password']");
 	if(jsonObj['password'] != ''){
-		if(jsonObj['password'].length < 8){
+		if(jsonObj['password'].length < 6){
 			passwordInput.parent().find(".confirm").hide();
 			passwordInput.parent().find(".error").show();
-			passwordInput.parent().find(".error").text('8자 이상으로 입력하세요.');
+			passwordInput.parent().find(".error").text('6자 이상으로 입력하세요.');
 			passwordInput.focus();
 			return false;
 		}else{
@@ -177,12 +196,53 @@ function validate(data){
 		return false;
 	}
 	
+	var classificationInput = $("input[name='classification']");
+	if(jsonObj['classification'] != ''){
+		classificationInput.parent().find(".error").hide();
+	}else{
+		classificationInput.parent().find(".error").show();
+		classificationInput.parent().find(".error").text('소속을 입력하세요.');
+		classificationInput.focus();
+		return false;
+	}
+	
+	var levelInput = $("input[name='level']");
+	if(jsonObj['level'] != ''){
+		levelInput.parent().find(".error").hide();
+	}else{
+		levelInput.parent().find(".error").show();
+		levelInput.parent().find(".error").text('직위를 입력하세요.');
+		levelInput.focus();
+		return false;
+	} 
+	
+	
+	var addressInput = $("input[name='address']");
+	if(jsonObj['address'] != ''){
+		addressInput.parent().find(".error").hide();
+	}else{
+		addressInput.parent().find(".error").show();
+		addressInput.parent().find(".error").text('주소를 입력하세요.');
+		addressInput.focus();
+		return false;
+	}
+	
+	var addressDetailInput = $("input[name='addressDetail']");
+	if(jsonObj['addressDetail'] != ''){
+		addressDetailInput.parent().find(".error").hide();
+	}else{
+		addressDetailInput.parent().find(".error").show();
+		addressDetailInput.parent().find(".error").text('상세주소를 입력하세요.');
+		addressDetailInput.focus();
+		return false;
+	}
+
 	var phoneInput = $("input[name='phone']");
 	if(jsonObj['phone'] != ''){
 		phoneInput.parent().find(".error").hide();
 	}else{
 		phoneInput.parent().find(".error").show();
-		phoneInput.parent().find(".error").text('휴대전화 번호를 입력하세요.');
+		phoneInput.parent().find(".error").text('전화번호를 입력하세요.');
 		phoneInput.focus();
 		return false;
 	}
@@ -212,47 +272,6 @@ function validate(data){
 		domainInput.focus();
 		return false;
 	}
-	
-	var classificationInput = $("input[name='classification']");
-	if(jsonObj['classification'] != ''){
-		classificationInput.parent().find(".error").hide();
-	}else{
-		classificationInput.parent().find(".error").show();
-		classificationInput.parent().find(".error").text('소속을 입력하세요.');
-		classificationInput.focus();
-		return false;
-	}
-	
-	var levelInput = $("input[name='level']");
-	if(jsonObj['level'] != ''){
-		levelInput.parent().find(".error").hide();
-	}else{
-		levelInput.parent().find(".error").show();
-		levelInput.parent().find(".error").text('직위를 입력하세요.');
-		levelInput.focus();
-		return false;
-	} 
-	
-	var addressInput = $("input[name='address']");
-	if(jsonObj['address'] != ''){
-		addressInput.parent().find(".error").hide();
-	}else{
-		addressInput.parent().find(".error").show();
-		addressInput.parent().find(".error").text('주소를 입력하세요.');
-		addressInput.focus();
-		return false;
-	}
-	
-	var addressDetailInput = $("input[name='addressDetail']");
-	if(jsonObj['addressDetail'] != ''){
-		addressDetailInput.parent().find(".error").hide();
-	}else{
-		addressDetailInput.parent().find(".error").show();
-		addressDetailInput.parent().find(".error").text('상세주소를 입력하세요.');
-		addressDetailInput.focus();
-		return false;
-	}
-	
 	return result;
 }
 function fn_setAddr(){
@@ -305,7 +324,8 @@ function move(nextPage){
 			}
 		}
 	}else if(nextPage == 2){
-		$(".form_step2").hide();
-		$(".form_step3").show();
+		//$(".form_step2").hide();
+		//$(".form_complete").show();
+		location.replace("/member/signup/complete");
 	}
 }
