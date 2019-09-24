@@ -22,8 +22,7 @@ public class UserDAO implements DataAccess<UserVO> {
 	}
 	@Override
 	public int update(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(namespace +".update", input);
 	}
 
 	@Override

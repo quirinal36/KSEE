@@ -10,8 +10,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div class="container_wrap">
 		<div class="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div class="board_view symposium">
 				<div class="board_view_title">
 					<div class="title">2019 하계 중국 심포지엄</div>

@@ -11,8 +11,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div id="contentsPrint">
 				
 				<!-- 회원가입 - 내 정보 -->
@@ -24,37 +28,37 @@
 						</dl>
 						<dl>
 							<dt>아이디</dt>
-							<dd>withi5</dd>
+							<dd>${user.login }</dd>
 						</dl>
 						<dl>
 							<dt>비밀번호</dt>
-							<dd><a href="#" class="bt2">비밀번호 변경</a></dd>
+							<dd><a href="<c:url value="/member/newPwd"/>" class="bt2">비밀번호 변경</a></dd>
 						</dl>
 						<dl>
 							<dt>이름</dt>
-							<dd>김한국</dd>
+							<dd>${user.username }</dd>
 						</dl>
 						<dl>
 							<dt>휴대전화 번호</dt>
-							<dd>01012345678</dd>
+							<dd>${user.phone }</dd>
 						</dl>
 						<dl>
 							<dt>이메일 주소</dt>
-							<dd>aasdfasdfas@gmail.com</dd>
+							<dd>${user.email }</dd>
 						</dl>
 						<dl>
 							<dt>소속</dt>
-							<dd>한국과학기술원</dd>
+							<dd>${user.classification }</dd>
 						</dl>
 						<dl>
 							<dt>직위</dt>
-							<dd>교수</dd>
+							<dd>${user.level }</dd>
 						</dl>
 						<dl>
 							<dt>직장주소</dt>
-							<dd>대전광역시 유성구 대학로 291, 생명과학과 3201호(구성동, 한국과학기술원) </dd>
+							<dd>${user.address } </dd>
 						</dl>
-						<input type="button" value="내 정보 수정" class="bt3 on">
+						<input type="button" value="내 정보 수정" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
 					</div>
 				</div>
 				

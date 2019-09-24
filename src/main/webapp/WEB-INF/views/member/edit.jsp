@@ -11,8 +11,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div id="contentsPrint">
 				<!-- 회원가입 - 내 정보 수정 -->
 				<div class="member member_form1">
@@ -39,14 +43,14 @@
 						<dl>
 							<dt>휴대전화 번호</dt>
 							<dd>
-								<input type="text" placeholder="휴대전화번호 입력" value="01098752564" class="ipt1">
+								<input type="text" placeholder="휴대전화번호 입력" value="${user.phone }" class="ipt1">
 								<p class="message error">휴대전화 번호를 입력하세요.</p>
 							</dd>
 						</dl>
 						<dl class="email">
 							<dt>이메일 주소</dt>
 							<dd>
-								<input type="text" placeholder="이메일 아이디 입력" value="turbolady36" class="ipt1">
+								<input type="text" placeholder="이메일 아이디 입력" value="${user.email }" class="ipt1">
 								<span>@</span>
 							 	<input type="text" placeholder="도메인 입력" value="gmail.com" class="ipt1">
 								<p class="message error">이메일 아이디를 입력하세요.</p>
@@ -57,14 +61,14 @@
 						<dl>
 							<dt>소속</dt>
 							<dd>
-								<input type="text" placeholder="소속 입력" value="전북대학교" class="ipt1">
+								<input type="text" placeholder="소속 입력" value="${user.classification }" class="ipt1">
 								<p class="message error">소속을 입력하세요.</p>
 							</dd>
 						</dl>
 						<dl>
 							<dt>직위</dt>
 							<dd>
-								<input type="text" placeholder="직위 입력" value="학생" class="ipt1">
+								<input type="text" placeholder="직위 입력" value="${user.level }" class="ipt1">
 								<p class="message error">직위를 입력하세요.</p>
 							</dd>
 						</dl>

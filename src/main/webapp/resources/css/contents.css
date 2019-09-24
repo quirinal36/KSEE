@@ -105,7 +105,7 @@
 .member .bt_wrap { margin-top: 20px; text-align: center; }
 .member .bt_wrap a { display: inline-block; margin: 0 10px; font-size: 14px; }
 
-.member .result { margin-top: 30px; text-align: center; }
+.member .result { margin-top: 30px; text-align: center; display:none; }
 .member .result p { padding: 20px; background: #f5f6f7; font-size: 15px; }
 .member .result span { color: #325cb2; text-decoration: underline; }
 

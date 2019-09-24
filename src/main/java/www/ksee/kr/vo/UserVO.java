@@ -12,6 +12,7 @@ public class UserVO {
 	int user_role;
 	String login;
 	String password;
+	String password_confirm;
 	String username;
 	String phone;
 	String email;

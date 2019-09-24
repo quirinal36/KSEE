@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -49,7 +50,9 @@
 	                                    </div>
 	                                    <div class="cont">
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">${item.title }</a><br>
-	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">${item.content }</a>
+	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">
+	                                        ${ su:removeTag(item.content) }
+	                                        </a>
 	                                    </div>
 	                                </li>
                             	</c:forEach>

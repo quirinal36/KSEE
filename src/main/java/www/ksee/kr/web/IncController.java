@@ -98,25 +98,26 @@ public class IncController extends KseeController{
 			}
 		}
 		
-		Menus prev;
-		int minId = siblings.get(0).getId();
-		int maxId = siblings.get(siblings.size()-1).getId();
-		if(menus.getId() == minId) {
-			prev = siblings.get(siblings.size() - 1);
-		}else {
-			prev = siblings.get(menus.getId() - 1 - minId);
+		if(siblings.size() > 1) {
+			Menus prev;
+			int minId = siblings.get(0).getId();
+			int maxId = siblings.get(siblings.size()-1).getId();
+			if(menus.getId() == minId) {
+				prev = siblings.get(siblings.size() - 1);
+			}else {
+				prev = siblings.get(menus.getId() - 1 - minId);
+			}
+			
+			Menus next;
+			if(menus.getId() == maxId) {
+				next = siblings.get(0);
+			}else {
+				next = siblings.get(menus.getId() + 1 - minId);
+			}
+			
+			menus.setPrev(prev);
+			menus.setNext(next);
 		}
-		
-		Menus next;
-		if(menus.getId() == maxId) {
-			next = siblings.get(0);
-		}else {
-			next = siblings.get(menus.getId() + 1 - minId);
-		}
-		
-		menus.setPrev(prev);
-		menus.setNext(next);
-		
 		mv.addObject("curMenu", menus);
 		mv.setViewName("/inc/contentsTitle");
 		return mv;

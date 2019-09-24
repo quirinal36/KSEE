@@ -79,8 +79,12 @@
 	<c:import url="/inc/header"></c:import>
 	<div class="container_wrap">
 		<div class="container">
-			<c:import url="/inc/lnb_wrap"></c:import>
-			<c:import url="/inc/contentsTitle"></c:import>
+			<c:import url="/inc/lnb_wrap">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
+			<c:import url="/inc/contentsTitle">
+				<c:param name="id">${curMenu.id }</c:param>
+			</c:import>
 			<div id="contentsPrint">
 				<form action="<c:url value="/board/insertBoard"/>" method="post">
 					<input type="hidden" name="board_type" value="${boardType }"/>

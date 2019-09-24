@@ -3,6 +3,7 @@ package www.ksee.kr.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,9 @@ public class MemberController extends KseeController{
 	public ModelAndView getLoginView(ModelAndView mv,
 			HttpServletRequest request,
 			@RequestParam(value = "loginRedirect", required = false) String redirectUrl) {
+		final String currentUrl = "/member/login";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		String refererUrl = request.getHeader("Referer");
 		if (redirectUrl != null) {
 			mv.addObject("loginRedirect", redirectUrl);
@@ -36,7 +40,11 @@ public class MemberController extends KseeController{
 		return mv;
 	}
 	@RequestMapping(value="/signup", method = RequestMethod.GET)
-	public ModelAndView getSignupView(ModelAndView mv) {
+	public ModelAndView getSignupView(ModelAndView mv,
+			HttpServletRequest request) {
+		final String currentUrl = "/member/signup";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.setViewName("/member/signup");
 		return mv;
 	}
@@ -93,23 +101,103 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/findId");
 		return mv;
 	}
-	@RequestMapping("/findPwd")
-	public ModelAndView getFindPwdView(ModelAndView mv) {
+	
+	/**
+	 * 비밀번호 찾기 화면
+	 * @param mv
+	 * @return
+	 */
+	@RequestMapping(value="/findPwd", method = RequestMethod.GET)
+	public ModelAndView getFindPwdView(ModelAndView mv, HttpServletRequest request) {
+		if(isLoginedUser(request)) {
+			mv.setViewName("redirect:/");
+			return mv;
+		}
+		final String currentUrl = "/member/findPwd";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.setViewName("/member/findPwd");
 		return mv;
 	}
+	@ResponseBody
+	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST)
+	public String sendEmailForFindPwd(UserVO user) {
+		JSONObject json = new JSONObject();
+		
+		logger.info(user.toString());
+		json.put("result", 1);
+		
+		UserVO selectedUser = userService.selectOne(user);
+		
+		return json.toString();
+	}
+	
+	/**
+	 * 새 비밀번호 입력화면
+	 * @param mv
+	 * @return
+	 */
 	@RequestMapping("/newPwd")
-	public ModelAndView getNewPwdView(ModelAndView mv) {
+	public ModelAndView getNewPwdView(ModelAndView mv, HttpServletRequest request) {
+		final String currentUrl = "/member/newPwd";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
 		mv.setViewName("/member/newPwd");
 		return mv;
 	}
+	
+	/**
+	 * 새 비밀번호 적용
+	 * @param user
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/newPwd/send", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String sendNewPwd(UserVO user, HttpServletRequest request,
+			HttpServletResponse response) {
+		JSONObject json = new JSONObject();
+		
+		if(isLoginedUser(request)) {
+			UserVO loginedUser = getUser();
+			loginedUser.setPassword(user.getPassword());
+			json.put("result", userService.update(loginedUser));
+		}else {
+			json.put("result", 0);
+			json.put("message", "로그인 해주세요.");
+		}
+		
+		return json.toString();
+	}
+	
 	@RequestMapping("/myinfo")
-	public ModelAndView getMyinfoView(ModelAndView mv) {
+	public ModelAndView getMyinfoView(ModelAndView mv, 
+			HttpServletRequest request) {
+		if(!isLoginedUser(request)) {
+			mv.setViewName("redirect:/member/login");
+			return mv;
+		}
+		
+		final String currentUrl = "/member/myinfo";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		UserVO user = getUser();
+		
+		mv.addObject("user", user);
 		mv.setViewName("/member/myinfo");
 		return mv;
 	}
 	@RequestMapping("/edit")
-	public ModelAndView getEditView(ModelAndView mv) {
+	public ModelAndView getEditView(ModelAndView mv,
+			HttpServletRequest request) {
+		if(!isLoginedUser(request)) {
+			mv.setViewName("redirect:/member/login");
+			return mv;
+		}
+		
+		final String currentUrl = "/member/myinfo";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		UserVO user = getUser();
+		
+		mv.addObject("user", user);
 		mv.setViewName("/member/edit");
 		return mv;
 	}

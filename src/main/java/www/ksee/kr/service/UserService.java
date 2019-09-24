@@ -33,8 +33,8 @@ public class UserService implements DataService<UserVO> {
 	}
 	@Override
 	public int update(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		input.setPassword(passwordEncoder.encode(input.getPassword()));
+		return dao.update(input);
 	}
 
 	@Override
