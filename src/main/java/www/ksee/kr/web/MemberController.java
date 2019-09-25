@@ -131,7 +131,6 @@ public class MemberController extends KseeController{
 		}
 		final String currentUrl = "/member/findPwd";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		
 		mv.setViewName("/member/findPwd");
 		return mv;
 	}
@@ -161,7 +160,11 @@ public class MemberController extends KseeController{
 		
 		return json.toString();
 	}
-	
+	@RequestMapping(value="/validate/token")
+	public ModelAndView getValidateTokenView(ModelAndView mv, HttpServletRequest request) {
+		mv.addObject("title", "비밀번호변경");
+		return mv;
+	}
 	/**
 	 * 새 비밀번호 입력화면
 	 * @param mv

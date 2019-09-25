@@ -22,6 +22,8 @@ function sendEmail(){
 		dataType: 'json'
 	}).done(function(json){
 		if(json.result > 0){
+			$("#result_msg p").text("mail sent");
+			
 			$("form").hide();
 			$("#result_msg").show();
 		}
@@ -68,7 +70,7 @@ function sendEmail(){
 						</form>
 						<div class="result" id="result_msg">
 							<p>
-								회원님의 이메일 주소(with**@d***.***)로<br>
+								회원님의 이메일 주소(${user.email }@${user.domain })로<br>
 								비밀번호 변경 링크를 보내드렸습니다.<br>
 								메일이 오지 않는 경우 스팸/광고메일함을 확인해주세요.
 							</p>
