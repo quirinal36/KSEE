@@ -35,8 +35,8 @@ $(document).ready(function(){
 			$(this).parent().find(".error").hide();
 			$(this).parent().find(".confirm").text('비밀번호가 일치합니다.');
 		}else if(passwordInput.length < 6 && passwordInput.length > 0){
-			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("6자 이상으로 입력하세요.");
+			// $(this).parent().find(".error").show();
+			// $(this).parent().find(".error").text("6자 이상으로 입력하세요.");
 		}else if(passwordInput != passwordConfirmInput
 				&& passwordInput.length > 0
 				&& passwordConfirmInput.length > 0){

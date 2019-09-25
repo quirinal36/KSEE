@@ -177,7 +177,6 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5</version>
 		</dependency>
-		
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 		    <groupId>commons-io</groupId>
@@ -242,7 +241,7 @@
 		</dependency>
 				
 		<dependency>
-		<groupId>commons-fileupload</groupId>
+			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.2</version>
 		</dependency>
@@ -282,6 +281,12 @@
 		   <groupId>org.hibernate</groupId>
 		   <artifactId>hibernate-entitymanager</artifactId>
 		   <version>5.2.17.Final</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java -->
+		<dependency>
+		    <groupId>com.sendgrid</groupId>
+		    <artifactId>sendgrid-java</artifactId>
+		    <version>2.2.2</version>
 		</dependency>
 	</dependencies>
     <build>

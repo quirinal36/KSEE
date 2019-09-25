@@ -15,7 +15,9 @@
 			classification,
 			level,
 			address,
-			telephone
+			telephone,
+			domain,
+			addressDetail
 		)
 		VALUES
 		(
@@ -28,7 +30,9 @@
 			'${classification}',
 			'${level}',
 			'${address}',
-			'${telephone}'
+			'${telephone}',
+			'${domain}',
+			'${addressDetail}'
 		)
 		
 	</insert> 
@@ -60,23 +64,32 @@
 	<update id="update" parameterType="user">
 		UPDATE users
 		<set>
+			<if test="user_role > 0">
+				user_role = ${user_role},
+			</if>
 			<if test="password != null and !password.equals('')">
-			password = '${password}',
+				password = '${password}',
 			</if>
 			<if test="phone != null and !phone.equals('')">
-			phone = '${phone}',
+				phone = '${phone}',
 			</if>
 			<if test="email != null and !email.equals('')">
-			email = '${email}',
+				email = '${email}',
 			</if>
 			<if test="classification != null and !classification.equals('')">
-			classification = '${classification}',
+				classification = '${classification}',
 			</if>
 			<if test="level != null and !level.equals('')">
-			level = '${level}',
+				level = '${level}',
 			</if>
 			<if test="address != null and !address.equals('')">
-			address = '${address}',
+				address = '${address}',
+			</if>
+			<if test="domain != null and !domain.equals('')">
+				domain = '${domain}',
+			</if>
+			<if test="addressDetail != null and !addressDetail.equals('')">
+				addressDetail = '${addressDetail}',
 			</if>
 		</set>
 		<where>

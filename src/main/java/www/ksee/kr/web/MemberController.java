@@ -1,7 +1,10 @@
 package www.ksee.kr.web;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sendgrid.SendGridException;
+
+import www.ksee.kr.vo.EmailToken;
 import www.ksee.kr.vo.UserVO;
 
 @RequestMapping("/member")
@@ -130,14 +136,28 @@ public class MemberController extends KseeController{
 		return mv;
 	}
 	@ResponseBody
-	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST)
-	public String sendEmailForFindPwd(UserVO user) {
+	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String sendEmailForFindPwd(UserVO user, HttpServletRequest request,
+			Locale locale) {
 		JSONObject json = new JSONObject();
-		
-		logger.info(user.toString());
-		json.put("result", 1);
-		
 		UserVO selectedUser = userService.selectOne(user);
+		logger.info(selectedUser.toString());
+		
+		EmailToken resetToken = new EmailToken(selectedUser.getId(), UUID.randomUUID().toString());
+		resetToken.setIsPwd(EmailToken.IS_PWD);
+		int result = tokenService.insert(resetToken);
+		if(result > 0) {
+			final String baseUrl = getBaseUrl(request);
+			final String subject = messageSource.getMessage("member.find.email_title", null, locale);
+			try {
+				resetToken.sendEmail(baseUrl, subject, selectedUser, resetToken, locale);
+				json.put("result", result);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (SendGridException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return json.toString();
 	}
@@ -196,7 +216,22 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/myinfo");
 		return mv;
 	}
-	@RequestMapping("/edit")
+	
+	@ResponseBody
+	@RequestMapping(value="/edit", method = RequestMethod.POST)
+	public String postEditInfo(UserVO user) {
+		JSONObject json = new JSONObject();
+		int result = userService.update(user);
+		json.put("result", result);
+		return json.toString();
+	}
+	/**
+	 * 회원정보 수정창
+	 * @param mv
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/edit", method = RequestMethod.GET)
 	public ModelAndView getEditView(ModelAndView mv,
 			HttpServletRequest request) {
 		if(!isLoginedUser(request)) {

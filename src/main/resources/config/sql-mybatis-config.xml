@@ -9,5 +9,6 @@
 		<typeAlias type="www.ksee.kr.vo.FileInfo" alias="fileinfo"/>
 		<typeAlias type="www.ksee.kr.vo.Board" alias="board"/>
 		<typeAlias type="www.ksee.kr.vo.Menus" alias="menus"/>
+		<typeAlias type="www.ksee.kr.vo.EmailToken" alias="token"/>
     </typeAliases>
 </configuration>

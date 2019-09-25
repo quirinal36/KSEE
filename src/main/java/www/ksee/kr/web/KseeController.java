@@ -2,7 +2,6 @@ package www.ksee.kr.web;
 
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,28 +13,35 @@ import www.ksee.kr.service.BoardService;
 import www.ksee.kr.service.FileInfoService;
 import www.ksee.kr.service.MenuService;
 import www.ksee.kr.service.PhotoInfoService;
+import www.ksee.kr.service.TokenService;
 import www.ksee.kr.service.UserService;
 import www.ksee.kr.vo.Menus;
 import www.ksee.kr.vo.UserVO;
 
 public class KseeController {
-	@Resource(name="userService")
-	protected UserService userService;
+	protected final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
+	
 	@Autowired
 	protected AuthenticationFacade authenticationFacade;
-	protected final Logger logger = Logger.getLogger(this.getClass().getSimpleName());
-	@Resource(name="photoInfoService")
-	protected PhotoInfoService photoInfoService;
-	@Resource(name="fileInfoService")
-	protected FileInfoService fileInfoService;
 	@Autowired
-	AuthenticationManager authenticationManager;
+	protected AuthenticationManager authenticationManager;
+	// 한영 번역시 프로퍼티파일을 불러오는 역할
 	@Autowired
 	protected MessageSource messageSource;
+	
 	@Autowired
-	BoardService boardService;
+	protected UserService userService;	
 	@Autowired
-	MenuService menuService;
+	protected PhotoInfoService photoInfoService;
+	@Autowired
+	protected FileInfoService fileInfoService;
+	@Autowired
+	protected BoardService boardService;
+	@Autowired
+	protected MenuService menuService;
+	@Autowired
+	protected TokenService tokenService;
+	
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();
 		
@@ -63,11 +69,21 @@ public class KseeController {
 	}
 	
 	protected Menus getCurMenus(String currentUrl, HttpServletRequest request) {
-		logger.info((String)request.getAttribute("javax.servlet.forward.request_uri"));
+		// logger.info((String)request.getAttribute("javax.servlet.forward.request_uri"));
 		
 		Menus curMenu = new Menus();
 		curMenu.setUrl(currentUrl);
 		curMenu = menuService.selectOne(curMenu);
 		return curMenu;
+	}
+	/**
+	 * 현재 사이트의 기본 URL 을 만드는 메소드
+	 * 
+	 * @param req
+	 * @return
+	 */
+	protected String getBaseUrl(HttpServletRequest req) {
+		return new StringBuilder().append(req.getScheme()).append("://").append(req.getServerName()).append(":")
+				.append(req.getServerPort()) + req.getContextPath().toString();
 	}
 }

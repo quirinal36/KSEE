@@ -12,9 +12,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.format.FormatterRegistry;
@@ -123,6 +125,7 @@ public class AppConfig implements WebMvcConfigurer {
 	 */
 	@Bean
 	public MultipartResolver multipartResolver() {
+		// 500 mega bytes
 		long maxSize = 1024 * 1024 * 500;
 		
 	    CommonsMultipartResolver resolver=new CommonsMultipartResolver();
@@ -131,6 +134,20 @@ public class AppConfig implements WebMvcConfigurer {
 	    return resolver;
 	}
 	
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+	    LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+	    lci.setParamName("lang");
+	    return lci;
+	}
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		//WEB-INF 밑에 해당 폴더에서 properties를 찾는다.
+		messageSource.setBasename("messages/messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
+	}
 	@Bean(name = "localeResolver")
 	public LocaleResolver sessionLocaleResolver(){
 		//세션 기준으로 로케일을 설정 한다.
@@ -141,12 +158,6 @@ public class AppConfig implements WebMvcConfigurer {
 		//최초 기본 로케일을 강제로 설정이 가능 하다.
 		localeResolver.setDefaultLocale(Locale.KOREA);
 		return localeResolver;
-	}
-	@Bean
-	public LocaleChangeInterceptor localeChangeInterceptor() {
-	    LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
-	    lci.setParamName("lang");
-	    return lci;
 	}
 	
 	@Override

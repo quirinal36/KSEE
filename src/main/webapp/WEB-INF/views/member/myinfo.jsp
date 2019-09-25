@@ -24,7 +24,22 @@
 					<div class="paper">
 						<dl>
 							<dt>회원구분</dt>
-							<dd>학생회원</dd>
+							<dd>
+							<c:choose>
+								<c:when test="${user.user_role eq 1 }">
+									관리자
+								</c:when>
+								<c:when test="${user.user_role eq 2 }">
+									학생
+								</c:when>
+								<c:when test="${user.user_role eq 3 }">
+									일반
+								</c:when>
+								<c:when test="${user.user_role eq 4 }">
+									기업
+								</c:when>
+							</c:choose>
+							</dd>
 						</dl>
 						<dl>
 							<dt>아이디</dt>
@@ -44,7 +59,7 @@
 						</dl>
 						<dl>
 							<dt>이메일 주소</dt>
-							<dd>${user.email }</dd>
+							<dd>${user.email }@${user.domain }</dd>
 						</dl>
 						<dl>
 							<dt>소속</dt>
@@ -56,7 +71,7 @@
 						</dl>
 						<dl>
 							<dt>직장주소</dt>
-							<dd>${user.address } </dd>
+							<dd>${user.address } ${user.addressDetail }</dd>
 						</dl>
 						<input type="button" value="내 정보 수정" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
 					</div>

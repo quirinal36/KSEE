@@ -17,7 +17,6 @@ $(document).ready(function(){
 	$("#submit").on('click', function(){
 		var result = validate($("form").serializeArray());
 		if(result == true){
-			
 			if(jscd.browser.indexOf('msie') != -1  ){
 				if(confirm("회원가입 하시겠습니까?")){
 					submitSignup();
