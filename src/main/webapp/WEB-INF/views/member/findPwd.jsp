@@ -22,7 +22,7 @@ function sendEmail(){
 		dataType: 'json'
 	}).done(function(json){
 		if(json.result > 0){
-			$("#result_msg p").text("mail sent");
+			$("#result_msg p").text(json.msg);
 			
 			$("form").hide();
 			$("#result_msg").show();

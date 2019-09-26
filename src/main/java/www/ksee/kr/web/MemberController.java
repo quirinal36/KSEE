@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -140,7 +142,6 @@ public class MemberController extends KseeController{
 			Locale locale) {
 		JSONObject json = new JSONObject();
 		UserVO selectedUser = userService.selectOne(user);
-		logger.info(selectedUser.toString());
 		
 		EmailToken resetToken = new EmailToken(selectedUser.getId(), UUID.randomUUID().toString());
 		resetToken.setIsPwd(EmailToken.IS_PWD);
@@ -157,7 +158,16 @@ public class MemberController extends KseeController{
 				e.printStackTrace();
 			}
 		}
-		
+
+		String msg = messageSource.getMessage("member.find.password.submit", null, locale);
+		final String regex = "[\\$][\\{]\\w+[\\}]";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(msg);
+		if (matcher.find()) {
+			// 사용자 email
+			msg = msg.replace(matcher.group(0), user.getEmail()+"@"+user.getDomain());
+		}
+		json.put("msg", msg);
 		return json.toString();
 	}
 	@RequestMapping(value="/validate/token")
