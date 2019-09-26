@@ -90,7 +90,7 @@
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked="">
-											<label for="member_chk1">한국</label>
+											<label for="member_chk1">대한민국</label>
 										</li>
 										<li>
 											<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3">

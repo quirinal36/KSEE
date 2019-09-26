@@ -91,6 +91,135 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="bt_wrap">
+						<a href="#" class="bt1">등록</a>
+					</div>
+					<div class="admin_title">학술대회 등록</div>
+					<table class="tbl1">
+						<colgroup>
+							<col width="15%">
+							<col width="35%">
+							<col width="15%">
+							<col width="35%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>행사명</th>
+								<td><input type="text" placeholder="행사명 입력" class="w90 ipt2"></td>
+								<th>장소</th>
+								<td><input type="text" placeholder="장소 입력" class="w90 ipt2"></td>
+							</tr>
+							<tr>
+								<th>행사기간</th>
+								<td>달력</td>
+								<th>접수기간</th>
+								<td>달력</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="bt_wrap mb-60">
+						<a href="#" class="bt1">등록</a>
+						<a href="#" class="bt1">수정</a>
+						<a href="#" class="bt1">삭제</a>
+					</div>
+					<div class="admin_title">학술대회 상세내용</div>
+					<table class="tbl1 mb-60">
+						<colgroup>
+							<col width="15%">
+							<col width="35%">
+							<col width="15%">
+							<col width="35%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>행사개요</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+								<th>인사말</th>
+								<td>
+									<a href="#" class="bt2">국문 수정</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+							</tr>
+							<tr>
+								<th>조직위원회</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+								<th>프로그램</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+							</tr>
+							<tr>
+								<th>발표요강</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+								<th>등록 및 숙박</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+							</tr>
+							<tr>
+								<th>투어안내</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+								<th>후원</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+							</tr>
+							<tr>
+								<th>학회장소 및 교통</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+								<th>문의</th>
+								<td>
+									<a href="#" class="bt2">국문 작성</a>
+									<a href="#" class="bt2">영문 작성</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="admin_title">행사개요</div>
+					<div style="width: 100%; height: 300px; background: #ddd;">에디터 삽입</div>
+					<div class="board_write_img" id="dropzone-img">
+						<dl>
+							<dt>사진</dt>
+							<dd>
+								<!-- 사진 목록 -->
+								<ul id="picture_ul">
+									<!-- 
+									<li style="background-image: url(/resources/img/temp/3.png);">
+										<input type="button" title="삭제" class="bt_del_img">
+									</li>
+									 -->
+								</ul>
+								<!-- 첨부하기 버튼 -->
+								<input id="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image" multiple="">
+							    <div id="progress_img" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+							        <div class="progress-bar" style="width: 0%;"></div>
+							    </div>
+							</dd>
+						</dl>
+					</div>
+					<div class="bt_wrap mb-60">
+						<a href="#" class="bt1 on">등록</a>
+						<a href="#" class="bt1 on">수정</a>
+						<a href="#" class="bt1">취소</a>
+					</div>
 				</div>
 			</div>
 		</div>

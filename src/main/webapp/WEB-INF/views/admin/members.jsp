@@ -26,13 +26,6 @@
 						</form>
 					</div>
 					<table class="tbl1 td_center">
-						<colgroup>
-							<col width="20%">
-							<col width="20%">
-							<col width="20%">
-							<col width="20%">
-							<col width="20%">
-						</colgroup>
 						<thead>
 							<tr>
 								<th>회원구분</th>
@@ -40,6 +33,7 @@
 								<th>소속</th>
 								<th>직위</th>
 								<th>직장 유선번호</th>
+								<th>가입일</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,6 +43,7 @@
 								<td>전북대학교</td>
 								<td>학생</td>
 								<td>063-111-1111</td>
+								<td>2019-11-11</td>
 							</tr>
 							<tr>
 								<td>학생회원</td>
@@ -56,6 +51,7 @@
 								<td>전북대학교</td>
 								<td>학생</td>
 								<td>063-111-1111</td>
+								<td>2019-11-11</td>
 							</tr>
 							<tr>
 								<td>학생회원</td>
@@ -63,6 +59,7 @@
 								<td>전북대학교</td>
 								<td>학생</td>
 								<td>063-111-1111</td>
+								<td>2019-11-11</td>
 							</tr>
 							<tr>
 								<td>학생회원</td>
@@ -70,6 +67,7 @@
 								<td>전북대학교</td>
 								<td>학생</td>
 								<td>063-111-1111</td>
+								<td>2019-11-11</td>
 							</tr>
 						</tbody>
 					</table>

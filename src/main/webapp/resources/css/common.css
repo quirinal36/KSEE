@@ -1,5 +1,8 @@
 /* 공통속성 */
+.w90 { width: 90% !important; }
 .mt-10 { margin-top: 10px !important; }
+.mb-20 { margin-bottom: 20px !important; }
+.mb-60 { margin-bottom: 60px !important; }
 
 a.bt1,
 input.bt1 {
@@ -74,6 +77,7 @@ input.bt3.on {
 
 
 input.ipt1 { padding: 0 10px 10px 10px; box-sizing: border-box; border-bottom: 1px solid #333; font-size: 15px; }
+input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font-size: 15px; }
 
 /* 검색창 공통 */
 .search_ipt { position: relative; display: inline-block; vertical-align: middle; }

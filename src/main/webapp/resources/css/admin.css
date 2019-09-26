@@ -21,7 +21,7 @@
 #sidebar > ul > li > ul > li:first-child { margin-top: 0; }
 #sidebar > ul > li > ul > li > a { font-size: 14px; }
 
-#container { padding: 50px 50px 0 300px; }
+#container { padding: 50px 50px 50px 300px; }
 #contentsPrint { width: 100%; max-width: 1300px; margin: 0 auto; }
 
 .admin_title { margin-bottom: 20px; font-size: 20px; font-weight: 600; }
@@ -35,3 +35,8 @@
 .admin_search input[type="button"] { padding: 7px 10px; border: 1px solid #325cb2; background: #325cb2; font-size: 14px; color: #fff; }
 
 .bt_wrap { margin-top: 20px; text-align: center; }
+
+.admin_sort { margin-bottom: 20px; font-size: 0; }
+.admin_sort a { display: inline-block; margin-left: 10px; font-size: 15px; }
+.admin_sort a:first-child { margin-left: 0; }
+.admin_sort a:hover { text-decoration: underline; }

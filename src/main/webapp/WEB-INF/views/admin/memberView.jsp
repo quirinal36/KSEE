@@ -29,7 +29,9 @@
 						<tbody>
 							<tr>
 								<th>회원구분</th>
-								<td colspan="3">학생회원</td>
+								<td>학생회원</td>
+								<th>가입일</th>
+								<td>2019-11-11</td>
 							</tr>
 							<tr>
 								<th>이름</th>
