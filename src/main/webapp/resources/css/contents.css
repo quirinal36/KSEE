@@ -82,7 +82,7 @@
 .member dt,
 .member dd {
 	display: inline-block;
-	vertical-align: top;
+	vertical-align: middle;
 	font-size: 15px;
 }
 .member dt { width: 30%; font-weight: 500; }

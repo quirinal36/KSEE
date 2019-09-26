@@ -13,6 +13,7 @@ html, body, #wrap { min-height: 100%; }
 #header { width: 90%; max-width: 1300px; min-width: 1000px; margin: 0 auto; box-sizing: border-box; text-align: right; font-size: 0; }
 #header > div { display: inline-block; vertical-align: middle; }
 #header .logo { float: left; }
+#header .logo img { height: 60px; }
 #header .gnb_wrap { display: inline-block; vertical-align: middle; }
 #header .gnb_wrap > ul { display: inline-block; vertical-align: middle; font-size: 0; }
 #header .gnb_wrap > ul > li { display: inline-block; width: 150px; text-align: left; cursor: pointer; }

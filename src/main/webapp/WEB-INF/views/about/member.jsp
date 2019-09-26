@@ -18,7 +18,7 @@
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<img src="/resources/img/temp/12.png" style="display: block; width: 80%; max-width: 1000px; margin: 60px auto;">
+				<img src="/resources/img/temp/12.png" style="display: none; width: 80%; max-width: 1000px; margin: 60px auto;">
 			</div>
 		</div>
 	</div>

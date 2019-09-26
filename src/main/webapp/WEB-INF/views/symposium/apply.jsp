@@ -50,18 +50,64 @@
 					</div>
 					<div class="paper">
 						<form action="<c:url value="/member/signup"/>" method="post">
+							<dl class="member_chk">
+								<dt>참가자 구분</dt>
+								<dd>
+									<ul class="chk_wrap">
+										<li>
+											<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked="">
+											<label for="member_chk1">일반</label>
+										</li>
+										<li>
+											<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3">
+											<label for="member_chk2">기업</label>
+										</li>
+										<li>
+											<input type="radio" name="user_role" id="member_chk3" class="radio1" value="4">
+											<label for="member_chk3">학생</label>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+							<dl class="member_chk">
+								<dt>발표자 여부</dt>
+								<dd>
+									<ul class="chk_wrap">
+										<li>
+											<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2">
+											<label for="member_chk1">발표자입니다</label>
+										</li>
+										<li>
+											<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3" checked="">
+											<label for="member_chk2">발표자가 아닙니다</label>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+							<dl class="member_chk">
+								<dt>국적</dt>
+								<dd>
+									<ul class="chk_wrap">
+										<li>
+											<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked="">
+											<label for="member_chk1">한국</label>
+										</li>
+										<li>
+											<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3">
+											<label for="member_chk2">중국</label>
+										</li>
+										<li>
+											<input type="radio" name="user_role" id="member_chk3" class="radio1" value="4">
+											<label for="member_chk3">일본</label>
+										</li>
+									</ul>
+								</dd>
+							</dl>
 							<dl>
 								<dt>이름</dt>
 								<dd>
 									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off">
 									<p class="message error">이름을 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl>
-								<dt>휴대전화 번호</dt>
-								<dd>
-									<input type="text" placeholder="휴대전화번호 입력" class="ipt1" name="phone" autocomplete="off">
-									<p class="message error">휴대전화 번호를 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
@@ -88,7 +134,7 @@
 								</dd>
 							</dl>
 							<dl class="company_tel">
-								<dt>직장 유선번호</dt>
+								<dt>연락</dt>
 								<dd>
 									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone" autocomplete="off">
 								</dd>
