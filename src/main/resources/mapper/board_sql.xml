@@ -21,7 +21,9 @@
 	<update id="update" parameterType="board">
 		UPDATE Board
 		<set>
-			viewCount = ${viewCount}
+			viewCount = ${viewCount},
+			title = '${title}',
+			content = '${content}'
 		</set>
 		<where>
 			id=${id}
@@ -86,4 +88,11 @@
 			board.id = ${id}
 		</where>
 	</select>
+	
+	<delete id="delete" parameterType="board">
+		DELETE FROM Board
+		<where>
+			id = ${id}		
+		</where>
+	</delete>
 </mapper>

@@ -92,7 +92,7 @@
 						</tbody>
 					</table>
 					<div class="bt_wrap">
-						<a href="#" class="bt1">등록</a>
+						<a href="<c:url value="/admin/domestic/write"/>" class="bt1">등록</a>
 					</div>
 					<div class="admin_title">학술대회 등록</div>
 					<table class="tbl1">

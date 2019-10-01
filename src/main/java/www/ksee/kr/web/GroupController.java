@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import www.ksee.kr.service.BoardService;
 import www.ksee.kr.vo.Board;
+import www.ksee.kr.vo.BoardInfo;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.UserVO;
@@ -62,26 +61,29 @@ public class GroupController extends KseeController {
 	 * @param board
 	 * @return
 	 */
-	@RequestMapping(value= "/notice")
+	@RequestMapping(value= "/{name}")
 	public ModelAndView getNoticeView(ModelAndView mv,
 			HttpServletRequest request,
-			Board board) {
-		final String currentUrl = "/group/notice";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "공지사항");
+			Board board, 
+			@PathVariable(value="name", required=true)String name) {
+		BoardInfo boardInfo = BoardInfo.init().get(name);
 		
-		board.setBoardType(Board.TYPE_NOTICE);
+		final String currentUrl = boardInfo.getCurrentUrl();
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("title", boardInfo.getTitle());
+		
+		board.setBoardType(boardInfo.getType());
 		int totalCount = boardService.count(board);
 		board.setTotalCount(totalCount);
 		List<Board> boardList = boardService.select(board);
 		
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
-		mv.addObject("listUrl", "/group/notice/");
-		mv.addObject("viewUrl", "/group/notice/view/");
-		mv.addObject("writeUrl", "/group/notice/write/");
-		mv.setViewName("/group/list");
+		mv.addObject("listUrl", boardInfo.getListUrl());
+		mv.addObject("viewUrl", boardInfo.getViewUrl());
+		mv.addObject("writeUrl", boardInfo.getWriteUrl());
 		
+		mv.setViewName(boardInfo.getListViewName());
 		return mv;
 	}
 	/**
@@ -90,21 +92,21 @@ public class GroupController extends KseeController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/notice/write")
+	@RequestMapping(value="/{name}/write")
 	public ModelAndView getWriteNoticeView(ModelAndView mv, 
-			HttpServletRequest request) {
-		final String currentUrl = "/group/notice";
+			HttpServletRequest request,
+			@PathVariable(value="name", required=true)String name) {
+		BoardInfo boardInfo = BoardInfo.init().get(name);
+		final String currentUrl = boardInfo.getCurrentUrl();
+
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "공지사항");
-		
-		UserVO user = getUser();
-		
+		mv.addObject("title", boardInfo.getTitle());
+		mv.addObject("user", getUser());
 		mv.addObject("current", request.getServletPath());
-		mv.addObject("listUrl", request.getContextPath() +"/group/notice");
-		mv.addObject("authUrl", "/member/isAdmin");
-		mv.addObject("user", user);
-		mv.addObject("boardType", Board.TYPE_NOTICE);
-		mv.setViewName("/board/write");
+		mv.addObject("listUrl", request.getContextPath() + boardInfo.getListUrl());
+		mv.addObject("authUrl", boardInfo.getAuthUrl());
+		mv.addObject("boardType", boardInfo.getType());
+		mv.setViewName(boardInfo.getWriteViewName());
 		return mv;
 	}
 	/**
@@ -114,13 +116,20 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/notice/view/{id}")
+	@RequestMapping(value="/{name}/view/{id}")
 	public ModelAndView getDetailNoticeView(HttpServletRequest request,
 			ModelAndView mv,
-			@PathVariable(value="id", required = true)Integer id) {
-		final String currentUrl = "/group/notice";
+			@PathVariable(value="id", required = true)Integer id,
+			@PathVariable(value="name", required=true)String name) {
+		BoardInfo boardInfo = BoardInfo.init().get(name);
+		
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+		}
+		final String currentUrl = boardInfo.getCurrentUrl();
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "공지사항");
+		mv.addObject("title", boardInfo.getTitle());
 		
 		Board board= boardService.selectOne(Board.newInstance(id));
 		board.setViewCount(board.getViewCount() + 1);
@@ -128,12 +137,13 @@ public class GroupController extends KseeController {
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
 		
-		mv.addObject("listUrl", request.getContextPath() +"/group/notice");
-		mv.addObject("edit_url", request.getContextPath()+"/group/notice/edit/");
+		mv.addObject("listUrl", request.getContextPath() +boardInfo.getListUrl());
+		mv.addObject("edit_url", request.getContextPath()+boardInfo.getEditUrl());
+		mv.addObject("del_url", request.getContextPath()+boardInfo.getDelUrl());
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);
-		mv.setViewName("/board/detail");
+		mv.setViewName(boardInfo.getDetailViewName());
 		return mv;
 	}
 	
@@ -144,23 +154,37 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/notice/edit/{id}")
+	@RequestMapping(value="/{name}/edit/{id}")
 	public ModelAndView getNoticeEditView(ModelAndView mv,
 			HttpServletRequest request,
-			@PathVariable(value="id", required = true)Integer id) {
-		final String currentUrl = "/group/notice";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "공지사항");
-		
-		Board board= boardService.selectOne(Board.newInstance(id));
-		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
-		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
-		
-		mv.addObject("fileList", fileList);
-		mv.addObject("photoList", photoList);
-		mv.addObject("board", board);
-		
-		mv.setViewName("/board/edit");
+			@PathVariable(value="id", required = true)Integer id,
+			@PathVariable(value="name", required=true)String name) {
+		BoardInfo boardInfo = BoardInfo.init().get(name);
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+			
+			final String currentUrl = boardInfo.getCurrentUrl();
+			mv.addObject("curMenu", getCurMenus(currentUrl, request));
+			mv.addObject("title", boardInfo.getTitle());
+			
+			Board board= boardService.selectOne(Board.newInstance(id));
+			
+			if(user.getId() == board.getWriter()) {
+				List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+				List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+				
+				mv.addObject("fileList", fileList);
+				mv.addObject("photoList", photoList);
+				mv.addObject("board", board);
+				mv.addObject("detailUrl", currentUrl+"/view/"+board.getId());
+				mv.setViewName(boardInfo.getEditViewName());	
+			}else {
+				mv.setViewName("redirect:/member/login");
+			}			
+		}else {
+			mv.setViewName("redirect:/member/login");
+		}
 		return mv;
 	}
 	
@@ -178,6 +202,7 @@ public class GroupController extends KseeController {
 	 * @param board
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/news")
 	public ModelAndView getNewsView(ModelAndView mv,
 			HttpServletRequest request,
@@ -200,6 +225,7 @@ public class GroupController extends KseeController {
 		
 		return mv;
 	}
+	*/
 	/**
 	 * 관련소식 글작성 화면
 	 * 
@@ -207,6 +233,7 @@ public class GroupController extends KseeController {
 	 * @param request
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/news/write")
 	public ModelAndView getWriteNewsView(ModelAndView mv, HttpServletRequest request) {
 		final String currentUrl = "/group/news";
@@ -222,6 +249,7 @@ public class GroupController extends KseeController {
 		mv.setViewName("/board/write");
 		return mv;
 	}
+	*/
 	
 	/**
 	 * 관련소식 상세보기 화면
@@ -231,9 +259,14 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/news/view/{id}")
 	public ModelAndView getDetailNewsView(HttpServletRequest request, ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+		}
 		final String currentUrl = "/group/news";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		mv.addObject("title", "관련소식");
@@ -246,12 +279,14 @@ public class GroupController extends KseeController {
 		
 		mv.addObject("listUrl", request.getContextPath() +"/group/news");
 		mv.addObject("edit_url", request.getContextPath()+"/group/news/edit/");
+		mv.addObject("del_url", request.getContextPath()+"/board/delete/");
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);
 		mv.setViewName("/board/detail");
 		return mv;
 	}
+	*/
 	/**
 	 * 관련소식 수정하기 화면
 	 * 
@@ -259,27 +294,39 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/news/edit/{id}")
 	public ModelAndView getNewsEditView(ModelAndView mv,
 			HttpServletRequest request,
 			@PathVariable(value="id", required = true)Integer id) {
-		final String currentUrl = "/group/news";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "관련소식");
-		
-		Board board= boardService.selectOne(Board.newInstance(id));
-		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
-		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
-		
-		mv.addObject("title", "관련소식");
-		mv.addObject("fileList", fileList);
-		mv.addObject("photoList", photoList);
-		mv.addObject("board", board);
-		
-		mv.setViewName("/board/edit");
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+			
+			final String currentUrl = "/group/news";
+			mv.addObject("curMenu", getCurMenus(currentUrl, request));
+			mv.addObject("title", "관련소식");
+			
+			Board board= boardService.selectOne(Board.newInstance(id));
+			
+			if(user.getId() == board.getWriter()) {
+				List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+				List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+				
+				mv.addObject("fileList", fileList);
+				mv.addObject("photoList", photoList);
+				mv.addObject("board", board);
+				mv.addObject("detailUrl", currentUrl+"/view/"+board.getId());
+				mv.setViewName("/board/edit");	
+			}else {
+				mv.setViewName("redirect:/member/login");
+			}			
+		}else {
+			mv.setViewName("redirect:/member/login");
+		}
 		return mv;
 	}
-	
+	*/
 	/************************************************************************
 	 * 	회원동정 관련 메소드
 	 * 	1. /member			: 게시판 리스트
@@ -293,6 +340,7 @@ public class GroupController extends KseeController {
 	 * @param board
 	 * @return
 	 */
+	/*
 	@RequestMapping(value= "/member")
 	public ModelAndView getMemberView(ModelAndView mv,
 			HttpServletRequest request,
@@ -314,12 +362,14 @@ public class GroupController extends KseeController {
 		mv.setViewName("/group/list");
 		return mv;
 	}
+	*/
 	/**
 	 * 회원동정 글쓰기 화면
 	 * @param mv
 	 * @param request
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/member/write")
 	public ModelAndView getWriteMemberView(ModelAndView mv, 
 			HttpServletRequest request) {
@@ -337,6 +387,7 @@ public class GroupController extends KseeController {
 		mv.setViewName("/board/write");
 		return mv;
 	}
+	*/
 	/**
 	 * 회원동정 상세보기
 	 * @param request
@@ -344,10 +395,15 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/member/view/{id}")
 	public ModelAndView getDetailMemberView(HttpServletRequest request,
 			ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+		}
 		final String currentUrl = "/group/member";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		mv.addObject("title", "회원동정");
@@ -360,13 +416,14 @@ public class GroupController extends KseeController {
 		
 		mv.addObject("listUrl", request.getContextPath() +"/group/member");
 		mv.addObject("edit_url", request.getContextPath()+"/group/member/edit/");
+		mv.addObject("del_url", request.getContextPath()+"/board/delete/");
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);
 		mv.setViewName("/board/detail");
 		return mv;
 	}
-	
+	*/
 	/**
 	 * 회원동정 수정하기 화면
 	 * 
@@ -374,23 +431,37 @@ public class GroupController extends KseeController {
 	 * @param id
 	 * @return
 	 */
+	/*
 	@RequestMapping(value="/member/edit/{id}")
 	public ModelAndView getMemberEditView(ModelAndView mv,
-			HttpServletRequest request, 
+			HttpServletRequest request,
 			@PathVariable(value="id", required = true)Integer id) {
-		final String currentUrl = "/group/member";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		mv.addObject("title", "회원동정");
-		
-		Board board= boardService.selectOne(Board.newInstance(id));
-		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
-		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
-		
-		mv.addObject("fileList", fileList);
-		mv.addObject("photoList", photoList);
-		mv.addObject("board", board);
-		
-		mv.setViewName("/board/edit");
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			mv.addObject("user", user);
+			
+			final String currentUrl = "/group/member";
+			mv.addObject("curMenu", getCurMenus(currentUrl, request));
+			mv.addObject("title", "회원동정");
+			
+			Board board= boardService.selectOne(Board.newInstance(id));
+			
+			if(user.getId() == board.getWriter()) {
+				List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+				List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+				
+				mv.addObject("fileList", fileList);
+				mv.addObject("photoList", photoList);
+				mv.addObject("board", board);
+				mv.addObject("detailUrl", currentUrl+"/view/"+board.getId());
+				mv.setViewName("/board/edit");	
+			}else {
+				mv.setViewName("redirect:/member/login");
+			}			
+		}else {
+			mv.setViewName("redirect:/member/login");
+		}
 		return mv;
 	}
+	*/
 }

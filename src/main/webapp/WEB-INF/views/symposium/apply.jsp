@@ -124,17 +124,8 @@
 									<p class="message error">직위를 입력하세요.</p>
 								</dd>
 							</dl>
-							<dl class="company_address">
-								<dt>직장주소</dt>
-								<dd>
-									<input type="button" value="주소찾기" class="bt2" onclick="javascript:fn_setAddr()">
-									<input type="text" placeholder="주소" class="mt-10 ipt1" readonly name="address">
-									<input type="text" placeholder="상세주소 입력" class="mt-10 ipt1" name="addressDetail" autocomplete="off">
-									<p class="message error">상세주소가 입력되지 않았습니다.</p>
-								</dd>
-							</dl>
 							<dl class="company_tel">
-								<dt>연락</dt>
+								<dt>연락처</dt>
 								<dd>
 									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone" autocomplete="off">
 								</dd>

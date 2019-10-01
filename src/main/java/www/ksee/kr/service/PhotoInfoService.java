@@ -33,8 +33,7 @@ public class PhotoInfoService implements DataService<PhotoInfo> {
 	}
 	@Override
 	public int delete(PhotoInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(input);
 	}
 
 	@Override

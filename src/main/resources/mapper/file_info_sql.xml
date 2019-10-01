@@ -90,4 +90,11 @@
 			boardId = ${boardId}
 		</where>
 	</select>
+	
+	<delete id="delete" parameterType="fileinfo">
+		DELETE FROM FileInfo
+		<where>
+			id=${id}
+		</where>
+	</delete>
 </mapper>

@@ -48,7 +48,7 @@
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
 								<div class="num">${paging.totalCount - (sts.index) - (paging.pageSize * (paging.pageNo-1))}</div>
-								<div class="title"><a href="<c:url value="/community/board/view/${item.id }"/>">${item.title }</a></div>
+								<div class="title"><a href="<c:url value="${viewUrl }${item.id }"/>">${item.title }</a></div>
 								<div class="writer">${item.writerName }</div>
 								<div class="date">
 								<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
@@ -74,11 +74,11 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-						<a href="#" class="bt next">다음 페이지로 가기</a>
-						<a href="#" class="bt last">마지막 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.nextPageNo})" class="bt next">다음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
-						<input type="hidden" name="write_url" value="/community/board/write">
+						<input type="hidden" name="write_url" value="${writeUrl }">
 						<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
 					</div>
 				</div>

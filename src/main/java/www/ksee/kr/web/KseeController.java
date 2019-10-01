@@ -69,8 +69,6 @@ public class KseeController {
 	}
 	
 	protected Menus getCurMenus(String currentUrl, HttpServletRequest request) {
-		// logger.info((String)request.getAttribute("javax.servlet.forward.request_uri"));
-		
 		Menus curMenu = new Menus();
 		curMenu.setUrl(currentUrl);
 		curMenu = menuService.selectOne(curMenu);

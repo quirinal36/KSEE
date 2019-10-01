@@ -42,13 +42,35 @@
 		login = '${login}'
 		</where>
 	</select>
-	
+	<select id="search" parameterType="user" resultType="user">
+		SELECT 
+			u.*, r.role_name, r.role_name_kr 
+		FROM 
+			users u LEFT JOIN roles r on (u.user_role = r.id)
+		<where>
+			<if test="query != ''">
+				and
+				(
+					u.username like '%${query}%'
+				)
+			</if>
+		</where>
+		ORDER BY u.id DESC
+		LIMIT ${from}, ${pageSize}
+	</select>
 	<select id="select_one" parameterType="user" resultType="user">
-		SELECT u.*, r.role_name FROM 
+		SELECT u.*, r.role_name, r.role_name_kr FROM 
 		users u 
 			LEFT JOIN roles r on (u.user_role = r.id)
 		<where>
-		login = '${login}'
+			<choose>
+				<when test="id > 0">
+					u.id = ${id}
+				</when>
+				<otherwise>
+					u.login = '${login}'
+				</otherwise>
+			</choose>
 		</where>
 	</select>
 	
@@ -96,4 +118,16 @@
 			id = ${id}
 		</where>
 	</update>
+	
+	<select id="count" parameterType="user" resultType="int">
+		SELECT COUNT(*) FROM users
+		<where>
+			<if test="query != ''">
+				and
+				(
+					username like '%${query}%'
+				)
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -31,8 +31,7 @@ public class FileInfoDAO implements DataAccess<FileInfo>{
 	}
 	@Override
 	public int delete(FileInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace+".delete", input);
 	}
 
 	@Override

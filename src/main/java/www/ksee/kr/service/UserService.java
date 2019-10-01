@@ -63,16 +63,15 @@ public class UserService implements DataService<UserVO> {
 
 	@Override
 	public int count(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.count(input);
 	}
 	public boolean isValid(UserVO input) {
-		logger.info("isValid");
-		
 		final String regex = "^[a-z]{1}[a-z0-9_]{4,19}$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(input.getLogin());
-		logger.info("matcher.matches(): " + matcher.matches());
 		return matcher.matches();
+	}
+	public List<UserVO> search(UserVO input){
+		return dao.search(input);
 	}
 }

@@ -78,8 +78,8 @@
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
-						<a href="#" class="bt next">다음 페이지로 가기</a>
-						<a href="#" class="bt last">마지막 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.nextPageNo})" class="bt next">다음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
 						<input type="hidden" name="write_url" value="${writeUrl }">

@@ -139,16 +139,16 @@ $(window).on("beforeunload", function(){
 										<dd>
 											<ul class="chk_wrap">
 												<li>
-													<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked>
-													<label for="member_chk1">학생</label>
-												</li>
-												<li>
 													<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3">
 													<label for="member_chk2">일반</label>
 												</li>
 												<li>
 													<input type="radio" name="user_role" id="member_chk3" class="radio1" value="4">
 													<label for="member_chk3">기업</label>
+												</li>
+												<li>
+													<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked>
+													<label for="member_chk1">학생</label>
 												</li>
 											</ul>
 										</dd>

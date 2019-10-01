@@ -26,8 +26,7 @@ public class BoardDAO implements DataAccess<Board>{
 
 	@Override
 	public int delete(Board input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace +".delete", input);
 	}
 
 	@Override

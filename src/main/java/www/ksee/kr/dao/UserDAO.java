@@ -49,8 +49,9 @@ public class UserDAO implements DataAccess<UserVO> {
 
 	@Override
 	public int count(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne(namespace+".count", input);
 	}
-
+	public List<UserVO> search(UserVO input){
+		return sqlSession.selectList(namespace +".search", input);
+	}
 }

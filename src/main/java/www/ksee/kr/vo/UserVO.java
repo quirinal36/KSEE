@@ -1,5 +1,7 @@
 package www.ksee.kr.vo;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,9 +9,10 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class UserVO {
+public class UserVO extends Paging{
 	int id;
 	int user_role;
+	int writer;
 	String login;
 	String password;
 	String password_confirm;
@@ -22,7 +25,9 @@ public class UserVO {
 	String address;
 	String addressDetail;
 	String role_name;
+	String role_name_kr;
 	String telephone;
+	Date mdate;
 	
 	public static final int ROLE_ADMIN = 1;
 	public static final int ROLE_STUDENT = 2;
@@ -38,5 +43,9 @@ public class UserVO {
 	public UserVO () {
 		
 	}
-	
+	public static UserVO newInstanse(int id) {
+		UserVO user = new UserVO();
+		user.setId(id);
+		return user;
+	}
 }

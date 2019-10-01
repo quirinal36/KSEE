@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import www.ksee.kr.util.FileUtil;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.FileMeta;
 import www.ksee.kr.vo.PhotoInfo;
@@ -53,7 +54,7 @@ public class FileController extends KseeController {
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
-            String srcPath = makeUserPath();
+            String srcPath = new FileUtil().makeUserPath();
             //request.getSession().getServletContext().getRealPath("/upload");
 			
 			File newFile = new File(srcPath + "/" + newFilename);
@@ -101,7 +102,7 @@ public class FileController extends KseeController {
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
             
-            String srcPath = makeUserPath();
+            String srcPath = new FileUtil().makeUserPath();
 			String contentType = mpf.getContentType();
 			
 			File newFile = new File(srcPath + "/" + newFilename);
@@ -178,7 +179,7 @@ public class FileController extends KseeController {
 		param.setId(id);
 
         PhotoInfo image = photoInfoService.selectOne(param);
-        String srcPath = makeUserPath();
+        String srcPath = new FileUtil().makeUserPath();
         //request.getSession().getServletContext().getRealPath("/upload");
         File imageFile = new File(srcPath+"/"+image.getNewFilename());
         response.setContentType(image.getContentType());
@@ -195,7 +196,7 @@ public class FileController extends KseeController {
     		HttpServletResponse response, @PathVariable int id) {
 		PhotoInfo param = new PhotoInfo();
 		param.setId(id);
-		String srcPath = makeUserPath(); 
+		String srcPath = new FileUtil().makeUserPath(); 
 		//request.getSession().getServletContext().getRealPath("/upload");
 		
 		PhotoInfo image = photoInfoService.selectOne(param);
@@ -211,11 +212,39 @@ public class FileController extends KseeController {
         }
     }
 	
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@ResponseBody
-	@RequestMapping(value="/delete/{value}")
-	public String deleteFile(@PathVariable String value) {
+	@RequestMapping(value="/delete/{which}/{id}", method = RequestMethod.POST)
+	public String deleteFile(@PathVariable(value="id", required=true) Integer id,
+			@PathVariable(value="which", required = true)String which) {
 		JSONObject json = new JSONObject();
+		String srcPath = new FileUtil().makeUserPath();
 		
+		if(which.equalsIgnoreCase("img")) {
+			PhotoInfo photoInfo = new PhotoInfo();
+			photoInfo.setId(id);
+			photoInfo = photoInfoService.selectOne(photoInfo);
+			
+			int result = photoInfoService.delete(photoInfo);
+			File targetFile = new File(srcPath + File.separator + photoInfo.getNewFilename());
+			if(targetFile.exists()) {
+				targetFile.delete();
+			}
+		}else if(which.equalsIgnoreCase("file")){
+			FileInfo fileInfo = new FileInfo();
+			fileInfo.setId(id);
+			fileInfo = fileInfoService.selectOne(fileInfo);
+			
+			int result = fileInfoService.delete(fileInfo);
+			File targetFile = new File(srcPath + File.separator + fileInfo.getNewFilename());
+			if(targetFile.exists()) {
+				targetFile.delete();
+			}
+		}
 		return json.toString();
 	}
 	
@@ -239,30 +268,11 @@ public class FileController extends KseeController {
 			response.setContentLength(fileInfo.getSize());
 			response.setHeader("Content-disposition", "attachment; charset=UTF-8; filename=\""+URLEncoder.encode(fileInfo.getName(), "UTF-8")+"\"");
 			
-			String srcPath = makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
+			String srcPath = new FileUtil().makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
 			InputStream is = new FileInputStream(new File(srcPath +File.separator + fileInfo.getNewFilename()));
 			FileCopyUtils.copy(is, response.getOutputStream());
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	/**
-	 * 사진 파일을 저장할 디렉터리 가져오기
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	private String makeUserPath() {
-		String path = System.getProperty("user.dir");
-		StringBuilder builder = new StringBuilder()
-				.append(path.substring(0, path.lastIndexOf(File.separator)))
-				.append(File.separator).append("webapps").append(File.separator)
-				.append("repository").append(File.separator)
-				.append("upload").append(File.separator);
-		
-		File file = new File(builder.toString());
-		file.mkdirs();
-		return file.getAbsolutePath();
 	}
 }

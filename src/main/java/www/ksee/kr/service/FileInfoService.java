@@ -30,8 +30,7 @@ public class FileInfoService implements DataService<FileInfo>{
 	}
 	@Override
 	public int delete(FileInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(input);
 	}
 
 	@Override

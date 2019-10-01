@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -29,38 +31,36 @@
 						<tbody>
 							<tr>
 								<th>회원구분</th>
-								<td>학생회원</td>
+								<td>${user.role_name_kr }</td>
 								<th>가입일</th>
-								<td>2019-11-11</td>
+								<td><fmt:formatDate value="${user.mdate}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 							<tr>
 								<th>이름</th>
-								<td>유단아</td>
+								<td>${user.username }</td>
 								<th>아이디</th>
-								<td>withi5</td>
+								<td>${user.login }</td>
 							</tr>
 							<tr>
-								<th>휴대전화 번호</th>
-								<td>01098752564</td>
+								<th>전화번호</th>
+								<td>${su:phone(user.phone) }</td>
 								<th>이메일 주소</th>
-								<td>turbolady36@gmail.com</td>
+								<td>${user.email }@${user.domain }</td>
 							</tr>
 							<tr>
 								<th>소속</th>
-								<td>전북대학교</td>
+								<td>${user.classification }</td>
 								<th>직위</th>
-								<td>학생</td>
+								<td>${user.level }</td>
 							</tr>
 							<tr>
 								<th>직장 주소</th>
-								<td>전라북도 전주시 완산구 우전로 260, 765</td>
-								<th>직장 전화번호</th>
-								<td>0631112222</td>
+								<td>${user.address } ${user.addressDetail }</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="bt_wrap">
-						<a href="/admin/members" class="bt1 on">목록</a>
+						<a href="<c:url value="/admin/members"/>" class="bt1 on">목록</a>
 					</div>
 				</div>
 			</div>

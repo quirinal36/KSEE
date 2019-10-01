@@ -32,8 +32,7 @@ public class PhotoInfoDAO implements DataAccess<PhotoInfo> {
 	}
 	@Override
 	public int delete(PhotoInfo input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace+".delete", input);
 	}
 	@Override
 	public List<PhotoInfo> select() {

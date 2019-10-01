@@ -30,16 +30,46 @@
 	
 	function delButtonClick(button){
 		var id = $(button).val();
-		$(".bt_del_img").each(function(index, item){
-			if(id == $(item).val()){
-				
-				$(item).parent().remove();
-				return;
-			}
-		});
+		var btnWhich = $(button).hasClass("btn_del_img");
+		if(btnWhich){
+			$(".bt_del_img").each(function(index, item){
+				if(id == $(item).val()){
+					var url = "/delete/img/"+id;
+					// console.log("delete: "+url);
+					
+					$.ajax({
+						url : url,
+						type: "POST",
+						dataType : "json"
+					}).done(function(json){
+						console.log(json);
+					});
+					
+					$(item).parent().remove();
+					return;
+				}
+			});
+		}else{
+			$(".bt_del_file").each(function(index, item){
+				if(id == $(item).val()){
+					// var url = $(button).parent().find("input[name='del_url']").val();
+					// console.log("delete: "+url);
+					var url = "/delete/file/"+id;
+					$.ajax({
+						url : url,
+						type: "POST",
+						dataType : "json"
+					}).done(function(json){
+						console.log(json);
+					});
+					
+					$(item).parent().remove();
+					return;
+				}
+			});
+		}
 	}
-	
-	function insertBoard(){
+	function editBoard(){
 		var url = $("form").attr("action");
 		
 		var title = $("input[name='title']").val();
@@ -55,6 +85,8 @@
 		});
 		
 		var param = "title="+title;
+		param += "&id="+ $("form").find("input[name='id']").val();
+		param += "&viewCount" + $("form").find("input[name='view_count']").val();
 		param += "&content="+content;
 		param += "&boardType="+boardType;
 		param += "&pictures="+pictures.join(",");
@@ -67,8 +99,8 @@
 			dataType : "json"
 		}).done(function(json){
 			if(json.result > 0){
-				alert("글 작성이 완료되었습니다.");
-				window.location.replace($("input[name='listUrl']").val());
+				alert("글 수정이 완료되었습니다.");
+				window.location.replace($("input[name='detailUrl']").val());
 			}
 		});
 	}
@@ -86,12 +118,14 @@
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<form action="<c:url value="/board/insertBoard"/>" method="post">
-					<input type="hidden" name="board_type" value="${boardType }"/>
+				<form action="<c:url value="/board/editBoard"/>" method="post">
+					<input type="hidden" name="board_type" value="${board.boardType }"/>
+					<input type="hidden" name="id" value="${board.id }"/>
+					<input type="hidden" name="view_count" value="${board.viewCount }"/>
 					<input type="hidden" name="isLoginUrl" value="<c:url value="${authUrl }"/>"/>
 					<input type="hidden" name="loginUrl" value="<c:url value="/member/login"/>"/>
 					<input type="hidden" name="currentUrl" value="${current }"/>
-					<input type="hidden" name="listUrl" value="${listUrl }"/>
+					<input type="hidden" name="detailUrl" value="${detailUrl }"/>
 					
 					<div class="board_write" style="margin-top:60px;">
 						<div class="board_write_title">
@@ -149,14 +183,10 @@
 									<ul id="picture_ul">
 										<c:forEach items="${photoList }" var="item">
 											<li style="background-image: url(${item.url});">
-												<input type="button" title="삭제" class="bt_del_img" value="${item.id }">
+												<input type="button" title="삭제" class="bt_del_img" value="${item.id }" 
+													onclick="javascript:delButtonClick(this);">
 											</li>
 										</c:forEach>
-										<!-- 
-										<li style="background-image: url(/resources/img/temp/3.png);">
-											<input type="button" title="삭제" class="bt_del_img">
-										</li>
-										 -->
 									</ul>
 									<!-- 첨부하기 버튼 -->
 									<input id="imageupload" type="file" name="files[]" 
@@ -173,19 +203,14 @@
 								<dt>첨부파일</dt>
 								<dd>
 									<!-- 첨부파일 목록 -->
-									<ul id = "file_ul">
+									<ul id="file_ul">
 										<c:forEach items="${fileList }" var="item">
 											<li>
 												<span>${item.name }</span>
-												<input type="button" title="삭제" class="bt_del_file" value="${item.id }">
+												<input type="button" title="삭제" class="bt_del_file" value="${item.id }"
+													onclick="javascript:delButtonClick(this);">
 											</li>
 										</c:forEach>
-										<!-- 
-										<li>
-											<span>2019 하계 중국 심포지움 안내파일.hwp</span>
-											<input type="button" value="삭제" class="bt_del_file">
-										</li>
-										 -->
 									</ul>
 									<input id="fileupload" type="file" name="files[]" 
 										data-url="<c:url value="/upload/file"/>" multiple>
@@ -197,7 +222,7 @@
 							</dl>
 						</div>
 						<div class="bt_wrap">
-							<a href="javascript:void(0);" onclick="javascript:insertBoard();" class="bt1 on">등록</a>
+							<a href="javascript:void(0);" onclick="javascript:editBoard();" class="bt1 on">등록</a>
 							<a href="javascript:void(0);" onClick="history.back();" class="bt1">취소</a>
 						</div>
 					</div>

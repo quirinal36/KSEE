@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!doctype html>
 <html>
 <head>
@@ -50,7 +51,14 @@
 				<div class="bt_wrap">
 					<a href="${listUrl }" class="bt1 on">목록</a>
 					<input type="hidden" name="edit_url" value="${edit_url }${board.id}"/>
-					<input type="button" class="bt1 btn_edit" value="수정">
+					<input type="hidden" name="del_url" value="${del_url }${board.id}"/>
+					<input type="hidden" name="list_url" value="${listUrl }"/>
+					<sec:authorize access="isAuthenticated()">
+						<c:if test="${user.id eq board.writer }">
+							<input type="button" class="bt1 btn_edit" value="수정">
+							<input type="button" class="bt1 btn_del" value="삭제">
+						</c:if>
+					</sec:authorize>
 				</div>
 			</div>
 		</div>
