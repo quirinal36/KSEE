@@ -54,19 +54,10 @@ public class SymposiumDAO implements DataAccess<Symposium> {
 	public int count(Symposium input) {
 		return sqlSession.selectOne(namespace +".count", input);
 	}
+	public int updateViewCnt(Symposium input) {
+		return sqlSession.update(namespace+".update_viewcnt", input);
+	}
 	public List<SymposiumTypes> selectSymposiumTypes(){
 		return sqlSession.selectList(namespace +".select_types");
-	}
-	public SymposiumDetail selectSymposiumDetail(SymposiumDetail input) {
-		return sqlSession.selectOne(namespace+".symposium_detail", input);
-	}
-	public List<SymposiumDetail> selectSymposiumDetails(SymposiumDetail input) {
-		return sqlSession.selectList(namespace+".symposium_details", input);
-	}
-	public SymposiumDetail selectSymposiumTitle(SymposiumDetail detail) {
-		return sqlSession.selectOne(namespace +".symposium_title", detail);
-	}
-	public int deleteSymposiumDetail(SymposiumDetail detail) {
-		return sqlSession.delete(namespace +".delete_symp_detail", detail);
 	}
 }

@@ -1,6 +1,8 @@
 package www.ksee.kr.vo;
 
 public class Paging {
+	public static final int PAGE_SIZE_LIST = 10;
+	
 	private String query;		// 검색어
 	private int pageSize; 		// 게시 글 수
     private int firstPageNo; 	// 첫 번째 페이지 번호

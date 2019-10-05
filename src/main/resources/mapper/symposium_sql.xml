@@ -71,4 +71,13 @@
 		FROM SymposiumTypes
 	</select>
 	
+	<update id="update_viewcnt" parameterType="symposium">
+		UPDATE Symposium
+		<set>
+			viewCnt = viewCnt + 1
+		</set>
+		<where>
+			id = ${id}
+		</where>
+	</update>
 </mapper>

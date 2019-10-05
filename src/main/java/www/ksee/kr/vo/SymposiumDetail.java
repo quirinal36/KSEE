@@ -17,6 +17,7 @@ public class SymposiumDetail {
 	String username;
 	String typeTitle;
 	String sympTitle;
+	String msgKey;
 	
 	public String getStrStype() {
 		return String.valueOf(this.stype);

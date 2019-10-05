@@ -1,10 +1,13 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
+<script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 </head>
 <body>
 <div id="wrap">
@@ -31,74 +34,34 @@
 							<div class="place">장소</div>
 							<div class="apply">참가신청</div>
 						</li>
-						<li>
-							<div class="num">8</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제8회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
-						</li>
-						<li>
-							<div class="num">7</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제7회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/7"/>" class="bt2">신청대기</a></div>
-						</li>
-						<li>
-							<div class="num">6</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제6회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/6"/>" class="bt2 off">신청종료</a></div>
-						</li>
-						<li>
-							<div class="num">5</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제5회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/5"/>" class="bt2 off">신청종료</a></div>
-						</li>
-						<li>
-							<div class="num">4</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제4회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/4"/>" class="bt2 off">신청종료</a></div>
-						</li>
-						<li>
-							<div class="num">3</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제3회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/3"/>" class="bt2 off">신청종료</a></div>
-						</li>
-						<li>
-							<div class="num">2</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제2회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/2"/>" class="bt2 off">신청종료</a></div>
-						</li>
-						<li>
-							<div class="num">1</div>
-							<div class="title"><a href="<c:url value="/symposium/domestic/view/8"/>">제1회 한국효소공학연구회 심포지엄</a></div>
-							<div class="period">2019-08-11(월) ~ 2019-08-13(수)</div>
-							<div class="place">고성 델피노</div>
-                            <div class="apply"><a href="<c:url value="/symposium/domestic/view/1"/>" class="bt2 off">신청종료</a></div>
-						</li>
+						<c:forEach items="${list }" var="item">
+							<li>
+								<div class="num">${item.id }</div>
+								<div class="title"><a href="<c:url value="/symposium/domestic/view/${item.id }"/>">${item.title }</a></div>
+								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
+								<div class="place">${item.place }</div>
+	                            <div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
+							</li>
+						</c:forEach>
 					</ul>
-					<!--
 					<div class="page">
-						<a href="#" class="bt first">맨 처음 페이지로 가기</a>
-						<a href="#" class="bt prev">이전 페이지로 가기</a>
-						<a href="#" class="num on">1</a>
-						<a href="#" class="num">2</a>
-						<a href="#" class="num">3</a>
-						<a href="#" class="bt next">다음 페이지로 가기</a>
-						<a href="#" class="bt last">마지막 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.firstPageNo})" class="bt first">맨 처음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.prevPageNo})" class="bt prev">이전 페이지로 가기</a>
+						<c:choose>
+							<c:when test="${paging.finalPageNo eq 0}">
+								<a href="javascript:pageGo(1)" class="num on">1</a>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="${paging.startPageNo }" end="${paging.endPageNo}" varStatus="loop">
+									<a href="javascript:pageGo(${loop.current })" class="num <c:if test="${loop.current eq paging.pageNo }">on</c:if>">
+									${loop.current }
+									</a>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+						<a href="javascript:pageGo(${paging.nextPageNo})" class="bt next">다음 페이지로 가기</a>
+						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
-					-->
 				</div>
 			</div>
 		</div>

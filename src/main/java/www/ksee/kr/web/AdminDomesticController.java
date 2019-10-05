@@ -1,15 +1,13 @@
 package www.ksee.kr.web;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.fileupload.FileUpload;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +28,6 @@ import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.Symposium;
 import www.ksee.kr.vo.SymposiumDetail;
 import www.ksee.kr.vo.SymposiumTypes;
-import www.ksee.kr.vo.UserVO;
 
 @RequestMapping("/admin/domestic")
 @Controller
@@ -56,8 +53,15 @@ public class AdminDomesticController extends KseeController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/write", method = RequestMethod.GET)
-	public ModelAndView getWriteView(ModelAndView mv, HttpServletRequest request) {
+	@RequestMapping(value= {"/write","/write/{id}"}, method = RequestMethod.GET)
+	public ModelAndView getWriteView(ModelAndView mv, HttpServletRequest request
+			,@PathVariable(value="id", required = false)Optional<Integer> id) {
+		if(id.isPresent()) {
+			Symposium symposium = new Symposium();
+			symposium.setId(id.get());
+			symposium = sympService.selectOne(symposium);
+			mv.addObject("symposium", symposium);
+		}
 		mv.addObject("title", "국내 학술대회");
 		mv.addObject("listUrl", request.getContextPath() + "/admin/domestic/");
 		mv.setViewName("/admin/domestic/write");

@@ -12,6 +12,7 @@
 			d.stype,
 			u.username AS username,
 			t.title AS typeTitle,
+			t.msgKey AS msgKey,
 			s.title AS sympTitle
 		FROM 
 			SymposiumDetail d 
@@ -27,9 +28,25 @@
 		</where>
 	</select>
 	<select id="select" parameterType="symposium_detail" resultType="symposium_detail">
-		SELECT * FROM SymposiumDetail
+		SELECT 
+			d.id,
+			d.content,
+			d.writer,
+			d.symposiumId,
+			d.stype,
+			u.username AS username,
+			t.title AS typeTitle,
+			t.msgKey AS msgKey,
+			s.title AS sympTitle
+		FROM 
+			SymposiumDetail d 
+				LEFT JOIN SymposiumTypes t 	on d.stype = t.id
+				LEFT JOIN Symposium s 		on d.symposiumId = s.id
+				LEFT JOIN users u 			on d.writer = u.id
 		<where>
 			symposiumId = ${symposiumId}
+			and
+			d.lang = '${lang}'
 		</where>
 	</select>
 	<insert id="insert" parameterType="symposium_detail" keyProperty="id" useGeneratedKeys="true">

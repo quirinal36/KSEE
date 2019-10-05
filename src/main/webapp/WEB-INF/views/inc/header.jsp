@@ -30,8 +30,8 @@ function search(){
 			 -->
 			 
 			<%request.setAttribute("currentUrl", request.getAttribute("javax.servlet.forward.request_uri"));%>
-			<a href="${currentUrl }?lang=ko_KR" class="language on">KOR</a>
-			<a href="${currentUrl }?lang=en_US" class="language">ENG</a>
+			<a href="<c:url value="${currentUrl }?lang=ko_KR"/>" class="language <c:if test="${locale == 'ko_KR' }">on</c:if>">KOR</a>
+			<a href="<c:url value="${currentUrl }?lang=en_US"/>" class="language <c:if test="${locale == 'en_US' }">on</c:if>">ENG</a>
 		</div>
 		<div id="header">
 			<div class="logo">

@@ -121,8 +121,10 @@
 					</table>
 					<div class="bt_wrap mb-60">
 						<a href="javascript:void(0);" class="bt1" onclick="javascript:registSymposium();">등록</a>
-						<a href="javascript:void(0);" class="bt1">수정</a>
-						<a href="javascript:void(0);" class="bt1">삭제</a>
+						<c:if test="${not empty symposium }">
+							<a href="javascript:void(0);" class="bt1">수정</a>
+							<a href="javascript:void(0);" class="bt1">삭제</a>
+						</c:if>
 					</div>
 				</form>
 			</div>

@@ -10,4 +10,5 @@ import lombok.ToString;
 public class SymposiumTypes {
 	int id;
 	String title;
+	String msgKey;
 }

@@ -15,4 +15,5 @@ public class Symposium extends Paging{
 	String finishDate;
 	String applyStart;
 	String applyFinish;
+	int viewCnt;
 }

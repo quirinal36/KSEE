@@ -55,7 +55,9 @@ public class SymposiumService implements DataService<Symposium> {
 	public List<SymposiumTypes> selectSymposiumTypes(){
 		return dao.selectSymposiumTypes();
 	}
-	
+	public int updateViewCnt(Symposium input) {
+		return dao.updateViewCnt(input);
+	}
 	/*
 	public SymposiumDetail selectSymposiumDetail(SymposiumDetail detail) {
 		return dao.selectSymposiumDetail(detail);
