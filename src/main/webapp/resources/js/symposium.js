@@ -38,3 +38,67 @@ function fn_setAddr(){
 	    });
 	});
 }
+function registSymposium(){
+	var url = $("form").attr("action");
+	var param = $("form").serialize();
+	var jsonObj = parse($("form").serializeArray());
+	
+	if(jsonObj['title'] != ''){
+		
+	}else{
+		alert("행사명을 입력해주세요.");
+		return false;
+	}
+	
+	if(jsonObj['place'] != ''){
+		
+	}else{
+		alert("장소를 입력해주세요.");
+		return false;
+	}
+	
+	if(jsonObj['startDate'] != '' && jsonObj['finishDate'] != ''){
+		
+	}else{
+		alert("행사기간을 선택해주세요.");
+		return false;
+	}
+	
+	if(jsonObj['applyStart'] != '' && jsonObj['applyFinish'] != ''){
+		
+	}else{
+		alert("접수기간을 선택해주세요.");
+		return false;
+	}
+	
+	if(!confirm("등록 하시겠습니까?")){
+		return false;
+	}
+	
+	$.ajax({
+		url : url,
+		data: param,
+		type: 'POST',
+		dataType: 'json'
+	}).done(function(json){
+		if(json.result > 0){
+			var listUrl = $("form").find("input[name='listUrl']").val();
+			alert("등록되었습니다.");
+			location.replace(listUrl);
+		}
+	}).fail(function(xhr, status, error){
+		
+	}).always(function(xhr, status){
+		
+	});
+}
+function parse(data){
+	var jsonObj = {};
+	data.forEach(function(item, index, arr){
+		var name = item.name;
+		var value = item.value;
+		
+		jsonObj[name] = value;
+	});
+	return jsonObj;
+}

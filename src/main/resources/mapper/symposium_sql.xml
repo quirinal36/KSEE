@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="symposium_sql">
+	<insert id="insert" parameterType="symposium" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Symposium
+		(
+			title,
+			place,
+			startDate,
+			finishDate,
+			applyStart,
+			applyFinish
+		)
+		VALUES
+		(
+			'${title}',
+			'${place}',
+			'${startDate}',
+			'${finishDate}',
+			'${applyStart}',
+			'${applyFinish}'
+		)
+	</insert>
+	<update id="update"  parameterType="symposium">
+		UPDATE Symposium
+		<set>
+			title 		= '${title}',
+			place 		= '${place}',
+			startDate	= '${startDate}',
+			finishDate	= '${finishDate}',
+			applyStart	= '${applyStart}',
+			applyFinish	= '${applyFinish}'
+		</set>
+		<where>
+			id = ${id}
+		</where> 
+	</update>
+	<select id="count" parameterType="symposium" resultType="int">
+		SELECT COUNT(*)
+		FROM Symposium
+		<where>
+			<if test="query != ''">
+				title like '%${query}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="select" parameterType="symposium" resultType="symposium">
+		SELECT *
+		FROM Symposium
+		<where>
+			<if test="query != ''">
+				title like '%${query}%'
+			</if>
+		</where>
+		ORDER BY id DESC
+		LIMIT ${from}, ${pageSize}
+	</select>
+	
+	<select id="select_one" parameterType="symposium" resultType="symposium">
+		SELECT *
+		FROM Symposium
+		<where>
+			id = ${id}
+		</where>
+	</select>
+	
+	<select id="select_types" resultType="symposium_type">
+		SELECT *
+		FROM SymposiumTypes
+	</select>
+	
+</mapper>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="symposium_detail_sql">
+	<select id="select_one" resultType="symposium_detail">
+		SELECT 
+			d.id,
+			d.content,
+			d.writer,
+			d.lang,
+			d.symposiumId,
+			d.stype,
+			u.username AS username,
+			t.title AS typeTitle,
+			s.title AS sympTitle
+		FROM 
+			SymposiumDetail d 
+				LEFT JOIN SymposiumTypes t 	on d.stype = t.id
+				LEFT JOIN Symposium s 		on d.symposiumId = s.id
+				LEFT JOIN users u 			on d.writer = u.id
+		<where>
+			d.lang = '${lang}'
+			and
+			d.stype = ${stype}
+			and
+			d.symposiumId = ${symposiumId}
+		</where>
+	</select>
+	<select id="select" parameterType="symposium_detail" resultType="symposium_detail">
+		SELECT * FROM SymposiumDetail
+		<where>
+			symposiumId = ${symposiumId}
+		</where>
+	</select>
+	<insert id="insert" parameterType="symposium_detail" keyProperty="id" useGeneratedKeys="true">
+		INSERT INTO SymposiumDetail
+		(
+			writer,
+			symposiumId,
+			stype,
+			lang,
+			content
+		)
+		VALUES
+		(
+			${writer},
+			${symposiumId},
+			${stype},
+			'${lang}',
+			'${content}'
+		)
+	</insert>
+	
+	<update id="update" parameterType="symposium_detail">
+		UPDATE SymposiumDetail
+		<set>
+			content = '${content}'
+		</set>
+		<where>
+			id = ${id}
+		</where>
+	</update>
+	
+	<select id="select_title" parameterType="symposium_detail" resultType="java.lang.String">
+		SELECT 
+			title 
+		FROM 
+			Symposium
+		<where>
+			id = ${symposiumId}
+		</where>
+	</select>
+	<select id="select_type_title" parameterType="symposium_detail" resultType="java.lang.String">
+		SELECT 
+			title 
+		FROM 
+			SymposiumTypes
+		<where>
+			id = ${stype}
+		</where>
+	</select>
+	
+	<delete id="delete" parameterType="symposium_detail">
+		DELETE FROM SymposiumDetail
+		<where>
+			symposiumId = ${symposiumId}
+			and
+			stype = ${stype}
+			and
+			lang = '${lang}'
+		</where>
+	</delete>
+	
+	<update id="update_photos" parameterType="java.util.List">
+		UPDATE PhotoInfo
+		<set>
+			symposiumDetailId =
+			<foreach collection="list" item="item" open="CASE" close="END"> 
+				WHEN id = ${item.id} THEN ${item.boardId}
+			</foreach>
+		</set>
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</update>
+	
+	<select id="select_photos" parameterType="symposium_detail" resultType="photoinfo">
+		SELECT * 
+		FROM PhotoInfo
+		<where>
+			symposiumDetailId = ${id}
+		</where>
+	</select>
+	
+	<delete id="delete_photos" parameterType="java.util.List">
+		DELETE FROM PhotoInfo
+		<where>
+			id IN 
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</delete>
+</mapper>

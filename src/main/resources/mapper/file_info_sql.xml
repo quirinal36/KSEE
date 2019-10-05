@@ -73,7 +73,6 @@
 			<foreach collection="list" item="item" open="CASE" close="END">
 				WHEN id = ${item.id} THEN ${item.boardId}
 			</foreach>
-			
 		</set>
 		<where>
 			id IN

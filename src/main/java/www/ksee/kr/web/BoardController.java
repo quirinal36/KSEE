@@ -118,13 +118,13 @@ public class BoardController extends KseeController{
 		UserVO user = getUser();
 		board.setWriter(user.getId());
 		int result = boardService.update(board);
-		
+		FileUtil fileUtil = new FileUtil();
 		if(result > 0 && board.getId()>0) {
 			if(pictures.length() > 0) {
-				photoInfoService.update(parsePhotoInfo(pictures.split(","), board.getId()));
+				photoInfoService.update(fileUtil.parsePhotoInfo(pictures.split(","), board.getId()));
 			}
 			if(files.length() > 0) {
-				fileInfoService.update(parseFileInfo(files.split(","), board.getId()));
+				fileInfoService.update(fileUtil.parseFileInfo(files.split(","), board.getId()));
 			}
 		}
 		
@@ -153,13 +153,14 @@ public class BoardController extends KseeController{
 		board.setWriter(user.getId());
 
 		int result = boardService.insert(board);
+		FileUtil fileUtil = new FileUtil();
 		
 		if(result > 0 && board.getId()>0) {
 			if(pictures.length() > 0) {
-				photoInfoService.update(parsePhotoInfo(pictures.split(","), board.getId()));
+				photoInfoService.update(fileUtil.parsePhotoInfo(pictures.split(","), board.getId()));
 			}
 			if(files.length() > 0) {
-				fileInfoService.update(parseFileInfo(files.split(","), board.getId()));
+				fileInfoService.update(fileUtil.parseFileInfo(files.split(","), board.getId()));
 			}
 		}
 		
@@ -168,24 +169,5 @@ public class BoardController extends KseeController{
 		return json.toString();
 	}
 	
-	private List<PhotoInfo> parsePhotoInfo(String[] input, int boardId) {
-		List<PhotoInfo> photoList = new ArrayList<PhotoInfo>();
-		for(String pictureId : input) {
-			PhotoInfo photoInfo = new PhotoInfo();
-			photoInfo.setId(Integer.parseInt(pictureId));
-			photoInfo.setBoardId(boardId);
-			photoList.add(photoInfo);
-		}
-		return photoList;
-	}
-	private List<FileInfo> parseFileInfo(String[] input, int boardId) {
-		List<FileInfo> fileList = new ArrayList<FileInfo>();
-		for(String fileId : input) {
-			FileInfo photoInfo = new FileInfo();
-			photoInfo.setId(Integer.parseInt(fileId));
-			photoInfo.setBoardId(boardId);
-			fileList.add(photoInfo);
-		}
-		return fileList;
-	}
+	
 }

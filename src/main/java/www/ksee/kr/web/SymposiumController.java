@@ -1,6 +1,5 @@
 package www.ksee.kr.web;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import www.ksee.kr.vo.Board;
-import www.ksee.kr.vo.FileInfo;
-import www.ksee.kr.vo.PhotoInfo;
-import www.ksee.kr.vo.UserVO;
 
 @RequestMapping(value="/symposium")
 @Controller
