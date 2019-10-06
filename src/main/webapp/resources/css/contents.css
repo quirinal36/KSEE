@@ -103,6 +103,9 @@
 
 .member .bt_wrap { margin-top: 20px; text-align: center; }
 .member .bt_wrap a { display: inline-block; margin: 0 10px; font-size: 14px; }
+.member .bt_wrap.item2 { font-size: 0; }
+.member .bt_wrap.item2 .bt3 { width: 49%; margin-left: 2%; }
+.member .bt_wrap.item2 .bt3:first-child { margin-left: 0; }
 
 .member .result { margin-top: 30px; text-align: center; display:none; }
 .member .result p { padding: 20px; background: #f5f6f7; font-size: 15px; }

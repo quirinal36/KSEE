@@ -56,8 +56,6 @@ public class MemberController extends KseeController{
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		mv.addObject("title", "회원가입");
 		
-		logger.info("isLoginedUser(request): " + isLoginedUser(request));
-		logger.info("complete.isPresent(): " + complete.isPresent());
 		if(isLoginedUser(request) && complete.isPresent()) {
 			logger.info("afterSignup present");
 			mv.addObject("afterSignup", complete.get());
@@ -260,11 +258,36 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/edit");
 		return mv;
 	}
-	@RequestMapping("/delete")
+	/**
+	 * 회원탈퇴
+	 * @param mv
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/delete", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String deleteUser(@RequestParam(value="password")String password) {
+		UserVO user = getUser();
+		JSONObject json = new JSONObject();
+		if(user != null) {
+			boolean passwordMatches = userService.isPasswordValid(user, password);
+			logger.info("passwordMatches: " + passwordMatches);
+			
+			if(passwordMatches) {
+				json.put("result", userService.delete(user));
+				json.put("logout", "/j_spring_security_logout");
+			}else {
+				json.put("result", 0);
+				json.put("msg", "비밀번호가 일치하지 않습니다.");
+			}
+		}
+		return json.toString();
+	}
+	@RequestMapping(value="/delete", method = RequestMethod.GET)
 	public ModelAndView getDeleteView(ModelAndView mv) {
 		mv.setViewName("/member/delete");
 		return mv;
 	}
+	
 	@RequestMapping(value="/loginProcess", method= RequestMethod.POST)
 	public ModelAndView getLoginProcessPostView(ModelAndView mv) {
 		mv.setViewName("/member/login");

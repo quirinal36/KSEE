@@ -10,6 +10,26 @@
 <style>
 	
 </style>
+<script type="text/javascript">
+function changeUserRole(){
+	if(confirm("회원정보를 수정하시겠습니까?")){
+		var url = $("form").attr("action");
+		var data = $("form").serialize();
+		
+		$.ajax({
+			url : url,
+			data: data,
+			type: 'POST',
+			dataType: 'json'
+		}).done(function(json){
+			if(json.result > 0){
+				alert("저장되었습니다.");
+				window.location.reload();
+			}
+		});
+	}
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -31,7 +51,20 @@
 						<tbody>
 							<tr>
 								<th>회원구분</th>
-								<td>${user.role_name_kr }</td>
+								<td>
+									<form action="<c:url value="/admin/members/edit"/>" method="POST">
+										<select name="user_role">
+											<c:forEach items="${userRoles }" var="item">
+												<option value="${item.id }"
+													<c:if test="${user.user_role eq item.id }">selected</c:if>>
+													${item.role_name_kr }
+												</option>
+											</c:forEach>
+										</select>
+										<input type="hidden" name="id" value="${user.id }"/>
+										<input type="button" value="저장" onclick="javascript:changeUserRole()"/>
+									</form>
+								</td>
 								<th>가입일</th>
 								<td><fmt:formatDate value="${user.mdate}" pattern="yyyy-MM-dd" /></td>
 							</tr>
@@ -60,7 +93,7 @@
 						</tbody>
 					</table>
 					<div class="bt_wrap">
-						<a href="<c:url value="/admin/members"/>" class="bt1 on">목록</a>
+						<a href="<c:url value="/admin/members/"/>" class="bt1 on">목록</a>
 					</div>
 				</div>
 			</div>

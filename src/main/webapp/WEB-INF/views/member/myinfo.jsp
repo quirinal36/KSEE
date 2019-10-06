@@ -73,7 +73,10 @@
 							<dt>직장주소</dt>
 							<dd>${user.address } ${user.addressDetail }</dd>
 						</dl>
-						<input type="button" value="내 정보 수정" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
+						<div class="bt_wrap item2">
+							<input type="button" value="내 정보 수정" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
+							<input type="button" value="탈퇴하기" class="bt3" onclick="location.replace('<c:url value="/member/delete"/>')"/>
+						</div>
 					</div>
 				</div>
 				

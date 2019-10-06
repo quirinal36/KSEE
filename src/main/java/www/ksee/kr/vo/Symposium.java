@@ -8,6 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Symposium extends Paging{
+	public final static int SYMP_TYPE_DOMESTIC = 1;
+	public final static int SYMP_TYPE_INTERNATIONAL = 2;
 	int id;
 	String title;
 	String place;
@@ -16,4 +18,5 @@ public class Symposium extends Paging{
 	String applyStart;
 	String applyFinish;
 	int viewCnt;
+	int sympType;
 }

@@ -93,20 +93,28 @@ function fn_setAddr(){
 								<dt>회원구분</dt>
 								<dd>
 									<ul class="chk_wrap">
+										<c:if test="${user.user_role eq 1 }">
+											<li>
+												<input type="radio" id="member_chk0" class="radio1" value="1" name="member_chk"
+													<c:if test="${user.user_role eq 1 }">checked</c:if>
+												>
+												<label for="member_chk0">관리자</label>
+											</li>
+										</c:if>
 										<li>
-											<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2"
+											<input type="radio" id="member_chk1" class="radio1" value="2" name="member_chk"
 												<c:if test="${user.user_role eq 2 }">checked</c:if>
 											>
 											<label for="member_chk1">학생</label>
 										</li>
 										<li>
-											<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3"
+											<input type="radio" id="member_chk2" class="radio1" value="3" name="member_chk"
 												<c:if test="${user.user_role eq 3 }">checked</c:if>
 											>
 											<label for="member_chk2">일반</label>
 										</li>
 										<li>
-											<input type="radio" name="user_role" id="member_chk3" class="radio1" value="4"
+											<input type="radio" id="member_chk3" class="radio1" value="4" name="member_chk"
 												<c:if test="${user.user_role eq 4 }">checked</c:if>
 											>
 											<label for="member_chk3">기업</label>
@@ -114,7 +122,14 @@ function fn_setAddr(){
 									</ul>
 								</dd>
 							</dl>
-							
+							<dl>
+								<dt>아이디</dt>
+								<dd>${user.login }</dd>
+							</dl>
+							<dl>
+								<dt>이름</dt>
+								<dd>${user.username }</dd>
+							</dl>
 							<dl class="email">
 								<dt>이메일 주소</dt>
 								<dd>

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import www.ksee.kr.vo.UserRole;
 import www.ksee.kr.vo.UserVO;
 
 @Repository("UserDAO")
@@ -27,8 +28,7 @@ public class UserDAO implements DataAccess<UserVO> {
 
 	@Override
 	public int delete(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace +".delete", input);
 	}
 
 	@Override
@@ -53,5 +53,8 @@ public class UserDAO implements DataAccess<UserVO> {
 	}
 	public List<UserVO> search(UserVO input){
 		return sqlSession.selectList(namespace +".search", input);
+	}
+	public List<UserRole> selectRoles(){
+		return sqlSession.selectList(namespace +".roles");
 	}
 }

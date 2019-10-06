@@ -130,4 +130,15 @@
 			</if>
 		</where>
 	</select>
+	
+	<delete id="delete" parameterType="user">
+		DELETE FROM users
+		<where>
+			id = ${id}
+		</where>
+	</delete>
+	
+	<select id="roles" resultType="user_role">
+		SELECT * FROM roles
+	</select>
 </mapper>

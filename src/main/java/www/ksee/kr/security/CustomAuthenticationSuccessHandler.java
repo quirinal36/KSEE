@@ -62,7 +62,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		      HttpServletResponse response, Authentication authentication, String targetUrl)
 		      throws IOException {
 		if(targetUrl==null || targetUrl.length() == 0) {
-			targetUrl = determineTargetUrl(authentication);
+			// targetUrl = determineTargetUrl(authentication);
 		}
 		
         if (response.isCommitted()) {

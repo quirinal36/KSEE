@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import www.ksee.kr.dao.UserDAO;
+import www.ksee.kr.vo.UserRole;
 import www.ksee.kr.vo.UserVO;
 
 @Component("userService")
@@ -41,8 +42,7 @@ public class UserService implements DataService<UserVO> {
 
 	@Override
 	public int delete(UserVO input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(input);
 	}
 
 	@Override
@@ -71,7 +71,13 @@ public class UserService implements DataService<UserVO> {
 		Matcher matcher = pattern.matcher(input.getLogin());
 		return matcher.matches();
 	}
+	public boolean isPasswordValid(UserVO user, final String input) {
+		return passwordEncoder.matches(input, user.getPassword());
+	}
 	public List<UserVO> search(UserVO input){
 		return dao.search(input);
+	}
+	public List<UserRole> selectRoles(){
+		return dao.selectRoles();
 	}
 }
