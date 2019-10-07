@@ -125,6 +125,6 @@
 	padding: 10px 0;
 	text-align: center;
 }
-.tbl2 thead { border-top: 2px solid #325cb2; background: #96b2eb; }
-.tbl2 th { border: 1px solid #325cb2; border-top: 0; }
+.tbl2 thead { border-top: 2px solid #325cb2; background: #6f8dc9; }
+.tbl2 th { border: 1px solid #325cb2; border-top: 0; color: #fff; }
 .tbl2 td { border: 1px solid #929292; }

@@ -37,85 +37,85 @@
 						<tr>
 							<td>회장</td>
 							<td>김학성</td>
-							<td>KAIST</td>
+							<td>한국과학기술원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>총무</td>
 							<td>박성훈</td>
-							<td></td>
+							<td>울산과학기술원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td rowspan="8">이사</td>
 							<td>이승구</td>
-							<td>KRIBB</td>
+							<td>한국생명공학연구원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>김용환</td>
-							<td>UNIST</td>
+							<td>울산과학기술원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>김경진</td>
-							<td>경북대</td>
+							<td>경북대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>김형권</td>
-							<td>가톨릭대</td>
+							<td>가톨릭대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>권인찬</td>
-							<td>GIST</td>
+							<td>광주과학기술원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>김정선</td>
-							<td>전남대</td>
+							<td>전남대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>이동선</td>
-							<td>제주대</td>
+							<td>제주대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>박진병</td>
-							<td>이화여대</td>
+							<td>이화여자대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td rowspan="6">운영위원</td>
 							<td>염수진</td>
-							<td>전남대</td>
+							<td>전남대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>주정찬</td>
-							<td>KRICT</td>
+							<td>한국화학연구원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>연영주</td>
-							<td>강릉원주</td>
+							<td>강릉원주대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>이대희</td>
-							<td>KRIBB</td>
+							<td>한국생명공학연구원</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>이동우</td>
-							<td>연새대</td>
+							<td>연세대학교</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>이선구</td>
-							<td>부산대</td>
+							<td>부산대학교</td>
 							<td></td>
 						</tr>
 					</tbody>
