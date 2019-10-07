@@ -111,7 +111,7 @@
 .member .result p { padding: 20px; background: #f5f6f7; font-size: 15px; }
 .member .result span { color: #325cb2; text-decoration: underline; }
 
-/* error_wrap */
+/* error_wrap */ 
 .error_wrap { display: table; width: 100%; min-height: calc( 100% - 293px ); background: #f5f6f7; text-align: center; }
 .error_wrap > div { display: table-cell; vertical-align: middle; }
 .error_wrap > div > div { padding: 40px 0 60px 0; }
