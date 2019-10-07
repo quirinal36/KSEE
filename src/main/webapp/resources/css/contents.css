@@ -117,3 +117,14 @@
 .error_wrap > div > div { padding: 40px 0 60px 0; }
 .error_wrap strong { font-size: 100px; font-weight: 400; color: #bfbfbf; }
 .error_wrap p { margin: 20px 0 40px 0; line-height: 160%; font-size: 16px; }
+
+/* 임원진 표 */
+.tbl2 { width: 90%; min-width: 1000px; max-width: 1300px; margin: 60px auto; }
+.tbl2 th,
+.tbl2 td {
+	padding: 10px 0;
+	text-align: center;
+}
+.tbl2 thead { border-top: 2px solid #325cb2; background: #96b2eb; }
+.tbl2 th { border: 1px solid #325cb2; border-top: 0; }
+.tbl2 td { border: 1px solid #929292; }
