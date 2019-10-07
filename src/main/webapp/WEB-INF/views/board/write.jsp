@@ -136,7 +136,7 @@
 			                    ],
 			                    // Remove the redundant buttons from toolbar groups defined above.
 			                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'
-			                	,height: 630
+			                	,height: 400
 			                });
 			            	</script>
 						</div>

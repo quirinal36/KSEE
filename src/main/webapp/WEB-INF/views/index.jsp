@@ -84,13 +84,13 @@
 					</div>
                     <div class="idx_board_list">
                         <div class="title">
-                            <a href="<c:url value="/community/board/"/>" class="name">자유게시판</a>
-                            <a href="<c:url value="/community/board/"/>" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/free/"/>" class="name">자유게시판</a>
+                            <a href="<c:url value="/group/free/"/>" title="더 보기" class="more">더 보기</a>
                         </div>
 						<div class="list">
 							<c:forEach items="${freeBoardList }" var="item" begin="0" end="0">
 								<div class="first">
-									<a href="<c:url value="/community/board/view/${item.id }"/>">${item.title }</a>
+									<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
 									<span>
 										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 									</span>
@@ -99,7 +99,7 @@
 							<ul>
 								<c:forEach items="${freeBoardList }" var="item" begin="1" end="4">
 									<li>
-										<a href="<c:url value="/community/board/view/${item.id }"/>">${item.title }</a>
+										<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
 										<span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
 									</li>
 								</c:forEach>

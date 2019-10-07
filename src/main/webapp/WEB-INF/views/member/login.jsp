@@ -40,8 +40,10 @@
 							<input type="submit" value="로그인" class="bt3 on">
 							<div class="bt_wrap">
 								<a href="<c:url value="/member/signup"/>">회원가입</a>
-								<a href="<c:url value="/member/findId"/>">아이디 찾기</a>
-								<a href="<c:url value="/member/findPwd"/>">비밀번호 찾기</a>
+								<!-- 
+									<a href="<c:url value="/member/findId"/>">아이디 찾기</a>
+									<a href="<c:url value="/member/findPwd"/>">비밀번호 찾기</a>
+								 -->
 							</div>
 						</div>
 					</div>

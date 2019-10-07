@@ -36,24 +36,35 @@ public class SymposiumController extends KseeController{
 	
 	@RequestMapping(value= {"/", "/{where}"})
 	public ModelAndView getHistoryView(ModelAndView mv, HttpServletRequest request,
-			Symposium symp, @PathVariable(value="where", required = true)String where) {
-		final String currentUrl = "/symposium/domestic";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+			Symposium symp, @PathVariable(value="where", required = true)Optional<String> where) {
+		String currentUrl = "/symposium/";
 		
 		if(symp.getPageNo() == 0) {
 			symp.setPageNo(1);
 		}
-		if(where.equalsIgnoreCase("domestic")) {
+		if(where.isPresent()) {
+			currentUrl += where.get();
+			if(where.get().equalsIgnoreCase("domestic")) {
+				symp.setSympType(Symposium.SYMP_TYPE_DOMESTIC);
+				mv.addObject("title", Symposium.DOMESTIC_TITLE);
+			}else if(where.get().equalsIgnoreCase("international")){
+				symp.setSympType(Symposium.SYMP_TYPE_INTERNATIONAL);
+				mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
+			}
+		}else {
+			currentUrl += "domestic";
 			symp.setSympType(Symposium.SYMP_TYPE_DOMESTIC);
 			mv.addObject("title", Symposium.DOMESTIC_TITLE);
-		}else if(where.equalsIgnoreCase("international")){
-			symp.setSympType(Symposium.SYMP_TYPE_INTERNATIONAL);
-			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
 		}
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		
 		int total = sympService.count(symp);
 		symp.setTotalCount(total);
 		List<Symposium> list = sympService.select(symp);
+		
+		if(where.isPresent()) {
+			mv.addObject("where", where.get());
+		}
 		mv.addObject("list", list);
 		mv.addObject("paging", symp);
 		mv.setViewName("/symposium/domestic");

@@ -35,7 +35,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>대표</td>
+							<td>회장</td>
 							<td>김학성</td>
 							<td>KAIST</td>
 							<td></td>
