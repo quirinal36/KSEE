@@ -16,6 +16,21 @@
 		
 		window.open("/admin/domestic/write/content/"+id+"/"+lang+"/${symposium.id}", "_blank");
 	}
+	function deleteSymposium(){
+		var url = $("input[name='deleteUrl']").val();
+		if(confirm("삭제하시겠습니까?")){
+			$.ajax({
+				url : url,
+				dataType: 'json',
+				type : 'POST'
+			}).done(function(json){
+				if(json.result> 0){
+					alert("삭제되었습니다.");
+					history.go(-1);
+				}
+			});
+		}
+	}
 	</script>
 </head>
 <body>
@@ -148,6 +163,11 @@
 							</c:forEach>
 						</tbody>
 					</table>
+					
+					<div class="bt_wrap">
+						<input type="hidden" name="deleteUrl" value="<c:url value="/admin/symposium/delete/${symposium.id }"/>"/>
+						<a href="javascript:void(0)" onclick="javascript:deleteSymposium();" class="bt1">삭제</a>
+					</div>
 				</div>
 			</div>
 		</div>

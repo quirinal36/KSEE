@@ -4,8 +4,8 @@
 	<div id="footer_wrap">
 		<div class="menu">
 			<div>
-				<a href="#">연구회 소개</a>
-				<a href="/about/term">정관</a>
+				<a href="<c:url value="/about"/>">연구회 소개</a>
+				<a href="<c:url value="/about/term"/>">정관</a>
 				<a href="#">개인정보취급방침</a>
 				<a href="#">이메일무단수집거부</a>
 			</div>

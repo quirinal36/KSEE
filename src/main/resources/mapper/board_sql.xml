@@ -41,9 +41,13 @@
 		<where>
 			<choose>
 				<when test="boardType eq 7">
-					board.boardType = 1 or
-					board.boardType = 2 or
-					board.boardType = 3
+					(
+						board.boardType = 1 or
+						board.boardType = 2 or
+						board.boardType = 3 or
+						board.boardType = 4 or
+						board.boardType = 5
+					) 
 				</when>
 				<otherwise>
 					board.boardType = ${boardType}

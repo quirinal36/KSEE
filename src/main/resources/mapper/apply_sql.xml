@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apply_sql">
+	<insert id="insert" parameterType="apply" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Apply
+		(
+			memberType,
+			isSpeaker,
+			national,
+			username,
+			classification,
+			level,
+			telephone,
+			email,
+			domain,
+			fileId,
+			sympId
+		)
+		VALUES
+		(
+			${memberType},
+			${isSpeaker},
+			${national},
+			'${username}',
+			'${classification}',
+			'${level}',
+			'${telephone}',
+			'${email}',
+			'${domain}',
+			${fileId},
+			${sympId}
+		)
+	</insert>
+	<update id="update" parameterType="apply">
+		UPDATE Apply
+		<set>
+			memberType=${memberType},
+			isSpeaker=${isSpeaker},
+			national=${national},
+			username='${username}',
+			classification='${classification}',
+			level='${level}',
+			telephone='${telephone}',
+			email='${email}',
+			domain='${domain}',
+			fileId=${fileId},
+			sympId=${sympId}
+		</set>
+		<where>
+			id = ${id}
+		</where>
+	</update>
+	<select id="select" parameterType="apply" resultType="apply">
+		SELECT *
+		FROM Apply
+		<where>
+			sympId = ${sympId}
+			<if test="query != ''">
+				and (
+					username like '%${query}%'
+					or
+					classification like '%${query}%'
+				)
+			</if>
+		</where>
+	</select>
+	<select id="select_one" parameterType="apply" resultType="apply">
+		SELECT *
+		FROM Apply
+		<where>
+			id = ${id}
+		</where>
+	</select>
+	<delete id="delete" parameterType="apply">
+		DELETE FROM Apply
+		<where>
+			id = ${id}
+		</where>
+	</delete>
+</mapper>

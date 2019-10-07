@@ -28,8 +28,7 @@ public class SymposiumService implements DataService<Symposium> {
 
 	@Override
 	public int delete(Symposium input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(input);
 	}
 
 	@Override

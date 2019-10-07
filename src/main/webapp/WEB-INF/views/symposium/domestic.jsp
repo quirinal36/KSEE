@@ -40,7 +40,7 @@
 								<div class="title"><a href="<c:url value="/symposium/domestic/view/${item.id }"/>">${item.title }</a></div>
 								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 								<div class="place">${item.place }</div>
-	                            <div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
+	                            <div class="apply"><a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on">참가신청</a></div>
 							</li>
 						</c:forEach>
 					</ul>

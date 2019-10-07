@@ -1,64 +1,21 @@
 package www.ksee.kr.web;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.StringReader;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.util.UriUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import www.ksee.kr.Config;
-import www.ksee.kr.security.config.UserDetailService;
-import www.ksee.kr.service.UserService;
 import www.ksee.kr.vo.Board;
-import www.ksee.kr.vo.UserVO;
+import www.ksee.kr.vo.Paging;
+import www.ksee.kr.vo.Symposium;
 
 /**
  * Handles requests for the application home page.
@@ -92,11 +49,57 @@ public class HomeController extends KseeController {
 	@RequestMapping(value="/search")
 	public ModelAndView getCompanyView(Locale locale, ModelAndView mv,
 			Board board) {
-		logger.info(locale.toString());
-		
 		mv.addObject("title", "검색");
+		
+		List<Integer> boardTypes = new ArrayList<Integer>();
+		boardTypes.add(Board.TYPE_NOTICE);
+		boardTypes.add(Board.TYPE_NEWS);
+		boardTypes.add(Board.TYPE_MEMBER);
+		boardTypes.add(Board.TYPE_SPEAKER);
+		boardTypes.add(Board.TYPE_FREE);
+		
+		List<List<Board>> listOfBoardList = new ArrayList<List<Board>>();
+		Iterator<Integer> boardTypeIter = boardTypes.iterator();
+		while(boardTypeIter.hasNext()) {	
+			int boardType = boardTypeIter.next();
+			if(board.getPageNo() == 0) {
+				board.setPageNo(1);
+			}
+			board.setPageSize(Paging.PAGE_SIZE_LIST);
+			board.setBoardType(boardType);
+			int count = boardService.count(board);
+			board.setTotalCount(count);
+			List<Board> boardList = boardService.select(board);
+			listOfBoardList.add(boardList);
+		}
+		mv.addObject("boardList", listOfBoardList);
+		
+		List<List<Symposium>> listOfSympList = new ArrayList<List<Symposium>>();
+		List<Integer> sympTypes = new ArrayList<Integer>();
+		sympTypes.add(Symposium.SYMP_TYPE_DOMESTIC);
+		sympTypes.add(Symposium.SYMP_TYPE_INTERNATIONAL);
+		Iterator<Integer> sympTypeIter = sympTypes.iterator();
+		while(sympTypeIter.hasNext()) {
+			Integer sympType = sympTypeIter.next();
+			Symposium symposium = new Symposium();
+			symposium.setQuery(board.getQuery());
+			if(board.getPageNo() == 0) {
+				symposium.setPageNo(1);
+			}else {
+				symposium.setPageNo(board.getPageNo());
+			}
+			symposium.setSympType(sympType);
+			symposium.setPageSize(Paging.PAGE_SIZE_LIST);
+			int count = sympService.count(symposium);
+			symposium.setTotalCount(count);
+			
+			List<Symposium> sympList = sympService.select(symposium);
+			listOfSympList.add(sympList);
+		}
+		mv.addObject("sympList", listOfSympList);
 		mv.addObject("paging", board);
-		mv.setViewName("/group/home");
+		
+		mv.setViewName("/home");
 		return mv;
 	}
 	@RequestMapping(value = "/company", method = RequestMethod.GET)

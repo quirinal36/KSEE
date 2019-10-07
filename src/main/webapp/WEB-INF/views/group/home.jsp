@@ -25,7 +25,7 @@
 						<form action="<c:url value="/group/"/>">
 							<input type="text" placeholder="검색어를 입력하세요." value="${paging.query }">
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
-							<input type="button" value="검색" onclick="search();">
+							<input type="button" value="검색" onclick="search(this.form);">
 						</form>
 					</div>
 				</div>

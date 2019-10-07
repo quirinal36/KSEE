@@ -10,6 +10,10 @@ import lombok.ToString;
 public class Symposium extends Paging{
 	public final static int SYMP_TYPE_DOMESTIC = 1;
 	public final static int SYMP_TYPE_INTERNATIONAL = 2;
+	public final static int SYMP_TYPE_ALL = 3;
+	public final static String DOMESTIC_TITLE = "국내 학술대회";
+	public final static String INTERNATIONAL_TITLE = "한중일 학술대회";
+	
 	int id;
 	String title;
 	String place;

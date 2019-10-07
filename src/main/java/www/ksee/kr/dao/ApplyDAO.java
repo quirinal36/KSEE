@@ -1,0 +1,54 @@
+package www.ksee.kr.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import www.ksee.kr.vo.ApplyVO;
+
+@Repository("ApplyDAO")
+public class ApplyDAO implements DataAccess<ApplyVO> {
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	private final String namespace = "apply_sql";
+	
+	@Override
+	public int insert(ApplyVO input) {
+		return sqlSession.insert(namespace +".insert", input);
+	}
+
+	@Override
+	public int update(ApplyVO input) {
+		return sqlSession.update(namespace +".update", input);
+	}
+
+	@Override
+	public int delete(ApplyVO input) {
+		return sqlSession.delete(namespace +".delete", input);
+	}
+
+	@Override
+	public List<ApplyVO> select() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ApplyVO> select(ApplyVO input) {
+		return sqlSession.selectList(namespace +".select", input);
+	}
+
+	@Override
+	public ApplyVO selectOne(ApplyVO input) {
+		return sqlSession.selectOne(namespace +".select_one", input);
+	}
+
+	@Override
+	public int count(ApplyVO input) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

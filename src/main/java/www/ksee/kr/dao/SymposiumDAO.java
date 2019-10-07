@@ -30,8 +30,7 @@ public class SymposiumDAO implements DataAccess<Symposium> {
 
 	@Override
 	public int delete(Symposium input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace+".delete", input);
 	}
 
 	@Override

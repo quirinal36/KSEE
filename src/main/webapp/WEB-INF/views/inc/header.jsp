@@ -3,12 +3,19 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <script type="text/javascript">
-function search(){
-	var query = $(".search_ipt").find("input[name='query']").val();
-	var url = $(".search_ipt").find("input[name='search_url']").val();
+function searchAll(){
+	var query = $(".search_ipt_all").find("input[name='query']").val();
+	var url = $(".search_ipt_all").find("input[name='search_url']").val();
 	
-	window.location.replace(url +"?query="+ query);
+	window.location.replace(url +"?query="+ encodeURI(query));
 }
+$(document).ready(function(){
+	$(".search_ipt_all").find("input[name='query']").keyup(function(e){
+		if(e.keyCode == 13){
+			searchAll();
+		}
+	});
+});
 </script>
 <header>
 	<div id="header_wrap">
@@ -64,10 +71,10 @@ function search(){
 			</div>
 			<input type="button" value="검색" class="bt_header_search">
 			<div class="header_search">
-				<div class="search_ipt">
+				<div class="search_ipt_all">
 					<input type="text" placeholder="검색어를 입력하세요." name="query">
 					<input type="hidden" name="search_url" value="<c:url value="/search"/>">
-					<input type="button" value="검색" onclick="javascript:search();">
+					<input type="button" value="검색" onclick="javascript:searchAll();">
 				</div>
 				<input type="button" value="닫기" class="bt_header_search_close">
 			</div>

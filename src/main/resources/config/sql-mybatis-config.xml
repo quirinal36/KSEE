@@ -14,5 +14,6 @@
 		<typeAlias type="www.ksee.kr.vo.EmailToken" alias="token"/>
 		<typeAlias type="www.ksee.kr.vo.SymposiumTypes" alias="symposium_type"/>
 		<typeAlias type="www.ksee.kr.vo.SymposiumDetail" alias="symposium_detail"/>
+		<typeAlias type="www.ksee.kr.vo.ApplyVO" alias="apply"/>
     </typeAliases>
 </configuration>

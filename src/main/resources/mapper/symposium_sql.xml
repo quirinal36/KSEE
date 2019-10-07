@@ -10,7 +10,8 @@
 			startDate,
 			finishDate,
 			applyStart,
-			applyFinish
+			applyFinish,
+			sympType
 		)
 		VALUES
 		(
@@ -19,7 +20,8 @@
 			'${startDate}',
 			'${finishDate}',
 			'${applyStart}',
-			'${applyFinish}'
+			'${applyFinish}',
+			${sympType}
 		)
 	</insert>
 	<update id="update"  parameterType="symposium">
@@ -40,8 +42,9 @@
 		SELECT COUNT(*)
 		FROM Symposium
 		<where>
+			sympType = ${sympType}
 			<if test="query != ''">
-				title like '%${query}%'
+				and title like '%${query}%'
 			</if>
 		</where>
 	</select>
@@ -50,8 +53,19 @@
 		SELECT *
 		FROM Symposium
 		<where>
+			<choose>
+				<when test ="sympType eq 3">
+					(
+						sympType = 1 or
+						sympType = 2
+					)
+				</when>
+				<otherwise>
+					sympType = ${sympType}
+				</otherwise> 
+			</choose>
 			<if test="query != ''">
-				title like '%${query}%'
+				and title like '%${query}%'
 			</if>
 		</where>
 		ORDER BY id DESC
@@ -80,4 +94,11 @@
 			id = ${id}
 		</where>
 	</update>
+	
+	<delete id="delete" parameterType="symposium">
+		DELETE FROM Symposium
+		<where>
+			id = ${id}
+		</where>
+	</delete>
 </mapper>

@@ -6,19 +6,25 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.SymposiumDetailService;
 import www.ksee.kr.service.SymposiumService;
 import www.ksee.kr.util.SymposiumUtil;
+import www.ksee.kr.vo.ApplyVO;
 import www.ksee.kr.vo.Paging;
 import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.Symposium;
 import www.ksee.kr.vo.SymposiumDetail;
+import www.ksee.kr.vo.UserVO;
 
 @RequestMapping(value="/symposium")
 @Controller
@@ -28,39 +34,49 @@ public class SymposiumController extends KseeController{
 	@Autowired
 	SymposiumDetailService sympDetailService;
 	
-	@RequestMapping(value= {"/", "/domestic"})
+	@RequestMapping(value= {"/", "/{where}"})
 	public ModelAndView getHistoryView(ModelAndView mv, HttpServletRequest request,
-			Symposium symp) {
+			Symposium symp, @PathVariable(value="where", required = true)String where) {
 		final String currentUrl = "/symposium/domestic";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		
 		if(symp.getPageNo() == 0) {
 			symp.setPageNo(1);
 		}
+		if(where.equalsIgnoreCase("domestic")) {
+			symp.setSympType(Symposium.SYMP_TYPE_DOMESTIC);
+			mv.addObject("title", Symposium.DOMESTIC_TITLE);
+		}else if(where.equalsIgnoreCase("international")){
+			symp.setSympType(Symposium.SYMP_TYPE_INTERNATIONAL);
+			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
+		}
 		
-		symp.setPageSize(Paging.PAGE_SIZE_LIST);
 		int total = sympService.count(symp);
 		symp.setTotalCount(total);
 		List<Symposium> list = sympService.select(symp);
 		mv.addObject("list", list);
 		mv.addObject("paging", symp);
 		mv.setViewName("/symposium/domestic");
-		mv.addObject("title", "국내 학술대회");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value= {"/domestic/view/{id}/{tab}", "/domestic/view/{id}"})
+	@RequestMapping(value= {"/{where}/view/{id}/{tab}", "/{where}/view/{id}"})
 	public ModelAndView getDetailView(ModelAndView mv, @PathVariable(value="id", required = true)Integer id,
 			@PathVariable(value="tab", required = false)Optional<Integer>tab,
-			HttpServletRequest request, Locale locale) {
+			HttpServletRequest request, Locale locale,
+			@PathVariable(value="where", required = true)String where) {
 		Symposium symposium = new Symposium();
 		SymposiumDetail detail = new SymposiumDetail();
+		if(where.equalsIgnoreCase("domestic")) {
+			mv.addObject("title", Symposium.DOMESTIC_TITLE);
+		}else if(where.equalsIgnoreCase("international")){
+			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
+		}
 		
 		final String currentUrl = "/symposium/domestic";
 		mv.addObject("curMenu", getCurMenus(currentUrl, request));
 		
-		mv.addObject("title", "국내 학술대회");
 		if(tab.isPresent()) {
 			detail.setStype(tab.get());
 		}else {
@@ -90,23 +106,39 @@ public class SymposiumController extends KseeController{
 		mv.setViewName("/symposium/detail");
 		return mv;
 	}
-	@RequestMapping(value="/international")
-	public ModelAndView getInternationalView(ModelAndView mv,
-			HttpServletRequest request) {
-		final String currentUrl = "/symposium/international";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
-		
-		mv.setViewName("/symposium/international");
-		mv.addObject("title", "한중일 학술대회");
-		return mv;
-	}
 	
-	@RequestMapping(value="/apply")
-	public ModelAndView getApplyView(ModelAndView mv) {
+	/**
+	 * 참가신청 화면
+	 * @param mv
+	 * @param sympId
+	 * @return
+	 */
+	@RequestMapping(value="/apply/{id}")
+	public ModelAndView getApplyView(ModelAndView mv,
+			@PathVariable(value="id")Integer sympId) {
+		UserVO user = getUser();
+		mv.addObject("user", user);
+		
 		mv.addObject("title", "참가신청");
+		
+		Symposium symposium = new Symposium();
+		symposium.setId(sympId);
+		symposium = sympService.selectOne(symposium);
+		mv.addObject("symposium", symposium);
 		mv.setViewName("/symposium/apply");
 		return mv;
 	}
 	
-	
+	@ResponseBody
+	@RequestMapping(value="/apply", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String applySend(ApplyVO apply,
+			@RequestParam(value="files")String files) {
+		for(String fileId : files.split(",")) {
+			apply.setFileId(Integer.parseInt(fileId));
+		}
+		
+		JSONObject json = new JSONObject();
+		json.put("result", applyService.insert(apply));
+		return json.toString();
+	}
 }

@@ -9,10 +9,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import www.ksee.kr.security.AuthenticationFacade;
+import www.ksee.kr.service.ApplyService;
 import www.ksee.kr.service.BoardService;
 import www.ksee.kr.service.FileInfoService;
 import www.ksee.kr.service.MenuService;
 import www.ksee.kr.service.PhotoInfoService;
+import www.ksee.kr.service.SymposiumService;
 import www.ksee.kr.service.TokenService;
 import www.ksee.kr.service.UserService;
 import www.ksee.kr.vo.Menus;
@@ -41,7 +43,10 @@ public class KseeController {
 	protected MenuService menuService;
 	@Autowired
 	protected TokenService tokenService;
-	
+	@Autowired
+	protected SymposiumService sympService;
+	@Autowired
+	protected ApplyService applyService;
 	protected UserVO getUser() {
 		String authUser = authenticationFacade.getAuthentication().getName();
 		

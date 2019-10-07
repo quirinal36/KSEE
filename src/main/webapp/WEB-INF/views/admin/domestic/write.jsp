@@ -77,7 +77,7 @@
 			<div id="contentsPrint">
 				<div class="admin_title">학술대회 등록</div>
 				
-				<form action="<c:url value="/admin/domestic/write"/>" method="POST">
+				<form action="<c:url value="/admin/${where }/write"/>" method="POST">
 					<input type="hidden" name="listUrl" value="${listUrl }"/>
 					<table class="tbl1">
 						<colgroup>
