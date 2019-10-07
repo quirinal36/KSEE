@@ -34,6 +34,7 @@
 			d.writer,
 			d.symposiumId,
 			d.stype,
+			d.lang,
 			u.username AS username,
 			t.title AS typeTitle,
 			t.msgKey AS msgKey,
@@ -45,9 +46,9 @@
 				LEFT JOIN users u 			on d.writer = u.id
 		<where>
 			symposiumId = ${symposiumId}
-			<if test="lang != ''">
-			and
-			d.lang = '${lang}'
+			<if test="@www.ksee.kr.util.StringUtil@notEmpty(lang)">
+				and
+				d.lang = '${lang}'
 			</if>
 		</where>
 	</select>

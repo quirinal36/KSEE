@@ -1,12 +1,15 @@
 package www.ksee.kr.util;
 
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class StringUtil {
 	private final static String[] days = {"일","월","화","수","목","금","토"};
@@ -39,4 +42,15 @@ public class StringUtil {
 		
 		return localDate.getDayOfWeek().getDisplayName(TextStyle.NARROW, Locale.getDefault());
 	}
+	
+	public static Boolean empty(Object obj) {
+        if (obj instanceof String) return obj == null || "".equals(obj.toString().trim());
+        else if (obj instanceof List)return obj == null || ((List<?>) obj).isEmpty();
+        else if (obj instanceof Map) return obj == null || ((Map<?, ?>) obj).isEmpty();
+        else if (obj instanceof Object[]) return obj == null || Array.getLength(obj) == 0;
+        else return obj == null;
+    }
+	public static Boolean notEmpty(Object obj) {
+        return !empty(obj);
+    }
 }
