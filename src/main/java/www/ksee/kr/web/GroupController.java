@@ -4,22 +4,26 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.service.ReplyService;
 import www.ksee.kr.vo.Board;
 import www.ksee.kr.vo.BoardInfo;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
+import www.ksee.kr.vo.Reply;
 import www.ksee.kr.vo.UserVO;
 
 @Controller
 @RequestMapping(value="/group")
 public class GroupController extends KseeController {
-	
+	@Autowired
+	ReplyService replyService;
 	/**
 	 * 공지사항, 자유게시판, 관련소식 모두 보여주기
 	 * 
@@ -123,7 +127,9 @@ public class GroupController extends KseeController {
 			@PathVariable(value="name", required=true)String name) {
 		BoardInfo boardInfo = BoardInfo.init().get(name);
 		
-		if(isLoginedUser(request)) {
+		boolean isLogined = isLoginedUser(request);
+		logger.info("isLogined: "+isLogined);
+		if(isLogined) {
 			UserVO user = getUser();
 			mv.addObject("user", user);
 		}
@@ -137,6 +143,11 @@ public class GroupController extends KseeController {
 		List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
 		List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
 		
+		Reply reply = new Reply();
+		reply.setBoardId(board.getId());
+		List<Reply> replyList = replyService.select(reply);
+		
+		mv.addObject("replyList", replyList);
 		mv.addObject("listUrl", request.getContextPath() +boardInfo.getListUrl());
 		mv.addObject("edit_url", request.getContextPath()+boardInfo.getEditUrl());
 		mv.addObject("del_url", request.getContextPath()+boardInfo.getDelUrl());

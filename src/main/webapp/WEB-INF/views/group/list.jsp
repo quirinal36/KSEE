@@ -2,6 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% 
+pageContext.setAttribute("LF", "\n"); 
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -55,9 +59,9 @@
 												<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 											</span>
 										</div>						   
-										<p class="content">
-											<c:out value='${item.content.replaceAll("\\\<.*?\\\>","") }'/>
-										</p>
+										<div class="content">
+										${item.content }
+										</div>
 									</div>
 								</a>
 							</li>

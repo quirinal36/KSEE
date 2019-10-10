@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply_sql">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Reply
+		(
+			writer,
+			parent,
+			boardId,
+			content
+		)
+		VALUES
+		(
+			writer,
+			parent,
+			boardId,
+			content
+		)
+	</insert>
+	
+	<update id="update" parameterType="reply">
+		UPDATE Reply
+		<set>
+			content
+		</set>
+		<where>
+			id = ${id}
+		</where>
+	</update>
+	
+	<select id="select" parameterType="reply" resultType="reply">
+		SELECT
+			r.parent,
+			r.boardId,
+			r.content,
+			u.username AS writerName,
+			r.mdate
+		FROM
+			Reply r LEFT JOIN users u ON r.writer = u.id
+		<where>
+			r.boardId = ${boardId}
+		</where>
+		ORDER BY r.id DESC
+		LIMIT ${from}, ${pageSize}
+	</select>
+	
+	<select id="select_one" parameterType="reply" resultType="reply">
+		SELECT
+			r.parent,
+			r.boardId,
+			r.content,
+			u.username AS writerName,
+			r.mdate
+		FROM
+			Reply r LEFT JOIN users u ON r.writer = u.id
+		<where>
+			r.id = ${id}
+		</where>
+	</select>
+	
+	<select id="count" parameterType="reply" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			Reply r LEFT JOIN users u ON r.writer = u.id
+		<where>
+			r.boardId = ${boardId}
+		</where>
+	</select>
+	
+	<delete id="delete" parameterType="reply">
+		DELETE FROM Reply
+		<where>
+			id = ${id}
+		</where>
+	</delete>
+</mapper>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import www.ksee.kr.security.AuthenticationFacade;
 import www.ksee.kr.service.ApplyService;
@@ -63,8 +65,13 @@ public class KseeController {
 	 * @return
 	 */
 	protected boolean isLoginedUser(HttpServletRequest request) {
+		for(GrantedAuthority authority : SecurityContextHolder.getContext().getAuthentication().getAuthorities()) {
+	        String userRole = authority.getAuthority();
+		}
 		boolean result = false;
 		for(int i=1; i<UserVO.ROLES.length; i++) {
+			logger.info("UserVO.ROLES[i]: " + UserVO.ROLES[i]);
+			logger.info("is user : "+ request.isUserInRole(UserVO.ROLES[i]));
 			if(request.isUserInRole(UserVO.ROLES[i])) {
 				result = true;
 				break;
