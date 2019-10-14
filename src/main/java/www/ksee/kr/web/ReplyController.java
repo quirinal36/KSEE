@@ -1,5 +1,7 @@
 package www.ksee.kr.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,22 +21,30 @@ public class ReplyController extends KseeController{
 	
 	@ResponseBody
 	@RequestMapping(value="/insert", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public String insert(Reply reply) {
+	public String insert(Reply reply, HttpServletRequest request) {
 		JSONObject json = new JSONObject();
-		UserVO user = getUser();
-		reply.setWriter(user.getId());
-		json.put("result", service.insert(reply));
+		if(isLoginedUser(request)) {
+			UserVO user = getUser();
+			reply.setWriter(user.getId());
+			json.put("result", service.insert(reply));
+		}else {
+			json.put("msg", "로그인 해주세요.");
+			json.put("result", -1);
+		}
 		
 		return json.toString();
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/update", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public String update(Reply reply) {
+	public String update(Reply reply, HttpServletRequest request) {
 		JSONObject json = new JSONObject();
-		
-		json.put("result", service.update(reply));
-		
+		if(isLoginedUser(request)) {
+			json.put("result", service.update(reply));
+		}else {
+			json.put("result", -1);
+			json.put("msg", "로그인 해주세요.");
+		}
 		return json.toString();
 	}
 	

@@ -13,6 +13,7 @@ public class Reply extends Paging{
 	int id;
 	int writer;
 	String writerName;
+	String content;
 	int parent;
 	int boardId;
 	Date mdate;

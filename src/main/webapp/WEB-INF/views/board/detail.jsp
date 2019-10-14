@@ -1,15 +1,105 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<% 
+pageContext.setAttribute("LF", "\n"); 
+%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
+<script type="text/javascript">
+function writeReply(){
+	var url = $("#replyForm").attr("action");
+	var param = $("#replyForm").serialize();
+	var jsonObj = parse($("#replyForm").serializeArray());
+	
+	if(jsonObj['content'].length == 0){
+		alert("댓글을 입력 해주세요.");
+		return false;
+	}
+	if(confirm("댓글을 등록하시겠습니까?")){
+		$.ajax({
+			url : url,
+			data: param,
+			dataType : 'json',
+			type : 'POST'
+		}).done(function(json){
+			if(json.result > 0){
+				window.location.reload();
+			}else{
+				alert(json.msg);
+			}
+		});		
+	}
+}
+function updateReply(replyId){
+	var form = $("#reply-edit-"+replyId).find("form");
+	var url = $(form).attr("action");
+	var param = $(form).serialize();
+	
+	$.ajax({
+		url : url,
+		data: param,
+		dataType : 'json',
+		type : 'POST'
+	}).done(function(json){
+		if(json.result > 0){
+			window.location.reload();
+		}else{
+			alert(json.msg);
+		}
+	});
+}
+function deleteReply(replyId){
+	var url = "/reply/delete";
+	var param = "id="+replyId;
+	
+	if(confirm("삭제하시겠습니까?")){
+		$.ajax({
+			url : url,
+			data: param,
+			dataType: 'json',
+			type: 'POST'
+		}).done(function(json){
+			if(json.result > 0){
+				window.location.reload();
+			}
+		});
+	}
+}
+function showEditView(replyId){
+	$("#reply-"+replyId).hide();
+	$("#reply-edit-"+replyId).show();
+}
+function hideEditView(replyId){
+	$("#reply-"+replyId).show();
+	$("#reply-edit-"+replyId).hide();
+}
+function parse(data){
+	var jsonObj = {};
+	data.forEach(function(item, index, arr){
+		var name = item.name;
+		var value = item.value;
+		
+		jsonObj[name] = value;
+	});
+	return jsonObj;
+}
+$(document).ready(function(){
+	$(".repl_content").on('keyup', function(e){
+		if(e.keyCode == 13){
+			e.preventDefault();
+			var text = $(this).val().slice(0, -1);
+			$(this).val(text);
+			writeReply();
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div id="wrap">
@@ -53,37 +143,59 @@
 							</ul>
 						</div>
 					</div>
-					<div class="repl_wrap" style="display:none">
+					<div class="repl_wrap">
 						<!-- 댓글 보기 -->
 						<ol class="repl_list">
 							<!-- 기본 -->
-							<li>
-								<div class="top">
-									<span class="repl_writer">이형구</span>
-									<span class="repl_date">(2019-10-08)</span>
-									<input type="button" value="수정" class="bt_repl_edit">
-									<input type="button" value="삭제" class="bt_repl_del">
-								</div>
-								<p class="repl_cont">효소 관련 뉴스나 중요 논문 게시를 자유게시판에서 하면 될 까요?</p>
-							</li>
-							<!-- 수정 눌렀을 때 -->
-							<li>
-								<div class="top">
-									<span class="repl_writer">이형구</span>
-									<span class="repl_date">(2019-10-08)</span>
-								</div>
-								<div class="repl_edit">
-									<textarea placeholder="댓글을 입력하세요.">효소 관련 뉴스나 중요 논문 게시를 자유게시판에서 하면 될 까요?</textarea>
-									<input type="button" value="수정" class="on">
-									<input type="button" value="취소">
-								</div>
-							</li>
+							<c:forEach items="${replyList }" var="reply">
+								<li id="reply-${reply.id }">
+									<div class="top">
+										<span class="repl_writer">${reply.writerName }</span>
+										<span class="repl_date">(<fmt:formatDate value="${reply.mdate}" pattern="yyyy-MM-dd" />)</span>
+										<c:if test="${user.id eq reply.writer }">
+											<input type="button" value="수정" class="bt_repl_edit" onclick="javascript:showEditView('${reply.id }');">
+											<input type="button" value="삭제" class="bt_repl_del" onclick="javascript:deleteReply('${reply.id}')">
+										</c:if>
+										<input type="hidden" name="user-id" value="${user.id }"/>
+									</div>
+									<p class="repl_cont">${fn:replace(reply.content, LF, "<br/>") }</p>
+								</li>
+								
+								<!-- 수정 눌렀을 때 -->
+								<li id="reply-edit-${reply.id }" style="display:none;">
+									<form action="<c:url value="/reply/update"/>" method="post">
+										<div class="top">
+											<span class="repl_writer">${reply.writerName }</span>
+											<span class="repl_date">(<fmt:formatDate value="${reply.mdate}" pattern="yyyy-MM-dd" />)</span>
+										</div>
+										<div class="repl_edit">
+											<textarea placeholder="댓글을 입력하세요." name="content" rows="1" class="repl_content">${reply.content }</textarea>
+											<input type="hidden" name="id" value="${reply.id }"/>
+											<input type="button" value="저장" class="on" onclick="javascript:updateReply('${reply.id}');">
+											<input type="button" value="취소" onclick="javascript:hideEditView('${reply.id}')">
+										</div>
+									</form>
+								</li>
+							</c:forEach>
 						</ol>
-						<!-- 댓글 작성 -->
-						<div class="repl_add">
-							<textarea placeholder="댓글을 입력하세요."></textarea>
-							<input type="button" value="등록" class="bt_repl_add">
-						</div>
+						<form id="replyForm" action="<c:url value="/reply/insert"/>" method="POST">
+							<c:choose>
+								<c:when test="${not empty user.id }">
+									<c:set value="댓글을 입력하세요." var="reply_placeholder"/>
+								</c:when>
+								<c:otherwise>
+									<c:set value="로그인 해주세요." var="reply_placeholder"/>
+								</c:otherwise>
+							</c:choose>
+							<!-- 댓글 작성 -->
+							<div class="repl_add">
+								<input type="hidden" name="writer" value="${user.id }"/>
+								<textarea placeholder="${reply_placeholder }" name="content" rows="1" class="repl_content" <c:if test="${empty user.id }">readonly</c:if>></textarea>
+								<input type="button" value="등록" class="bt_repl_add" onclick="javascript:writeReply();"  <c:if test="${empty user.id }">disabled</c:if>>
+							</div>
+							<input type="hidden" name="parent" value="0"/>
+							<input type="hidden" name="boardId" value="${board.id }"/>
+						</form>
 					</div>
 					<div class="bt_wrap">
 						<a href="<c:url value="${listUrl }"/>" class="bt1 on">목록</a> 

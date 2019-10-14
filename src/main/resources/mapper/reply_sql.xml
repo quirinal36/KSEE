@@ -12,17 +12,17 @@
 		)
 		VALUES
 		(
-			writer,
-			parent,
-			boardId,
-			content
+			${writer},
+			${parent},
+			${boardId},
+			'${content}'
 		)
 	</insert>
 	
 	<update id="update" parameterType="reply">
 		UPDATE Reply
 		<set>
-			content
+			content = '${content}'
 		</set>
 		<where>
 			id = ${id}
@@ -31,6 +31,8 @@
 	
 	<select id="select" parameterType="reply" resultType="reply">
 		SELECT
+			r.id,
+			r.writer,
 			r.parent,
 			r.boardId,
 			r.content,
@@ -42,11 +44,11 @@
 			r.boardId = ${boardId}
 		</where>
 		ORDER BY r.id DESC
-		LIMIT ${from}, ${pageSize}
 	</select>
 	
 	<select id="select_one" parameterType="reply" resultType="reply">
 		SELECT
+			r.id,
 			r.parent,
 			r.boardId,
 			r.content,
