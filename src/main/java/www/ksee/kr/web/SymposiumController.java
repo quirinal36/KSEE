@@ -42,6 +42,7 @@ public class SymposiumController extends KseeController{
 		if(symp.getPageNo() == 0) {
 			symp.setPageNo(1);
 		}
+		symp.setPageSize(Paging.PAGE_SIZE_LIST);
 		if(where.isPresent()) {
 			currentUrl += where.get();
 			if(where.get().equalsIgnoreCase("domestic")) {
@@ -140,6 +141,11 @@ public class SymposiumController extends KseeController{
 		return mv;
 	}
 	
+	@RequestMapping(value="/applyList", method = RequestMethod.GET)
+	public ModelAndView applyView(ModelAndView mv) {
+		mv.setViewName("/symposium/applyList");
+		return mv;
+	}
 	@ResponseBody
 	@RequestMapping(value="/apply", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String applySend(ApplyVO apply,

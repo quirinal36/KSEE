@@ -28,7 +28,7 @@ public class FileUtil {
 		return file.getAbsolutePath();
 	}
 	
-	public List<PhotoInfo> parsePhotoInfo(String[] input, int boardId) {
+	public List<PhotoInfo> parsePhotoInfo(String[] input, int boardId) throws NumberFormatException{
 		List<PhotoInfo> photoList = new ArrayList<PhotoInfo>();
 		if(input.length>0) {
 			for(String pictureId : input) {

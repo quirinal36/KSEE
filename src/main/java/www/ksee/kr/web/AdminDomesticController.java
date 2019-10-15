@@ -155,6 +155,8 @@ public class AdminDomesticController extends KseeController{
 		}else if(where.equalsIgnoreCase("international")){
 			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
 		}
+		
+		mv.addObject("menu", 1);
 		mv.addObject("types", sympTypes);
 		mv.addObject("details", sympDetails);
 		mv.addObject("where", where);
@@ -237,9 +239,10 @@ public class AdminDomesticController extends KseeController{
 		}
 
 		FileUtil fileUtil = new FileUtil();
-		List<PhotoInfo> editPhotos = fileUtil.parsePhotoInfo(pictures.split(","), sympDetail.getId());
-		util.updatePhoto(sympDetailService, editPhotos, sympDetail);
-		
+		if(pictures.length() > 0) {
+			List<PhotoInfo> editPhotos = fileUtil.parsePhotoInfo(pictures.split(","), sympDetail.getId());
+			util.updatePhoto(sympDetailService, editPhotos, sympDetail);
+		}
 		json.put("result", result);
 		return json.toString();
 	}

@@ -40,6 +40,7 @@
 								</c:forEach>
 							</ul>
 						</div>
+						
 						<div class="cont">
 							<c:forEach items="${detailList }" var="item" varStatus="sts">
 								<c:if test="${tab eq item.stype}">

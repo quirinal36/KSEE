@@ -35,9 +35,9 @@
 							<div class="place">장소</div>
 							<div class="apply">참가신청</div>
 						</li>
-						<c:forEach items="${list }" var="item">
+						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
-								<div class="num">${item.id }</div>
+								<div class="num">${sts.count + (paging.pageNo - 1) * 10}</div>
 								<div class="title"><a href="<c:url value="/symposium/domestic/view/${item.id }"/>">${item.title }</a></div>
 								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 								<div class="place">${item.place }</div>
