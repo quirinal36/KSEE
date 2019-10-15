@@ -42,5 +42,6 @@ public class Board extends Paging{
 	int fileCnt;
 	int pictureCnt;
 	int viewCount;
+	int replyCnt;
 	String boardName;
 }

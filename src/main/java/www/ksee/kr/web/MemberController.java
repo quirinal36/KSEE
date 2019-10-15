@@ -102,7 +102,7 @@ public class MemberController extends KseeController{
 			json.put("result", findUsers.size());
 			json.put("message", "이미 사용 중인 아이디입니다.");
 		}else if(userService.isValid(user)==false) {
-			json.put("result", 1);
+			json.put("result", -1);
 			json.put("message", "5~20자의 영문 소문자, 숫자만 사용 가능합니다.");
 		}else {
 			json.put("result", 0);

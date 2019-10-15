@@ -11,14 +11,16 @@ $(document).ready(function(){
 			type: 'GET',
 			dataType: 'json'
 		}).done(function(json){
-			if(json.result > 0){
-				loginInput.parent().find(".confirm").hide();
-				loginInput.parent().find(".error").show();
-				loginInput.parent().find(".error").text(json.message);
-			}else{
+			if(json.result == 0){
+				$("#login-valid").val(1);
 				loginInput.parent().find(".confirm").show();
 				loginInput.parent().find(".error").hide();
 				loginInput.parent().find(".confirm").text(json.message);
+			}else{
+				$("#login-valid").val(0);
+				loginInput.parent().find(".confirm").hide();
+				loginInput.parent().find(".error").show();
+				loginInput.parent().find(".error").text(json.message);
 			}
 		}).fail(function(xhr, status, error){
 			
@@ -80,7 +82,7 @@ $(document).ready(function(){
 			var regPhone = /^\d{3}\d{3,4}\d{4}$/;
 			if(!regPhone.test(input)){
 				$(this).parent().find(".error").show();
-				$(this).parent().find(".error").text("숫자만 입력해주세요.");
+				$(this).parent().find(".error").text("전화번호를 확인해주세요.");
 			}else{
 				$(this).parent().find(".error").hide();
 			}
@@ -136,9 +138,19 @@ function validate(data){
 	var result = true;
 	var jsonObj = parse(data);
 
+	var loginValid = parseInt($("#login-valid").val());
+	console.log("loginValid : "+ loginValid);
+	console.log("loginValid == 0 : "+ (loginValid == 0));
+	
 	var loginInput = $("input[name='login']");
-	if(jsonObj['login'] != ''){
+	if(jsonObj['login'] != '' && loginValid > 0){
 		loginInput.parent().find(".error").hide(); 
+	}else if(loginValid == 0){
+		loginInput.parent().find(".confirm").hide();
+		loginInput.parent().find(".error").show();
+		loginInput.parent().find(".error").text('아이디를 확인해주세요.');
+		loginInput.focus();
+		return false;
 	}else{
 		loginInput.parent().find(".confirm").hide();
 		loginInput.parent().find(".error").show();

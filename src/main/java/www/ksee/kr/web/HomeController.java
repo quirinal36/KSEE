@@ -147,4 +147,15 @@ public class HomeController extends KseeController {
 		mv.setViewName("/inc/head_admin");
 		return mv;
 	}
+	
+	@RequestMapping(value="/term/privacy")
+	public ModelAndView getPrivacyView(ModelAndView mv) {
+		mv.setViewName("/term/privacy");
+		return mv;
+	}
+	@RequestMapping(value="/term/email")
+	public ModelAndView getEmailTermView(ModelAndView mv) {
+		mv.setViewName("/term/email");
+		return mv;
+	}
 }

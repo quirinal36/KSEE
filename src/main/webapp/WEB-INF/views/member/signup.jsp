@@ -349,7 +349,7 @@ $(window).on("beforeunload", function(){
 										<dd>
 											<ul class="chk_wrap">
 												<li>
-													<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3">
+													<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3" checked>
 													<label for="member_chk2">일반</label>
 												</li>
 												<li>
@@ -357,7 +357,7 @@ $(window).on("beforeunload", function(){
 													<label for="member_chk3">기업</label>
 												</li>
 												<li>
-													<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2" checked>
+													<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2">
 													<label for="member_chk1">학생</label>
 												</li>
 											</ul>
@@ -367,6 +367,7 @@ $(window).on("beforeunload", function(){
 										<dt>아이디</dt>
 										<dd>
 											<input type="text" placeholder="아이디 입력" class="ipt1" name="login">
+											<input type="hidden" id="login-valid" value="0"/>
 											<p class="message error">5~20자의 영문 소문자, 숫자만 사용 가능합니다.</p>
 											<p class="message confirm">사용 가능한 아이디입니다.</p>
 										</dd>
