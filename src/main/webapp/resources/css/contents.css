@@ -72,6 +72,8 @@
 .form_step1 strong { display: block; margin: 30px 0 10px 0; font-size: 15px; font-weight: 500; }
 .form_step1 strong:first-child { margin-top: 0; }
 .form_step1 .term { height: 200px; margin-bottom: 10px; padding: 10px; background: #f5f6f7; overflow-y: scroll; }
+.form_step1 .term strong { display: inline-block; margin: 10px 0 5px 0; font-size: 12px; }
+.form_step1 .term .item:first-child .title strong { margin-top: 0; }
 .form_step1 .chk_wrap { text-align: right; }
 .form_step2 { display: none; }
 .form_complete .paper { font-size: 16px; }

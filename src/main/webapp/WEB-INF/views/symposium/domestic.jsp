@@ -22,9 +22,10 @@
 			</c:import>
 			<div id="contentsPrint">
             	<div class="symposium_title_img">
-            	<a href="<c:url value="/symposium/domestic/view/8"/>">
-            		<img src="/resources/img/contents/2019_symposium.png" alt="2019 심포지엄">
-            	</a></div>
+	            	<a href="<c:url value="/symposium/domestic/view/8"/>">
+	            		<img src="/resources/img/contents/2019_symposium.png" alt="2019 심포지엄">
+	            	</a>
+            	</div>
 				<div class="board_list board_list_typeB symposium">
 					<ul class="list">
 						<li class="head">

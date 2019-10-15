@@ -53,7 +53,7 @@ function changeUserRole(){
 								<th>회원구분</th>
 								<td>
 									<form action="<c:url value="/admin/members/edit"/>" method="POST">
-										<select name="user_role">
+										<select name="user_role" class="select1">
 											<c:forEach items="${userRoles }" var="item">
 												<option value="${item.id }"
 													<c:if test="${user.user_role eq item.id }">selected</c:if>>
@@ -62,7 +62,7 @@ function changeUserRole(){
 											</c:forEach>
 										</select>
 										<input type="hidden" name="id" value="${user.id }"/>
-										<input type="button" value="저장" onclick="javascript:changeUserRole()"/>
+										<input type="button" class="bt2" value="저장" onclick="javascript:changeUserRole()"/>
 									</form>
 								</td>
 								<th>가입일</th>
@@ -88,7 +88,7 @@ function changeUserRole(){
 							</tr>
 							<tr>
 								<th>직장 주소</th>
-								<td>${user.address } ${user.addressDetail }</td>
+								<td colspan="3">${user.address } ${user.addressDetail }</td>
 							</tr>
 						</tbody>
 					</table>

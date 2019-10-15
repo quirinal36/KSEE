@@ -24,16 +24,27 @@
 #container { padding: 50px 50px 50px 300px; }
 #contentsPrint { width: 100%; max-width: 1300px; margin: 0 auto; }
 
-.admin_title { margin-bottom: 20px; font-size: 20px; font-weight: 600; }
+.admin_title { margin: 60px 0 20px 0; font-size: 20px; font-weight: 600; }
+#contentsPrint > .admin_title:first-child,
+#contentsPrint > div:first-child > .admin_title {
+	margin-top: 0;
+}
 .admin_search { margin-bottom: 20px; }
 .admin_search input[type="text"],
-.admin_search input[type="button"] {
+.admin_search input[type="button"],
+.admin_search input[type="submit"] {
 	display: inline-block;
 	vertical-align: middle;
 }
 .admin_search input[type="text"] { width: 200px; padding: 7px 10px; border: 1px solid #ddd; font-size: 14px; }
-.admin_search input[type="button"] { padding: 7px 10px; border: 1px solid #325cb2; background: #325cb2; font-size: 14px; color: #fff; }
-.admin_search input[type="submit"] { padding: 7px 10px; border: 1px solid #325cb2; background: #325cb2; font-size: 14px; color: #fff; }
+.admin_search input[type="button"],
+.admin_search input[type="submit"] {
+	padding: 7px 10px;
+	border: 1px solid #325cb2;
+	background: #325cb2;
+	font-size: 14px;
+	color: #fff;
+}
 .bt_wrap { margin-top: 20px; text-align: center; }
 
 .admin_sort { margin-bottom: 20px; font-size: 0; }
@@ -42,5 +53,7 @@
 .admin_sort a:hover { text-decoration: underline; }
 
 .date_chk { position: relative; display: inline-block; }
-.date_chk input[type="text"] { width: 200px; height: 30px; padding: 0 8px; border: 1px solid #ddd; background: transparent; }
-.date_chk .bt_date_chk { position: absolute; top: 10px; right: 10px; width: 12px; height: 11px; background: transparent url(/resources/img/contents/bt_date_chk.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
+.date_chk input[type="text"] { width: 200px; padding: 10px; border: 1px solid #ddd; background: transparent; }
+.date_chk .bt_date_chk { position: absolute; top: 13px; right: 10px; width: 12px; height: 11px; background: transparent url(/resources/img/contents/bt_date_chk.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
+
+.popup_img_guide { margin-top: 10px; font-size: 14px; }

@@ -119,3 +119,16 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 .chk1:checked + label { background-image: url(/resources/img/contents/chk1_on.png); }
 .radio1 + label { background: url(/resources/img/contents/radio1.png) no-repeat 0 3px; background-size: 16px; }
 .radio1:checked + label { background-image: url(/resources/img/contents/radio1_on.png); }
+
+/* 셀렉트박스 */
+.select1 {
+	display: inline-block;
+	padding: 3px 27px 4px 7px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 90% 50%;
+	background-size: 10px;
+	font-size: 14px;
+	font-weight: 400;
+}
