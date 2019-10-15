@@ -68,7 +68,7 @@
 								<c:when test="${fn:length(list) gt 0 }">
 									<c:forEach items="${list }" var="item" varStatus="sts">
 										<li>
-											<div class="num">${sts.count }</div>
+											<div class="num">${item.id }</div>
 											<div class="category">${item.boardName }</div>
 											<div class="title"><a href="/">${item.title }</a></div>
 											<div class="writer">${item.writerName }</div>

@@ -2,6 +2,7 @@ package www.ksee.kr.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.Config;
 import www.ksee.kr.service.BoardService;
 import www.ksee.kr.util.FileUtil;
 import www.ksee.kr.vo.Board;
@@ -152,6 +154,9 @@ public class BoardController extends KseeController{
 		UserVO user = getUser();
 		board.setWriter(user.getId());
 
+		board.setContent(URLDecoder.decode(board.getContent(), Config.ENCODING));
+		logger.info(board.toString());
+		
 		int result = boardService.insert(board);
 		FileUtil fileUtil = new FileUtil();
 		

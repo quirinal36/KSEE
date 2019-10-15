@@ -52,12 +52,14 @@
 		$("#file_ul").find(".bt_del_file").each(function(i, item){
 			files.push($(item).val());
 		});
+		console.log("content: " + content);
 		
 		var param = "title="+title;
-		param += "&content="+content;
+		param += "&content="+ encodeURI(content);
 		param += "&boardType="+boardType;
 		param += "&pictures="+pictures.join(",");
 		param += "&files="+files.join(",");
+		console.log(param);
 		
 		$.ajax({
 			url : url,

@@ -48,7 +48,7 @@
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
 								<div class="num">${paging.totalCount - (sts.index) - (paging.pageSize * (paging.pageNo-1))}</div>
-								<div class="title"><a href="<c:url value="${viewUrl }${item.id }"/>">${item.title }(${item.replyCnt })</a></div>
+								<div class="title"><a href="<c:url value="${viewUrl }${item.id }"/>">${item.title }<c:if test="${item.replyCnt > 0 }">(${item.replyCnt })</c:if></a></div>
 								<div class="writer">${item.writerName }</div>
 								<div class="date">
 								<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
