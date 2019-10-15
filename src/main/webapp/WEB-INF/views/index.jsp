@@ -109,15 +109,27 @@
                 </div>
 			</div>
 			<div class="idx_banner">
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b1.png"/>" alt="한국생명공학연구원"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b2.png"/>" alt="코오롱생명과학"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b3.png"/>" alt="한국식품연구원"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b4.png"/>" alt="Genofocus"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b5.png"/>" alt="두산"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b6.png"/>" alt="MH2 BIO CHEMICAL"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b7.png"/>" alt="Amicogen"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b8.png"/>" alt="CJ"></a>
-				<a href="#" target="_blank"><img src="<c:url value="/resources/img/index/b9.png"/>" alt="AP"></a>
+				<a href="https://www.kribb.re.kr" target="_blank"><img src="<c:url value="/resources/img/index/b1.png"/>" alt="한국생명공학연구원"></a>
+				<a href="https://www.kolonls.co.kr" target="_blank"><img src="<c:url value="/resources/img/index/b2.png"/>" alt="코오롱생명과학"></a>
+				<a href="https://www.kfri.re.kr" target="_blank"><img src="<c:url value="/resources/img/index/b3.png"/>" alt="한국식품연구원"></a>
+				<a href="https://www.kr.genofocus.com" target="_blank"><img src="<c:url value="/resources/img/index/b4.png"/>" alt="Genofocus"></a>
+				<a href="https://www.doosan.com/kr" target="_blank"><img src="<c:url value="/resources/img/index/b5.png"/>" alt="두산"></a>
+				<a href="http://www.mh2.co.kr" target="_blank"><img src="<c:url value="/resources/img/index/b6.png"/>" alt="MH2 BIO CHEMICAL"></a>
+				<a href="http://www.amicogen.com" target="_blank"><img src="<c:url value="/resources/img/index/b7.png"/>" alt="Amicogen"></a>
+				<a href="javascript:void(0);"><img src="<c:url value="/resources/img/index/b8.png"/>" alt="AP"></a>
+				<a href="https://www.cj.net" target="_blank"><img src="<c:url value="/resources/img/index/b9.png"/>" alt="CJ"></a>
+				<a href="https://www.gist.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b10.png"/>" alt="광주과학기술원"></a>
+				<a href="https://www.kaist.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b11.png"/>" alt="한국과학기술원"></a>
+				<a href="https://unist-kor.unist.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b12.png"/>" alt="unist"></a>
+				<a href="https://www.catholic.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b13.png"/>" alt="가톨릭대학교"></a>
+				<a href="https://www.gwnu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b14.png"/>" alt="강릉원주대학교"></a>
+				<a href="https://www.knu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b15.png"/>" alt="경북대학교"></a>
+				<a href="http://www.pusan.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b16.png"/>" alt="부산대학교"></a>
+				<a href="https://www.yonsei.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b17.png"/>" alt="연세대학교"></a>
+				<a href="http://www.ewha.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b18.png"/>" alt="이화여자대학교"></a>
+				<a href="http://www.jnu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b19.png"/>" alt="전남대학교"></a>
+				<a href="http://www.jejunu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b20.png"/>" alt="제주대학교"></a>
+				<a href="https://www.krict.re.kr/" target="_blank"><img src="<c:url value="/resources/img/index/b21.png"/>" alt="한국화학연구원"></a>
 			</div>
 		</div>
 	</div>
