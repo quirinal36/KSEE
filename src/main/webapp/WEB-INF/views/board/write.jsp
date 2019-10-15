@@ -70,6 +70,10 @@
 				window.location.replace($("input[name='listUrl']").val());
 			}
 		});
+		
+		$("#editor1").keyup(function(e){
+			
+		});
 	}
 	</script>
 </head>

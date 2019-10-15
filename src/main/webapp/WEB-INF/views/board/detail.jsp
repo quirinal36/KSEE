@@ -99,6 +99,22 @@ $(document).ready(function(){
 		}
 	});
 });
+function deleteBoard(id){
+	var url = "${del_url}"+id;
+	
+	if(confirm("삭제하시겠습니까?")){
+		$.ajax({
+			url : url,
+			dataType: 'json',
+			type: 'POST'
+		}).done(function(json){
+			if(json.result > 0){
+				window.history.go(-1);
+			}
+		});
+	}
+}
+
 </script>
 </head>
 <body>
@@ -204,13 +220,17 @@ $(document).ready(function(){
 						<input type="hidden" name="list_url" value="${listUrl }" />
 						<input type="hidden" value="${user.id }" />
 						<input type="hidden" value="${board.writer }" />
-						<c:if test="${user.id eq board.writer }">
-							<input type="button" class="bt1 btn_edit" value="수정">
-							<input type="button" class="bt1 btn_del" value="삭제">
-						</c:if>
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<input type="button" class="bt1 btn_del" value="삭제">
-						</sec:authorize>
+						<c:choose>
+							<c:when test="${user.id eq board.writer }">
+								<input type="button" class="bt1 btn_edit" value="수정" onclick="window.location.replace('${edit_url}/${board.id }')">
+								<input type="button" class="bt1 btn_del" value="삭제" onclick="javascript:deleteBoard('${board.id}');">
+							</c:when>
+							<c:otherwise>
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<input type="button" class="bt1 btn_del" value="삭제" onclick="javascript:deleteBoard('${board.id}');">
+								</sec:authorize>
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 			</div>

@@ -13,4 +13,6 @@ public class Config {
 	
 	public final static String UPLOAD_DIR = "/upload/www.ksee.kr/";
 	public final static String ADMIN_EMAIL = "no-reply@ksee.kr";
+	
+	public final static String OPENGRAPH_API = "1c6351e3-c4ab-4623-8506-535f8ac5cab8";
 }
