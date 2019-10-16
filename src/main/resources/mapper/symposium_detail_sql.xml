@@ -51,6 +51,7 @@
 				d.lang = '${lang}'
 			</if>
 		</where>
+		order by d.stype
 	</select>
 	<insert id="insert" parameterType="symposium_detail" keyProperty="id" useGeneratedKeys="true">
 		INSERT INTO SymposiumDetail

@@ -141,9 +141,9 @@ public class SymposiumController extends KseeController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/applyList", method = RequestMethod.GET)
+	@RequestMapping(value="/search/apply", method = RequestMethod.GET)
 	public ModelAndView applyView(ModelAndView mv) {
-		mv.setViewName("/symposium/applyList");
+		mv.setViewName("/symposium/searchApply");
 		return mv;
 	}
 	@ResponseBody
