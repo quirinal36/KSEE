@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup_sql">
+	<insert id="insert" parameterType="popup" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO popup
+		(
+			symposiumTitle,
+			startDate,
+			finishDate
+		)
+		VALUES
+		(
+			'${symposiumTitle}',
+			'${startDate}',
+			'${finishDate}'
+		)
+	</insert>
+	
+	<update id="update" parameterType="popup">
+		UPDATE popup
+		<set>
+			symposiumTitle = '${symposiumTitle}',
+			startDate = '${startDate}',
+			finishDate = '${finishDate}',
+			fileId = ${fileId}
+		</set>
+		<where>
+			id=${id}
+		</where>
+	</update>
+	
+	<delete id="delete" parameterType="popup">
+		DELETE FROM popup
+		<where>
+			id=${id}
+		</where>
+	</delete>
+	
+	<select id="select" parameterType="popup" resultType="popup">
+		SELECT * FROM popup
+	</select>
+	
+	<select id="select_one" parameterType="popup" resultType="popup">
+		SELECT * FROM popup
+		<where>
+			id=${id}
+		</where>
+	</select>
+	
+	<select id="count" parameterType="popup" resultType="int">
+		SELECT COUNT(*)
+		FROM popup
+	</select>
+</mapper>

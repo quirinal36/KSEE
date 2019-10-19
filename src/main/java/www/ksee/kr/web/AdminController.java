@@ -1,13 +1,17 @@
 package www.ksee.kr.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.service.PopupService;
+
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
-	
+	@Autowired
+	PopupService popupService;
 	/**
 	 * 관리자 첫화면
 	 * @param mv
@@ -30,6 +34,9 @@ public class AdminController {
 	public ModelAndView getAdminPopup(ModelAndView mv) {
 		mv.addObject("title", "팝업관리");
 		mv.addObject("menu", 3);
+		
+		
+		
 		mv.setViewName("/admin/popup");
 		return mv;
 	}

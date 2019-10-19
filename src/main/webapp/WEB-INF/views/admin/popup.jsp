@@ -5,9 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head_admin"></c:import>
-<style>
-	
-</style>
 </head>
 <body>
 	<div id="wrap">
