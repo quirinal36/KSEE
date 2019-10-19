@@ -75,6 +75,16 @@ input.bt3.on {
 	background: #325cb2;
 }
 
+.bt3_item2 { font-size: 0; }
+.bt3_item2 a.bt3,
+.bt3_item2 input.bt3 {
+	width: 49%;
+	margin-left: 2%;
+}
+.bt3_item2 a.bt3:first-child,
+.bt3_item2 input.bt3:first-child {
+	margin-left: 0;
+}
 
 input.ipt1 { padding: 0 10px 10px 10px; box-sizing: border-box; border-bottom: 1px solid #333; font-size: 15px; }
 input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font-size: 15px; }
@@ -130,5 +140,16 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 90% 50%;
 	background-size: 10px;
 	font-size: 14px;
+	font-weight: 400;
+}
+.select2 {
+	display: inline-block;
+	padding: 5px 30px 6px 10px;
+	box-sizing: border-box;
+	border-radius: 2px;
+	border: 1px solid #ddd;
+	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 92% 50%;
+	background-size: 10px;
+	font-size: 15px;
 	font-weight: 400;
 }

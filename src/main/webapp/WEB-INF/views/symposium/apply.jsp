@@ -159,7 +159,7 @@ function applySubmit(){
 							<dl class="company_tel">
 								<dt>연락처</dt>
 								<dd>
-									<input type="text" placeholder="직장 유선번호" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
+									<input type="text" placeholder="연락처 입력" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
 								</dd>
 							</dl>
 							<dl class="email">
