@@ -66,7 +66,9 @@ $(document).ready(function(){
 					<div class="member form_step1">
 						<div class="paper">
 							<strong>안내사항</strong>
-							<div class="term"></div>
+							<div class="term">
+								탈퇴 즉시 회원님의 정보가 삭제되며 복구할 수 없습니다.
+							</div>
 							<div class="chk_wrap">
 								<input type="checkbox" id="term_chk1" class="chk1">
 								<label for="term_chk1">동의합니다.</label>

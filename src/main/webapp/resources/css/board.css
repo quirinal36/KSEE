@@ -51,7 +51,7 @@
 }
 .board_view_title .file { background: url(/resources/img/board/file.png) no-repeat 0 50%; }
 .board_view_title .view { background: url(/resources/img/board/view.png) no-repeat 0 50%; }
-.board_view_cont { padding: 30px; border-bottom: 1px solid #ccc; line-height: 160%; font-size: 15px; }
+.board_view_cont { min-height: 250px; padding: 30px; border-bottom: 1px solid #ccc; line-height: 160%; font-size: 15px; }
 .board_view_img { margin-bottom: 30px; }
 .board_view_img img { display: block; max-width: 100%; margin: 10px auto 0 auto; }
 .board_view_img img:first-child { margin-top: 0; }
