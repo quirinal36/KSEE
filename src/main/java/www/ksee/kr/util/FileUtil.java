@@ -1,8 +1,14 @@
 package www.ksee.kr.util;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import org.imgscalr.Scalr;
 
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
@@ -49,5 +55,33 @@ public class FileUtil {
 			fileList.add(photoInfo);
 		}
 		return fileList;
+	}
+	public void resizeTo(int dw, int dh, File input) throws IOException {
+		final String ext = input.getName().substring(input.getName().lastIndexOf(".") + 1);
+		
+		// 저장된 원본파일로부터 BufferedImage 객체를 생성합니다.
+		// File originFile = new File(filePath);
+		BufferedImage srcImg = ImageIO.read(input); 
+		// 썸네일의 너비와 높이 입니다. 
+		// 원본 이미지의 너비와 높이 입니다. 
+		int ow = srcImg.getWidth(); 
+		int oh = srcImg.getHeight(); 
+		// 원본 너비를 기준으로 하여 썸네일의 비율로 높이를 계산합니다. 
+		int nw = ow; 
+		int nh = (ow * dh) / dw; 
+		// 계산된 높이가 원본보다 높다면 crop이 안되므로 
+		// 원본 높이를 기준으로 썸네일의 비율로 너비를 계산합니다. 
+		if(nh > oh) { 
+			nw = (oh * dw) / dh; 
+			nh = oh; 
+		}
+		// 계산된 크기로 원본이미지를 가운데에서 crop 합니다. 
+		BufferedImage cropImg = Scalr.crop(srcImg, (ow-nw)/2, (oh-nh)/2, nw, nh);
+
+		BufferedImage destImg = Scalr.resize(cropImg, dw, dh);
+
+		String destFilename = input.getName();
+		File destFile = new File(input.getParent() + "/" + destFilename);
+		ImageIO.write(destImg, ext, destFile);
 	}
 }

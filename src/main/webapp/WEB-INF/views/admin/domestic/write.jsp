@@ -18,7 +18,7 @@
 		var options = {
 				"opens": 'left',
 				"autoApply": true,
-				 "minYear": 2018,
+				 "minYear": 2019,
 				 "locale": {
 				        "format": "YYYY-MM-DD",
 				        "separator": " - ",

@@ -1,11 +1,14 @@
 package www.ksee.kr.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.PopupService;
+import www.ksee.kr.vo.Popup;
 
 @RequestMapping("/admin")
 @Controller
@@ -35,8 +38,10 @@ public class AdminController {
 		mv.addObject("title", "팝업관리");
 		mv.addObject("menu", 3);
 		
+		Popup popup = new Popup();
+		List<Popup> list = popupService.select(popup);
 		
-		
+		mv.addObject("list", list);		
 		mv.setViewName("/admin/popup");
 		return mv;
 	}

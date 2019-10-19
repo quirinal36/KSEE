@@ -7,13 +7,15 @@
 		(
 			symposiumTitle,
 			startDate,
-			finishDate
+			finishDate,
+			fileId
 		)
 		VALUES
 		(
 			'${symposiumTitle}',
 			'${startDate}',
-			'${finishDate}'
+			'${finishDate}',
+			${fileId}
 		)
 	</insert>
 	
