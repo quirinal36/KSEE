@@ -70,8 +70,6 @@ public class KseeController {
 		}
 		boolean result = false;
 		for(int i=1; i<UserVO.ROLES.length; i++) {
-			logger.info("UserVO.ROLES[i]: " + UserVO.ROLES[i]);
-			logger.info("is user : "+ request.isUserInRole(UserVO.ROLES[i]));
 			if(request.isUserInRole(UserVO.ROLES[i])) {
 				result = true;
 				break;
@@ -79,7 +77,11 @@ public class KseeController {
 		}
 		return result;
 	}
-	
+	protected boolean isAdmin(HttpServletRequest request) {
+		boolean result = false;
+		result = request.isUserInRole(UserVO.ADMIN);
+		return result;
+	}
 	protected Menus getCurMenus(String currentUrl, HttpServletRequest request) {
 		Menus curMenu = new Menus();
 		curMenu.setUrl(currentUrl);

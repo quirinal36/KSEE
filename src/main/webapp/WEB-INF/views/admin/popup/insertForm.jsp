@@ -13,7 +13,6 @@
 	function submit(){
 		var url = $("form").attr("action");
 		var param = $("form").serialize();
-		console.log("url:" + url);
 		
 		var pictures = [];
 		$("#picture_ul").find(".bt_del_img").each(function(i, item){
@@ -21,15 +20,15 @@
 		});
 		param += "&pictures="+pictures.join(",");
 		
-		console.log("param: " + param);
-		
 		$.ajax({
 			url : url,
 			data: param,
 			type: "POST",
 			dataType: "json"
 		}).done(function(json){
-			console.log(json);
+			if(json.result > 0){
+				window.location.replace("/admin/popup");
+			}
 		});
 	}
 	function delButtonClick(button){

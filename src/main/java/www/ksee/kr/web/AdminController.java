@@ -29,24 +29,6 @@ public class AdminController {
 	}
 	
 	/**
-	 * 팝업관리
-	 * @param mv
-	 * @return
-	 */
-	@RequestMapping(value="/popup")
-	public ModelAndView getAdminPopup(ModelAndView mv) {
-		mv.addObject("title", "팝업관리");
-		mv.addObject("menu", 3);
-		
-		Popup popup = new Popup();
-		List<Popup> list = popupService.select(popup);
-		
-		mv.addObject("list", list);		
-		mv.setViewName("/admin/popup");
-		return mv;
-	}
-	
-	/**
 	 * 사이드메뉴
 	 * @param mv
 	 * @return
