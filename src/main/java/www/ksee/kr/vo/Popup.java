@@ -15,6 +15,7 @@ public class Popup {
 	String startDate;
 	String finishDate;
 	int fileId;
+	int enFileId;
 	Date wdate;
 	Date mdate;
 }

@@ -23,4 +23,5 @@ public class ApplyVO extends Paging{
 	String domain;
 	int fileId;
 	Date mdate;
+	int status;
 }

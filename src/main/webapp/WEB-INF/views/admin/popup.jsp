@@ -60,9 +60,9 @@ function deletePopup(id){
 					</tbody>
 				</table>
 				<div class="bt_wrap">
-					<a href="<c:url value="/popup/insertForm"/>" class="bt1 on">팝업 등록</a>
-					<input type="hidden" name="del-url" value="<c:url value="/popup/delete"/>"/>
-					<input type="hidden" name="edit-url" value="<c:url value="/popup/editForm/"/>"/>
+					<a href="<c:url value="/admin/popup/insertForm"/>" class="bt1 on">팝업 등록</a>
+					<input type="hidden" name="del-url" value="<c:url value="/admin/popup/delete"/>"/>
+					<input type="hidden" name="edit-url" value="<c:url value="/admin/popup/editForm/"/>"/>
 				</div>
 				
 				

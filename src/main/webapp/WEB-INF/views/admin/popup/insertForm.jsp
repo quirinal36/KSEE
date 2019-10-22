@@ -13,23 +13,25 @@
 	function submit(){
 		var url = $("form").attr("action");
 		var param = $("form").serialize();
+		var fileId = $(".bt_del_img:first").val();
+		var enFileId = $(".bt_del_img:last").val();
+		param += "&fileId="+fileId;
+		param += "&enFileId="+enFileId;
 		
-		var pictures = [];
-		$("#picture_ul").find(".bt_del_img").each(function(i, item){
-			pictures.push($(item).val());
-		});
-		param += "&pictures="+pictures.join(",");
+		console.log(param);
 		
-		$.ajax({
-			url : url,
-			data: param,
-			type: "POST",
-			dataType: "json"
-		}).done(function(json){
-			if(json.result > 0){
-				window.location.replace("/admin/popup");
-			}
-		});
+		if(confirm("저장하시겠습니까?")){
+			$.ajax({
+				url : url,
+				data: param,
+				type: "POST",
+				dataType: "json"
+			}).done(function(json){
+				if(json.result > 0){
+					window.location.replace("/admin/popup/");
+				}
+			});
+		}
 	}
 	function delButtonClick(button){
 		var id = $(button).val();
@@ -93,14 +95,14 @@
 		$(".date_chk").find("input[name='period']").val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
 	});
 	
-	$('#imageupload').fileupload({
+	$('.imageupload').fileupload({
     	imageCrop: true,
         dataType: 'json',
         done: function (e, data) {
-        	
+        	var ul = $(this).parent().find("ul");
         	var file = data.result.file;
-        	$("#picture_ul").empty();
-        	$("#picture_ul").append(
+        	ul.empty();
+        	ul.append(
        			$("<li>").attr("style", "background-image: url(" + file.url + ");")
        				.append(
        						$("<input>").attr("type","button").attr("title","삭제").addClass("bt_del_img")
@@ -145,7 +147,7 @@ $(window).on("beforeunload", function(){
 			<div id="contentsPrint">
 				<!-- 여기부터 팝업 등록화면 -->
 				<div class="admin_title">팝업 등록</div>
-				<form action="<c:url value="/popup/insert"/>">
+				<form action="<c:url value="/admin/popup/insert"/>">
 					<table class="tbl1">
 						<colgroup>
 							<col width="15%">
@@ -174,19 +176,31 @@ $(window).on("beforeunload", function(){
 				</form>
 				<div class="board_write_img popup_write_img" id="dropzone-img">
 					<dl>
-						<dt>사진</dt>
+						<dt>국문사진</dt>
 						<dd>
 							<!-- 사진 목록 -->
-							<ul id="picture_ul">
-								<!-- 
-								<li style="background-image: url(/resources/img/temp/3.png);">
-									<input type="button" title="삭제" class="bt_del_img">
-								</li>
-								 -->
+							<ul>
+								
 							</ul>
 							<!-- 첨부하기 버튼 -->
-							<input id="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image" multiple="">
-						    <div id="progress_img" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+							<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+						    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+						        <div class="progress-bar" style="width: 0%;"></div>
+						    </div>
+						</dd>
+					</dl>
+				</div>
+				<div class="board_write_img popup_write_img" id="dropzone-img-en">
+					<dl>
+						<dt>영문사진</dt>
+						<dd>
+							<!-- 사진 목록 -->
+							<ul>
+								
+							</ul>
+							<!-- 첨부하기 버튼 -->
+							<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+						    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
 						        <div class="progress-bar" style="width: 0%;"></div>
 						    </div>
 						</dd>
@@ -195,7 +209,7 @@ $(window).on("beforeunload", function(){
 				<p class="popup_img_guide">팝업 이미지의 사이즈는 624*337이며, 좌우 여백 90px이 확보되어야 합니다.</p>
 				<div class="bt_wrap">
 					<a href="javascript:void(0);" class="bt1 on" onclick="javascript:submit();">등록</a>
-					<a href="<c:url value="/admin/popup"/>" class="bt1">취소</a>
+					<a href="<c:url value="/admin/popup/"/>" class="bt1">취소</a>
 				</div>
 			</div>
 		</div>

@@ -49,5 +49,7 @@ public class ApplyService implements DataService<ApplyVO> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	public ApplyVO search(ApplyVO input) {
+		return dao.search(input);
+	}
 }

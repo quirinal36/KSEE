@@ -8,14 +8,16 @@
 			symposiumTitle,
 			startDate,
 			finishDate,
-			fileId
+			fileId,
+			enFileId
 		)
 		VALUES
 		(
 			'${symposiumTitle}',
 			'${startDate}',
 			'${finishDate}',
-			${fileId}
+			${fileId},
+			${enFileId}
 		)
 	</insert>
 	
@@ -25,7 +27,8 @@
 			symposiumTitle = '${symposiumTitle}',
 			startDate = '${startDate}',
 			finishDate = '${finishDate}',
-			fileId = ${fileId}
+			fileId = ${fileId},
+			enFileId =${enFileId}
 		</set>
 		<where>
 			id=${id}

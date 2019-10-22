@@ -141,11 +141,6 @@ public class SymposiumController extends KseeController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/search/apply", method = RequestMethod.GET)
-	public ModelAndView applyView(ModelAndView mv) {
-		mv.setViewName("/symposium/searchApply");
-		return mv;
-	}
 	@ResponseBody
 	@RequestMapping(value="/apply", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String applySend(ApplyVO apply,

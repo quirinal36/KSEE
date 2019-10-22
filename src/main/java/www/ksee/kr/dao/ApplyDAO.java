@@ -50,5 +50,7 @@ public class ApplyDAO implements DataAccess<ApplyVO> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	public ApplyVO search(ApplyVO input) {
+		return sqlSession.selectOne(namespace+".search", input);
+	}
 }

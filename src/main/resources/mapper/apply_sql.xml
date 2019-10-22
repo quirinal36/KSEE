@@ -72,6 +72,26 @@
 			id = ${id}
 		</where>
 	</select>
+	
+	<select id="search" parameterType="apply" resultType="apply">
+		SELECT *
+		FROM Apply
+		<where>
+			sympId = ${sympId}
+			<if test="@www.ksee.kr.util.StringUtil@notEmpty(username)">
+				and (
+					username like '%${username}%'
+				)
+			</if>
+			<if test="@www.ksee.kr.util.StringUtil@notEmpty(telephone)">
+				and (
+					telephone like '%${telephone}%'
+				)
+			</if>
+		</where>
+		limit 0, 1
+	</select>
+	
 	<delete id="delete" parameterType="apply">
 		DELETE FROM Apply
 		<where>

@@ -59,26 +59,15 @@ public class PopupController extends KseeController{
 	@ResponseBody
 	@RequestMapping(value = "/insert", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String insert(Popup popup,
-			@RequestParam(value="pictures", required = false)Optional<Integer> picture,
 			HttpServletRequest request) {
-		FileUtil fileUtil = new FileUtil();
 		JSONObject json = new JSONObject();
 		if(isAdmin(request)) {
-			if(picture.isPresent()) {
-				PhotoInfo photoInfo = PhotoInfo.newInstance(0);
-				photoInfo.setId(picture.get());
-				photoInfo = photoInfoService.selectOne(photoInfo);
-				
-				File file = new File(fileUtil.makeUserPath() + File.separator + photoInfo.getNewFilename());
-				if(file.exists()) {
-					try {
-						fileUtil.resizeTo(IMG_WIDTH, IMG_HEIGHT, file);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					popup.setFileId(photoInfo.getId());
-				}
-			}		
+			if(popup.getFileId() > 0) {
+				resizePhoto(popup.getFileId());
+			}
+			if(popup.getEnFileId() > 0) {
+				resizePhoto(popup.getEnFileId());
+			}	
 		}else {
 			json.put("result", -1);
 			json.put("msg", "관리자 계정으로 로그인 해주세요.");
@@ -116,6 +105,12 @@ public class PopupController extends KseeController{
 				photoInfo = photoInfoService.selectOne(photoInfo);
 				mv.addObject("photo", photoInfo);
 			}
+			if(popup.getEnFileId() > 0) {
+				PhotoInfo photoInfo = PhotoInfo.newInstance(0);
+				photoInfo.setId(popup.getEnFileId());
+				photoInfo = photoInfoService.selectOne(photoInfo);
+				mv.addObject("enPhoto", photoInfo);
+			}
 		}
 		
 		mv.setViewName("/admin/popup/editForm");
@@ -125,27 +120,15 @@ public class PopupController extends KseeController{
 	@ResponseBody
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String edit(Popup popup,
-			@RequestParam(value="pictures", required = false)Optional<Integer> picture,
 			HttpServletRequest request) {
-		FileUtil fileUtil = new FileUtil();
 		JSONObject json = new JSONObject();
 		if(isAdmin(request)) {
-			if(picture.isPresent()) {
-				PhotoInfo photoInfo = PhotoInfo.newInstance(0);
-				photoInfo.setId(picture.get());
-				photoInfo = photoInfoService.selectOne(photoInfo);
-				
-				File file = new File(fileUtil.makeUserPath() + File.separator + photoInfo.getNewFilename());
-				if(file.exists()) {
-					try {
-						fileUtil.resizeTo(IMG_WIDTH, IMG_HEIGHT, file);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					popup.setFileId(photoInfo.getId());
-				}
+			if(popup.getFileId() > 0) {
+				resizePhoto(popup.getFileId());
 			}
-			
+			if(popup.getEnFileId() > 0) {
+				resizePhoto(popup.getEnFileId());
+			}
 			int result = popupService.update(popup);
 			json.put("result", result);
 		}else {
@@ -154,9 +137,24 @@ public class PopupController extends KseeController{
 		}
 		return json.toString();
 	}
-	
+	private void resizePhoto(int fileId) {
+		FileUtil fileUtil = new FileUtil();
+		
+		PhotoInfo photoInfo = PhotoInfo.newInstance(0);
+		photoInfo.setId(fileId);
+		photoInfo = photoInfoService.selectOne(photoInfo);
+		
+		File file = new File(fileUtil.makeUserPath() + File.separator + photoInfo.getNewFilename());
+		if(file.exists()) {
+			try {
+				fileUtil.resizeTo(IMG_WIDTH, IMG_HEIGHT, file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	@ResponseBody
-	@RequestMapping(value = "/delete", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	@RequestMapping(value = {"/delete", "/delete/{id}"}, method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String delete(@PathVariable(value="id")Optional<Integer>id,
 			HttpServletRequest request) {
 		JSONObject json = new JSONObject();
