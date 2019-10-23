@@ -66,7 +66,8 @@
 		</where>
 	</select>
 	<select id="select_one" parameterType="apply" resultType="apply">
-		SELECT *
+		SELECT *,
+			(SELECT name FROM FileInfo WHERE id=fileId) AS filename
 		FROM Apply
 		<where>
 			id = ${id}

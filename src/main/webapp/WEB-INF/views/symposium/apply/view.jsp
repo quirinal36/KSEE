@@ -90,7 +90,7 @@
 								<dl>
 									<dt>학술대회 초록</dt>
 									<dd>
-										<a href="<c:url value="/upload/get/${apply.fileId }"/>">파일명(다운로드 링크)</a>
+										<a href="<c:url value="/upload/get/${apply.fileId }"/>">${apply.filename }</a>
 									</dd>
 								</dl>
 							</c:if>

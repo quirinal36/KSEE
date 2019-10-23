@@ -185,7 +185,7 @@ function applySubmit(){
 											 -->
 										</ul>
 										<input id="fileupload" type="file" name="files[]" 
-											data-url="<c:url value="/upload/file"/>" multiple>
+											data-url="<c:url value="/upload/file"/>">
 									    <div id="progress_file">
 									        <div class="progress-bar" style="width: 0%;"></div>
 									    </div>
@@ -218,6 +218,7 @@ $(document).ready(function(){
         	
         	var file = data.result.file;
             
+        	$("#file_ul").empty();
            	$("#file_ul").append(
            		$("<li>").append(
            			$("<span>").text(file.name)
