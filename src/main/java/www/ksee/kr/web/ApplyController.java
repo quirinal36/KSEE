@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,21 +41,54 @@ public class ApplyController extends KseeController{
 		mv.setViewName("/symposium/searchApply");
 		return mv;
 	}
-	
+	@RequestMapping(value="/view/{id}", method = RequestMethod.GET)
+	public ModelAndView showView(ModelAndView mv, HttpServletRequest request,
+			@PathVariable(value="id")Integer id) {
+		final String currentUrl = "/symposium/apply/search";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
+		mv.addObject("title", "참가신청 조회");
+		
+		ApplyVO apply = new ApplyVO();
+		apply.setId(id);
+		apply = applyService.selectOne(apply);
+		
+		mv.addObject("apply", apply);
+		
+		mv.setViewName("/symposium/apply/view");
+		return mv;
+	}
+	@RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editView(ModelAndView mv, HttpServletRequest request,
+			@PathVariable(value="id")Integer id) {
+		final String currentUrl = "/symposium/apply/search";
+		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		
+		mv.addObject("title", "참가신청 수정");
+		
+		ApplyVO apply = new ApplyVO();
+		apply.setId(id);
+		apply = applyService.selectOne(apply);
+		
+		mv.addObject("apply", apply);
+		
+		mv.setViewName("/symposium/apply/editForm");
+		return mv;
+	}
 	@ResponseBody
 	@RequestMapping(value="/search", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String search(ApplyVO apply) {
 		JSONObject json = new JSONObject();
 		
-		ApplyVO searchList = applyService.search(apply);
+		ApplyVO searchResult = applyService.search(apply);
 		
-		if(searchList != null) {
+		if(searchResult != null) {
 			json.put("result", 1);
-			json.put("status", searchList.getStatus());
+			json.put("status", searchResult.getStatus());
+			json.put("applyId", searchResult.getId());
 		}else {
 			json.put("result", 0);
 		}
-		logger.info(apply.toString());
 		
 		return json.toString();
 	}

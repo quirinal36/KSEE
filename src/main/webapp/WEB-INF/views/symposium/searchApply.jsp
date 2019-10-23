@@ -22,6 +22,8 @@ function applySearch(){
 		});
 		
 		if(json.result > 0){
+			$(".applyId").val(json.applyId);
+			
 			if(json.status == 1){
 				$(".apply_search_result.apply").show();
 			}else if(json.status == 2){
@@ -32,7 +34,11 @@ function applySearch(){
 		}
 	});
 }
-
+function showView(){
+	var url = $("input[name='viewUrl']").val();
+	
+	window.location.replace(url +"/" + $(".applyId").val());
+}
 $(document).ready(function(){
 	$("input[name='national']").change(function(){
 		$("input[name='national']").each(function(){
@@ -133,13 +139,15 @@ $(document).ready(function(){
 							<!-- 접수 중 -->
 							<div class="apply_search_result apply">
 								<p><span>[접수 중]</span> 상태입니다.</p>
-								<a href="#" class="bt2 on">신청서 보기</a>
-								<a href="#" class="bt2">신청 취소</a>
+								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">신청서 보기</a>
+								<a href="javascript:void(0);" onclick="javascript:delete();" class="bt2">신청 취소</a>
+								<input type="hidden" value="" class="applyId"/>
+								<input type="hidden" name="viewUrl" value="<c:url value="/symposium/apply/view"/>"/>
 							</div>
 							<!-- 신청완료 -->
 							<div class="apply_search_result complete">
 								<p><span>[신청완료]</span> 상태입니다.</p>
-								<a href="#" class="bt2 on">신청서 보기</a>
+								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">신청서 보기</a>
 							</div>
 							<!-- 신청취소 -->
 							
