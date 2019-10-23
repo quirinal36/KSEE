@@ -22,8 +22,8 @@
 					<colgroup>
 						<col width="20%">
 						<col width="20%">
-						<col width="20%">
-						<col width="40%">
+						<col width="30%">
+						<col width="30%">
 					</colgroup>
 					<thead>
 						<tr>

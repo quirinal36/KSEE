@@ -8,6 +8,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>한국효소공학연구회</title>
 <c:import url="/inc/head"></c:import>
+<script>
+// 모바일 팝업 가로길이
+
+$(document).ready(function(){
+	resizePopup();
+});
+
+//리사이징 됐을 때
+$(window).resize(function(){
+	resizePopup();
+});
+
+function resizePopup(){
+	var popup_width = $(document).width();
+	// console.log( popup_width );
+	var popup_height = popup_width / 100 * 54 - 5;
+	// console.log( popup_height );
+	var windowWidth = $( window ).width();
+	if(windowWidth <= 800) {
+		$(".idx_popup_wrap, .idx_popup_wrap .item a").height( popup_height + "px" );
+	}
+};
+</script>
 </head>
 <body>
 <div id="wrap">

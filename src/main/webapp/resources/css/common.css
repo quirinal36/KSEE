@@ -88,6 +88,26 @@ input.bt3.on {
 
 input.ipt1 { padding: 0 10px 10px 10px; box-sizing: border-box; border-bottom: 1px solid #333; font-size: 15px; }
 input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font-size: 15px; }
+@media ( max-width: 800px ) {
+	a.bt1,
+	input.bt1 {
+		min-width: 80px;
+		padding: 4px 10px;
+		font-size: 14px;
+	}
+	a.bt3,
+	input.bt3 {
+		margin-top: 20px;
+		padding: 8px 0 9px 0;
+		font-size: 14px;
+	}
+	input.ipt1,
+	input.ipt2 {
+		font-size: 13px;
+	}
+}
+
+
 
 /* 검색입력 */
 .search_ipt { position: relative; display: inline-block; vertical-align: middle; }
@@ -124,6 +144,12 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 	line-height: 100%;
 	font-size: 15px;
 	cursor: pointer;
+}
+@media ( max-width: 800px ) {
+	.chk1 + label,
+	.radio1 + label {
+		font-size: 14px;
+	}
 }
 .chk1 + label { background: url(/resources/img/contents/chk1.png) no-repeat 0 3px; background-size: 16px; }
 .chk1:checked + label { background-image: url(/resources/img/contents/chk1_on.png); }

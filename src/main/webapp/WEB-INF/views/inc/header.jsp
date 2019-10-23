@@ -15,6 +15,23 @@ $(document).ready(function(){
 			searchAll();
 		}
 	});
+	
+	
+	// mobile gnb
+	$(".gnb_m_opener").click(function(){
+		$(".gnb_m_menu").fadeIn();
+	});
+	$(".gnb_m_close").click(function(){
+		$(".gnb_m_menu").fadeOut();
+	});
+	
+	$(".gnb_m_menu .dep1 > li > a").click(function(){
+		$(".gnb_m_menu .dep1 > li > a").removeClass("on");
+		$(this).addClass("on");
+		$(".gnb_m_menu .dep1 > li > ul").hide();
+		$(this).find("+ ul").slideDown();
+	});
+	
 });
 </script>
 <header>
@@ -64,6 +81,32 @@ $(document).ready(function(){
 										</c:forEach>
 									</ul>
 								</li>
+							</c:forEach>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="gnb_m_wrap">
+				<input type="button" class="gnb_m_opener" value="메뉴 열">
+				<div class="gnb_m_menu">
+					<div class="bg"></div>
+					<div class="menu_area">
+						<div class="top">
+							<a href="/" class="logo"><img src="<c:url value="/resources/img/comm/logo.png"/>" alt="한국효소공학연구회"></a>
+							<input type="button" class="gnb_m_close" value="메뉴 닫기">
+						</div>
+						<ul class="dep1">
+							<c:forEach items="${parents }" var="pmenu">
+							<li>
+								<a href="javascript:void(0);">${pmenu.title }</a>
+								<ul class="dep2">
+									<c:forEach items="${children }" var="item">
+										<c:if test="${pmenu.id eq item.parent}">
+											<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</li>
 							</c:forEach>
 						</ul>
 					</div>

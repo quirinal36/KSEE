@@ -102,3 +102,49 @@
 	margin-top: 0;
 }
 .idx_banner a img { width: 85%; }
+
+
+
+/* 반응형 */
+@media ( max-width: 800px ) {
+	.idx_intro { min-width: auto; padding: 40px 0 44px 0; }
+	.idx_intro > .title span { margin-bottom: 10px; padding: 2px 12px 4px 12px; border: 1px solid #fff; font-size: 24px; letter-spacing: -1px; }
+	.idx_intro > .title span:first-child { display: none; }
+	.idx_intro > .text { font-size: 12px; }
+	.idx_intro > .text span { font-size: 14px; }
+	.idx_cont { padding: 10px 0; }
+	.idx_cont > div { width: auto; min-width: auto; max-width: unset; }
+	.idx_cont > div > div { width: 100%; height: auto; margin-top: 10px !important; }
+	.idx_cont > div > div:nth-child(odd) { margin-right: 0; }
+	.idx_popup_wrap { border-radius: 0; }
+	.idx_popup_wrap .item a { height: calc( 100% ); }
+	.idx_notice_list > .title, .idx_board_list > .title { height: 47px; padding: 19px 20px 0 20px; }
+	.idx_notice_list > .title a.name, .idx_board_list > .title a.name { padding-bottom: 10px; font-size: 16px; }
+	.idx_notice_list > .title a.more, .idx_board_list > .title a.more { width: 20px; height: 14px; margin-top: -1px; background-size: 20px; }
+	.idx_notice_list .list { padding: 14px 20px; }
+	.idx_notice_list li { padding: 4px 0 10px 0; border-top: 1px dashed #ddd; }
+	.idx_notice_list .date strong { font-size: 24px; }
+	.idx_notice_list .date span { letter-spacing: -1px; }
+	.idx_notice_list .cont .title { font-size: 16px; font-weight: 400; }
+	.idx_notice_list .cont .text { font-weight: 100; }
+	.idx_board_list .first { padding: 12px 20px 15px 20px; }
+	.idx_board_list .first a { font-size: 16px; font-weight: 400; }
+	.idx_board_list .first span { top: 16px; right: 20px; font-size: 12px; font-weight: 100; }
+	.idx_board_list ul { padding: 16px 20px; }
+	.idx_board_list ul li a { font-size: 14px; letter-spacing: -0.5px; }
+	.idx_board_list ul li span { font-size: 12px; font-weight: 100; }
+	.idx_banner { width: 100%; min-width: auto; max-width: unset; padding: 20px; box-sizing: border-box; }
+	.idx_banner a { width: 19.2%; margin: 6px 0 0 1%; }
+
+
+
+
+
+
+
+
+
+
+
+}
+/**/

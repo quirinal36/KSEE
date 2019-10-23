@@ -107,7 +107,7 @@
 	</script>
 </head>
 <body>
-<div class="wrap">
+<div id="wrap">
 	<c:import url="/inc/header"></c:import>
 	<div class="container_wrap">
 		<div class="container">

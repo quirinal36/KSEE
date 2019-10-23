@@ -14,7 +14,7 @@
 </script>
 </head>
 <body>
-<div id="wrap">
+<div id="wrap" class="search_page">
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
@@ -57,7 +57,6 @@
 						<ul class="list">
 							<li class="head">
 								<div class="num">번호</div>
-								<div class="category">구분</div>
 								<div class="title">제목</div>
 								<div class="writer">작성자</div>
 								<div class="date">작성일</div>
@@ -69,7 +68,6 @@
 									<c:forEach items="${list }" var="item" varStatus="sts">
 										<li>
 											<div class="num">${item.id }</div>
-											<div class="category">${item.boardName }</div>
 											<div class="title"><a href="/">${item.title }</a></div>
 											<div class="writer">${item.writerName }</div>
 											<div class="date"><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></div>
