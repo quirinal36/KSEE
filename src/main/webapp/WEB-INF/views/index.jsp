@@ -27,12 +27,11 @@
             	<div>
                     <div class="idx_popup_wrap">
 						<div class="idx_popup">
-							<div class="item">
-								<a href="<c:url value="/symposium/domestic/"/>" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
-							</div>
-							<div class="item">
-								<a href="<c:url value="/symposium/domestic/"/>" style="background: url(/resources/img/temp/10.png);">팝업 제목</a>
-							</div>
+							<c:forEach items="${popups }" var="item">
+								<div class="item">
+									<a href="<c:url value="${item.link }"/>" style="background: url(<c:url value="${item.url }"/>);">팝업 제목</a>
+								</div>
+							</c:forEach>
 						</div>
                     </div>
                     <div class="idx_notice_list">

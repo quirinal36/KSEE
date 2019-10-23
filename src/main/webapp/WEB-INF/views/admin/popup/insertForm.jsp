@@ -159,7 +159,7 @@ $(window).on("beforeunload", function(){
 							<tr>
 								<th>팝업 이름</th>
 								<td>
-									<input type="text" placeholder="팝업 이름 입력" class="w90 ipt2" name="symposiumTitle">
+									<input type="text" placeholder="팝업 이름 입력" class="w90 ipt2" name="popupTitle">
 								</td>
 								<th>등록기간</th>
 								<td>
@@ -169,6 +169,12 @@ $(window).on("beforeunload", function(){
 										<input type="text" value=" ~ " class="ipt_date" name="period" readonly>
 										<input type="button" value="" class="bt_date_chk" id="symposium_date_btn">
 									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>URL</th>
+								<td colspan="3">
+									<input type="text" placeholder="url 을 입력하세요." class="ipt2 w90" name="link">
 								</td>
 							</tr>
 						</tbody>

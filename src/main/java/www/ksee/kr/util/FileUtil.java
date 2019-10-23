@@ -56,7 +56,7 @@ public class FileUtil {
 		}
 		return fileList;
 	}
-	public void resizeTo(int dw, int dh, File input) throws IOException {
+	public int resizeTo(int dw, int dh, File input) throws IOException {
 		final String ext = input.getName().substring(input.getName().lastIndexOf(".") + 1);
 		
 		// 저장된 원본파일로부터 BufferedImage 객체를 생성합니다.
@@ -83,5 +83,7 @@ public class FileUtil {
 		String destFilename = input.getName();
 		File destFile = new File(input.getParent() + "/" + destFilename);
 		ImageIO.write(destImg, ext, destFile);
+		
+		return (int)destFile.length();
 	}
 }

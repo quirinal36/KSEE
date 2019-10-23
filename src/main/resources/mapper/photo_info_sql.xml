@@ -68,7 +68,8 @@
 		UPDATE PhotoInfo
 		<set>
 			url = '${url}',
-			thumbnailUrl = '${thumbnailUrl}'
+			thumbnailUrl = '${thumbnailUrl}',
+			size = ${size}
 		</set>
 		<where>
 			id=${id}

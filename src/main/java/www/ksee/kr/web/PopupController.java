@@ -147,10 +147,13 @@ public class PopupController extends KseeController{
 		File file = new File(fileUtil.makeUserPath() + File.separator + photoInfo.getNewFilename());
 		if(file.exists()) {
 			try {
-				fileUtil.resizeTo(IMG_WIDTH, IMG_HEIGHT, file);
+				int destFileSize = fileUtil.resizeTo(IMG_WIDTH, IMG_HEIGHT, file);
+				photoInfo.setSize(destFileSize);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			photoInfoService.update(photoInfo);
 		}
 	}
 	@ResponseBody

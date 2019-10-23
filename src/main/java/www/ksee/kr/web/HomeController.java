@@ -1,5 +1,6 @@
 package www.ksee.kr.web;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -7,14 +8,17 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.service.PopupService;
 import www.ksee.kr.vo.Board;
 import www.ksee.kr.vo.Paging;
+import www.ksee.kr.vo.Popup;
 import www.ksee.kr.vo.Symposium;
 
 /**
@@ -22,12 +26,21 @@ import www.ksee.kr.vo.Symposium;
  */
 @Controller
 public class HomeController extends KseeController {
+	@Autowired
+	PopupService popupService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
+		Popup pp = new Popup();
+		pp.setToday(LocalDate.now().toString());
+		pp.setLang(locale.getLanguage());
+		logger.info(pp.toString());
+		List<Popup> popupList = popupService.select(pp);
+		mv.addObject("popups", popupList);
+		
 		Board notice = Board.newInstance(0, Board.TYPE_NOTICE);
 		notice.setTotalCount(boardService.count(notice));
 		List<Board> noticeList = boardService.select(notice);

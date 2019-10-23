@@ -5,30 +5,33 @@
 	<insert id="insert" parameterType="popup" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO popup
 		(
-			symposiumTitle,
+			popupTitle,
 			startDate,
 			finishDate,
 			fileId,
-			enFileId
+			enFileId,
+			link
 		)
 		VALUES
 		(
-			'${symposiumTitle}',
+			'${popupTitle}',
 			'${startDate}',
 			'${finishDate}',
 			${fileId},
-			${enFileId}
+			${enFileId},
+			'${link}'
 		)
 	</insert>
 	
 	<update id="update" parameterType="popup">
 		UPDATE popup
 		<set>
-			symposiumTitle = '${symposiumTitle}',
+			popupTitle = '${popupTitle}',
 			startDate = '${startDate}',
 			finishDate = '${finishDate}',
 			fileId = ${fileId},
-			enFileId =${enFileId}
+			enFileId =${enFileId},
+			link = '${link}'
 		</set>
 		<where>
 			id=${id}
@@ -43,11 +46,65 @@
 	</delete>
 	
 	<select id="select" parameterType="popup" resultType="popup">
-		SELECT * FROM popup
+		SELECT 
+			id,
+			popupTitle,
+			startDate,
+			finishDate,
+			(
+				SELECT url FROM PhotoInfo WHERE
+				id = 
+				<choose>
+					<when test="@www.ksee.kr.util.StringUtil@notEmpty(lang) and lang.equalsIgnoreCase('ko') ">
+						fileId
+					</when>
+					<otherwise>
+						enFileId
+					</otherwise>
+				</choose>
+			) AS url,
+			fileId,
+			enFileId,
+			wdate,
+			mdate,
+			link
+		FROM popup
+		<where>
+			<if test="@www.ksee.kr.util.StringUtil@notEmpty(today)">
+				<![CDATA[
+				startDate <= '${today}'
+				AND
+				finishDate >= '${today}'
+				]]>
+			</if>
+		</where>
+		order by startDate
 	</select>
 	
 	<select id="select_one" parameterType="popup" resultType="popup">
-		SELECT * FROM popup
+		SELECT
+			id,
+			popupTitle,
+			startDate,
+			finishDate,
+			(
+				SELECT url FROM PhotoInfo WHERE
+				id = 
+				<choose>
+					<when test="@www.ksee.kr.util.StringUtil@notEmpty(lang) and lang.equalsIgnoreCase('ko') ">
+						fileId
+					</when>
+					<otherwise>
+						enFileId
+					</otherwise>
+				</choose>
+			) AS url,
+			fileId,
+			enFileId,
+			wdate,
+			mdate,
+			link 
+		FROM popup
 		<where>
 			id=${id}
 		</where>

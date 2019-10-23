@@ -49,7 +49,7 @@ function deletePopup(id){
 						<c:forEach items="${list }" var="item">
 							<tr>
 								<td>${item.id }</td>
-								<td>${item.symposiumTitle }</td>
+								<td>${item.popupTitle }</td>
 								<td>${item.startDate } ~ ${item.finishDate }</td>
 								<td>
 									<input type="button" value="수정" class="bt2 on" onclick="javascript:edit('${item.id}')">
