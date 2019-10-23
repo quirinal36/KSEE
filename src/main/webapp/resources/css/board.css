@@ -309,7 +309,7 @@
 	.repl_cont { font-size: 14px; }
 	.repl_edit textarea { margin-top: 10px; margin-bottom: 10px; font-size: 14px; }
 
-	.board_write { margin-top: 20px !important; width: auto; min-width: auto; max-width: unset; padding: 0 10px; }
+	.board_write { margin-top: 20px !important; width: auto; min-width: auto; max-width: unset; padding: 0 20px; }
 	.board_write_title { padding: 10px 0; }
 	.board_write_title > div { font-size: 14px; }
 	.board_write_title .title { width: 25%; text-align: left; text-indent: 20px; }
