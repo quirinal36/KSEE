@@ -112,12 +112,25 @@ public class MemberController extends KseeController{
 		return json.toString();
 	}
 	
-	@RequestMapping("/findId")
+	@RequestMapping(value="/findId", method = RequestMethod.GET)
 	public ModelAndView getFindIdView(ModelAndView mv) {
 		mv.setViewName("/member/findId");
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/findId", method = RequestMethod.POST, produces = "application/json; charset=utf8;")
+	public String postFindIdView(ModelAndView mv, UserVO user) {
+		JSONObject json = new JSONObject();
+		user = userService.selectFindId(user);
+		if(user != null && user.getId()>0) {
+			json.put("result", user.getId());
+			json.put("login", user.getLogin());
+		}else {
+			json.put("result", 0);
+		}
+		return json.toString();
+	}
 	/**
 	 * 비밀번호 찾기 화면
 	 * @param mv
@@ -134,6 +147,7 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/findPwd");
 		return mv;
 	}
+	
 	@ResponseBody
 	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String sendEmailForFindPwd(UserVO user, HttpServletRequest request,
@@ -158,6 +172,9 @@ public class MemberController extends KseeController{
 		}
 
 		String msg = messageSource.getMessage("member.find.password.submit", null, locale);
+		
+		logger.info(msg);
+		
 		final String regex = "[\\$][\\{]\\w+[\\}]";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(msg);

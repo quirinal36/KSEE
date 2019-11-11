@@ -2,6 +2,9 @@ package www.ksee.kr.vo;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -47,5 +50,8 @@ public class UserVO extends Paging{
 		UserVO user = new UserVO();
 		user.setId(id);
 		return user;
+	}
+	public String toJsonString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
 	}
 }

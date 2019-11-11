@@ -46,7 +46,9 @@ public class UserDAO implements DataAccess<UserVO> {
 	public UserVO selectOne(UserVO input) {
 		return sqlSession.selectOne(namespace +".select_one", input);
 	}
-
+	public UserVO selectFindId(UserVO input) {
+		return sqlSession.selectOne(namespace +".select_findid", input);
+	}
 	@Override
 	public int count(UserVO input) {
 		return sqlSession.selectOne(namespace+".count", input);

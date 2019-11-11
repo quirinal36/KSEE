@@ -7,11 +7,7 @@
 <c:import url="/inc/head"></c:import>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	console.log("ready");
-});
 function sendEmail(){
-	// $("form").submit();
 	var url = $("form").attr("action");
 	var param = $("form").serialize();
 	
@@ -21,6 +17,8 @@ function sendEmail(){
 		type: 'POST',
 		dataType: 'json'
 	}).done(function(json){
+		console.log(json);
+		
 		if(json.result > 0){
 			$("#result_msg p").text(json.msg);
 			
@@ -82,7 +80,6 @@ function sendEmail(){
 								<a href="<c:url value="/member/login"/>">로그인</a>
 							</div>
 						</div>
-						
 					</div>
 				</div>
 			</div>

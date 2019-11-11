@@ -73,7 +73,16 @@
 			</choose>
 		</where>
 	</select>
-	
+	<select id="select_findid" parameterType="user" resultType="user">
+		SELECT u.*, r.role_name, r.role_name_kr FROM 
+		users u 
+			LEFT JOIN roles r on (u.user_role = r.id)
+		<where>
+			u.username = '${username}'
+			and
+			u.phone = '${phone}'
+		</where>
+	</select>
 	<select id="select_no_pwd_user" parameterType="user" resultType="user">
 		SELECT u.*, r.role_name FROM 
 		users u 
