@@ -60,7 +60,9 @@ public class UserService implements DataService<UserVO> {
 	public UserVO selectOne(UserVO input) {
 		return dao.selectOne(input);
 	}
-
+	public UserVO selectFindId(UserVO input) {
+		return dao.selectFindId(input);
+	}
 	@Override
 	public int count(UserVO input) {
 		return dao.count(input);

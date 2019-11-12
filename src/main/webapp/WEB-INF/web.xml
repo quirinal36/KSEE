@@ -26,8 +26,8 @@
 	
 	<jsp-config>
 		<taglib>
-			<taglib-uri>/WEB_INF/tlds/customTags</taglib-uri>
-			<taglib-location>/WEB_INF/tlds/customTags.tld</taglib-location>
+			<taglib-uri>/WEB-INF/tlds/customTags</taglib-uri>
+			<taglib-location>/WEB-INF/tlds/customTags.tld</taglib-location>
 		</taglib>
 	</jsp-config>
 	
