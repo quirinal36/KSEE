@@ -3,6 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -59,8 +60,12 @@ function resizePopup(){
                     </div>
                     <div class="idx_notice_list">
                         <div class="title">
-                            <a href="<c:url value="/group/notice/"/>" class="name">공지사항</a>
-                            <a href="<c:url value="/group/notice/"/>" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/notice/"/>" class="name">
+                            	<spring:message code="comm.announcements" text="comm.announcements"></spring:message>
+                            </a>
+                            <a href="<c:url value="/group/notice/"/>" title="<spring:message code="comm.more" text="comm.more"></spring:message>" class="more">
+                            	<spring:message code="comm.more" text="comm.more"></spring:message>
+                            </a>
                         </div>
                         <div class="list">
                             <ul>
@@ -83,8 +88,12 @@ function resizePopup(){
                     </div>
                     <div class="idx_board_list">
                         <div class="title">
-                            <a href="<c:url value="/group/news/"/>" class="name">관련소식</a>
-                            <a href="<c:url value="/group/news/"/>" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/news/"/>" class="name">
+                            	<spring:message code="comm.relevant_news" text="comm.relevant_news"></spring:message>
+                            </a>
+                            <a href="<c:url value="/group/news/"/>" title="<spring:message code="comm.more" text="comm.more"></spring:message>" class="more">
+                            	<spring:message code="comm.more" text="comm.more"></spring:message>
+                            </a>
                         </div>
                         <div class="list">
                         	<c:forEach items="${newsBoardList }" var="item" begin="0" end="0">
@@ -106,8 +115,12 @@ function resizePopup(){
 					</div>
                     <div class="idx_board_list">
                         <div class="title">
-                            <a href="<c:url value="/group/free/"/>" class="name">자유게시판</a>
-                            <a href="<c:url value="/group/free/"/>" title="더 보기" class="more">더 보기</a>
+                            <a href="<c:url value="/group/free/"/>" class="name">
+                            	<spring:message code="comm.bulletin_board" text="comm.bulletin_board"></spring:message>
+                            </a>
+                            <a href="<c:url value="/group/free/"/>" title="<spring:message code="comm.more" text="comm.more"></spring:message>" class="more">
+                            	<spring:message code="comm.more" text="comm.more"></spring:message>
+                            </a>
                         </div>
 						<div class="list">
 							<c:forEach items="${freeBoardList }" var="item" begin="0" end="0">

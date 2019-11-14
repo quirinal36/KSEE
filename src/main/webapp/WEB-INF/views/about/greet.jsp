@@ -22,8 +22,8 @@
 				<div class="greet_title">
 					<div>
 						<div>
-							<span>Bio-based Economy의 핵심</span>
-							<strong>효소공학연구회 회원님들께</strong>
+							<span><spring:message code="cont.greet_tit1" text="cont.greet_tit1"></spring:message></span>
+							<strong><spring:message code="cont.greet_tit2" text="cont.greet_tit2"></spring:message></strong>
 						</div>
 					</div>
 				</div>

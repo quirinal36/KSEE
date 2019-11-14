@@ -1,25 +1,34 @@
 <%@ page session="false" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <footer>
 	<div id="footer_wrap">
 		<div class="menu">
 			<div>
-				<a href="<c:url value="/about/greet"/>">인사말</a>
-				<a href="<c:url value="/about/term"/>">정관</a>
-				<a href="#">개인정보취급방침</a>
-				<a href="#">이메일무단수집거부</a>
+				<a href="<c:url value="/about/greet"/>">
+					<spring:message code="comm.greetings" text="comm.greetings"></spring:message>
+				</a>
+				<a href="<c:url value="/about/term"/>">
+					<spring:message code="comm.articles_of_ksee" text="comm.articles_of_ksee"></spring:message>
+				</a>
+				<a href="#">
+					<spring:message code="comm.personal_information" text="comm.personal_information"></spring:message>
+				</a>
+				<a href="#">
+					<spring:message code="comm.refuse_email" text="comm.refuse_email"></spring:message>
+				</a>
 			</div>
 		</div>
 		<div class="text">
 			<div>
 				<ul>
-					<li>사단법인 한국효소공학연구회</li>
-					<li>회장 : 김학성</li>
-					<li>법인등록번호 : 160121-0010068</li>
+					<li><spring:message code="comm.co_ksee" text="comm.co_ksee"></spring:message></li>
+					<li><spring:message code="comm.president" text="comm.president"></spring:message></li>
+					<li><spring:message code="comm.co_num" text="comm.co_num"></spring:message></li>
 				</ul>
 				<ul>
-					<li>대전광역시 유성구 대학로 291, 생명과학과 3201호(구성동, 한국과학기술원)</li>
-					<li>전화 : 042-860-4373</li>
+					<li><spring:message code="comm.co_address" text="comm.co_address"></spring:message></li>
+					<li><spring:message code="comm.co_tel" text="comm.co_tel"></spring:message></li>
 				</ul>
 				<p>COPYRIGHT <span>KSEE</span>. ALL RIGHTS RESERVED.</p>
 			</div>
