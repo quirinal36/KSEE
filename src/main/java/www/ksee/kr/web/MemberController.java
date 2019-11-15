@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sendgrid.SendGridException;
 
@@ -38,7 +39,7 @@ public class MemberController extends KseeController{
 			HttpServletRequest request,
 			@RequestParam(value = "loginRedirect", required = false) String redirectUrl) {
 		final String currentUrl = "/member/login";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		String refererUrl = request.getHeader("Referer");
 		if (redirectUrl != null) {
@@ -53,7 +54,7 @@ public class MemberController extends KseeController{
 	public ModelAndView getSignupView(ModelAndView mv,
 			HttpServletRequest request, @PathVariable(value="complete")Optional<String> complete) {
 		final String currentUrl = "/member/signup";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "회원가입");
 		
 		if(isLoginedUser(request) && complete.isPresent()) {
@@ -76,17 +77,20 @@ public class MemberController extends KseeController{
 			HttpServletRequest request) {
 		final String inputPwd = user.getPassword();
 		int result = userService.insert(user);
-		// 회원가입 직후 로그인
-		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(user.getLogin(), inputPwd);
-		authToken.setDetails(new WebAuthenticationDetails(request));
-		Authentication authentication = authenticationManager.authenticate(authToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
+		// 회원가입 직후 로그인
+		login(user.getLogin(), inputPwd, request);
+
 		JSONObject json = new JSONObject();
 		json.put("result", result);
 		return json.toString();
 	}
-	
+	private void login(String login, String inputPwd, HttpServletRequest request) {
+		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(login, inputPwd);
+		authToken.setDetails(new WebAuthenticationDetails(request));
+		Authentication authentication = authenticationManager.authenticate(authToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+	}
 	/**
 	 * 중복 아이디가 존재하는지 
 	 * @param user
@@ -143,7 +147,7 @@ public class MemberController extends KseeController{
 			return mv;
 		}
 		final String currentUrl = "/member/findPwd";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.setViewName("/member/findPwd");
 		return mv;
 	}
@@ -155,8 +159,9 @@ public class MemberController extends KseeController{
 		JSONObject json = new JSONObject();
 		UserVO selectedUser = userService.selectOne(user);
 		
-		EmailToken resetToken = new EmailToken(selectedUser.getId(), UUID.randomUUID().toString());
+		EmailToken resetToken = EmailToken.newInstance(selectedUser.getId(), UUID.randomUUID().toString());
 		resetToken.setIsPwd(EmailToken.IS_PWD);
+		resetToken.setUserId(selectedUser.getId());
 		int result = tokenService.insert(resetToken);
 		if(result > 0) {
 			final String baseUrl = getBaseUrl(request);
@@ -173,21 +178,33 @@ public class MemberController extends KseeController{
 
 		String msg = messageSource.getMessage("member.find.password.submit", null, locale);
 		
-		logger.info(msg);
-		
-		final String regex = "[\\$][\\{]\\w+[\\}]";
+		final String regex = "\\{(email)\\}";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(msg);
 		if (matcher.find()) {
 			// 사용자 email
-			msg = msg.replace(matcher.group(0), user.getEmail()+"@"+user.getDomain());
+			msg = msg.replace(matcher.group(0), user.getEmail());
 		}
 		json.put("msg", msg);
 		return json.toString();
 	}
 	@RequestMapping(value="/validate/token")
-	public ModelAndView getValidateTokenView(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView getValidateTokenView(ModelAndView mv, 
+			EmailToken emailToken, HttpServletRequest request) {
+		final String currentUrl = "/member/newPwd";
+		
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "비밀번호변경");
+		
+		EmailToken selectedToken = tokenService.selectOne(emailToken);
+		if(selectedToken.getId() > 0) {
+			boolean isValid = selectedToken.isValidToken(emailToken.getToken());
+			
+			if(isValid) {
+				UserVO user = userService.selectOne(UserVO.newInstanse(emailToken.getUserId()));
+				mv.addObject("user", user);
+			}
+		}
 		return mv;
 	}
 	/**
@@ -198,7 +215,8 @@ public class MemberController extends KseeController{
 	@RequestMapping("/newPwd")
 	public ModelAndView getNewPwdView(ModelAndView mv, HttpServletRequest request) {
 		final String currentUrl = "/member/newPwd";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
+	
 		UserVO user = getUser();
 		mv.addObject("user", user);
 		mv.setViewName("/member/newPwd");
@@ -211,12 +229,20 @@ public class MemberController extends KseeController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/newPwd/send", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	@RequestMapping(value= {"/newPwd/send", "/newPwd/send/{userId}"}, method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String sendNewPwd(UserVO user, HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response, @PathVariable("userId")Optional<Integer>userId) {
 		JSONObject json = new JSONObject();
 		
-		if(isLoginedUser(request)) {
+		if(userId.isPresent()) {
+			UserVO cUser = UserVO.newInstanse(userId.get());
+			cUser.setPassword(user.getPassword());
+			int result = userService.update(cUser);
+			json.put("result", result);
+			if(result > 0) {
+				tokenService.delete(EmailToken.newInstance(user.getId()));
+			}
+		}else if(isLoginedUser(request)) {
 			UserVO loginedUser = getUser();
 			loginedUser.setPassword(user.getPassword());
 			json.put("result", userService.update(loginedUser));
@@ -237,7 +263,7 @@ public class MemberController extends KseeController{
 		}
 		
 		final String currentUrl = "/member/myinfo";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		UserVO user = getUser();
 		
 		mv.addObject("user", user);
@@ -268,7 +294,7 @@ public class MemberController extends KseeController{
 		}
 		
 		final String currentUrl = "/member/myinfo";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		UserVO user = getUser();
 		
 		mv.addObject("user", user);

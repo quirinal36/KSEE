@@ -7,7 +7,10 @@
 <c:import url="/inc/head"></c:import>
 
 <script type="text/javascript">
-function sendEmail(){
+function sendEmail(button){
+	$(button).removeClass("on");
+	$(button).attr("disabled", true);
+	
 	var url = $("form").attr("action");
 	var param = $("form").serialize();
 	
@@ -64,11 +67,11 @@ function sendEmail(){
 								</dd>
 							</dl>
 							
-							<input type="button" value="비밀번호 찾기" class="bt3 on" onclick="javascript:sendEmail();">
+							<input type="button" value="비밀번호 찾기" class="bt3 on" onclick="javascript:sendEmail(this);">
 						</form>
 						<div class="result" id="result_msg">
 							<p>
-								회원님의 이메일 주소(${user.email }@${user.domain })로<br>
+								회원님의 이메일 주소(${user.email })로<br>
 								비밀번호 변경 링크를 보내드렸습니다.<br>
 								메일이 오지 않는 경우 스팸/광고메일함을 확인해주세요.
 							</p>

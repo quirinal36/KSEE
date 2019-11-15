@@ -35,12 +35,16 @@ public class EmailToken extends PasswordResetToken {
 	public EmailToken() {
 		
 	}
-	public EmailToken(Integer userId) {
-		this.user_id = userId;
+	public static EmailToken newInstance(Integer userId) {
+		EmailToken result = new EmailToken();
+		result.setUser_id(userId);
+		return result;
 	}
-	public EmailToken(Integer userId, String token) {
-		this.user_id = userId;
-		this.token = token;
+	public static EmailToken newInstance(Integer userId, String token) {
+		EmailToken result = new EmailToken();
+		result.setUser_id(userId);
+		result.setToken(token);
+		return result;
 	}
 	public boolean isValidToken(String input) {
 		boolean result = false;
@@ -91,7 +95,7 @@ public class EmailToken extends PasswordResetToken {
 					.append(appUrl)
 					.append("/member/validate/token")
 					.append("?token=").append(usertoken.getToken())
-					.append("&id=").append(user.getId())
+					.append("&userId=").append(user.getId())
 					.append("&lang=").append(locale)
 					.toString();
 

@@ -23,7 +23,7 @@ public class ApplyController extends KseeController{
 	@RequestMapping(value="/search", method = RequestMethod.GET)
 	public ModelAndView applyView(ModelAndView mv, HttpServletRequest request) {
 		final String currentUrl = "/symposium/apply/search";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "참가신청 조회");
 		
@@ -46,7 +46,7 @@ public class ApplyController extends KseeController{
 	public ModelAndView showView(ModelAndView mv, HttpServletRequest request,
 			@PathVariable(value="id")Integer id) {
 		final String currentUrl = "/symposium/apply/search";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "참가신청 조회");
 		
@@ -63,7 +63,7 @@ public class ApplyController extends KseeController{
 	public ModelAndView editView(ModelAndView mv, HttpServletRequest request,
 			@PathVariable(value="id")Integer id) {
 		final String currentUrl = "/symposium/apply/search";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "참가신청 수정");
 		

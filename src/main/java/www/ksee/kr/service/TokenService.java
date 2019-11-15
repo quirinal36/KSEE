@@ -25,8 +25,7 @@ public class TokenService implements DataService<EmailToken> {
 
 	@Override
 	public int delete(EmailToken input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.delete(input);
 	}
 
 	@Override

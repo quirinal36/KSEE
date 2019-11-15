@@ -14,7 +14,7 @@ public class AboutController extends KseeController{
 	public ModelAndView getHomeView(ModelAndView mv,
 			HttpServletRequest request) {
 		final String currentUrl = "/about/greet";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "인사말");
 		
 		mv.setViewName("/about/greet");
@@ -24,7 +24,7 @@ public class AboutController extends KseeController{
 	public ModelAndView getHistoryView(ModelAndView mv,
 			HttpServletRequest request) {
 		final String currentUrl = "/about/history";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "연혁");
 		
 		mv.setViewName("/about/history");
@@ -34,7 +34,7 @@ public class AboutController extends KseeController{
 	public ModelAndView getTermView(ModelAndView mv,
 			HttpServletRequest request) {
 		final String currentUrl = "/about/term";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "정관");		
 		mv.setViewName("/about/term");
 		return mv;
@@ -43,7 +43,7 @@ public class AboutController extends KseeController{
 	public ModelAndView getMemberView(ModelAndView mv,
 			HttpServletRequest request) {
 		final String currentUrl = "/about/member";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", "임원진");		
 		mv.setViewName("/about/member");
 		return mv;

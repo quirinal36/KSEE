@@ -26,8 +26,7 @@ public class TokenDAO implements DataAccess<EmailToken> {
 
 	@Override
 	public int delete(EmailToken input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(namespace +".delete", input);
 	}
 
 	@Override

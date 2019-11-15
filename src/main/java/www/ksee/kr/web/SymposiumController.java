@@ -57,7 +57,7 @@ public class SymposiumController extends KseeController{
 			symp.setSympType(Symposium.SYMP_TYPE_DOMESTIC);
 			mv.addObject("title", Symposium.DOMESTIC_TITLE);
 		}
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		int total = sympService.count(symp);
 		symp.setTotalCount(total);
@@ -87,7 +87,7 @@ public class SymposiumController extends KseeController{
 		}
 		
 		final String currentUrl = "/symposium/domestic";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		if(tab.isPresent()) {
 			detail.setStype(tab.get());

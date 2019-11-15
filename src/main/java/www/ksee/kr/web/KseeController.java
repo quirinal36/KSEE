@@ -82,7 +82,7 @@ public class KseeController {
 		result = request.isUserInRole(UserVO.ADMIN);
 		return result;
 	}
-	protected Menus getCurMenus(String currentUrl, HttpServletRequest request) {
+	protected Menus getCurMenus(String currentUrl) {
 		Menus curMenu = new Menus();
 		curMenu.setUrl(currentUrl);
 		curMenu = menuService.selectOne(curMenu);

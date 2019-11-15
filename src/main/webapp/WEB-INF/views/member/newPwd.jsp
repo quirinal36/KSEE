@@ -90,10 +90,10 @@ function changePwd(){
 	<div id="container_wrap">
 		<div id="container">
 			<c:import url="/inc/lnb_wrap">
-				<c:param name="id">${curMenu.id }</c:param>
+				
 			</c:import>
 			<c:import url="/inc/contentsTitle">
-				<c:param name="id">${curMenu.id }</c:param>
+				
 			</c:import>
 			<form action="<c:url value="/member/newPwd/send"/>" method="POST">
 				<div id="contentsPrint">

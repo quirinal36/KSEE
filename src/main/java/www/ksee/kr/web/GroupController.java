@@ -37,7 +37,7 @@ public class GroupController extends KseeController {
 	public ModelAndView getGroupView(ModelAndView mv, 
 			HttpServletRequest request, Board board) {
 		final String currentUrl = "/group/notice";
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "공지사항");
 		
@@ -75,7 +75,7 @@ public class GroupController extends KseeController {
 		BoardInfo boardInfo = BoardInfo.init().get(name);
 		
 		final String currentUrl = boardInfo.getCurrentUrl();
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", boardInfo.getTitle());
 		
 		board.setBoardType(boardInfo.getType());
@@ -107,7 +107,7 @@ public class GroupController extends KseeController {
 		final String currentUrl = boardInfo.getCurrentUrl();
 
 		mv.addObject("opengraph-api", Config.OPENGRAPH_API);
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", boardInfo.getTitle());
 		mv.addObject("user", getUser());
 		mv.addObject("current", request.getServletPath());
@@ -137,7 +137,7 @@ public class GroupController extends KseeController {
 			mv.addObject("user", user);
 		}
 		final String currentUrl = boardInfo.getCurrentUrl();
-		mv.addObject("curMenu", getCurMenus(currentUrl, request));
+		mv.addObject("curMenu", getCurMenus(currentUrl));
 		mv.addObject("title", boardInfo.getTitle());
 		
 		Board board= boardService.selectOne(Board.newInstance(id));
@@ -179,7 +179,7 @@ public class GroupController extends KseeController {
 			mv.addObject("user", user);
 			
 			final String currentUrl = boardInfo.getCurrentUrl();
-			mv.addObject("curMenu", getCurMenus(currentUrl, request));
+			mv.addObject("curMenu", getCurMenus(currentUrl));
 			mv.addObject("title", boardInfo.getTitle());
 			
 			Board board= boardService.selectOne(Board.newInstance(id));
