@@ -41,7 +41,19 @@
 								<div class="title"><a href="<c:url value="/symposium/domestic/view/${item.id }"/>">${item.title }</a></div>
 								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 								<div class="place">${item.place }</div>
-	                            <div class="apply"><a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on">참가신청</a></div>
+	                            <div class="apply">
+	                            	<fmt:parseDate var="from" value="${item.applyStart }" pattern="yyyy-MM-dd"/>
+	                            	<fmt:parseDate var="to" value="${item.applyFinish }" pattern="yyyy-MM-dd"/>
+	                            	<fmt:parseDate var="now" value="${today }" pattern="yyyy-MM-dd"/>
+	                            	<c:choose>
+	                            		<c:when test="${now ge from and now le to }">
+		                            		<a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on">참가신청</a>
+		                            	</c:when>
+		                            	<c:otherwise>
+		                            		
+		                            	</c:otherwise>
+	                            	</c:choose>
+	                            </div>
 							</li>
 						</c:forEach>
 					</ul>

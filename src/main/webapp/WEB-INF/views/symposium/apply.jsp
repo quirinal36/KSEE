@@ -9,19 +9,37 @@
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
 <script type="text/javascript">
+$(document).ready(function(){
+	$("input[name='isSpeaker']").on('change', function(){
+		console.log(">> " + $(this).val());
+		
+		var isSpeaker = parseInt($(this).val()) == 1? true : false;
+		if(isSpeaker){
+			$(".file").show();
+		}else{
+			$(".file").hide();
+			$("#file_ul").empty();
+		}
+	});
+});
 function applySubmit(){
 	var url = $("#applyForm").attr("action");
 	var files = [];
 	$("#file_ul").find(".bt_del_file").each(function(i, item){
 		files.push($(item).val());
 	});
-	if(files.length == 0){
+	var isSpeaker = parseInt($("input[name='isSpeaker']:checked").val())== 1? true : false;
+	
+	if(files.length == 0 && isSpeaker){
 		alert("초록을 등록 해주세요.");
 		return false;
 	}
 	
 	var param = $("#applyForm").serialize();
-	param += "&files="+files.join(",");
+	
+	if(isSpeaker){
+		param += "&files="+files.join(",");
+	}
 	
 	if(confirm("제출하시겠습니까?")){
 		$.ajax({
@@ -31,7 +49,6 @@ function applySubmit(){
 			dataType: 'json'
 		}).done(function(json){
 			if(json.result > 0){
-				//$(".form_complete").show();
 				move(2);
 			}
 		});
@@ -171,7 +188,7 @@ function applySubmit(){
 									<p class="message error">이메일 아이디를 입력하세요.</p>
 								</dd>
 							</dl>
-							<dl class="file">
+							<dl class="file" style="display:none;">
 								<dt>학술대회 초록</dt>
 								<dd>
 									<div class="board_write_file"  id="dropzone-file">

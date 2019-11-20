@@ -1,5 +1,6 @@
 package www.ksee.kr.web;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -66,10 +67,11 @@ public class SymposiumController extends KseeController{
 		if(where.isPresent()) {
 			mv.addObject("where", where.get());
 		}
+		
+		mv.addObject("today", LocalDate.now().toString());
 		mv.addObject("list", list);
 		mv.addObject("paging", symp);
 		mv.setViewName("/symposium/domestic");
-		
 		return mv;
 	}
 	
@@ -114,7 +116,7 @@ public class SymposiumController extends KseeController{
 			List<PhotoInfo> photos = util.selectPhotos(sympDetailService, detail);
 			mv.addObject("photos", photos);
 		}
-		
+		mv.addObject("today", LocalDate.now().toString());
 		mv.setViewName("/symposium/detail");
 		return mv;
 	}
@@ -144,9 +146,11 @@ public class SymposiumController extends KseeController{
 	@ResponseBody
 	@RequestMapping(value="/apply", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String applySend(ApplyVO apply,
-			@RequestParam(value="files")String files) {
-		for(String fileId : files.split(",")) {
-			apply.setFileId(Integer.parseInt(fileId));
+			@RequestParam(value="files")Optional<String> files) {
+		if(files.isPresent()) {
+			for(String fileId : files.get().split(",")) {
+				apply.setFileId(Integer.parseInt(fileId));
+			}
 		}
 		
 		JSONObject json = new JSONObject();

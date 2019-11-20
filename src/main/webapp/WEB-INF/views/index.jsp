@@ -53,7 +53,7 @@ function resizePopup(){
 						<div class="idx_popup">
 							<c:forEach items="${popups }" var="item">
 								<div class="item">
-									<a href="<c:url value="${item.link }"/>" style="background: url(<c:url value="${item.url }"/>);">팝업 제목</a>
+									<a href="<c:url value="${item.link }"/>" style="background: url(<c:url value="${item.url }"/>);">${item.popupTitle }</a>
 								</div>
 							</c:forEach>
 						</div>

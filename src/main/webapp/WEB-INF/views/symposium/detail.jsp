@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -62,7 +63,13 @@
 						</div>
 					</div>
 					<div class="bt_wrap">
-						<a href="<c:url value="/symposium/"/>" class="bt1 on">목록</a>
+						<fmt:parseDate var="from" value="${symposium.applyStart }" pattern="yyyy-MM-dd"/>
+                      	<fmt:parseDate var="to" value="${symposium.applyFinish }" pattern="yyyy-MM-dd"/>
+                      	<fmt:parseDate var="now" value="${today }" pattern="yyyy-MM-dd"/>
+                      	<c:if test="${now ge from and now le to }">
+							<a href="<c:url value="/symposium/apply/${symposium.id }"/>" class="bt1 on">참가신청</a>
+						</c:if>
+						<a href="<c:url value="/symposium/"/>" class="bt1">목록</a>
 					</div>
 				</div>
 			</div>

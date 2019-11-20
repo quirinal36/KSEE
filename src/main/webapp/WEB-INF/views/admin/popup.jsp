@@ -46,9 +46,9 @@ function deletePopup(id){
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${list }" var="item">
+						<c:forEach items="${list }" var="item" varStatus="sts">
 							<tr>
-								<td>${item.id }</td>
+								<td>${sts.count }</td>
 								<td>${item.popupTitle }</td>
 								<td>${item.startDate } ~ ${item.finishDate }</td>
 								<td>

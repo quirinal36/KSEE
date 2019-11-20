@@ -105,4 +105,16 @@ public class ApplyController extends KseeController{
 		}
 		return json.toString();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delete", method=RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String delete(ApplyVO apply) {
+		JSONObject json = new JSONObject();
+		int result = applyService.delete(apply);
+		json.put("result", result);
+		if(result > 0) {
+			json.put("move", "/symposium/apply/search");
+		}
+		return json.toString();
+	}
 }

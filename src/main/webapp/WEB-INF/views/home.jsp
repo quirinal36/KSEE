@@ -67,7 +67,7 @@
 								<c:when test="${fn:length(list) gt 0 }">
 									<c:forEach items="${list }" var="item" varStatus="sts">
 										<li>
-											<div class="num">${item.id }</div>
+											<div class="num">${sts.count }</div>
 											<div class="title"><a href="/">${item.title }</a></div>
 											<div class="writer">${item.writerName }</div>
 											<div class="date"><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></div>
@@ -102,7 +102,7 @@
 								<div class="place">장소</div>
 								<div class="apply">참가신청</div>
 							</li>
-							<c:forEach items="${list }" var="item">
+							<c:forEach items="${list }" var="item" varStatus="ists">
 								<c:choose>
 									<c:when test="${item.sympType eq 1 }">
 										<c:set value="domestic" var="where"/> 
@@ -112,7 +112,7 @@
 									</c:otherwise>
 								</c:choose>
 								<li>
-									<div class="num">${item.id }</div>
+									<div class="num">${ists.count }</div>
 									<div class="title"><a href="<c:url value="/symposium/${where}/view/${item.id }"/>">${item.title }</a></div>
 									<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 									<div class="place">${item.place }</div>

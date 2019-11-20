@@ -36,8 +36,24 @@ function applySearch(){
 }
 function showView(){
 	var url = $("input[name='viewUrl']").val();
-	
 	window.location.replace(url +"/" + $(".applyId").val());
+}
+function deleteApply(){
+	if(confirm("신청 취소 하시겠습니까?")){
+		var url = $("input[name='deleteUrl']").val();
+		var param = "id="+$(".applyId").val();
+		
+		$.ajax({
+			url: url,
+			data: param,
+			type: "POST",
+			dataType: "json"
+		}).done(function(json){
+			if(json.result > 0 && confirm("취소가 완료되었습니다.")){
+				window.location.replace(json.move);
+			}
+		});
+	}
 }
 $(document).ready(function(){
 	$("input[name='national']").change(function(){
@@ -140,9 +156,10 @@ $(document).ready(function(){
 							<div class="apply_search_result apply">
 								<p><span>[접수 중]</span> 상태입니다.</p>
 								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">신청서 보기</a>
-								<a href="javascript:void(0);" onclick="javascript:delete();" class="bt2">신청 취소</a>
+								<a href="javascript:void(0);" onclick="javascript:deleteApply();" class="bt2">신청 취소</a>
 								<input type="hidden" value="" class="applyId"/>
 								<input type="hidden" name="viewUrl" value="<c:url value="/symposium/apply/view"/>"/>
+								<input type="hidden" name="deleteUrl" value="<c:url value="/symposium/apply/delete"/>"/>
 							</div>
 							<!-- 신청완료 -->
 							<div class="apply_search_result complete">

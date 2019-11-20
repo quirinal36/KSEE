@@ -224,7 +224,7 @@ function submit(){
 					
 					<div class="bt_wrap">
 						<a href="javascript:void(0)" class="bt1 on" onclick="javascript:submit();">수정</a>
-						<a href="history.go(-1)" class="bt1">취소</a>
+						<a href="javascript:history.go(-1)" class="bt1">취소</a>
 					</div>
 					<input type="hidden" name="id" value="${popup.id }"/>
 				</form>

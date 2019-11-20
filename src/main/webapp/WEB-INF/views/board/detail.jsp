@@ -149,16 +149,18 @@ function deleteBoard(id){
 						</c:if>
 						${board.content }
 					</div>
-					<div class="board_view_file">
-						<div class="title">첨부파일</div>
-						<div class="file_list">
-							<ul>
-								<c:forEach items="${fileList }" var="item">
-									<li><a href="<c:url value="/upload/get/${item.id }"/>">${item.name }</a></li>
-								</c:forEach>
-							</ul>
+					<c:if test="${fn:length(fileList) gt 0}">					
+						<div class="board_view_file">
+							<div class="title">첨부파일</div>
+							<div class="file_list">
+								<ul>
+									<c:forEach items="${fileList }" var="item">
+										<li><a href="<c:url value="/upload/get/${item.id }"/>">${item.name }</a></li>
+									</c:forEach>
+								</ul>
+							</div>
 						</div>
-					</div>
+					</c:if>
 					<div class="repl_wrap">
 						<!-- 댓글 보기 -->
 						<ol class="repl_list">
@@ -200,7 +202,7 @@ function deleteBoard(id){
 									<c:set value="댓글을 입력하세요." var="reply_placeholder"/>
 								</c:when>
 								<c:otherwise>
-									<c:set value="로그인 해주세요." var="reply_placeholder"/>
+									<c:set value="로그인 후 댓글을 작성하실 수 있습니다." var="reply_placeholder"/>
 								</c:otherwise>
 							</c:choose>
 							<!-- 댓글 작성 -->
