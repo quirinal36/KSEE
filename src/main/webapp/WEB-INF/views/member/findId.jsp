@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -21,7 +22,7 @@ function findId(){
 		$(".result").show();
 		
 		if(json.result > 0){
-			$("#result-text").text("회원님의 아이디는 [" + json.login +" ]입니다.");
+			$("#result-text").text("회원님의 아이디는 [" + json.login);
 		}else{
 			$("#result-text").text("아이디를 찾지 못했습니다.");
 		}
@@ -46,26 +47,26 @@ function findId(){
 					<div class="paper">
 						<form action="<c:url value="/member/findId"/>" id="find-id-form">
 							<dl>
-								<dt>이름</dt>
+								<dt><spring:message code="member.name" text="member.name"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username">
-									<p class="message error">이름을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.name" text="member.name"></spring:message>" class="ipt1" name="username">
+									<p class="message error"><spring:message code="member.enter_your_name" text="member.enter_your_name"></spring:message></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>휴대전화 번호</dt>
+								<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="휴대전화번호 입력" class="ipt1" name="phone">
-									<p class="message error">휴대전화 번호를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.tel" text="member.tel"></spring:message>" class="ipt1" name="phone">
+									<p class="message error"><spring:message code="member.enter_your_num" text="member.enter_your_num"></spring:message></p>
 								</dd>
 							</dl>
-							<input type="button" value="아이디 찾기" class="bt3 on" onclick="findId()">
+							<input type="button" value="<spring:message code="member.find_id" text="member.find_id"></spring:message>" class="bt3 on" onclick="findId()">
 						</form>
 						<div class="result">
-							<p id="result-text">회원님의 아이디는 <span id="result-id">withi5</span>입니다.</p>
+							<p id="result-text"></p>
 							<div class="bt_wrap">
-								<a href="<c:url value="/member/login"/>">로그인</a>
-								<a href="<c:url value="/member/findPwd"/>">비밀번호 찾기</a>
+								<a href="<c:url value="/member/login"/>"><spring:message code="member.login" text="member.login"></spring:message></a>
+								<a href="<c:url value="/member/findPwd"/>"><spring:message code="member.find_password" text="member.find_password"></spring:message></a>
 							</div>
 						</div>
 					</div>

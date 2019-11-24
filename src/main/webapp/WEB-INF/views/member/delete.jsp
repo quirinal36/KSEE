@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -65,22 +66,22 @@ $(document).ready(function(){
 				<form action="<c:url value="/member/delete"/>" method="POST">
 					<div class="member form_step1">
 						<div class="paper">
-							<strong>안내사항</strong>
+							<strong><spring:message code="member.instructions" text="member.instructions"></spring:message></strong>
 							<div class="term">
-								탈퇴 즉시 회원님의 정보가 삭제되며 복구할 수 없습니다.
+								<spring:message code="member.delete_message1" text="member.delete_message1"></spring:message>
 							</div>
 							<div class="chk_wrap">
 								<input type="checkbox" id="term_chk1" class="chk1">
-								<label for="term_chk1">동의합니다.</label>
+								<label for="term_chk1"><spring:message code="member.i_agree" text="member.i_agree"></spring:message></label>
 							</div>
 							<dl>
-								<dt>비밀번호</dt>
+								<dt><spring:message code="member.password" text="member.password"></spring:message></dt>
 								<dd>
-									<input type="password" placeholder="비밀번호 입력" class="ipt1" autocomplete="false" name="password">
-									<p class="message error">비밀번호가 일치하지 않습니다.</p>
+									<input type="password" placeholder="<spring:message code="member.password" text="member.password"></spring:message>" class="ipt1" autocomplete="false" name="password">
+									<p class="message error"><spring:message code="member.password_not_match" text="member.password_not_match"></spring:message></p>
 								</dd>
 							</dl>
-							<input id="confirm-btn" type="button" value="회원탈퇴" class="bt3" onclick="javascript:deleteUser();">
+							<input id="confirm-btn" type="button" value="<spring:message code="member.terminate_membership" text="member.terminate_membership"></spring:message>" class="bt3" onclick="javascript:deleteUser();">
 						</div>
 					</div>
 				</form>

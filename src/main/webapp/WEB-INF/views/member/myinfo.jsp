@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -23,59 +24,59 @@
 				<div class="member member_form1">
 					<div class="paper">
 						<dl>
-							<dt>회원구분</dt>
+							<dt><spring:message code="member.member_cate" text="member.member_cate"></spring:message></dt>
 							<dd>
 							<c:choose>
 								<c:when test="${user.user_role eq 1 }">
-									관리자
+									<spring:message code="member.admin" text="member.admin"></spring:message>
 								</c:when>
 								<c:when test="${user.user_role eq 2 }">
-									학생
+									<spring:message code="member.student" text="member.student"></spring:message>
 								</c:when>
 								<c:when test="${user.user_role eq 3 }">
-									일반
+									<spring:message code="member.general" text="member.general"></spring:message>
 								</c:when>
 								<c:when test="${user.user_role eq 4 }">
-									기업
+									<spring:message code="member.corporate" text="member.corporate"></spring:message>
 								</c:when>
 							</c:choose>
 							</dd>
 						</dl>
 						<dl>
-							<dt>아이디</dt>
+							<dt><spring:message code="member.id" text="member.id"></spring:message></dt>
 							<dd>${user.login }</dd>
 						</dl>
 						<dl>
-							<dt>비밀번호</dt>
-							<dd><a href="<c:url value="/member/newPwd"/>" class="bt2">비밀번호 변경</a></dd>
+							<dt><spring:message code="member.password" text="member.password"></spring:message></dt>
+							<dd><a href="<c:url value="/member/newPwd"/>" class="bt2"><spring:message code="member.change_password" text="member.change_password"></spring:message></a></dd>
 						</dl>
 						<dl>
-							<dt>이름</dt>
+							<dt><spring:message code="member.name" text="member.name"></spring:message></dt>
 							<dd>${user.username }</dd>
 						</dl>
 						<dl>
-							<dt>휴대전화 번호</dt>
+							<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
 							<dd>${user.phone }</dd>
 						</dl>
 						<dl>
-							<dt>이메일 주소</dt>
+							<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
 							<dd>${user.email }@${user.domain }</dd>
 						</dl>
 						<dl>
-							<dt>소속</dt>
+							<dt><spring:message code="member.affiliation" text="member.affiliation"></spring:message></dt>
 							<dd>${user.classification }</dd>
 						</dl>
 						<dl>
-							<dt>직위</dt>
+							<dt><spring:message code="member.position" text="member.position"></spring:message></dt>
 							<dd>${user.level }</dd>
 						</dl>
 						<dl>
-							<dt>직장주소</dt>
+							<dt><spring:message code="member.work_address" text="member.work_address"></spring:message></dt>
 							<dd>${user.address } ${user.addressDetail }</dd>
 						</dl>
 						<div class="bt_wrap item2">
-							<input type="button" value="내 정보 수정" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
-							<input type="button" value="탈퇴하기" class="bt3" onclick="location.replace('<c:url value="/member/delete"/>')"/>
+							<input type="button" value="<spring:message code="member.edit_my_info" text="member.edit_my_info"></spring:message>" class="bt3 on" onclick="location.replace('<c:url value="/member/edit"/>')">
+							<input type="button" value="<spring:message code="member.terminate_membership" text="member.terminate_membership"></spring:message>" class="bt3" onclick="location.replace('<c:url value="/member/delete"/>')"/>
 						</div>
 					</div>
 				</div>

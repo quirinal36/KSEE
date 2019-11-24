@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -102,12 +103,12 @@ $(window).on("beforeunload", function(){
 						<div class="member form_step1">
 							<!-- 현재상태 -->
 							<div class="location">
-								<div class="on">약관동의</div>
-								<div>정보입력</div>
-								<div>가입완료</div>
+								<div class="on"><spring:message code="member.agree_to_terms" text="member.agree_to_terms"></spring:message></div>
+								<div><spring:message code="member.enter_info" text="member.enter_info"></spring:message></div>
+								<div><spring:message code="member.completed" text="member.completed"></spring:message></div>
 							</div>
 							<div class="paper">
-								<strong>정관</strong>
+								<strong><spring:message code="member.articles" text="member.articles"></spring:message></strong>
 								<div class="term">
 									<div class="item">
 										<div class="title">
@@ -321,15 +322,15 @@ $(window).on("beforeunload", function(){
 								</div>
 								<div class="chk_wrap">
 									<input type="checkbox" id="term_chk1" class="chk1">
-									<label for="term_chk1">동의합니다.</label>
+									<label for="term_chk1"><spring:message code="member.i_agree" text="member.i_agree"></spring:message></label>
 								</div>
-								<strong>개인정보처리방침</strong>
+								<strong><spring:message code="member.personal_info" text="member.personal_info"></spring:message></strong>
 								<div class="term"></div>
 								<div class="chk_wrap">
 									<input type="checkbox" id="term_chk2" class="chk1">
-									<label for="term_chk2">동의합니다.</label>
+									<label for="term_chk2"><spring:message code="member.i_agree" text="member.i_agree"></spring:message></label>
 								</div>
-								<input type="button" value="다음 단계로" class="bt3 on" onclick="javascript:move(1);">
+								<input type="button" value="<spring:message code="member.next" text="member.next"></spring:message>" class="bt3 on" onclick="javascript:move(1);">
 							</div>
 						</div>
 						
@@ -337,102 +338,102 @@ $(window).on("beforeunload", function(){
 						<div class="member member_form1 form_step2">
 							<!-- 현재상태 -->
 							<div class="location">
-								<div>약관동의</div>
-								<div class="on">정보입력</div>
-								<div>가입완료</div>
+								<div><spring:message code="member.agree_to_terms" text="member.agree_to_terms"></spring:message></div>
+								<div class="on"><spring:message code="member.enter_info" text="member.enter_info"></spring:message></div>
+								<div><spring:message code="member.completed" text="member.completed"></spring:message></div>
 							</div>
 							<div class="paper">
 								<form action="<c:url value="/member/signup"/>" method="post">
 									<dl class="member_chk">
-										<dt>회원구분</dt>
+										<dt><spring:message code="member.member_cate" text="member.member_cate"></spring:message></dt>
 										<dd>
 											<ul class="chk_wrap">
 												<li>
 													<input type="radio" name="user_role" id="member_chk2" class="radio1" value="3" checked>
-													<label for="member_chk2">일반</label>
+													<label for="member_chk2"><spring:message code="member.general" text="member.general"></spring:message></label>
 												</li>
 												<li>
 													<input type="radio" name="user_role" id="member_chk3" class="radio1" value="4">
-													<label for="member_chk3">기업</label>
+													<label for="member_chk3"><spring:message code="member.corporate" text="member.corporate"></spring:message></label>
 												</li>
 												<li>
 													<input type="radio" name="user_role" id="member_chk1" class="radio1" value="2">
-													<label for="member_chk1">학생</label>
+													<label for="member_chk1"><spring:message code="member.student" text="member.student"></spring:message></label>
 												</li>
 											</ul>
 										</dd>
 									</dl>
 									<dl>
-										<dt>아이디</dt>
+										<dt><spring:message code="member.id" text="member.id"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="아이디 입력" class="ipt1" name="login">
+											<input type="text" placeholder="<spring:message code="member.enter_your_id" text="member.enter_your_id"></spring:message>" class="ipt1" name="login">
 											<input type="hidden" id="login-valid" value="0"/>
-											<p class="message error">5~20자의 영문 소문자, 숫자만 사용 가능합니다.</p>
-											<p class="message confirm">사용 가능한 아이디입니다.</p>
+											<p class="message error"><spring:message code="member.enter_your_id2" text="member.enter_your_id2"></spring:message></p>
+											<p class="message confirm"><spring:message code="member.you_may_use_this_id" text="member.you_may_use_this_id"></spring:message></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>비밀번호</dt>
+										<dt><spring:message code="member.password" text="member.password"></spring:message></dt>
 										<dd>
-											<input type="password" placeholder="비밀번호 입력" class="ipt1" name="password" autocomplete="off">
-											<p class="message error">6자리 이상 입력하세요.</p>
+											<input type="password" placeholder="<spring:message code="member.enter_your_password" text="member.enter_your_password"></spring:message>" class="ipt1" name="password" autocomplete="off">
+											<p class="message error"><spring:message code="member.enter_your_password2" text="member.enter_your_password2"></spring:message></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>비밀번호 확인</dt>
+										<dt><spring:message code="member.confirm_password" text="member.confirm_password"></spring:message></dt>
 										<dd>
-											<input type="password" placeholder="비밀번호 재입력" class="ipt1" name="password_confirm" autocomplete="off">
-											<p class="message error">비밀번호가 일치하지 않습니다.</p>
-											<p class="message confirm">비밀번호가 일치합니다.</p>
+											<input type="password" placeholder="<spring:message code="member.confirm_password" text="member.confirm_password"></spring:message>" class="ipt1" name="password_confirm" autocomplete="off">
+											<p class="message error"><spring:message code="member.password_not_match" text="member.password_not_match"></spring:message></p>
+											<p class="message confirm"><spring:message code="member.password_match" text="member.password_match"></spring:message></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>이름</dt>
+										<dt><spring:message code="member.name" text="member.name"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off">
-											<p class="message error">이름을 입력하세요.</p>
+											<input type="text" placeholder="<spring:message code="member.enter_your_name" text="member.enter_your_name"></spring:message>" class="ipt1" name="username" autocomplete="off">
+											<p class="message error"><spring:message code="member.enter_your_name" text="member.enter_your_name"></spring:message></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>소속</dt>
+										<dt><spring:message code="member.affiliation" text="member.affiliation"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="소속 입력" class="ipt1" name="classification">
-											<p class="message error">소속을 입력하세요.</p>
+											<input type="text" placeholder="<spring:message code="member.enter_your_affiliation" text="member.enter_your_affiliation"></spring:message>" class="ipt1" name="classification">
+											<p class="message error"><spring:message code="member.enter_your_affiliation" text="member.enter_your_affiliation"></spring:message></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>직위</dt>
+										<dt><spring:message code="member.position" text="member.position"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="직위 입력" class="ipt1" name="level">
-											<p class="message error">직위를 입력하세요.</p>
+											<input type="text" placeholder="<spring:message code="member.position" text="member.position"></spring:message>" class="ipt1" name="level">
+											<p class="message error"><spring:message code="member.position" text="member.position"></spring:message></p>
 										</dd>
 									</dl>
 									<dl class="company_address">
-										<dt>직장주소</dt>
+										<dt><spring:message code="member.work_address" text="member.work_address"></spring:message></dt>
 										<dd>
-											<input type="button" value="주소찾기" class="bt2" onclick="javascript:fn_setAddr()">
-											<input type="text" placeholder="주소" class="mt-10 ipt1" readonly name="address">
-											<input type="text" placeholder="상세주소 입력" class="mt-10 ipt1" name="addressDetail">
-											<p class="message error">상세주소가 입력되지 않았습니다.</p>
+											<input type="button" value="<spring:message code="member.find_address" text="member.find_address"></spring:message>" class="bt2" onclick="javascript:fn_setAddr()">
+											<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" class="mt-10 ipt1" readonly name="address">
+											<input type="text" placeholder="<spring:message code="member.rest_address" text="member.rest_address"></spring:message>" class="mt-10 ipt1" name="addressDetail">
+											<p class="message error"><spring:message code="member.enter_your_address2" text="member.enter_your_address2"></spring:message></p>
 										</dd>
 									</dl>
 									<dl class="company_tel">
-										<dt>연락처</dt>
+										<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="연락처" class="ipt1" name="phone">
-											<p class="message error">연락처가 입력되지 않았습니다.</p>
+											<input type="text" placeholder="<spring:message code="member.tel" text="member.tel"></spring:message>" class="ipt1" name="phone">
+											<p class="message error"><spring:message code="member.enter_your_num" text="member.enter_your_num"></spring:message></p>
 										</dd>
 									</dl>
 									<dl class="email">
-										<dt>이메일 주소</dt>
+										<dt><spring:message code="member.email_address" text="member.email_address"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email">
+											<input type="text" placeholder="<spring:message code="member.email" text="member.email"></spring:message>" class="ipt1" name="email">
 											<span>@</span>
-										 	<input type="text" placeholder="도메인 입력" class="ipt1" name="domain">
-											<p class="message error">이메일 아이디를 입력하세요.</p>
+										 	<input type="text" placeholder="<spring:message code="member.domain" text="member.domain"></spring:message>" class="ipt1" name="domain">
+											<p class="message error"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
 										</dd>
 									</dl>
-									<input type="button" value="회원가입" class="bt3 on" id="submit">
+									<input type="button" value="<spring:message code="member.member_registration" text="member.member_registration"></spring:message>" class="bt3 on" id="submit">
 								</form>
 							</div>
 						</div>
@@ -441,8 +442,7 @@ $(window).on("beforeunload", function(){
 						<!-- 회원가입 - 가입 완료 -->
 						<div class="member form_complete">
 							<div class="paper">
-								환영합니다!<br>
-								한국효소공학연구회 회원가입이 완료되었습니다.
+								<spring:message code="member.welcome" text="member.welcome"></spring:message>
 								<a href="<c:url value="/"/>" class="bt3 on">HOME</a>
 							</div>
 						</div>

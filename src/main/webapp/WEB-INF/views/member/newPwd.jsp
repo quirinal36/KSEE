@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -101,23 +102,23 @@ function changePwd(){
 					<div class="member member_form1">
 						<div class="paper">
 							<dl>
-								<dt>새 비밀번호</dt>
+								<dt><spring:message code="member.new_password" text="member.new_password"></spring:message></dt>
 								<dd>
-									<input type="password" placeholder="새 비밀번호 입력" class="ipt1" name="password">
+									<input type="password" placeholder="<spring:message code="member.new_password" text="member.new_password"></spring:message>" class="ipt1" name="password">
 									<p class="message six-letters">6자리 이상 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>비밀번호 확인</dt>
+								<dt><spring:message code="member.confirm_password" text="member.confirm_password"></spring:message></dt>
 								<dd>
-									<input type="password" placeholder="비밀번호 재입력" class="ipt1" name="password_confirm">
-									<p class="message error">비밀번호가 일치하지 않습니다.</p>
-									<p class="message confirm">비밀번호가 일치합니다.</p>
+									<input type="password" placeholder="<spring:message code="member.confirm_password" text="member.confirm_password"></spring:message>" class="ipt1" name="password_confirm">
+									<p class="message error"><spring:message code="member.password_not_match" text="member.password_not_match"></spring:message></p>
+									<p class="message confirm"><spring:message code="member.password_match" text="member.password_match"></spring:message></p>
 								</dd>
 							</dl>
 							<input type="hidden" name="login" value="${user.login }"/>
 							<input type="hidden" name="my-info-url" value="<c:url value="/member/myinfo"/>"/>
-							<input type="button" value="비밀번호 변경" class="bt3" onclick="javascript:changePwd();" disabled>
+							<input type="button" value="<spring:message code="member.change_password" text="member.change_password"></spring:message>" class="bt3" onclick="javascript:changePwd();" disabled>
 						</div>
 					</div>
 				</div>

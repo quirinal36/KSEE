@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -90,7 +91,7 @@ function fn_setAddr(){
 					<div class="member member_form1">
 						<div class="paper">
 							<dl class="member_chk">
-								<dt>회원구분</dt>
+								<dt><spring:message code="member.member_cate" text="member.member_cate"></spring:message></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<c:if test="${user.user_role eq 1 }">
@@ -98,40 +99,40 @@ function fn_setAddr(){
 												<input type="radio" id="member_chk0" class="radio1" value="1" name="member_chk"
 													<c:if test="${user.user_role eq 1 }">checked</c:if>
 												>
-												<label for="member_chk0">관리자</label>
+												<label for="member_chk0"><spring:message code="member.admin" text="member.admin"></spring:message></label>
 											</li>
 										</c:if>
 										<li>
 											<input type="radio" id="member_chk1" class="radio1" value="2" name="member_chk"
 												<c:if test="${user.user_role eq 2 }">checked</c:if>
 											>
-											<label for="member_chk1">학생</label>
+											<label for="member_chk1"><spring:message code="member.student" text="member.student"></spring:message></label>
 										</li>
 										<li>
 											<input type="radio" id="member_chk2" class="radio1" value="3" name="member_chk"
 												<c:if test="${user.user_role eq 3 }">checked</c:if>
 											>
-											<label for="member_chk2">일반</label>
+											<label for="member_chk2"><spring:message code="member.general" text="member.general"></spring:message></label>
 										</li>
 										<li>
 											<input type="radio" id="member_chk3" class="radio1" value="4" name="member_chk"
 												<c:if test="${user.user_role eq 4 }">checked</c:if>
 											>
-											<label for="member_chk3">기업</label>
+											<label for="member_chk3"><spring:message code="member.corporate" text="member.corporate"></spring:message></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl>
-								<dt>아이디</dt>
+								<dt><spring:message code="member.id" text="member.id"></spring:message></dt>
 								<dd>${user.login }</dd>
 							</dl>
 							<dl>
-								<dt>이름</dt>
+								<dt><spring:message code="member.name" text="member.name"></spring:message></dt>
 								<dd>${user.username }</dd>
 							</dl>
 							<dl class="email">
-								<dt>이메일 주소</dt>
+								<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="이메일 아이디 입력" value="${user.email }" class="ipt1" name="email">
 									<span>@</span>
@@ -140,38 +141,38 @@ function fn_setAddr(){
 								</dd>
 							</dl>
 							<dl>
-								<dt>소속</dt>
+								<dt><spring:message code="member.affiliation" text="member.affiliation"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="소속 입력" value="${user.classification }" class="ipt1" name="classification">
 									<p class="message error">소속을 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>직위</dt>
+								<dt><spring:message code="member.position" text="member.position"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="직위 입력" value="${user.level }" class="ipt1" name="level">
 									<p class="message error">직위를 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>전화번호</dt>
+								<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="전화번호 입력" value="${user.phone }" class="ipt1" name="phone">
 									<p class="message error">휴대전화 번호를 입력하세요.</p>
 								</dd>
 							</dl>
 							<dl class="company_address">
-								<dt>직장주소</dt>
+								<dt><spring:message code="member.work_address" text="member.work_address"></spring:message></dt>
 								<dd>
-									<input type="button" value="주소찾기" class="bt2" onclick="javascript:fn_setAddr()">
-									<input type="text" placeholder="주소" value="${user.address }" class="mt-10 ipt1" name="address" readonly>
-									<input type="text" placeholder="상세주소 입력" value="${user.addressDetail }" class="mt-10 ipt1" name="addressDetail">
-									<p class="message error">상세주소가 입력되지 않았습니다.</p>
+									<input type="button" value="<spring:message code="member.find_address" text="member.find_address"></spring:message>" class="bt2" onclick="javascript:fn_setAddr()">
+									<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" value="${user.address }" class="mt-10 ipt1" name="address" readonly>
+									<input type="text" placeholder="<spring:message code="member.rest_address" text="member.rest_address"></spring:message>" value="${user.addressDetail }" class="mt-10 ipt1" name="addressDetail">
+									<p class="message error"><spring:message code="member.enter_your_address2" text="member.enter_your_address2"></spring:message></p>
 								</dd>
 							</dl>
 							<input type="hidden" value="${user.id }" name="id"/>
 							<input type="hidden" value="<c:url value="/member/myinfo"/>" name="myinfo-url"/>
-							<input type="button" value="수정완료" class="bt3 on" id="submit">
+							<input type="button" value="<spring:message code="member.edit_complete" text="member.edit_complete"></spring:message>" class="bt3 on" id="submit">
 						</div>
 					</div>
 				</form>

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -53,34 +54,34 @@ function sendEmail(button){
 					<div class="paper">
 						<form action="<c:url value="/member/findPwd/submit"/>" method="POST">
 							<dl>
-								<dt>아이디</dt>
+								<dt><spring:message code="member.id" text="member.id"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="아이디 입력" class="ipt1" name="login">
-									<p class="message error">아이디를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.id" text="member.id"></spring:message>" class="ipt1" name="login">
+									<p class="message error"><spring:message code="member.enter_your_id" text="member.enter_your_id"></spring:message></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>이메일</dt>
+								<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="이메일 입력" class="ipt1" name="email">
-									<p class="message error">이메일을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.email" text="member.email"></spring:message>" class="ipt1" name="email">
+									<p class="message error"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
 								</dd>
 							</dl>
 							
-							<input type="button" value="비밀번호 찾기" class="bt3 on" onclick="javascript:sendEmail(this);">
+							<input type="button" value="<spring:message code="member.find_password" text="member.find_password"></spring:message>" class="bt3 on" onclick="javascript:sendEmail(this);">
 						</form>
 						<div class="result" id="result_msg">
 							<p>
-								회원님의 이메일 주소(${user.email })로<br>
-								비밀번호 변경 링크를 보내드렸습니다.<br>
-								메일이 오지 않는 경우 스팸/광고메일함을 확인해주세요.
+								${user.email }<br>
+								<spring:message code="member.send_email" text="member.send_email"></spring:message><br>
+								<spring:message code="member.send_email2" text="member.send_email2"></spring:message>
 							</p>
 							<p style="display:none;">
 								메일 발송 횟수(10회) 초과로 인해 메일을 보낼 수 없습니다.<br>
 								내일 다시 시도하시거나 관리자에게 문의하세요.
 							</p>
 							<div class="bt_wrap">
-								<a href="<c:url value="/member/login"/>">로그인</a>
+								<a href="<c:url value="/member/login"/>"><spring:message code="member.login" text="member.login"></spring:message></a>
 							</div>
 						</div>
 					</div>
