@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -29,11 +30,11 @@
 				<div class="board_list board_list_typeB symposium">
 					<ul class="list">
 						<li class="head">
-							<div class="num">번호</div>
-							<div class="title">행사명</div>
-							<div class="period">행사기간</div>
-							<div class="place">장소</div>
-							<div class="apply">참가신청</div>
+							<div class="num"><spring:message code="symposium.num"/></div>
+							<div class="title"><spring:message code="symposium.name_of_event"/></div>
+							<div class="period"><spring:message code="symposium.dates"/></div>
+							<div class="place"><spring:message code="symposium.place"/></div>
+							<div class="apply"><spring:message code="symposium.attendant"/></div>
 						</li>
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
