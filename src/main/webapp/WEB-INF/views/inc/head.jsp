@@ -5,8 +5,8 @@
 <meta http-equiv="Content-Script-Type" content="text/javascript">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=1300">
-<meta name="apple-mobile-web-app-title" content="NAVER" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-title" content="한국효소공학연구회" />
 <meta name="robots" content="index,nofollow"/>
 <meta name="description" content="한국효소공학연구회입니다."/>
 <meta property="og:title" content="한국효소공학연구회">
@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="/resources/img/comm/og.jpg">
 <meta name="twitter:description" content="한국효소공학연구회입니다."/>
 	
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="shortcut icon" href="<c:url value="/resources/img/comm/favicon.ico"/>">
 <script type="text/javascript" src="<c:url value="/resources/js/jquery-1.12.1.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bxslider.min.js"/>"></script>

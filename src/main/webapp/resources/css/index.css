@@ -21,7 +21,7 @@
 	vertical-align: top;
 }
 .idx_popup_wrap { width: 48%; height: 337px; margin-right: 4%; border-radius: 15px; overflow: hidden; }
-.idx_popup_wrap .item a { display: block; width: 100%; height: 337px; background-position: 0 50%; background-repeat: no-repeat; background-size: cover; }
+.idx_popup_wrap .item a { display: block; width: 100%; height: 337px; background-position: 50% 50%; background-repeat: no-repeat; background-size: cover; }
 .idx_notice_list,
 .idx_board_list {
 	width: 48%;
