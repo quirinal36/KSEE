@@ -77,6 +77,7 @@ public class IncController extends KseeController{
 			}
 		}
 		
+		mv.addObject("locale", locale);
 		mv.setViewName("/inc/lnb_wrap");
 		return mv;
 	}
@@ -95,6 +96,7 @@ public class IncController extends KseeController{
 		for(Menus m : siblings) {
 			if(m.getId() == menus.getId()) {
 				menus.setTitle(m.getTitle());
+				menus.setTitle_en(m.getTitle_en());
 				menus.setUrl(m.getUrl());
 				menus.setParent(m.getParent());
 			}
@@ -120,6 +122,7 @@ public class IncController extends KseeController{
 			menus.setPrev(prev);
 			menus.setNext(next);
 		}
+		mv.addObject("locale", locale);
 		mv.addObject("curMenu", menus);
 		mv.setViewName("/inc/contentsTitle");
 		return mv;
