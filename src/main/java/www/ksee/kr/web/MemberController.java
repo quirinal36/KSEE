@@ -151,41 +151,56 @@ public class MemberController extends KseeController{
 		mv.setViewName("/member/findPwd");
 		return mv;
 	}
-	
+	private String fullEmail(UserVO input) {
+		return new StringBuilder().append(input.getEmail()).append("@").append(input.getDomain()).toString();
+	}
 	@ResponseBody
 	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String sendEmailForFindPwd(UserVO user, HttpServletRequest request,
 			Locale locale) {
+		logger.info(user.toJsonString());
 		JSONObject json = new JSONObject();
 		UserVO selectedUser = userService.selectOne(user);
+		if(selectedUser == null) {
+			json.put("result", -1);
+			json.put("msg", "존재하지 않는 아이디 입니다.");
+		}else {
+			if(fullEmail(selectedUser).equals(user.getEmail())) {
+				logger.info(selectedUser.toJsonString());
+				
+				EmailToken resetToken = EmailToken.newInstance(selectedUser.getId(), UUID.randomUUID().toString());
+				resetToken.setIsPwd(EmailToken.IS_PWD);
+				resetToken.setUserId(selectedUser.getId());
+				int result = tokenService.insert(resetToken);
+				if(result > 0) {
+					final String baseUrl = getBaseUrl(request);
+					final String subject = messageSource.getMessage("member.find.email_title", null, locale);
+					try {
+						resetToken.sendEmail(baseUrl, subject, selectedUser, resetToken, locale);
+						json.put("result", result);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (SendGridException e) {
+						e.printStackTrace();
+					}
+				}
 		
-		EmailToken resetToken = EmailToken.newInstance(selectedUser.getId(), UUID.randomUUID().toString());
-		resetToken.setIsPwd(EmailToken.IS_PWD);
-		resetToken.setUserId(selectedUser.getId());
-		int result = tokenService.insert(resetToken);
-		if(result > 0) {
-			final String baseUrl = getBaseUrl(request);
-			final String subject = messageSource.getMessage("member.find.email_title", null, locale);
-			try {
-				resetToken.sendEmail(baseUrl, subject, selectedUser, resetToken, locale);
-				json.put("result", result);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (SendGridException e) {
-				e.printStackTrace();
+				String msg = messageSource.getMessage("member.find.password.submit", null, locale);
+				
+				final String regex = "\\{(email)\\}";
+				Pattern pattern = Pattern.compile(regex);
+				Matcher matcher = pattern.matcher(msg);
+				if (matcher.find()) {
+					// 사용자 email
+					msg = msg.replace(matcher.group(0), user.getEmail());
+				}
+				json.put("msg", msg);
+				json.put("result", 1);
+			}else {
+				json.put("result", 0);
+				json.put("msg", "이메일 주소가 일치하지 않습니다.");
 			}
 		}
-
-		String msg = messageSource.getMessage("member.find.password.submit", null, locale);
-		
-		final String regex = "\\{(email)\\}";
-		Pattern pattern = Pattern.compile(regex);
-		Matcher matcher = pattern.matcher(msg);
-		if (matcher.find()) {
-			// 사용자 email
-			msg = msg.replace(matcher.group(0), user.getEmail());
-		}
-		json.put("msg", msg);
 		return json.toString();
 	}
 	@RequestMapping(value="/validate/token")

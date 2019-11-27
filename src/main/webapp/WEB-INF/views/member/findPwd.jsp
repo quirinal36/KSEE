@@ -22,12 +22,24 @@ function sendEmail(button){
 		dataType: 'json'
 	}).done(function(json){
 		console.log(json);
+		$(".error").hide();
 		
 		if(json.result > 0){
 			$("#result_msg p").text(json.msg);
-			
 			$("form").hide();
 			$("#result_msg").show();
+		}else if(json.result == 0){
+			$(".email").show();
+			$(".email").text(json.msg);
+			
+			$(button).addClass("on");
+			$(button).attr("disabled", false);
+		}else if(json.result < 0){
+			$(".login").show();
+			$(".login").text(json.msg);
+			
+			$(button).addClass("on");
+			$(button).attr("disabled", false);
 		}
 	}).fail(function(xhr, status, error){
 		
@@ -57,14 +69,14 @@ function sendEmail(button){
 								<dt><spring:message code="member.id" text="member.id"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="<spring:message code="member.id" text="member.id"></spring:message>" class="ipt1" name="login">
-									<p class="message error"><spring:message code="member.enter_your_id" text="member.enter_your_id"></spring:message></p>
+									<p class="message error login"><spring:message code="member.enter_your_id" text="member.enter_your_id"></spring:message></p>
 								</dd>
 							</dl>
 							<dl>
 								<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
 								<dd>
 									<input type="text" placeholder="<spring:message code="member.email" text="member.email"></spring:message>" class="ipt1" name="email">
-									<p class="message error"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
+									<p class="message error email"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
 								</dd>
 							</dl>
 							
