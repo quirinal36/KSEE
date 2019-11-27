@@ -14,6 +14,7 @@ public class Menus {
 	String url;
 	Menus prev;
 	Menus next;
+	String title_en;
 	
 	public static Menus newInstance(int id) {
 		Menus menu = new Menus();

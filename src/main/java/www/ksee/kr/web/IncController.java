@@ -31,6 +31,7 @@ public class IncController extends KseeController{
 		List<Menus> children = menuService.select(parents);
 		
 		mv.addObject("locale", locale);
+		
 		mv.addObject("parents", parents);
 		mv.addObject("children", children);
 		

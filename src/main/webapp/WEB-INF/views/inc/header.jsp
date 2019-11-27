@@ -64,7 +64,18 @@ $(document).ready(function(){
 			<div class="gnb_wrap">
 				<ul>
 					<c:forEach items="${parents}" var="item">
-						<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+						<li>
+							<a href="<c:url value="${item.url }"/>">
+								<c:choose>
+									<c:when test="${locale.language eq 'en'}">
+										${item.title_en }					
+									</c:when>
+									<c:otherwise>
+										${item.title }	
+									</c:otherwise>
+								</c:choose>
+							</a>
+						</li>
 					</c:forEach>
 				</ul>
 				<div class="gnb_menu">
@@ -76,7 +87,18 @@ $(document).ready(function(){
 									<ul class="dep2">
 										<c:forEach items="${children }" var="item">
 											<c:if test="${pmenu.id eq item.parent}">
-												<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+												<li>
+													<a href="<c:url value="${item.url }"/>">
+														<c:choose>
+															<c:when test="${locale.language eq 'en'}">
+																${item.title_en }					
+															</c:when>
+															<c:otherwise>
+																${item.title }	
+															</c:otherwise>
+														</c:choose>
+													</a>
+												</li>
 											</c:if>
 										</c:forEach>
 									</ul>
