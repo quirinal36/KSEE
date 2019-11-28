@@ -20,7 +20,9 @@
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<c:import url="/inc/privacy"></c:import>
+				<div class="term_wrap">
+					<c:import url="/inc/privacy"></c:import>
+				</div>
 			</div>
 		</div>
 	</div>
