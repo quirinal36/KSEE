@@ -79,12 +79,11 @@ function fn_setAddr(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="member.edit_my_info" text="member.edit_my_info"></spring:message></h2>
+				</div>
+			</div>
 			<div id="contentsPrint">
 				<form action="<c:url value="/member/edit"/>" method="post">
 					<!-- 회원가입 - 내 정보 수정 -->
@@ -165,7 +164,7 @@ function fn_setAddr(){
 								<dt><spring:message code="member.work_address" text="member.work_address"></spring:message></dt>
 								<dd>
 									<input type="button" value="<spring:message code="member.find_address" text="member.find_address"></spring:message>" class="bt2" onclick="javascript:fn_setAddr()">
-									<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" value="${user.address }" class="mt-10 ipt1" name="address" readonly>
+									<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" value="${user.address }" class="mt-10 ipt1" name="address">
 									<input type="text" placeholder="<spring:message code="member.rest_address" text="member.rest_address"></spring:message>" value="${user.addressDetail }" class="mt-10 ipt1" name="addressDetail">
 									<p class="message error"><spring:message code="member.enter_your_address2" text="member.enter_your_address2"></spring:message></p>
 								</dd>

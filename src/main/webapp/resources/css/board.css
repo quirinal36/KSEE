@@ -215,7 +215,7 @@
 /* 학회소식 */
 .board_list_typeB.news .list .num { width: 7%; }
 .board_list_typeB.news .list .category { width: 12%; }
-.board_list_typeB.news .list .title { width: 41%; }
+.board_list_typeB.news .list .title { width: 53%; }
 
 /* 심포지엄 목록 */
 .board_list_typeB.symposium { margin-top: 60px; }

@@ -141,7 +141,6 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 .chk1 + label,
 .radio1 + label {
 	padding-left: 24px;
-	line-height: 100%;
 	font-size: 15px;
 	cursor: pointer;
 }

@@ -90,12 +90,11 @@ $(window).on("beforeunload", function(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="member.member_registration" text="member.member_registration"></spring:message></h2>
+				</div>
+			</div>
 			<div id="contentsPrint">
 				<c:choose>
 					<c:when test="${fn:length(afterSignup ) eq 0}">

@@ -82,15 +82,15 @@
 .member dt,
 .member dd {
 	display: inline-block;
-	vertical-align: middle;
+	vertical-align: top;
 	font-size: 15px;
 }
 .member dt { width: 30%; font-weight: 500; }
 .member dd { position: relative; width: 70%; }
 .member input.ipt1 { width: 100%; }
 .member .member_chk ul { font-size: 0; }
-.member .member_chk ul li { display: inline-block; margin-left: 30px; }
-.member .member_chk ul li:first-child { margin-left: 0; }
+.member .member_chk ul li { display: block; margin-top: 10px; }
+.member .member_chk ul li:first-child { margin-top: 0; }
 .member .email dd { font-size: 0; }
 .member .email input.ipt1,
 .member .email span {
@@ -123,8 +123,8 @@
 		vertical-align: top;
 		font-size: 13px;
 	}
-	.member dt { width: 20%; word-break: keep-all; }
-	.member dd { width: 80%; margin-top: 4px; }
+	.member dt { width: 30%; word-break: keep-all; }
+	.member dd { width: 70%; margin-top: 4px; }
 	.member .member_chk ul li { display: block; margin: 10px 0 0 0; }
 	.member .member_chk ul li:first-child { margin-top: 0; }
 	.member .email input.ipt1, .member .email span { font-size: 13px; }
