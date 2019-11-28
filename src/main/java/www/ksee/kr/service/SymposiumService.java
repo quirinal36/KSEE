@@ -22,8 +22,7 @@ public class SymposiumService implements DataService<Symposium> {
 
 	@Override
 	public int update(Symposium input) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.update(input);
 	}
 
 	@Override

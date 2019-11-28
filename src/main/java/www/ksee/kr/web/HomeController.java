@@ -1,20 +1,30 @@
 package www.ksee.kr.web;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.Config;
 import www.ksee.kr.service.PopupService;
 import www.ksee.kr.vo.Board;
 import www.ksee.kr.vo.Paging;
@@ -112,6 +122,8 @@ public class HomeController extends KseeController {
 		mv.addObject("sympList", listOfSympList);
 		mv.addObject("paging", board);
 		mv.addObject("today", LocalDate.now().toString());
+		mv.addObject("locale", locale);
+		
 		mv.setViewName("/home");
 		return mv;
 	}
@@ -170,5 +182,30 @@ public class HomeController extends KseeController {
 	public ModelAndView getEmailTermView(ModelAndView mv) {
 		mv.setViewName("/term/email");
 		return mv;
+	}
+	/**
+	 * JAVASCRIPT i18n 을 위함
+	 * properties 파일을 읽어와 List 형태로 돌려준다.
+	 * 
+	 * @param propertiesName
+	 * @param response
+	 * @param locale
+	 */
+	@RequestMapping(value="/properties/{propertiesName}")
+	public void getProperties(@PathVariable("propertiesName")Optional<String> propertiesName, 
+			HttpServletResponse response, Locale locale) {
+		response.setCharacterEncoding(Config.ENCODING);
+		
+		if(propertiesName.isPresent()) {
+			try {
+				List<String> readLines = FileUtils.readLines(ResourceUtils.getFile("classpath:messages/" + propertiesName.get() + ".properties"), Config.ENCODING);
+				OutputStream outputStream = response.getOutputStream();
+				IOUtils.writeLines(readLines, null, outputStream, Config.ENCODING);
+			} catch (FileNotFoundException e) {
+				logger.info(e.getLocalizedMessage());
+			} catch (IOException e) {
+				logger.info(e.getLocalizedMessage());
+			}
+		}
 	}
 }

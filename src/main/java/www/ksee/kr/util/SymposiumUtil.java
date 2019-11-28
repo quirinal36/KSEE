@@ -20,7 +20,9 @@ public class SymposiumUtil {
 		service.insert(symposium);
 		return symposium;
 	}
-	
+	public int update(SymposiumService service, Symposium symposium) {
+		return service.update(symposium);
+	}
 	public List<Symposium> search(SymposiumService service, Symposium symposium){
 		if(symposium.getPageNo() == 0) {
 			symposium.setPageNo(1);

@@ -35,18 +35,20 @@ $(document).ready(function(){
 		var pwd = $("input[name='password']").val();
 		var pwdConfirm = $(this).val();
 		
-		if(pwd.length * pwdConfirm.length > 0){
+		if(pwd.length >= 6 && pwdConfirm.length >= 6){
 			if(pwd == pwdConfirm){
 				$(".message").hide();
 				$(".confirm").show();
 				buttonEnable();
 			}else{
 				$(".message").hide();
+				$(".error").text(jQuery.i18n.prop("member.signup.not_matched_pwd"))
 				$(".error").show();
 				buttonDisable();
 			}
 		}else{
-			$(".message").hide();
+			$(".error").text(jQuery.i18n.prop("member.new_pwd.over_six"));
+			$(".error").show();
 			buttonDisable();
 		}
 	});
@@ -62,28 +64,30 @@ function buttonEnable(){
 function changePwd(){
 	buttonDisable();
 	
-	var url = $("form").attr("action");
-	var param = $("form").serialize();
-	
-	$.ajax({
-		url : url,
-		data: param,
-		type: 'POST',
-		dataType: 'json'
-	}).done(function(json){
-		if(json.result > 0){
-			var myInfoUrl = $("input[name='my-info-url']").val();
-			if(confirm("비밀번호 변경이 완료되었습니다.")){
-				location.replace(myInfoUrl);
+	if(valid()){
+		var url = $("form").attr("action");
+		var param = $("form").serialize();
+		
+		$.ajax({
+			url : url,
+			data: param,
+			type: 'POST',
+			dataType: 'json'
+		}).done(function(json){
+			if(json.result > 0){
+				var myInfoUrl = $("input[name='my-info-url']").val();
+				if(confirm(jQuery.i18n.prop("member.change_pwd.complete"))){
+					location.replace(myInfoUrl);
+				}
+			}else{
+				alert(json.message);
 			}
-		}else{
-			alert(json.message);
-		}
-	}).fail(function(xhr, status, error){
-		
-	}).always(function(xhr, status){
-		
-	});
+		}).fail(function(xhr, status, error){
+			
+		}).always(function(xhr, status){
+			
+		});
+	}
 }
 </script>
 </head>
@@ -106,23 +110,23 @@ function changePwd(){
 							<div class="member member_form1">
 								<div class="paper">
 									<dl>
-										<dt>새 비밀번호</dt>
+										<dt><spring:message code="member.new_pwd"/></dt>
 										<dd>
-											<input type="password" placeholder="새 비밀번호 입력" class="ipt1" name="password">
-											<p class="message six-letters">6자리 이상 입력하세요.</p>
+											<input type="password" placeholder="<spring:message code="member.new_pwd"/>" class="ipt1" name="password">
+											<p class="message six-letters"><spring:message code="member.new_pwd.over_six"/></p>
 										</dd>
 									</dl>
 									<dl>
-										<dt>비밀번호 확인</dt>
+										<dt><spring:message code="member.new_pwd.confirm"/></dt>
 										<dd>
-											<input type="password" placeholder="비밀번호 재입력" class="ipt1" name="password_confirm">
-											<p class="message error">비밀번호가 일치하지 않습니다.</p>
-											<p class="message confirm">비밀번호가 일치합니다.</p>
+											<input type="password" placeholder="<spring:message code="member.new_pwd.confirm.hint"/>" class="ipt1" name="password_confirm">
+											<p class="message error"><spring:message code="member.password_not_match"/></p>
+											<p class="message confirm"><spring:message code="member.password_match"/></p>
 										</dd>
 									</dl>
 									<input type="hidden" name="login" value="${user.login }"/>
 									<input type="hidden" name="my-info-url" value="<c:url value="/member/login"/>"/>
-									<input type="button" value="비밀번호 변경" class="bt3" onclick="javascript:changePwd();" disabled>
+									<input type="button" value="<spring:message code="member.new_pwd.submit"/>" class="bt3" onclick="javascript:changePwd();" disabled>
 								</div>
 							</div>
 						</div>
@@ -130,7 +134,7 @@ function changePwd(){
 				</c:when>
 				<c:otherwise>
 					<div id="contentsPrint">
-					토큰의 기간이 만료되었습니다.
+						<spring:message code="member.new_pwd.expired_token"/>
 					</div>
 				</c:otherwise>
 			</c:choose>

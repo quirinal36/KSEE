@@ -61,6 +61,16 @@
 								</td>
 							</tr>
 							<tr>
+								<th>행사명(영문)</th>
+								<td>
+									${symposium.title_en }
+								</td>
+								<th>장소(영문)</th>
+								<td>
+									${symposium.place_en }
+								</td>
+							</tr>
+							<tr>
 								<th>행사기간</th>
 								<td>
 									${symposium.startDate } ~ ${symposium.finishDate }
@@ -166,6 +176,7 @@
 					
 					<div class="bt_wrap">
 						<input type="hidden" name="deleteUrl" value="<c:url value="/admin/symposium/delete/${symposium.id }"/>"/>
+						<a href="<c:url value="/admin/${where }/write/${symposium.id }"/>" class="bt1">수정</a>
 						<a href="javascript:void(0)" onclick="javascript:deleteSymposium();" class="bt1">삭제</a>
 					</div>
 				</div>

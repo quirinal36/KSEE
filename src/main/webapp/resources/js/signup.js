@@ -35,7 +35,7 @@ $(document).ready(function(){
 		if(passwordInput.length >= 6 && 
 				passwordInput == passwordConfirmInput){
 			$(this).parent().find(".error").hide();
-			$(this).parent().find(".confirm").text('비밀번호가 일치합니다.');
+			$(this).parent().find(".confirm").text(jQuery.i18n.prop("member.signup.matched_pwd"));
 		}else if(passwordInput.length < 6 && passwordInput.length > 0){
 			// $(this).parent().find(".error").show();
 			// $(this).parent().find(".error").text("6자 이상으로 입력하세요.");
@@ -44,7 +44,7 @@ $(document).ready(function(){
 				&& passwordConfirmInput.length > 0){
 			$(this).parent().find(".confirm").hide();
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text('비밀번호가 일치하지 않습니다.');
+			$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.not_matched_pwd"));
 		}
 	});
 	
@@ -56,13 +56,13 @@ $(document).ready(function(){
 				&& passwordInput.val() == passwordConfirmInput.val()){
 			passwordConfirmInput.parent().find(".confirm").show();
 			passwordConfirmInput.parent().find(".error").hide();
-			passwordConfirmInput.parent().find(".confirm").text('비밀번호가 일치합니다.');
+			passwordConfirmInput.parent().find(".confirm").text(jQuery.i18n.prop("member.signup.matched_pwd"));
 		}else if(passwordInput.val().length >= 6 
 				&& passwordConfirmInput.val().length >= 6
 				&& passwordInput.val() != passwordConfirmInput.val()){
 			passwordConfirmInput.parent().find(".confirm").hide();
 			passwordConfirmInput.parent().find(".error").show();
-			passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
+			passwordConfirmInput.parent().find(".error").text(jQuery.i18n.prop("member.signup.not_matched_pwd"));
 			// passwordConfirmInput.focus();
 		}else if(passwordInput.val().length == 0 
 				&& passwordConfirmInput.val().length == 0){
@@ -82,7 +82,7 @@ $(document).ready(function(){
 			var regPhone = /^\d{3}\d{3,4}\d{4}$/;
 			if(!regPhone.test(input)){
 				$(this).parent().find(".error").show();
-				$(this).parent().find(".error").text("전화번호를 확인해주세요.");
+				$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.check.phone"));
 			}else{
 				$(this).parent().find(".error").hide();
 			}
@@ -97,14 +97,14 @@ $(document).ready(function(){
 			$(this).parent().find(".error").hide();
 		}else{
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("잘못된 도메인 형식입니다.");
+			$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.check.domain"));
 		}
 	});
 	$("input[name='classification']").blur(function(){
 		var input = $(this).val();
 		if(input == '' || input=='undefined'){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("소속을 입력하세요.");
+			$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.check.affiliation"));
 		}else{
 			$(this).parent().find(".error").hide();
 		}
@@ -113,7 +113,7 @@ $(document).ready(function(){
 		var input = $(this).val();
 		if(input == '' || input=='undefined'){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text("직위를 입력하세요.");
+			$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.check.level"));
 		}else{
 			$(this).parent().find(".error").hide();
 		}
@@ -148,13 +148,13 @@ function validate(data){
 	}else if(loginValid == 0){
 		loginInput.parent().find(".confirm").hide();
 		loginInput.parent().find(".error").show();
-		loginInput.parent().find(".error").text('아이디를 확인해주세요.');
+		loginInput.parent().find(".error").text(jQuery.i18n.prop("member.signup.check.login"));
 		loginInput.focus();
 		return false;
 	}else{
 		loginInput.parent().find(".confirm").hide();
 		loginInput.parent().find(".error").show();
-		loginInput.parent().find(".error").text('아이디를 입력해주세요.');
+		loginInput.parent().find(".error").text(jQuery.i18n.prop("member.signup.input_login"));
 		loginInput.focus();
 		return false;
 	}
@@ -164,7 +164,7 @@ function validate(data){
 		if(jsonObj['password'].length < 6){
 			passwordInput.parent().find(".confirm").hide();
 			passwordInput.parent().find(".error").show();
-			passwordInput.parent().find(".error").text('6자 이상으로 입력하세요.');
+			passwordInput.parent().find(".error").text(jQuery.i18n.prop("member.new_pwd.over_six"));
 			passwordInput.focus();
 			return false;
 		}else{
@@ -173,7 +173,7 @@ function validate(data){
 	}else{
 		passwordInput.parent().find(".confirm").hide();
 		passwordInput.parent().find(".error").show();
-		passwordInput.parent().find(".error").text('비밀번호를 입력하세요.');
+		passwordInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_password"));
 		passwordInput.focus();
 		return false;
 	}
@@ -183,17 +183,17 @@ function validate(data){
 		if(passwordInput.val() == passwordConfirmInput.val()){
 			passwordConfirmInput.parent().find(".confirm").show();
 			passwordConfirmInput.parent().find(".error").hide();
-			passwordConfirmInput.parent().find(".confirm").text('비밀번호가 일치합니다.');
+			passwordConfirmInput.parent().find(".confirm").text(jQuery.i18n.prop("member.password_match"));
 		}else{
 			passwordConfirmInput.parent().find(".confirm").hide();
 			passwordConfirmInput.parent().find(".error").show();
-			passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
+			passwordConfirmInput.parent().find(".error").text(jQuery.i18n.prop("member.password_not_match"));
 			return false;
 		}
 	}else{
 		passwordConfirmInput.parent().find(".confirm").hide();
 		passwordConfirmInput.parent().find(".error").show();
-		passwordConfirmInput.parent().find(".error").text('비밀번호가 일치하지 않습니다.');
+		passwordConfirmInput.parent().find(".error").text(jQuery.i18n.prop("member.password_not_match"));
 		passwordConfirmInput.focus();
 		return false;
 	}
@@ -203,7 +203,7 @@ function validate(data){
 		usernameInput.parent().find(".error").hide();
 	}else{
 		usernameInput.parent().find(".error").show();
-		usernameInput.parent().find(".error").text('이름을 입력하세요.');
+		usernameInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_name"));
 		usernameInput.focus();
 		return false;
 	}
@@ -213,7 +213,7 @@ function validate(data){
 		classificationInput.parent().find(".error").hide();
 	}else{
 		classificationInput.parent().find(".error").show();
-		classificationInput.parent().find(".error").text('소속을 입력하세요.');
+		classificationInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_affiliation"));
 		classificationInput.focus();
 		return false;
 	}
@@ -223,7 +223,7 @@ function validate(data){
 		levelInput.parent().find(".error").hide();
 	}else{
 		levelInput.parent().find(".error").show();
-		levelInput.parent().find(".error").text('직위를 입력하세요.');
+		levelInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_position"));
 		levelInput.focus();
 		return false;
 	} 
@@ -234,7 +234,7 @@ function validate(data){
 		addressInput.parent().find(".error").hide();
 	}else{
 		addressInput.parent().find(".error").show();
-		addressInput.parent().find(".error").text('주소를 입력하세요.');
+		addressInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_address"));
 		addressInput.focus();
 		return false;
 	}
@@ -244,7 +244,7 @@ function validate(data){
 		addressDetailInput.parent().find(".error").hide();
 	}else{
 		addressDetailInput.parent().find(".error").show();
-		addressDetailInput.parent().find(".error").text('상세주소를 입력하세요.');
+		addressDetailInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_address2"));
 		addressDetailInput.focus();
 		return false;
 	}
@@ -254,7 +254,7 @@ function validate(data){
 		phoneInput.parent().find(".error").hide();
 	}else{
 		phoneInput.parent().find(".error").show();
-		phoneInput.parent().find(".error").text('전화번호를 입력하세요.');
+		phoneInput.parent().find(".error").text(jQuery.i18n.prop("member.signup.check.telephone"));
 		phoneInput.focus();
 		return false;
 	}
@@ -264,7 +264,7 @@ function validate(data){
 		emailInput.parent().find(".error").hide();
 	}else{
 		emailInput.parent().find(".error").show();
-		emailInput.parent().find(".error").text('이메일 주소를 입력하세요.');
+		emailInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_email"));
 		emailInput.focus();
 		return false;
 	}
@@ -274,13 +274,13 @@ function validate(data){
 		domainInput.parent().find(".error").hide();
 	} else{
 		domainInput.parent().find(".error").show();
-		domainInput.parent().find(".error").text('이메일 도메인을 입력하세요.');
+		domainInput.parent().find(".error").text(jQuery.i18n.prop("member.enter_your_domain"));
 		domainInput.focus();
 		return false;
 	}
 	if(!emailCheck(domainInput.val())){
 		domainInput.parent().find(".error").show();
-		domainInput.parent().find(".error").text('잘못된 도메인 형식입니다.');
+		domainInput.parent().find(".error").text(jQuery.i18n.prop("member.signup.check.domain"));
 		domainInput.focus();
 		return false;
 	}
@@ -313,7 +313,7 @@ function move(nextPage){
 			$(".form_step2").show();
 		}else {
 			if(!check1){
-				var message = "이용약관에 동의해주세요.";
+				var message = jQuery.i18n.prop("member.signup.agree.terms");
 				if(jscd.browser.indexOf('msie') != -1){
 					alert(message);
 				}else{
@@ -324,7 +324,7 @@ function move(nextPage){
 				return false;
 			}
 			if(!check2){
-				var message = "개인정보처리방침에 동의해주세요.";
+				var message = jQuery.i18n.prop("member.signup.policy");
 				if(jscd.browser.indexOf('msie') != -1){
 					alert(message);
 				}else{

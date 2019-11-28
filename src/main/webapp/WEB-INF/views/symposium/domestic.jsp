@@ -51,7 +51,7 @@
 										</c:choose>
 									</a>
 								</div>
-								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
+								<div class="period">${item.startDate } ~ ${item.finishDate}</div>
 								<div class="place">
 									<c:choose>
 										<c:when test="${locale.language eq 'en' }">

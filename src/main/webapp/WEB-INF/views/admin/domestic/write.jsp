@@ -66,6 +66,40 @@
 			$(".date_chk_apply").find("input[name='period']").val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
 		});
 	});
+	
+	function deleteSymposium(){
+		var url = $("input[name='deleteUrl']").val();
+		if(confirm("삭제하시겠습니까?")){
+			$.ajax({
+				url : url,
+				dataType: 'json',
+				type : 'POST'
+			}).done(function(json){
+				if(json.result> 0){
+					alert("삭제되었습니다.");
+					history.go(-1);
+				}
+			});
+		}
+	}
+	
+	function updateSymposium(){
+		var url = $("input[name='updateUrl']").val();
+		if(confirm("수정 하시겠습니까?")){
+			var param = $("form").serialize();
+			$.ajax({
+				url : url,
+				data : param,
+				dataType: 'json',
+				type : 'POST'
+			}).done(function(json){
+				if(json.result> 0){
+					alert("완료되었습니다.");
+					history.go(-1);
+				}
+			});
+		}
+	}
 	</script>
 </head>
 <body>
@@ -90,39 +124,39 @@
 							<tr>
 								<th>행사명</th>
 								<td>
-									<input type="text" placeholder="행사명 입력" class="w90 ipt2" name="title">
+									<input type="text" placeholder="행사명 입력" class="w90 ipt2" name="title" value="${symposium.title }">
 								</td>
 								<th>장소</th>
 								<td>
-									<input type="text" placeholder="장소 입력" class="w90 ipt2" name="place">
+									<input type="text" placeholder="장소 입력" class="w90 ipt2" name="place" value="${symposium.place }">
 								</td>
 							</tr>
 							<tr>
 								<th>행사명(영문)</th>
 								<td>
-									<input type="text" placeholder="행사명 입력" class="w90 ipt2" name="title_en">
+									<input type="text" placeholder="행사명 입력" class="w90 ipt2" name="title_en" value="${symposium.title_en }">
 								</td>
 								<th>장소(영문)</th>
 								<td>
-									<input type="text" placeholder="장소 입력" class="w90 ipt2" name="place_en">
+									<input type="text" placeholder="장소 입력" class="w90 ipt2" name="place_en" value="${symposium.place_en }">
 								</td>
 							</tr>
 							<tr>
 								<th>행사기간</th>
 								<td>
 									<div class="date_chk date_chk_symposium">
-										<input type="hidden" value="${dateStart }" name="startDate"/>
-										<input type="hidden" value="${dateFinish }" name="finishDate"/>
-										<input type="text" value="${dateStart } ~ ${dateFinish }" class="ipt_date" name="period" readonly>
+										<input type="hidden" value="${symposium.startDate }" name="startDate"/>
+										<input type="hidden" value="${symposium.finishDate }" name="finishDate"/>
+										<input type="text" value="${symposium.startDate } ~ ${symposium.finishDate }" class="ipt_date" name="period" readonly>
 										<input type="button" value="날짜 선택" class="bt_date_chk" id="symposium_date_btn">
 									</div>
 								</td>
 								<th>접수기간</th>
 								<td>
 									<div class="date_chk date_chk_apply">
-										<input type="hidden" value="${dateStart }" name="applyStart"/>
-										<input type="hidden" value="${dateFinish }" name="applyFinish"/>
-										<input type="text" value="${dateStart } ~ ${dateFinish }" class="ipt_date" name="period" readonly>
+										<input type="hidden" value="${symposium.applyStart }" name="applyStart"/>
+										<input type="hidden" value="${symposium.applyFinish }" name="applyFinish"/>
+										<input type="text" value="${symposium.applyStart } ~ ${symposium.applyFinish }" class="ipt_date" name="period" readonly>
 										<input type="button" value="날짜 선택" class="bt_date_chk" id="apply_date_btn">
 									</div>
 								</td>
@@ -130,10 +164,15 @@
 						</tbody>
 					</table>
 					<div class="bt_wrap mb-60">
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:registSymposium();">등록</a>
+						<c:if test="${empty symposium }">
+							<a href="javascript:void(0);" class="bt1" onclick="javascript:registSymposium();">등록</a>
+						</c:if>
 						<c:if test="${not empty symposium }">
-							<a href="javascript:void(0);" class="bt1">수정</a>
-							<a href="javascript:void(0);" class="bt1">삭제</a>
+							<input type="hidden" name="deleteUrl" value="<c:url value="/admin/symposium/delete/${symposium.id }"/>"/>
+							<input type="hidden" name="updateUrl" value="<c:url value="/admin/symposium/update/${symposium.id }"/>"/>
+							<input type="hidden" name="id" value="${symposium.id }"/>
+							<a href="javascript:void(0);" class="bt1" onclick="javascript:updateSymposium();">수정</a>
+							<a href="javascript:void(0);" class="bt1" onclick="javascript:deleteSymposium();">삭제</a>
 						</c:if>
 					</div>
 				</form>

@@ -80,7 +80,7 @@
 					</div>
 					<div class="bt_wrap">
 						<input type="hidden" name="write_url" value="${writeUrl }">
-						<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
+						<input type="button" class="bt1 bt_write popup_password_opener" value="<spring:message code="board.write"/>">
 					</div>
 				</div>
 			</div>

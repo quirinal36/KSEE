@@ -9,10 +9,10 @@
 <script type="text/javascript">
 function deleteUser(){
 	if(!$("#term_chk1").is(":checked")){
-		alert("안내사항에 동의해주세요.");
+		alert(jQuery.i18n.prop("member.delete.please_agree"));
 		return false;
 	}
-	if(confirm("정말 탈퇴하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("member.delete.confirm"))){
 		var url = $("form").attr("action");
 		var data = $("form").serialize();
 		

@@ -19,16 +19,16 @@ $(document).ready(function(){
 		var result = validate($("form").serializeArray());
 		if(result == true){
 			if(jscd.browser.indexOf('msie') != -1  ){
-				if(confirm("회원가입 하시겠습니까?")){
+				if(confirm(jQuery.i18n.prop("member.signup.confirm"))){
 					submitSignup();
 				}
 			}else{
 				swal({
-					text : "회원가입 하시겠습니까?",
+					text : jQuery.i18n.prop("member.signup.confirm"),
 					showCancelButton: true,
 					focusConfirm: true,
-					confirmButtonText: "확인",
-					cancelButtonText: "취소",
+					confirmButtonText: jQuery.i18n.prop("member.confirm"),
+					cancelButtonText: jQuery.i18n.prop("member.cancel"),
 					animation: false
 				}).then(function(result){
 					if(result.value){
@@ -52,15 +52,15 @@ $(document).ready(function(){
 				signupComplete = true;
 				
 				if(jscd.browser.indexOf('msie') != -1  ){
-					if(confirm("가입 완료되었습니다.")){
+					if(confirm(jQuery.i18n.prop("member.signup.complete"))){
 						move(2);
 					}
 				}else{
 					swal({
-						text : "가입 완료되었습니다.",
+						text : jQuery.i18n.prop("member.signup.complete"),
 						showCancelButton: false,
 						focusConfirm: true,
-						confirmButtonText: "확인",
+						confirmButtonText: jQuery.i18n.prop("member.confirm"),
 						animation: false
 					}).then(function(result){
 						if(result.value){
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
 $(window).on("beforeunload", function(){
 	if(!signupComplete){
-		var msg = "이 페이지를 벗어나면 작성된 내용은 저장되지 않습니다.";
+		var msg = jQuery.i18n.prop("member.signup.before_leave");
 		return msg;		
 	}
 });
@@ -205,7 +205,7 @@ $(window).on("beforeunload", function(){
 										<dt><spring:message code="member.work_address" text="member.work_address"></spring:message></dt>
 										<dd>
 											<input type="button" value="<spring:message code="member.find_address" text="member.find_address"></spring:message>" class="bt2" onclick="javascript:fn_setAddr()">
-											<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" class="mt-10 ipt1" readonly name="address">
+											<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" class="mt-10 ipt1" name="address">
 											<input type="text" placeholder="<spring:message code="member.rest_address" text="member.rest_address"></spring:message>" class="mt-10 ipt1" name="addressDetail">
 											<p class="message error"><spring:message code="member.enter_your_address2" text="member.enter_your_address2"></spring:message></p>
 										</dd>

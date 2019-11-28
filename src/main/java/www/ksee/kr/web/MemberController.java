@@ -98,19 +98,19 @@ public class MemberController extends KseeController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/get", method = RequestMethod.GET, produces = "application/json; charset=utf8")
-	public String getUser(UserVO user) {
+	public String getUser(UserVO user, Locale locale) {
 		List<UserVO> findUsers = userService.select(user);
 		
 		JSONObject json = new JSONObject();
 		if(findUsers != null && findUsers.size()>0) {
 			json.put("result", findUsers.size());
-			json.put("message", "이미 사용 중인 아이디입니다.");
+			json.put("message", messageSource.getMessage("member.signup.exist", null, locale));
 		}else if(userService.isValid(user)==false) {
 			json.put("result", -1);
-			json.put("message", "5~20자의 영문 소문자, 숫자만 사용 가능합니다.");
+			json.put("message", messageSource.getMessage("member.signup.login.length", null, locale));
 		}else {
 			json.put("result", 0);
-			json.put("message", "사용 가능한 아이디입니다.");
+			json.put("message", messageSource.getMessage("member.signup.login.enable", null, locale));
 		}
 		
 		return json.toString();
@@ -243,7 +243,7 @@ public class MemberController extends KseeController{
 	 */
 	@ResponseBody
 	@RequestMapping(value= {"/newPwd/send", "/newPwd/send/{userId}"}, method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public String sendNewPwd(UserVO user, HttpServletRequest request,
+	public String sendNewPwd(Locale locale, UserVO user, HttpServletRequest request,
 			HttpServletResponse response, @PathVariable("userId")Optional<Integer>userId) {
 		JSONObject json = new JSONObject();
 		
@@ -261,7 +261,7 @@ public class MemberController extends KseeController{
 			json.put("result", userService.update(loginedUser));
 		}else {
 			json.put("result", 0);
-			json.put("message", "로그인 해주세요.");
+			json.put("message", messageSource.getMessage("member.please_login", null, locale));
 		}
 		
 		return json.toString();
@@ -321,19 +321,18 @@ public class MemberController extends KseeController{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/delete", method = RequestMethod.POST, produces = "application/json; charset=utf8")
-	public String deleteUser(@RequestParam(value="password")String password) {
+	public String deleteUser(Locale locale, @RequestParam(value="password")String password) {
 		UserVO user = getUser();
 		JSONObject json = new JSONObject();
 		if(user != null) {
 			boolean passwordMatches = userService.isPasswordValid(user, password);
-			logger.info("passwordMatches: " + passwordMatches);
 			
 			if(passwordMatches) {
 				json.put("result", userService.delete(user));
 				json.put("logout", "/j_spring_security_logout");
 			}else {
 				json.put("result", 0);
-				json.put("msg", "비밀번호가 일치하지 않습니다.");
+				json.put("msg", messageSource.getMessage("member.signup.not_matched_pwd", null, locale));
 			}
 		}
 		return json.toString();

@@ -135,7 +135,16 @@ public class AdminDomesticController extends KseeController{
 		json.put("result", symposium.getId());
 		return json.toString();
 	}
-	
+	@ResponseBody
+	@RequestMapping(value="/symposium/update/{id}", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String editSymposium(Symposium symposium) {
+		SymposiumUtil util = new SymposiumUtil();
+		int result = util.update(sympService, symposium);
+		
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		return json.toString();
+	}
 	@RequestMapping(value="/{where}/detail/{id}")
 	public ModelAndView getDetailView(@PathVariable(value="id")Integer id,
 			@PathVariable(value="where", required = true)String where,
@@ -391,4 +400,5 @@ public class AdminDomesticController extends KseeController{
 		}
 		return null;
 	}
+	
 }
