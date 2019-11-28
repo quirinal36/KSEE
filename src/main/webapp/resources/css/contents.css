@@ -208,6 +208,9 @@
 .history_wrap .item dt { width: 15%; padding-right: 20px; box-sizing: border-box; font-weight: 600; color: #777; }
 .history_wrap .item dd { width: 85%; word-break: keep-all; }
 
+.history_wrap.en .item dt { display: none; }
+.history_wrap.en .item dd { width: 100%; }
+
 @media ( max-width: 800px ) {
 	.history_wrap { margin: 0; padding: 20px; box-sizing: border-box; }
 	.history_wrap::before { display: none; }
