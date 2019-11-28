@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="item">
 	<div class="title">
-		<strong>제1장 총칙</strong>
+		<input type="button" value="제1장 총칙" class="term_bt">
 	</div>
 	<div class="content">
 		<strong>제1조 (명칭)</strong>
@@ -24,7 +24,7 @@
 </div>
 <div class="item">
 	<div class="title">
-		<strong>제2장 회원 및 임원</strong>
+		<input type="button" value="제2장 회원 및 임원" class="term_bt">
 	</div>
 	<div class="content">
 		<strong>제5조 (회원의 자격)</strong>
@@ -81,7 +81,7 @@
 </div>
 <div class="item">
 	<div class="title">
-		<strong>제3장 총회 및 이사회</strong>
+		<input type="button" value="제3장 총회 및 이사회" class="term_bt">
 	</div>
 	<div class="content">
 		<strong>제16조 (총회)</strong>
@@ -139,7 +139,7 @@
 </div>
 <div class="item">
 	<div class="title">
-		<strong>제4장 사무국</strong>
+		<input type="button" value="제4장 사무국" class="term_bt">
 	</div>
 	<div class="content">
 		<strong>제26조 (종사자의 구성 및 임면) </strong>
@@ -198,7 +198,7 @@
 </div>
 <div class="item">
 	<div class="title">
-		<strong>부칙</strong>
+		<input type="button" value="부칙" class="term_bt">
 	</div>
 	<div class="content">
 		<p>

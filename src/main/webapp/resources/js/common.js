@@ -59,14 +59,7 @@ $(function(){
 			pause: 8000
 		});
 	}
-	
-	if($(".term_bt").length > 0){
-		// 정관
-		$(".term_bt").click(function(){
-			$(this).toggleClass("on");
-			$(this).parent().find("+ .content").slideToggle();
-		});
-	}
+
 });
 
 
