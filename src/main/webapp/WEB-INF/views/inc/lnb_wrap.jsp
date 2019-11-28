@@ -44,7 +44,7 @@
 							${curMenu.title_en }					
 						</c:when>
 						<c:otherwise>
-							${curMenu.title }	
+							${curMenu.title }
 						</c:otherwise>
 					</c:choose>
 				</a>

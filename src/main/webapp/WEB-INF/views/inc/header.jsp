@@ -120,11 +120,31 @@ $(document).ready(function(){
 						<ul class="dep1">
 							<c:forEach items="${parents }" var="pmenu">
 							<li>
-								<a href="javascript:void(0);">${pmenu.title }</a>
+								<a href="javascript:void(0);">
+									<c:choose>
+										<c:when test="${locale.language eq 'en'}">
+											${pmenu.title_en }			
+										</c:when>
+										<c:otherwise>
+											${pmenu.title }
+										</c:otherwise>
+									</c:choose>
+								</a>
 								<ul class="dep2">
 									<c:forEach items="${children }" var="item">
 										<c:if test="${pmenu.id eq item.parent}">
-											<li><a href="<c:url value="${item.url }"/>">${item.title }</a></li>
+											<li>
+												<a href="<c:url value="${item.url }"/>">
+													<c:choose>
+														<c:when test="${locale.language eq 'en'}">
+															${item.title_en }	
+														</c:when>
+														<c:otherwise>
+															${item.title }
+														</c:otherwise>
+													</c:choose>
+												</a>
+											</li>
 										</c:if>
 									</c:forEach>
 								</ul>
@@ -137,9 +157,9 @@ $(document).ready(function(){
 			<input type="button" value="검색" class="bt_header_search">
 			<div class="header_search">
 				<div class="search_ipt_all">
-					<input type="text" placeholder="검색어를 입력하세요." name="query">
+					<input type="text" placeholder="<spring:message code="inc.header.query" text="inc.header.query"/>" name="query">
 					<input type="hidden" name="search_url" value="<c:url value="/search"/>">
-					<input type="button" value="검색" onclick="javascript:searchAll();">
+					<input type="button" value="<spring:message code="inc.header.search" text="inc.header.search"/>" onclick="javascript:searchAll();">
 				</div>
 				<input type="button" value="닫기" class="bt_header_search_close">
 			</div>

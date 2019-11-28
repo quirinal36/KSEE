@@ -3,6 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="su" uri="/WEB-INF/tlds/customTags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -26,14 +27,16 @@
 			</c:import>
 			<div id="contentsTitle">
 				<div>
-					<h2>통합검색</h2>
+					<h2>
+						<spring:message code="comm.search"/>
+					</h2>
 				</div>
 			</div>
 			<div class="board_search">
 				<div class="search_ipt">
 					<form action="<c:url value="/search"/>" method="get">
-						<input type="text" name="query" placeholder="검색어를 입력하세요.">
-						<input type="submit" value="검색">
+						<input type="text" name="query" placeholder="<spring:message code="inc.header.query" text="inc.header.query"/>">
+						<input type="submit" value="<spring:message code="inc.header.search" text="inc.header.search"/>">
 					</form>
 				</div>
 			</div>
@@ -46,22 +49,22 @@
 				<c:forEach items="${boardList }" var="list" varStatus="sts">
 					<h2 class="search_title">
 						<c:choose>
-							<c:when test="${sts.count eq 1}">공지사항</c:when>
-							<c:when test="${sts.count eq 2}">관련소식</c:when>
-							<c:when test="${sts.count eq 3}">회원동정</c:when>
-							<c:when test="${sts.count eq 4}">연사제안</c:when>
-							<c:when test="${sts.count eq 5}">자유게시판</c:when>
+							<c:when test="${sts.count eq 1}"><spring:message code="comm.announcements"/></c:when>
+							<c:when test="${sts.count eq 2}"><spring:message code="comm.relevant_news"/></c:when>
+							<c:when test="${sts.count eq 3}"><spring:message code="comm.member_news"/></c:when>
+							<c:when test="${sts.count eq 4}"><spring:message code="comm"/></c:when>
+							<c:when test="${sts.count eq 5}"><spring:message code="comm.bulletin_board"/></c:when>
 						</c:choose>
 					</h2>
 					<div class="board_list board_list_typeB news">
 						<ul class="list">
 							<li class="head">
-								<div class="num">번호</div>
-								<div class="title">제목</div>
-								<div class="writer">작성자</div>
-								<div class="date">작성일</div>
-								<div class="file">첨부파일</div>
-								<div class="view">조회</div>
+								<div class="num"><spring:message code="board.number"/></div>
+								<div class="title"><spring:message code="board.title"/></div>
+								<div class="writer"><spring:message code="board.user"/></div>
+								<div class="date"><spring:message code="board.date"/></div>
+								<div class="file"><spring:message code="board.attachment"/></div>
+								<div class="view"><spring:message code="board.show"/></div>
 							</li>
 							<c:choose>
 								<c:when test="${fn:length(list) gt 0 }">
@@ -89,18 +92,18 @@
 				<c:forEach items="${sympList }" var="list" varStatus="sts">
 					<h2 class="search_title">
 						<c:choose>
-							<c:when test="${sts.count eq 1}">국내 학술대회</c:when>
-							<c:when test="${sts.count eq 2}">한중일 학술대회</c:when>
+							<c:when test="${sts.count eq 1}"><spring:message code="symposium.korean"/></c:when>
+							<c:when test="${sts.count eq 2}"><spring:message code="symposium.kcj"/></c:when>
 						</c:choose>
 					</h2>
 					<div class="board_list board_list_typeB symposium">
 						<ul class="list">
 							<li class="head">
-								<div class="num">번호</div>
-								<div class="title">행사명</div>
-								<div class="period">행사기간</div>
-								<div class="place">장소</div>
-								<div class="apply">참가신청</div>
+								<div class="num"><spring:message code="symposium.num"/></div>
+								<div class="title"><spring:message code="symposium.name_of_event"/></div>
+								<div class="period"><spring:message code="symposium.dates"/></div>
+								<div class="place"><spring:message code="symposium.place"/></div>
+								<div class="apply"><spring:message code="symposium.attendant"/></div>
 							</li>
 							<c:forEach items="${list }" var="item" varStatus="ists">
 								<c:choose>
@@ -116,11 +119,15 @@
 									<div class="title"><a href="<c:url value="/symposium/${where}/view/${item.id }"/>">${item.title }</a></div>
 									<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 									<div class="place">${item.place }</div>
-	                            	<div class="apply"><a href="<c:url value="/symposium/apply"/>" class="bt2 on">참가신청</a></div>
+	                            	<div class="apply">
+	                            		<a href="<c:url value="/symposium/apply"/>" class="bt2 on">
+	                            			<spring:message code="symposium.attendant"/>
+	                            		</a>
+	                            	</div>
 								</li>
 							</c:forEach>
 							<c:if test="${fn:length(list) eq 0 }">
-								<li class="noItem"><div>검색결과가 없습니다.</div></li>
+								<li class="noItem"><div><spring:message code="comm.no_result"/></div></li>
 							</c:if>
 						</ul>
 					</div>

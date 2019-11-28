@@ -3,6 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% 
 pageContext.setAttribute("LF", "\n"); 
 %>
@@ -30,7 +31,7 @@ pageContext.setAttribute("LF", "\n");
 				<div class="board_search">
 					<div class="search_ipt">
 						<form action="<c:url value="${listUrl }"/>">
-							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }"/>
+							<input type="text" name="query" placeholder="<spring:message code="inc.header.query"/>" value="${paging.query }"/>
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search(this.form);">
 						</form>

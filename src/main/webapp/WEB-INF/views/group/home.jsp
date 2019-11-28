@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -23,7 +24,7 @@
 				<div class="board_search">
 					<div class="search_ipt">
 						<form action="<c:url value="/group/"/>">
-							<input type="text" placeholder="검색어를 입력하세요." value="${paging.query }">
+							<input type="text" placeholder="<spring:message code="inc.header.query"/>" value="${paging.query }">
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search(this.form);">
 						</form>
@@ -37,13 +38,13 @@
 				<div class="board_list board_list_typeB news">
 					<ul class="list">
 						<li class="head">
-							<div class="num">번호</div>
-							<div class="category">구분</div>
-							<div class="title">제목</div>
-							<div class="writer">작성자</div>
-							<div class="date">작성일</div>
-							<div class="file">첨부파일</div>
-							<div class="view">조회</div>
+							<div class="num"><spring:message code="board.number"/></div>
+							<div class="category"><spring:message code="board.category"/></div>
+							<div class="title"><spring:message code="board.title"/></div>
+							<div class="writer"><spring:message code="board.user"/></div>
+							<div class="date"><spring:message code="board.date"/></div>
+							<div class="file"><spring:message code="board.attachment"/></div>
+							<div class="view"><spring:message code="board.show"/></div>
 						</li>
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
