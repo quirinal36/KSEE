@@ -90,12 +90,11 @@ function changePwd(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-				
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-				
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="member.change_password" text="member.change_password"></spring:message></h2>
+				</div>
+			</div>
 			<form action="<c:url value="/member/newPwd/send"/>" method="POST">
 				<div id="contentsPrint">
 					<!-- 새 비밀번호 -->
