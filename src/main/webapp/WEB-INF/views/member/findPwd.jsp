@@ -21,7 +21,6 @@ function sendEmail(button){
 		type: 'POST',
 		dataType: 'json'
 	}).done(function(json){
-		console.log(json);
 		$(".error").hide();
 		
 		if(json.result > 0){

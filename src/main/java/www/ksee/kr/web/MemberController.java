@@ -158,16 +158,14 @@ public class MemberController extends KseeController{
 	@RequestMapping(value="/findPwd/submit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String sendEmailForFindPwd(UserVO user, HttpServletRequest request,
 			Locale locale) {
-		logger.info(user.toJsonString());
+		
 		JSONObject json = new JSONObject();
 		UserVO selectedUser = userService.selectOne(user);
 		if(selectedUser == null) {
 			json.put("result", -1);
-			json.put("msg", "존재하지 않는 아이디 입니다.");
+			json.put("msg", messageSource.getMessage("member.find_pwd.not_exist", null, locale));
 		}else {
 			if(fullEmail(selectedUser).equals(user.getEmail())) {
-				logger.info(selectedUser.toJsonString());
-				
 				EmailToken resetToken = EmailToken.newInstance(selectedUser.getId(), UUID.randomUUID().toString());
 				resetToken.setIsPwd(EmailToken.IS_PWD);
 				resetToken.setUserId(selectedUser.getId());
@@ -198,7 +196,7 @@ public class MemberController extends KseeController{
 				json.put("result", 1);
 			}else {
 				json.put("result", 0);
-				json.put("msg", "이메일 주소가 일치하지 않습니다.");
+				json.put("msg", messageSource.getMessage("member.find_pwd.email_not_matched", null, locale));
 			}
 		}
 		return json.toString();

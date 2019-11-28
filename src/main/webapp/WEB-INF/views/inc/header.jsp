@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<script src="<c:url value="/resources/js/jquery.i18n.properties.js"/>" type="text/javascript"></script>
 <script type="text/javascript">
 function searchAll(){
 	var query = $(".search_ipt_all").find("input[name='query']").val();
@@ -16,6 +17,15 @@ $(document).ready(function(){
 		}
 	});
 	
+	jQuery.i18n.properties({
+  		name: 'messages', 
+  		path:'/properties',
+  		mode:'map',
+  		language:"${locale}",
+  		callback: function(){ 
+  			
+  		}
+	});
 	
 	// mobile gnb
 	$(".gnb_m_opener").click(function(){

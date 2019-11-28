@@ -104,7 +104,7 @@ function changePwd(){
 								<dt><spring:message code="member.new_password" text="member.new_password"></spring:message></dt>
 								<dd>
 									<input type="password" placeholder="<spring:message code="member.new_password" text="member.new_password"></spring:message>" class="ipt1" name="password">
-									<p class="message six-letters">6자리 이상 입력하세요.</p>
+									<p class="message six-letters"><spring:message code="member.new_pwd.over_six"/></p>
 								</dd>
 							</dl>
 							<dl>

@@ -116,7 +116,11 @@
 								</c:choose>
 								<li>
 									<div class="num">${ists.count }</div>
-									<div class="title"><a href="<c:url value="/symposium/${where}/view/${item.id }"/>">${item.title }</a></div>
+									<div class="title">
+										<a href="<c:url value="/symposium/${where}/view/${item.id }"/>">
+											${item.title }
+										</a>
+									</div>
 									<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 									<div class="place">${item.place }</div>
 	                            	<div class="apply">
