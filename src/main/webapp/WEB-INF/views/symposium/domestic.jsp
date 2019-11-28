@@ -68,7 +68,7 @@
 	                            	<fmt:parseDate var="now" value="${today }" pattern="yyyy-MM-dd"/>
 	                            	<c:choose>
 	                            		<c:when test="${now ge from and now le to }">
-		                            		<a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on">참가신청</a>
+		                            		<a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on"><spring:message code="symposium.attendant"/></a>
 		                            	</c:when>
 		                            	<c:otherwise>
 		                            		
