@@ -71,7 +71,7 @@
 									<c:forEach items="${list }" var="item" varStatus="sts">
 										<li>
 											<div class="num">${sts.count }</div>
-											<div class="title"><a href="/">${item.title }</a></div>
+											<div class="title"><a href="/group/${item.boardName_en }/view/${item.id}">${item.title }</a></div>
 											<div class="writer">${item.writerName }</div>
 											<div class="date"><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></div>
 											<div class="file">${item.fileCnt }</div>
@@ -120,9 +120,17 @@
 									<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
 									<div class="place">${item.place }</div>
 	                            	<div class="apply">
-	                            		<a href="<c:url value="/symposium/apply"/>" class="bt2 on">
-	                            			<spring:message code="symposium.attendant"/>
-	                            		</a>
+	                            		<fmt:parseDate var="from" value="${item.applyStart }" pattern="yyyy-MM-dd"/>
+		                            	<fmt:parseDate var="to" value="${item.applyFinish }" pattern="yyyy-MM-dd"/>
+		                            	<fmt:parseDate var="now" value="${today }" pattern="yyyy-MM-dd"/>
+		                            	<c:choose>
+		                            		<c:when test="${now ge from and now le to }">
+			                            		<a href="<c:url value="/symposium/apply/${item.id }"/>" class="bt2 on"><spring:message code="symposium.attendant"/></a>
+			                            	</c:when>
+			                            	<c:otherwise>
+			                            		
+			                            	</c:otherwise>
+		                            	</c:choose>
 	                            	</div>
 								</li>
 							</c:forEach>

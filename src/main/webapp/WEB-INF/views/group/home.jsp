@@ -50,7 +50,7 @@
 							<li>
 								<div class="num">${sts.count }</div>
 								<div class="category">${item.boardName }</div>
-								<div class="title"><a href="#">${item.title }</a></div>
+								<div class="title"><a href="/group/${item.boardName_en }/view/${item.id}">${item.title }</a></div>
 								<div class="writer">${item.writerName }</div>
 								<div class="date"><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></div>
 								<div class="file">${item.fileCnt }</div>

@@ -44,4 +44,5 @@ public class Board extends Paging{
 	int viewCount;
 	int replyCnt;
 	String boardName;
+	String boardName_en;
 }

@@ -35,6 +35,7 @@
 			(SELECT COUNT(*) FROM FileInfo WHERE boardId = board.id) AS fileCnt,
 			(SELECT COUNT(*) FROM PhotoInfo WHERE boardId = board.id) AS pictureCnt,
 			(SELECT boardName FROM BoardType WHERE id = board.boardType) AS boardName,
+			(SELECT boardName_en FROM BoardType WHERE id = board.boardType) AS boardName_en,
 			(SELECT COUNT(*) FROM Reply WHERE boardId = board.id) AS replyCnt,
 			usr.username AS writerName
 		FROM 

@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -73,18 +74,18 @@ function applySubmit(){
 				<div class="member form_step1">
 					<!-- 현재상태 -->
 					<div class="location">
-						<div class="on">안내사항</div>
-						<div>정보입력</div>
-						<div>신청완료</div>
+						<div class="on"><spring:message code="symposium.apply.tab1"/></div>
+						<div><spring:message code="symposium.apply.tab2"/></div>
+						<div><spring:message code="symposium.apply.tab3"/></div>
 					</div>
 					<div class="paper">
-						<strong>개인정보처리방침</strong>
+						<strong><spring:message code="symposium.apply.policy"/></strong>
 						<div class="term"></div>
 						<div class="chk_wrap">
 							<input type="checkbox" id="term_chk1" class="chk1">
-							<label for="term_chk1">동의합니다.</label>
+							<label for="term_chk1"><spring:message code="symposium.apply.agree"/></label>
 						</div>
-						<input type="button" value="다음 단계로" class="bt3 on" onclick="javascript:move(1);">
+						<input type="button" value="<spring:message code="symposium.apply.next"/>" class="bt3 on" onclick="javascript:move(1);">
 					</div>
 				</div>
 				
@@ -92,104 +93,104 @@ function applySubmit(){
 				<div class="member member_form1 form_step2" style="display: none;">
 					<!-- 현재상태 -->
 					<div class="location">
-						<div>동의</div>
-						<div class="on">정보입력</div>
-						<div>신청완료</div>
+						<div><spring:message code="symposium.apply.tab1"/></div>
+						<div class="on"><spring:message code="symposium.apply.tab2"/></div>
+						<div><spring:message code="symposium.apply.tab3"/></div>
 					</div>
 					<div class="paper">
 						<form action="<c:url value="/symposium/apply"/>" id="applyForm">
 							<input type="hidden" name="sympId" value="${symposium.id }"/>
 							<dl class="member_chk">
-								<dt>참가자 구분</dt>
+								<dt><spring:message code="symposium.attendee"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="memberType" id="member_chk1" class="radio1" value="2" checked>
-											<label for="member_chk1">일반</label>
+											<label for="member_chk1"><spring:message code="symposium.general"/></label>
 										</li>
 										<li>
 											<input type="radio" name="memberType" id="member_chk2" class="radio1" value="3">
-											<label for="member_chk2">기업</label>
+											<label for="member_chk2"><spring:message code="symposium.apply.view.company"/></label>
 										</li>
 										<li>
 											<input type="radio" name="memberType" id="member_chk3" class="radio1" value="4">
-											<label for="member_chk3">학생</label>
+											<label for="member_chk3"><spring:message code="symposium.apply.view.student"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl class="member_chk">
-								<dt>발표자 여부</dt>
+								<dt><spring:message code="symposium.apply.view.is_speaker"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="isSpeaker" id="speaker_chk1" class="radio1" value="1">
-											<label for="speaker_chk1">발표자입니다</label>
+											<label for="speaker_chk1"><spring:message code="symposium.apply.view.speaker"/></label>
 										</li>
 										<li>
 											<input type="radio" name="isSpeaker" id="speaker_chk2" class="radio1" value="2" checked>
-											<label for="speaker_chk2">발표자가 아닙니다</label>
+											<label for="speaker_chk2"><spring:message code="symposium.apply.view.no_speaker"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl class="member_chk">
-								<dt>국적</dt>
+								<dt><spring:message code="symposium.nationality"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="national" id="national_chk1" class="radio1" value="1" checked>
-											<label for="national_chk1">대한민국</label>
+											<label for="national_chk1"><spring:message code="symposium.korea"/></label>
 										</li>
 										<li>
 											<input type="radio" name="national" id="national_chk2" class="radio1" value="2">
-											<label for="national_chk2">중국</label>
+											<label for="national_chk2"><spring:message code="symposium.china"/></label>
 										</li>
 										<li>
 											<input type="radio" name="national" id="national_chk3" class="radio1" value="3">
-											<label for="national_chk3">일본</label>
+											<label for="national_chk3"><spring:message code="symposium.japan"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl>
-								<dt>이름</dt>
+								<dt><spring:message code="symposium.name"/></dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off" value="${user.username }">
-									<p class="message error">이름을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="symposium.apply.search.please_input_name"/>" class="ipt1" name="username" autocomplete="off" value="${user.username }">
+									<p class="message error"><spring:message code="symposium.apply.search.please_input_name"/></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>소속</dt>
+								<dt><spring:message code="member.affiliation"/></dt>
 								<dd>
-									<input type="text" placeholder="소속 입력" class="ipt1" name="classification" autocomplete="off" value="${user.classification }">
-									<p class="message error">소속을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_affiliation"/>" class="ipt1" name="classification" autocomplete="off" value="${user.classification }">
+									<p class="message error"><spring:message code="member.enter_your_affiliation"/></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>직위</dt>
+								<dt><spring:message code="symposium.position"/></dt>
 								<dd>
-									<input type="text" placeholder="직위 입력" class="ipt1" name="level" autocomplete="off" value="${user.level }">
-									<p class="message error">직위를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_position"/>" class="ipt1" name="level" autocomplete="off" value="${user.level }">
+									<p class="message error"><spring:message code="member.enter_your_position"/></p>
 								</dd>
 							</dl>
 							<dl class="company_tel">
-								<dt>연락처</dt>
+								<dt><spring:message code="symposium.tel"/></dt>
 								<dd>
-									<input type="text" placeholder="연락처 입력" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
+									<input type="text" placeholder="<spring:message code="symposium.tel.hint"/>" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
 								</dd>
 							</dl>
 							<dl class="email">
-								<dt>이메일 주소</dt>
+								<dt><spring:message code="symposium.email"/></dt>
 								<dd>
-									<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email" autocomplete="off" value="${user.email }">
+									<input type="text" placeholder="<spring:message code="member.enter_your_email"/>" class="ipt1" name="email" autocomplete="off" value="${user.email }">
 									<span>@</span>
-									<input type="text" placeholder="도메인 입력" class="ipt1" name="domain" autocomplete="off" value="${user.domain }">
-									<p class="message error">이메일 아이디를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_domain"/>" class="ipt1" name="domain" autocomplete="off" value="${user.domain }">
+									<p class="message error"><spring:message code="member.enter_your_email"/></p>
 								</dd>
 							</dl>
 							<dl class="file" style="display:none;">
-								<dt>학술대회 초록</dt>
+								<dt><spring:message code="symposium.form"/></dt>
 								<dd>
 									<div class="board_write_file"  id="dropzone-file">
 										<!-- 첨부파일 목록 -->
@@ -209,7 +210,7 @@ function applySubmit(){
 									</div>
 								</dd>
 							</dl>
-							<input type="button" value="신청서 제출" class="bt3 on" id="submit" onclick="javascript:applySubmit();">
+							<input type="button" value="<spring:message code="symposium.submit"/>" class="bt3 on" id="submit" onclick="javascript:applySubmit();">
 						</form>
 					</div>
 				</div>
@@ -217,7 +218,7 @@ function applySubmit(){
 				<!-- 심포지엄 참가신청 - 신청완료 -->
 				<div class="member form_complete" style="display:none;">
 					<div class="paper">
-						참가신청이 완료되었습니다.<br>						
+						<spring:message code="symposium.after.submit"/><br>						
 						<a href="<c:url value="/"/>" class="bt3 on">HOME</a>
 					</div>
 				</div>

@@ -37,7 +37,7 @@ public class HomeController extends KseeController {
 		Popup pp = new Popup();
 		pp.setToday(LocalDate.now().toString());
 		pp.setLang(locale.getLanguage());
-		logger.info(pp.toString());
+		
 		List<Popup> popupList = popupService.select(pp);
 		mv.addObject("popups", popupList);
 		
@@ -111,7 +111,7 @@ public class HomeController extends KseeController {
 		}
 		mv.addObject("sympList", listOfSympList);
 		mv.addObject("paging", board);
-		
+		mv.addObject("today", LocalDate.now().toString());
 		mv.setViewName("/home");
 		return mv;
 	}
