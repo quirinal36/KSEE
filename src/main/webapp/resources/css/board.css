@@ -116,6 +116,7 @@
 .board_write_title .writer_ipt input[type="text"] { width: 100%; }
 
 .board_write_title input[type="text"] { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 2px; font-size: 16px; }
+.board_write_title input[type="text"]:read-only { background: #eee; }
 .board_write_cont { min-height: 300px; background: #ddd; }
 .board_write_img,
 .board_write_file {
