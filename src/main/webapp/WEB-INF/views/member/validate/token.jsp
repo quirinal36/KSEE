@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -91,10 +92,11 @@ function changePwd(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="member.change_password" text="member.change_password"></spring:message></h2>
+				</div>
+			</div>
 			
 			<c:choose>
 				<c:when test="${not empty user}">

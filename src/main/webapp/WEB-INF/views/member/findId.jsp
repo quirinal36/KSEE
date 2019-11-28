@@ -22,7 +22,7 @@ function findId(){
 		$(".result").show();
 		
 		if(json.result > 0){
-			$("#result-text").text("회원님의 아이디는 [" + json.login);
+			$("#result-text").text("회원님의 아이디 : " + json.login);
 		}else{
 			$("#result-text").text("아이디를 찾지 못했습니다.");
 		}
