@@ -127,4 +127,16 @@ public class IncController extends KseeController{
 		mv.setViewName("/inc/contentsTitle");
 		return mv;
 	}
+	
+	@RequestMapping(value="/term")
+	public ModelAndView getTermView(ModelAndView mv) {
+		
+		return mv;
+	}
+
+	@RequestMapping(value="/privacy")
+	public ModelAndView getPrivacyView(ModelAndView mv) {
+		
+		return mv;
+	}
 }
