@@ -11,10 +11,10 @@
 				<a href="<c:url value="/about/term"/>">
 					<spring:message code="comm.articles_of_ksee" text="comm.articles_of_ksee"></spring:message>
 				</a>
-				<a href="#">
+				<a href="<c:url value="/term/privacy"/>">
 					<spring:message code="comm.personal_information" text="comm.personal_information"></spring:message>
 				</a>
-				<a href="#">
+				<a href="<c:url value="/term/email"/>">
 					<spring:message code="comm.refuse_email" text="comm.refuse_email"></spring:message>
 				</a>
 			</div>
