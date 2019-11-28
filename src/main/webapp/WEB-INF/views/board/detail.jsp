@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% 
 pageContext.setAttribute("LF", "\n"); 
 %>
@@ -198,8 +199,14 @@ function deleteBoard(id){
 						</ol>
 						<form id="replyForm" action="<c:url value="/reply/insert"/>" method="POST">
 							<c:choose>
-								<c:when test="${not empty user.id }">
+								<c:when test="${not empty user.id and locale.language eq 'en'}">
+									<c:set value="input reply." var="reply_placeholder"/>
+								</c:when>
+								<c:when test="${not empty user.id and locale.language ne 'en'}">
 									<c:set value="댓글을 입력하세요." var="reply_placeholder"/>
+								</c:when>
+								<c:when test="${empty user.id and locale.language eq 'en' }">
+									<c:set value="login to write reply." var="reply_placeholder"/>
 								</c:when>
 								<c:otherwise>
 									<c:set value="로그인 후 댓글을 작성하실 수 있습니다." var="reply_placeholder"/>
@@ -209,14 +216,16 @@ function deleteBoard(id){
 							<div class="repl_add">
 								<input type="hidden" name="writer" value="${user.id }"/>
 								<textarea placeholder="${reply_placeholder }" name="content" rows="1" class="repl_content" <c:if test="${empty user.id }">readonly</c:if>></textarea>
-								<input type="button" value="등록" class="bt_repl_add" onclick="javascript:writeReply();"  <c:if test="${empty user.id }">disabled</c:if>>
+								<input type="button" value="<spring:message code="board.submit"/>" class="bt_repl_add" onclick="javascript:writeReply();"  <c:if test="${empty user.id }">disabled</c:if>>
 							</div>
 							<input type="hidden" name="parent" value="0"/>
 							<input type="hidden" name="boardId" value="${board.id }"/>
 						</form>
 					</div>
 					<div class="bt_wrap">
-						<a href="<c:url value="${listUrl }"/>" class="bt1 on">목록</a> 
+						<a href="<c:url value="${listUrl }"/>" class="bt1 on">
+							<spring:message code="board.detail.list"/>
+						</a> 
 						<input type="hidden" name="edit_url" value="${edit_url }${board.id}" />
 						<input type="hidden" name="del_url" value="${del_url }${board.id}" />
 						<input type="hidden" name="list_url" value="${listUrl }" />
@@ -224,12 +233,12 @@ function deleteBoard(id){
 						<input type="hidden" value="${board.writer }" />
 						<c:choose>
 							<c:when test="${user.id eq board.writer }">
-								<input type="button" class="bt1 btn_edit" value="수정" onclick="window.location.replace('${edit_url}/${board.id }')">
-								<input type="button" class="bt1 btn_del" value="삭제" onclick="javascript:deleteBoard('${board.id}');">
+								<input type="button" class="bt1 btn_edit" value="<spring:message code="board.detail.edit"/>" onclick="window.location.replace('${edit_url}/${board.id }')">
+								<input type="button" class="bt1 btn_del" value="<spring:message code="board.detail.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
 							</c:when>
 							<c:otherwise>
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<input type="button" class="bt1 btn_del" value="삭제" onclick="javascript:deleteBoard('${board.id}');">
+									<input type="button" class="bt1 btn_del" value="<spring:message code="board.detail.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
 								</sec:authorize>
 							</c:otherwise>
 						</c:choose>

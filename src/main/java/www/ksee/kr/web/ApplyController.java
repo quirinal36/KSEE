@@ -1,6 +1,7 @@
 package www.ksee.kr.web;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +21,8 @@ import www.ksee.kr.vo.Symposium;
 public class ApplyController extends KseeController{
 
 	@RequestMapping(value="/search", method = RequestMethod.GET)
-	public ModelAndView applyView(ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView applyView(ModelAndView mv, HttpServletRequest request,
+			Locale locale) {
 		final String currentUrl = "/symposium/apply/search";
 		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
@@ -39,6 +40,7 @@ public class ApplyController extends KseeController{
 		List<Symposium> interList = sympService.select(inter);
 		mv.addObject("interList", interList);
 		
+		mv.addObject("locale", locale);
 		mv.setViewName("/symposium/searchApply");
 		return mv;
 	}

@@ -17,6 +17,8 @@ public class Symposium extends Paging{
 	int id;
 	String title;
 	String place;
+	String title_en;
+	String place_en;
 	String startDate;
 	String finishDate;
 	String applyStart;

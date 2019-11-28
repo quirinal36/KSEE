@@ -89,7 +89,7 @@ pageContext.setAttribute("LF", "\n");
 					<div class="bt_wrap">
 						<input type="hidden" name="write_url" value="${writeUrl }">
 						<sec:authorize access="isAuthenticated()">
-							<input type="button" class="bt1 bt_write popup_password_opener" value="글쓰기">
+							<input type="button" class="bt1 bt_write popup_password_opener" value="<spring:message code="board.write"/>">
 						</sec:authorize>
 					</div>
 				</div>

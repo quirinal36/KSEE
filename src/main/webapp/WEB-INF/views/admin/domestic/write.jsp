@@ -98,6 +98,16 @@
 								</td>
 							</tr>
 							<tr>
+								<th>행사명(영문)</th>
+								<td>
+									<input type="text" placeholder="행사명 입력" class="w90 ipt2" name="title_en">
+								</td>
+								<th>장소(영문)</th>
+								<td>
+									<input type="text" placeholder="장소 입력" class="w90 ipt2" name="place_en">
+								</td>
+							</tr>
+							<tr>
 								<th>행사기간</th>
 								<td>
 									<div class="date_chk date_chk_symposium">

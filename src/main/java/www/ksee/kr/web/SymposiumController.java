@@ -36,7 +36,7 @@ public class SymposiumController extends KseeController{
 	SymposiumDetailService sympDetailService;
 	
 	@RequestMapping(value= {"/", "/{where}"})
-	public ModelAndView getHistoryView(ModelAndView mv, HttpServletRequest request,
+	public ModelAndView getHistoryView(Locale locale, ModelAndView mv, HttpServletRequest request,
 			Symposium symp, @PathVariable(value="where", required = true)Optional<String> where) {
 		String currentUrl = "/symposium/";
 		
@@ -71,6 +71,7 @@ public class SymposiumController extends KseeController{
 		mv.addObject("today", LocalDate.now().toString());
 		mv.addObject("list", list);
 		mv.addObject("paging", symp);
+		mv.addObject("locale", locale);
 		mv.setViewName("/symposium/domestic");
 		return mv;
 	}

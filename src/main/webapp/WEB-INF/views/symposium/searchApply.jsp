@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -102,69 +103,96 @@ $(document).ready(function(){
 					<div class="paper">
 						<form action="<c:url value="/symposium/apply/search"/>" method="POST">
 							<dl class="member_chk">
-								<dt>구분</dt>
+								<dt><spring:message code="symposium.category"/></dt>
 								<dd>
 									<ul>
 										<li>
 											<input type="radio" name="national" id="dome" class="radio1" value="1" checked>
-											<label for="dome">국내 학술대회</label>
+											<label for="dome"><spring:message code="symposium.korean"/></label>
 										</li>
 										<li>
 											<input type="radio" name="national" id="inter" class="radio1" value="2">
-											<label for="inter">한중일 학술대회</label>
+											<label for="inter"><spring:message code="symposium.kcj"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl>
-								<dt>행사명</dt>
+								<dt><spring:message code="symposium.name_of_event"/></dt>
 								<dd>
 									<select class="select2 symp-title" name="sympId">
 										<c:forEach items="${domeList }" var="item">
-											<option value="${item.id }">${item.title }</option>
+											<option value="${item.id }">
+												<c:choose>
+													<c:when test="${locale.language eq 'en' }">
+														${item.title_en }
+													</c:when>
+													<c:otherwise>
+														${item.title }
+													</c:otherwise>
+												</c:choose>
+											</option>
 										</c:forEach>
 									</select>
 									<select class="select2 symp-title" style="display:none;">
 										<c:forEach items="${interList }" var="item">
-											<option value="${item.id }">${item.title }</option>
+											<option value="${item.id }">
+												<c:choose>
+													<c:when test="${locale.language eq 'en' }">
+														${item.title_en }
+													</c:when>
+													<c:otherwise>
+														${item.title }
+													</c:otherwise>
+												</c:choose>
+											</option>
 										</c:forEach>
 									</select>
 								</dd>
 							</dl>
 							<dl>
-								<dt>이름</dt>
+								<dt><spring:message code="symposium.name"/></dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off" value="${user.username }">
-									<p class="message error">이름을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="symposium.name"/>" class="ipt1" name="username" autocomplete="off" value="${user.username }">
+									<p class="message error"><spring:message code="symposium.apply.search.please_input_name"/></p>
 								</dd>
 							</dl>
 							<dl class="company_tel">
-								<dt>연락처</dt>
+								<dt><spring:message code="symposium.tel"/></dt>
 								<dd>
-									<input type="text" placeholder="연락처 입력" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
+									<input type="text" placeholder="<spring:message code="symposium.tel"/>" class="ipt1" name="telephone" autocomplete="off" value="${user.telephone }">
 								</dd>
 							</dl>
-							<input type="button" value="참가신청 조회" class="bt3 on" onclick="javascript:applySearch();">
+							<input type="button" value="<spring:message code="symposium.find_button"/>" class="bt3 on" onclick="javascript:applySearch();">
 							<!-- 검색결과 없음 -->
 							<div class="apply_search_result none">
 								<p>
-									신청내역이 없습니다.<br>
-									입력하신 정보를 확인해주세요.
+									<spring:message code="symposium.apply.search.no_result"/>
 								</p>
 							</div>
 							<!-- 접수 중 -->
 							<div class="apply_search_result apply">
-								<p><span>[접수 중]</span> 상태입니다.</p>
-								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">신청서 보기</a>
-								<a href="javascript:void(0);" onclick="javascript:deleteApply();" class="bt2">신청 취소</a>
+								<p>
+									<spring:message code="symposium.apply.search.being_processing"/>
+								</p>
+								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">
+									<spring:message code="symposium.apply.search.show_my_application"/>
+								</a>
+								<a href="javascript:void(0);" onclick="javascript:deleteApply();" class="bt2">
+									<spring:message code="symposium.apply.search.cancel_apply"/>
+								</a>
 								<input type="hidden" value="" class="applyId"/>
 								<input type="hidden" name="viewUrl" value="<c:url value="/symposium/apply/view"/>"/>
 								<input type="hidden" name="deleteUrl" value="<c:url value="/symposium/apply/delete"/>"/>
 							</div>
 							<!-- 신청완료 -->
 							<div class="apply_search_result complete">
-								<p><span>[신청완료]</span> 상태입니다.</p>
-								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">신청서 보기</a>
+								<p>
+									<spring:message code="symposium.is_completed"/>
+								</p>
+								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">
+									<spring:message code="symposium.apply.search.show_my_application"/>
+								</a>
 							</div>
 							<!-- 신청취소 -->
 							

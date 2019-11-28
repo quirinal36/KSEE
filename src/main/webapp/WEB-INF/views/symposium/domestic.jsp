@@ -39,9 +39,29 @@
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
 								<div class="num">${sts.count + (paging.pageNo - 1) * 10}</div>
-								<div class="title"><a href="<c:url value="/symposium/domestic/view/${item.id }"/>">${item.title }</a></div>
+								<div class="title">
+									<a href="<c:url value="/symposium/domestic/view/${item.id }"/>">
+										<c:choose>
+											<c:when test="${locale.language eq 'en' }">
+												${item.title_en }
+											</c:when>
+											<c:otherwise>
+												${item.title }
+											</c:otherwise>
+										</c:choose>
+									</a>
+								</div>
 								<div class="period">${item.startDate }(${su:getDayOfWeek(item.startDate)}) ~ ${item.finishDate}(${su:getDayOfWeek(item.finishDate)})</div>
-								<div class="place">${item.place }</div>
+								<div class="place">
+									<c:choose>
+										<c:when test="${locale.language eq 'en' }">
+											${item.place_en }
+										</c:when>
+										<c:otherwise>
+											${item.place }
+										</c:otherwise>
+									</c:choose>
+								</div>
 	                            <div class="apply">
 	                            	<fmt:parseDate var="from" value="${item.applyStart }" pattern="yyyy-MM-dd"/>
 	                            	<fmt:parseDate var="to" value="${item.applyFinish }" pattern="yyyy-MM-dd"/>

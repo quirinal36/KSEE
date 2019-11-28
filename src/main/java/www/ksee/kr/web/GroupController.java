@@ -1,6 +1,7 @@
 package www.ksee.kr.web;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -128,7 +129,8 @@ public class GroupController extends KseeController {
 	public ModelAndView getDetailNoticeView(HttpServletRequest request,
 			ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id,
-			@PathVariable(value="name", required=true)String name) {
+			@PathVariable(value="name", required=true)String name,
+			Locale locale) {
 		BoardInfo boardInfo = BoardInfo.init().get(name);
 		
 		boolean isLogined = isLoginedUser(request);
@@ -157,6 +159,8 @@ public class GroupController extends KseeController {
 		mv.addObject("fileList", fileList);
 		mv.addObject("photoList", photoList);
 		mv.addObject("board", board);
+		mv.addObject("locale", locale);
+		
 		mv.setViewName(boardInfo.getDetailViewName());
 		return mv;
 	}
