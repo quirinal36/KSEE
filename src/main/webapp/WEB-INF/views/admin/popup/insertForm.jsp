@@ -18,8 +18,6 @@
 		param += "&fileId="+fileId;
 		param += "&enFileId="+enFileId;
 		
-		console.log(param);
-		
 		if(confirm("저장하시겠습니까?")){
 			$.ajax({
 				url : url,

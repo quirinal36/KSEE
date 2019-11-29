@@ -38,7 +38,15 @@
 			}
 		});
 	}
-	
+	function delFileClick(button){
+		var id = $(button).val();
+		$(".bt_del_file").each(function(index, item){
+			if(id == $(item).val()){
+				$(item).parent().remove();
+				return;
+			}
+		});
+	}
 	function insertBoard(){
 		var url = $("form").attr("action");
 		
@@ -53,14 +61,12 @@
 		$("#file_ul").find(".bt_del_file").each(function(i, item){
 			files.push($(item).val());
 		});
-		console.log("content: " + content);
 		
 		var param = "title="+title;
 		param += "&content="+ encodeURI(content);
 		param += "&boardType="+boardType;
 		param += "&pictures="+pictures.join(",");
 		param += "&files="+files.join(",");
-		console.log(param);
 		
 		$.ajax({
 			url : url,
@@ -72,10 +78,6 @@
 				alert("글 작성이 완료되었습니다.");
 				window.location.replace($("input[name='listUrl']").val());
 			}
-		});
-		
-		$("#editor1").keyup(function(e){
-			
 		});
 	}
 	</script>
@@ -232,7 +234,7 @@ $(document).ready(function(){
            			$("<span>").text(file.name)
            		).append(
            			$("<input>").attr("type","button").addClass("bt_del_file").attr("title","삭제")
-           				.attr("onclick", "delButtonClick(this);").val(file.id)
+           				.attr("onclick", "delFileClick(this);").val(file.id)
            		)
            	);
         },
@@ -253,7 +255,6 @@ $(document).ready(function(){
 });
 
 </script>
-<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.iframe-transport.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.fileupload.js"/>"></script>

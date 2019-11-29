@@ -90,10 +90,11 @@ $(document).ready(function(){
 });
 function delButtonClick(button){
 	var id = $(button).val();
+	
 	$(".bt_del_img").each(function(index, item){
+		
 		if(id == $(item).val()){
 			var url = "/delete/img/"+id;
-			
 			$.ajax({
 				url : url,
 				type: "POST",
@@ -101,7 +102,6 @@ function delButtonClick(button){
 			}).done(function(json){
 				console.log(json);
 			});
-			
 			$(item).parent().remove();
 			return;
 		}
@@ -116,7 +116,6 @@ function submit(){
 	param += "&fileId="+fileId;
 	param += "&enFileId="+enFileId;
 	
-	console.log(param);
 	if(confirm("저장 하시겠습니까?")){
 		$.ajax({
 			url : url,

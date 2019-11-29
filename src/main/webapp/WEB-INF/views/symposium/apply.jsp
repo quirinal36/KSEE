@@ -263,7 +263,7 @@ $(document).ready(function(){
 });
 
 </script>
-<script src="<c:url value="/resources/js/jquery-1.9.1.min.js"/>"></script>
+
 <script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.iframe-transport.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.fileupload.js"/>"></script>

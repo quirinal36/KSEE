@@ -21,7 +21,7 @@
 	
 
 <link rel="shortcut icon" href="<c:url value="/resources/img/comm/favicon.ico"/>">
-<script type="text/javascript" src="<c:url value="/resources/js/jquery-1.12.1.min.js"/>"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.bxslider.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/common.js"/>"></script>
 <script src="<c:url value="/resources/js/sweetalert2.all.min.js"><c:param name="dt" value="${nowDate }"/></c:url>"></script>

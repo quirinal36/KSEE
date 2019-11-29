@@ -47,12 +47,6 @@ public class BoardController extends KseeController{
 		return mv;
 	}
 
-	@RequestMapping(value = "/board_write")
-	public ModelAndView getBoardWriteView(ModelAndView mv) {
-		mv.setViewName("/board/board_write");
-		return mv;
-	}
-	
 	/**
 	 * 
 	 * @param id
