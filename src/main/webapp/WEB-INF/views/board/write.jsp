@@ -108,6 +108,12 @@
 							<div class="writer"><spring:message code="board.user" text="board.user"></spring:message></div>
 							<div class="writer_ipt"><input type="text" placeholder="<spring:message code="board.user" text="board.user"></spring:message>" value="${user.username }" readonly autocomplete="off"></div>
 						</div>
+						<div class="board_write_title en">
+							<div class="title"><spring:message code="board.title" text="board.title"></spring:message>(en)</div>
+							<div class="title_ipt">
+								<input type="text" placeholder="<spring:message code="board.title" text="board.title"></spring:message>" name="title" autocomplete="off" >
+							</div>
+						</div>
 						<div class="board_write_cont">
 							<textarea name="editor1" id="editor1" rows="30" cols="80"></textarea>
 	                        <script>

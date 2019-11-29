@@ -106,7 +106,8 @@
 
 /* 게시판 글쓰기 */
 .board_write { width: 90%; min-width: 1000px; max-width: 1300px; }
-.board_write_title { padding: 20px 0; border-top: 1px solid #325cb2; border-bottom: 1px solid #ddd; text-align: left; font-size: 0; }
+.board_write_title { padding: 20px 0; border-bottom: 1px solid #ddd; text-align: left; font-size: 0; }
+.board_write_title:first-child { border-top: 1px solid #325cb2; }
 .board_write_title > div { display: inline-block; vertical-align: middle; font-size: 15px; }
 .board_write_title .title { width: 120px; text-indent: 30px; }
 .board_write_title .title_ipt { width: 510px; }
@@ -219,11 +220,11 @@
 
 /* 심포지엄 목록 */
 .board_list_typeB.symposium { margin-top: 60px; }
-.board_list_typeB.symposium .list .num { width: 9% }
-.board_list_typeB.symposium .list .title { width: 30%; }
-.board_list_typeB.symposium .list .period { width: 25%; }
-.board_list_typeB.symposium .list .place { width: 20%; }
-.board_list_typeB.symposium .list .apply { width: 16%; }
+.board_list_typeB.symposium .list .num { width: 10% }
+.board_list_typeB.symposium .list .title { width: 40%; }
+.board_list_typeB.symposium .list .period { width: 20%; }
+.board_list_typeB.symposium .list .place { width: 15%; }
+.board_list_typeB.symposium .list .apply { width: 15%; }
 
 .board_view.symposium { margin-top: 60px; }
 
