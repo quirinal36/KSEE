@@ -43,6 +43,8 @@ function deletePopup(id){
 							<th>팝업 이름</th>
 							<th>등록기간</th>
 							<th>수정</th>
+							<th>노출순서</th>
+							<th>이동</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,6 +56,12 @@ function deletePopup(id){
 								<td>
 									<input type="button" value="수정" class="bt2 on" onclick="javascript:edit('${item.id}')">
 									<input type="button" value="삭제" class="bt2" onclick="javascript:deletePopup('${item.id }')">
+								</td>
+								<td>
+									1
+								</td>
+								<td>
+									<input type="button" value="이동" class="bt_move">
 								</td>
 							</tr>
 						</c:forEach>

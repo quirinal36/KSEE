@@ -37,17 +37,22 @@
 					<table class="tbl1 td_center">
 						<thead>
 							<tr>
+								<th>선택</th>
 								<th>회원구분</th>
 								<th>이름</th>
 								<th>소속</th>
 								<th>직위</th>
-								<th>직장 유선번호</th>
+								<th>이메일</th>
 								<th>가입일</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${members }" var="item">
 								<tr>
+									<td>
+										<input type="checkbox" id="chk1" class="chk1">
+										<label for="chk1"></label>
+									</td>
 									<td>${item.role_name_kr }</td>
 									<td><a href="<c:url value="/admin/members/view/${item.id }"/>">${item.username }</a></td>
 									<td>${item.classification }</td>
@@ -77,6 +82,11 @@
 						</c:choose>
 						<a href="javascript:pageGo(${paging.nextPageNo})" class="bt next">다음 페이지로 가기</a>
 						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
+					</div>
+					<div class="bt_wrap">
+						<a href="javascript:void(0);" class="bt1" onclick="">선택회원 이메일 발송</a>
+						<a href="javascript:void(0);" class="bt1" onclick="">전체회원 이메일 발송</a>
+						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
 					</div>
 				</div>
 			</div>

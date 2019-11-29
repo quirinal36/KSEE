@@ -78,7 +78,7 @@ function resizePopup(){
 	                                    <div class="cont">
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">${item.title }</a><br>
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">
-	                                        ${ su:removeTag(item.content) }
+	                                        	<b>이승구</b> ${ su:removeTag(item.content) }
 	                                        </a>
 	                                    </div>
 	                                </li>
@@ -99,14 +99,20 @@ function resizePopup(){
                         	<c:forEach items="${newsBoardList }" var="item" begin="0" end="0">
 	                            <div class="first">
 									<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
-	                                <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+	                                <span>
+		                                이승구
+	                                	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
+	                                </span>
 	                            </div>
                             </c:forEach>
                             <ul>
                             	<c:forEach items="${newsBoardList }" var="item" begin="1" end="4">
 	                                <li>
 										<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
-	                                    <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+	                                    <span>
+		                                    이승구
+	                                    	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
+	                                    </span>
 	                                </li>
                                 </c:forEach>
                                 
@@ -127,6 +133,7 @@ function resizePopup(){
 								<div class="first">
 									<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
 									<span>
+										이승구
 										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 									</span>
 								</div>
@@ -135,7 +142,10 @@ function resizePopup(){
 								<c:forEach items="${freeBoardList }" var="item" begin="1" end="4">
 									<li>
 										<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
-										<span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" /></span>
+										<span>
+											이승구
+											<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
+										</span>
 									</li>
 								</c:forEach>
 							</ul>

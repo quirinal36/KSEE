@@ -3,5 +3,5 @@
 .popup_write_img ul li:first-child { margin-left: 0; }
 .popup_write_img ul li:nth-child(6n-5) { margin-left: 0; }
 .popup_write_img ul li:nth-child(-n+5) { margin-top: 0; }
-.popup_write_img ul li .bt_del_img { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.2) url(/resources/img/contents/board_img_del.png) no-repeat 50% 50%; background-size: 10px; text-indent: -1000px; overflow: hidden; }
+.popup_write_img ul li .bt_del_img { display: none; position: absolute; top: 0; left: auto; right: 0; width: 40px; height: 40px; background: rgba(0, 0, 0, 0.5) url(/resources/img/contents/board_img_del.png) no-repeat 50% 50%; background-size: 10px; text-indent: -1000px; overflow: hidden; }
 .popup_write_img ul li:hover .bt_del_img { display: block; }

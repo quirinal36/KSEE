@@ -82,12 +82,12 @@
 .idx_notice_list .cont .text { display: block; font-size: 12px; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 .idx_board_list .first { position: relative; padding: 22px 30px 25px 30px; border-bottom: 1px solid #bbb; }
-.idx_board_list .first a { display: block; width: 80%; font-size: 20px; font-weight: 500; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.idx_board_list .first a { display: block; width: 70%; font-size: 20px; font-weight: 500; color: #333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .idx_board_list .first span { position: absolute; top: 27px; right: 30px; font-size: 14px; color: #333; }
 .idx_board_list ul { padding: 26px 30px 0 30px; }
 .idx_board_list ul li { position: relative; margin-top: 10px; padding-left: 10px; background: url(/resources/img/index/idx_list_dot.gif) no-repeat 0 55%; background-size: 2px; }
 .idx_board_list ul li:first-child { margin-top: 0; }
-.idx_board_list ul li a { display: block; width: 80%; font-size: 16px; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.idx_board_list ul li a { display: block; width: 70%; font-size: 16px; font-weight: 400; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .idx_board_list ul li span { position: absolute; top: 0; right: 0; font-size: 14px; color: #333; }
 
 /* idx_banner */
