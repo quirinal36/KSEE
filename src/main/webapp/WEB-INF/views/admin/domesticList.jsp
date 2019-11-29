@@ -43,6 +43,8 @@ function downloadExcel(sympId){
 					<table class="tbl1 td_center">
 						<thead>
 							<tr>
+								<th>선택</th>
+								<th>상태</th>
 								<th>신청일</th>
 								<th>구분</th>
 								<th>발표자</th>
@@ -58,6 +60,11 @@ function downloadExcel(sympId){
 						<tbody>
 							<c:forEach items="${applyList }" var="item">
 								<tr>
+									<td>
+										<input type="checkbox" id="chk1" class="chk1">
+										<label for="chk1"></label>
+									</td>
+									<td>접수 중</td>
 									<td><fmt:formatDate value="${item.mdate}" pattern="yyyy-MM-dd" /></td>
 									<td>
 										<c:choose>
@@ -94,8 +101,11 @@ function downloadExcel(sympId){
 						</tbody>
 					</table>
 					<div class="bt_wrap">
-						<a href="javascript:void(0);" class="bt1 on" onclick="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
-						<a href="javascript:void(0);" class="bt1 on" onclick="javascript:downloadAllFiles();" style="display:none;">초록 일괄다운로드</a>
+						<a href="javascript:void(0);" class="bt1" onclick="">접수 중으로 변경</a>
+						<a href="javascript:void(0);" class="bt1 on" onclick="">접수완료로 변경</a>
+						<a href="javascript:void(0);" class="bt1" onclick="">신청취소</a>
+						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
+						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadAllFiles();">초록 일괄다운로드</a>
 						<a href="javascript:void(0);" class="bt1" onclick="javascript:history.go(-1)">이전</a>
 					</div>
 				</div>

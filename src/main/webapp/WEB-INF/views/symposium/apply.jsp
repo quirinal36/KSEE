@@ -32,7 +32,7 @@ function applySubmit(){
 	var isSpeaker = parseInt($("input[name='isSpeaker']:checked").val())== 1? true : false;
 	
 	if(files.length == 0 && isSpeaker){
-		alert("초록을 등록 해주세요.");
+		alert("초록을 등록해주세요.");
 		return false;
 	}
 	
@@ -62,12 +62,11 @@ function applySubmit(){
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="symposium.attendant" text="symposium.attendant"></spring:message></h2>
+				</div>
+			</div>
 			<div id="contentsPrint">
             	
 				<!-- 심포지엄 참가신청 - 동의 -->
@@ -80,7 +79,9 @@ function applySubmit(){
 					</div>
 					<div class="paper">
 						<strong><spring:message code="symposium.apply.policy"/></strong>
-						<div class="term"></div>
+						<div class="term" style="height: auto;">
+							<spring:message code="symposium.privacy_policy" text="symposium.privacy_policy"></spring:message>
+						</div>
 						<div class="chk_wrap">
 							<input type="checkbox" id="term_chk1" class="chk1">
 							<label for="term_chk1"><spring:message code="symposium.apply.agree"/></label>

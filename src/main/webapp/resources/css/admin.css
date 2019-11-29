@@ -58,8 +58,8 @@
 
 .popup_img_guide { margin-top: 10px; font-size: 14px; }
 
-.board_list .chk1 + label,
-.board_list  .radio1 + label {
+.chk1 + label,
+.radio1 + label {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
