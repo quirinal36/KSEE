@@ -33,22 +33,24 @@
 	}
 	function delButtonClick(button){
 		var id = $(button).val();
-		$(".bt_del_img").each(function(index, item){
-			if(id == $(item).val()){
-				var url = "/delete/img/"+id;
-				
-				$.ajax({
-					url : url,
-					type: "POST",
-					dataType : "json"
-				}).done(function(json){
-					console.log(json);
-				});
-				
-				$(item).parent().remove();
-				return;
-			}
-		});
+		if(confirm("삭제하시겠습니까?")){
+			$(".bt_del_img").each(function(index, item){
+				if(id == $(item).val()){
+					var url = "/delete/img/"+id;
+					
+					$.ajax({
+						url : url,
+						type: "POST",
+						dataType : "json"
+					}).done(function(json){
+						console.log(json);
+					});
+					
+					$(item).parent().remove();
+					return;
+				}
+			});
+		}
 	}
 	$(document).ready(function(){
 		var options = {

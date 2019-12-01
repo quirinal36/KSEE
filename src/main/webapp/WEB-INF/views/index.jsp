@@ -100,7 +100,7 @@ function resizePopup(){
 	                            <div class="first">
 									<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
 	                                <span>
-		                                이승구
+		                                ${item.writerName }
 	                                	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 	                                </span>
 	                            </div>
@@ -110,7 +110,7 @@ function resizePopup(){
 	                                <li>
 										<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
 	                                    <span>
-		                                    이승구
+		                                    ${item.writerName }
 	                                    	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 	                                    </span>
 	                                </li>
@@ -133,7 +133,7 @@ function resizePopup(){
 								<div class="first">
 									<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
 									<span>
-										이승구
+										${item.writerName }
 										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 									</span>
 								</div>
@@ -143,7 +143,7 @@ function resizePopup(){
 									<li>
 										<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
 										<span>
-											이승구
+											${item.writerName }
 											<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 										</span>
 									</li>

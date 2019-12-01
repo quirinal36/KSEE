@@ -5,7 +5,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head_admin"></c:import>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script> 
 <script type="text/javascript">
+$(document).ready(function(){
+	$("tbody").sortable({
+		placeholder:"highlight"
+	});
+	$("tbody").on("sortupdate", function(event, ui){
+		var productOrder = $(this).sortable('toArray');
+		var positions = productOrder.join(';');
+		console.log("positions: " + positions);
+		var url = "/admin/popup/arange";
+		var param = "ids="+positions;
+		
+		$.ajax({
+			url: url,
+			data: param,
+			type: 'POST',
+			dataType: 'json'
+		}).done(function(json){
+			console.log(json);	
+		});
+	});
+});
+
 function edit(id){
 	window.location.replace($("input[name='edit-url']").val() + id);
 }
@@ -43,25 +66,18 @@ function deletePopup(id){
 							<th>팝업 이름</th>
 							<th>등록기간</th>
 							<th>수정</th>
-							<th>노출순서</th>
-							<th>이동</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list }" var="item" varStatus="sts">
-							<tr>
+							<tr id="${item.id}">
 								<td>${sts.count }</td>
 								<td>${item.popupTitle }</td>
 								<td>${item.startDate } ~ ${item.finishDate }</td>
 								<td>
 									<input type="button" value="수정" class="bt2 on" onclick="javascript:edit('${item.id}')">
 									<input type="button" value="삭제" class="bt2" onclick="javascript:deletePopup('${item.id }')">
-								</td>
-								<td>
-									1
-								</td>
-								<td>
-									<input type="button" value="이동" class="bt_move">
+									<input type="hidden" value="${item.porder }" name="porder"/>
 								</td>
 							</tr>
 						</c:forEach>

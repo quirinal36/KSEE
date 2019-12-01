@@ -21,7 +21,9 @@ public class PopupService  implements DataService<Popup>{
 	public int update(Popup input) {
 		return dao.update(input);
 	}
-
+	public int update(List<Popup> input) {
+		return dao.update(input);
+	}
 	@Override
 	public int delete(Popup input) {
 		return dao.delete(input);

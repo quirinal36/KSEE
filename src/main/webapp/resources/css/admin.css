@@ -68,15 +68,3 @@
 	background-size: 16px;
 }
 
-input[type="button"].bt_move {
-	display: inline-block;
-	width: 20px;
-	height: 16px;
-	background: transparent url(/resources/img/comm/bt_move.png) no-repeat 0 0 /20px;
-	text-indent: -200px;
-	overflow: hidden;
-	opacity: 0.7;
-}
-input[type="button"].bt_move:hover {
-	opacity: 1;
-}

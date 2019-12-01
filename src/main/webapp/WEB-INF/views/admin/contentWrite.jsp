@@ -11,29 +11,42 @@
 		
 	</style>
 	<script type="text/javascript">
+	function replaceAll(str, searchStr, replaceStr){
+		var arr = str.split(searchStr);
+		return str.split(searchStr).join(replaceStr);
+	}
 	function registContent(){
+		var textContent = CKEDITOR.instances.editor1.getData();
+		textContent = replaceAll(textContent, "&nbsp;", " ");
+		textContent = replaceAll(textContent, "&", "%26");
+		
+		console.log(textContent);
+		
 		var url = $("form").attr("action");
 		var pictures = [];
 		$("#picture_ul").find(".bt_del_img").each(function(i, item){
 			pictures.push($(item).val());
 		});
 		var param = $("form").serialize();
-		param += "&content="+CKEDITOR.instances.editor1.getData();
+		
+		param += "&content=" + textContent;
 		param += "&pictures="+pictures.join(",");
 		
-		$.ajax({
-			url : url,
-			data: param,
-			type: "POST",
-			dataType: "json"
-		}).done(function(json){
-			if(json.result > 0){
-				alert("저장 되었습니다.");
-				opener.location.reload();
-				window.open('','_self','');
-				window.close();
-			}
-		});
+		if(confirm("저장할까요?")){
+			$.ajax({
+				url : url,
+				data: param,
+				type: "POST",
+				dataType: "json"
+			}).done(function(json){
+				if(json.result > 0){
+					alert("저장 되었습니다.");
+					opener.location.reload();
+					window.open('','_self','');
+					window.close();
+				}
+			});
+		}
 	}
 	function deleteContent(){
 		var url = $("form").find("input[name='del_url']").val();
@@ -92,37 +105,10 @@
 					<input type="hidden" name="stype" value="${detail.stype }"/>
 					<input type="hidden" name="del_url" value="<c:url value="/admin/domestic/delete/content"/>"/>
 					<div>
-						<textarea name="editor1" id="editor1" rows="30" cols="80">${detail.content }</textarea>
+						<textarea id="editor1" rows="30" cols="80">${detail.content }</textarea>
                         <script>
 		                CKEDITOR.replace( 'editor1' ,{
-		                	toolbarGroups: [{
-		                        "name": "basicstyles",
-		                        "groups": ["basicstyles"]
-		                      },
-		                      {
-		                        "name": "links",
-		                        "groups": ["links"]
-		                      },
-		                      {
-		                        "name": "paragraph",
-		                        "groups": ["list", "blocks"]
-		                      },
-		                      {
-		                        "name": "document",
-		                        "groups": ["mode"]
-		                      },
-		                      {
-		                        "name": "insert",
-		                        "groups": ["insert"]
-		                      },
-		                      {
-		                        "name": "styles",
-		                        "groups": ["styles"]
-		                      },
-		                      {
-		                        "name": "about",
-		                        "groups": ["about"]
-		                      }
+		                	toolbarGroups: [
 		                    ],
 		                    // Remove the redundant buttons from toolbar groups defined above.
 		                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'

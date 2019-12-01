@@ -92,9 +92,11 @@ function downloadExcel(sympId){
 									<td>${item.telephone }</td>
 									<td>${item.email }@${item.domain }</td>
 									<td>
-										<a href="<c:url value="/upload/get/${item.fileId }"/>">
-											<img src="/resources/img/contents/board_file_icon.png" alt="다운로드">
-										</a>
+										<c:if test="${item.fileId > 0 }">
+											<a href="<c:url value="/upload/get/${item.fileId }"/>">
+												<img src="/resources/img/contents/board_file_icon.png" alt="다운로드">
+											</a>
+										</c:if>
 									</td>
 								</tr>
 							</c:forEach>

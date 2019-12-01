@@ -23,6 +23,13 @@ public class Popup {
 	String lang;
 	String url; // 이미지 URL
 	String link; // 팝업 링크
+	int porder;
+	
+	public static Popup newInstance(int id) {
+		Popup popup = new Popup();
+		popup.setId(id);
+		return popup;
+	}
 	
 	@Override
 	public String toString() {

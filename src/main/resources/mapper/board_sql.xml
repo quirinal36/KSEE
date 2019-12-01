@@ -6,6 +6,7 @@
 		INSERT INTO Board
 		(
 			title,
+			title_en,
 			content,
 			writer,
 			boardType
@@ -13,6 +14,7 @@
 		values
 		(
 			'${title}',
+			'${title_en}',
 			'${content}',
 			${writer},
 			${boardType}
@@ -23,6 +25,7 @@
 		<set>
 			viewCount = ${viewCount},
 			title = '${title}',
+			title_en = '${title_en}',
 			content = '${content}'
 		</set>
 		<where>

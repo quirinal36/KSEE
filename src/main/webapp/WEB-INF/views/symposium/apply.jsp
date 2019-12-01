@@ -12,8 +12,6 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("input[name='isSpeaker']").on('change', function(){
-		console.log(">> " + $(this).val());
-		
 		var isSpeaker = parseInt($(this).val()) == 1? true : false;
 		if(isSpeaker){
 			$(".file").show();

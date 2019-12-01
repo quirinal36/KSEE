@@ -69,11 +69,20 @@
 			});
 		}
 	}
+	function replaceAll(str, searchStr, replaceStr){
+		var arr = str.split(searchStr);
+		return str.split(searchStr).join(replaceStr);
+	}
 	function editBoard(){
+		var textContent = CKEDITOR.instances.editor1.getData();
+		textContent = replaceAll(textContent, "&nbsp;", " ");
+		textContent = replaceAll(textContent, "&", "%26");
+		
 		var url = $("form").attr("action");
 		
 		var title = $("input[name='title']").val();
-		var content = CKEDITOR.instances.editor1.getData();
+		var title_en = $("input[name='title_en']").val();
+		var content = textContent;
 		var boardType = $("input[name='board_type']").val();
 		var pictures = [];
 		var files = [];
@@ -85,6 +94,7 @@
 		});
 		
 		var param = "title="+title;
+		param += "&title_en="+title_en;
 		param += "&id="+ $("form").find("input[name='id']").val();
 		param += "&viewCount" + $("form").find("input[name='view_count']").val();
 		param += "&content="+content;
@@ -140,34 +150,7 @@
 							<textarea name="editor1" id="editor1" rows="30" cols="80">${board.content }</textarea>
 	                        <script>
 			                CKEDITOR.replace( 'editor1' ,{
-			                	toolbarGroups: [{
-			                        "name": "basicstyles",
-			                        "groups": ["basicstyles"]
-			                      },
-			                      {
-			                        "name": "links",
-			                        "groups": ["links"]
-			                      },
-			                      {
-			                        "name": "paragraph",
-			                        "groups": ["list", "blocks"]
-			                      },
-			                      {
-			                        "name": "document",
-			                        "groups": ["mode"]
-			                      },
-			                      {
-			                        "name": "insert",
-			                        "groups": ["insert"]
-			                      },
-			                      {
-			                        "name": "styles",
-			                        "groups": ["styles"]
-			                      },
-			                      {
-			                        "name": "about",
-			                        "groups": ["about"]
-			                      }
+			                	toolbarGroups: [
 			                    ],
 			                    // Remove the redundant buttons from toolbar groups defined above.
 			                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'

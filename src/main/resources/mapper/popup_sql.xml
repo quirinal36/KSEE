@@ -10,7 +10,8 @@
 			finishDate,
 			fileId,
 			enFileId,
-			link
+			link,
+			porder
 		)
 		VALUES
 		(
@@ -19,7 +20,8 @@
 			'${finishDate}',
 			${fileId},
 			${enFileId},
-			'${link}'
+			'${link}',
+			(SELECT MAX(p.porder) + 1 FROM popup p)
 		)
 	</insert>
 	
@@ -31,10 +33,27 @@
 			finishDate = '${finishDate}',
 			fileId = ${fileId},
 			enFileId =${enFileId},
-			link = '${link}'
+			link = '${link}',
+			porder = ${porder}
 		</set>
 		<where>
 			id=${id}
+		</where>
+	</update>
+	
+	<update id="update_order" parameterType="java.util.List">
+		UPDATE popup
+		<set>
+			porder =
+			<foreach collection="list" item="item" open="CASE" close="END"> 
+				WHEN id = ${item.id} THEN ${item.porder}
+			</foreach>
+		</set>
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach> 
 		</where>
 	</update>
 	
@@ -67,7 +86,8 @@
 			enFileId,
 			wdate,
 			mdate,
-			link
+			link,
+			porder
 		FROM popup
 		<where>
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(today)">
@@ -78,7 +98,7 @@
 				]]>
 			</if>
 		</where>
-		order by startDate
+		order by porder
 	</select>
 	
 	<select id="select_one" parameterType="popup" resultType="popup">
@@ -114,4 +134,6 @@
 		SELECT COUNT(*)
 		FROM popup
 	</select>
+	
+	
 </mapper>

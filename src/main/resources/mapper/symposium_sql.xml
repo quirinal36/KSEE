@@ -74,7 +74,7 @@
 				and title like '%${query}%'
 			</if>
 		</where>
-		ORDER BY id DESC
+		ORDER BY startDate DESC
 		LIMIT ${from}, ${pageSize}
 	</select>
 	

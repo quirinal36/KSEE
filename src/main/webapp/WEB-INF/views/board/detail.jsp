@@ -12,6 +12,7 @@ pageContext.setAttribute("LF", "\n");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
+<script src="https://cdn.ckeditor.com/4.11.3/standard-all/ckeditor.js"></script>
 <script type="text/javascript">
 function writeReply(){
 	var url = $("#replyForm").attr("action");

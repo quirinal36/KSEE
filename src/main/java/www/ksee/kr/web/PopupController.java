@@ -2,6 +2,7 @@ package www.ksee.kr.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -174,6 +175,24 @@ public class PopupController extends KseeController{
 			json.put("result", -1);
 			json.put("msg", "관리자 계정으로 로그인 해주세요.");
 		}
+		return json.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/arange", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String arangeOrder(@RequestParam(value="ids", required = true)String ids) {
+		JSONObject json = new JSONObject();
+		String [] idArr = ids.split(";");
+		List<Popup> orderList = new ArrayList<>();
+		int odr = 1;
+		for(String id : idArr) {
+			Popup popup = Popup.newInstance(Integer.parseInt(id));
+			popup.setPorder(odr++);
+			orderList.add(popup);
+		}
+		int result = popupService.update(orderList);
+		json.put("result", result);
+		
 		return json.toString();
 	}
 }

@@ -23,7 +23,9 @@ public class PopupDAO implements DataAccess<Popup> {
 	public int update(Popup input) {
 		return sqlSession.update(namespace +".update", input);
 	}
-
+	public int update(List<Popup> input) {
+		return sqlSession.update(namespace +".update_order", input);
+	}
 	@Override
 	public int delete(Popup input) {
 		return sqlSession.delete(namespace +".delete", input);

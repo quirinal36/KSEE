@@ -1,6 +1,7 @@
 package www.ksee.kr.web;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -107,10 +108,18 @@ public class SymposiumController extends KseeController{
 		detail.setSymposiumId(symposium.getId());
 		detail.setLang(locale.toString());
 		List<SymposiumDetail> detailList = sympDetailService.select(detail);
+		
 		mv.addObject("detailList",detailList);
 		
 		detail = sympDetailService.selectOne(detail);
-		mv.addObject("detail", detail);
+		
+		if(detail == null && detailList.size()>0) {
+			int tabNum = detailList.get(0).getStype();
+			mv.setViewName("redirect:/symposium/"+where+"/view/"+id+"/"+tabNum);
+		}else {
+			mv.addObject("detail", detail);
+			mv.setViewName("/symposium/detail");
+		}
 		
 		if(detail != null) {
 			SymposiumUtil util = new SymposiumUtil();
@@ -118,7 +127,7 @@ public class SymposiumController extends KseeController{
 			mv.addObject("photos", photos);
 		}
 		mv.addObject("today", LocalDate.now().toString());
-		mv.setViewName("/symposium/detail");
+		
 		return mv;
 	}
 	
