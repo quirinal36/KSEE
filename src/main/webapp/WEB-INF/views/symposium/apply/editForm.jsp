@@ -39,6 +39,16 @@ $(document).ready(function(){
  
         dropZone: $('#dropzone-file')
     });
+	
+	$("input[name='isSpeaker']").on('change', function(){
+		var isSpeaker = parseInt($(this).val()) == 1? true : false;
+		if(isSpeaker){
+			$(".file").show();
+		}else{
+			$(".file").hide();
+			$("#file_ul").empty();
+		}
+	});
 });
 function editSubmit(){
 	var url = $("#applyForm").attr("action");
@@ -46,13 +56,19 @@ function editSubmit(){
 	$("#file_ul").find(".bt_del_file").each(function(i, item){
 		files.push($(item).val());
 	});
-	if(files.length == 0){
+	
+	var isSpeaker = parseInt($("input[name='isSpeaker']:checked").val())== 1? true : false;
+	
+	if(files.length == 0 && isSpeaker){
 		alert("초록을 등록 해주세요.");
 		return false;
 	}
 	
 	var param = $("#applyForm").serialize();
-	param += "&fileId="+files.join(",");
+	
+	if(isSpeaker){
+		param += "&fileId="+files.join(",");
+	}
 	
 	if(confirm("제출하시겠습니까?")){
 		$.ajax({
@@ -66,6 +82,15 @@ function editSubmit(){
 			}
 		});
 	}
+}
+function delButtonClick(button){
+	var id = $(button).val();
+	$(".bt_del_file").each(function(index, item){
+		if(id == $(item).val()){
+			$(item).parent().remove();
+			return;
+		}
+	});
 }
 </script>	
 <script src="<c:url value="/resources/js/jquery.ui.widget.js"/>"></script>
@@ -178,7 +203,7 @@ function editSubmit(){
 									<p class="message error">이메일 아이디를 입력하세요.</p>
 								</dd>
 							</dl>
-							<dl class="file">
+							<dl class="file" <c:if test="${apply.fileId eq 0 }">style="display:none;"</c:if>>
 								<dt>학술대회 초록</dt>
 								<dd>
 									<div class="board_write_file"  id="dropzone-file">

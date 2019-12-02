@@ -138,7 +138,7 @@ public class SymposiumController extends KseeController{
 	 * @return
 	 */
 	@RequestMapping(value="/apply/{id}")
-	public ModelAndView getApplyView(ModelAndView mv,
+	public ModelAndView getApplyView(Locale locale, ModelAndView mv,
 			@PathVariable(value="id")Integer sympId) {
 		UserVO user = getUser();
 		mv.addObject("user", user);
@@ -148,6 +148,20 @@ public class SymposiumController extends KseeController{
 		Symposium symposium = new Symposium();
 		symposium.setId(sympId);
 		symposium = sympService.selectOne(symposium);
+		
+		LocalDate applyStartDate = LocalDate.parse(symposium.getApplyStart());
+		LocalDate applyFinishDate = LocalDate.parse(symposium.getApplyFinish());
+		LocalDate today = LocalDate.now();
+		if(applyStartDate.isAfter(today)) {
+			final String msg = messageSource.getMessage("symposium.apply.msg.ready", null, locale);
+			mv.addObject("expired_msg", msg);
+			mv.addObject("expired", true);
+		}
+		if(applyFinishDate.isBefore(today)) {
+			final String msg = messageSource.getMessage("symposium.apply.msg.expired", null, locale);
+			mv.addObject("expired_msg", msg);
+			mv.addObject("expired", true);
+		}
 		mv.addObject("symposium", symposium);
 		mv.setViewName("/symposium/apply");
 		return mv;

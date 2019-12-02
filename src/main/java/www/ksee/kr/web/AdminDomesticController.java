@@ -374,9 +374,9 @@ public class AdminDomesticController extends KseeController{
 			}
 		case 2:
 			if(item.getIsSpeaker() == 0) {
-				return "O";
-			}else if(item.getIsSpeaker() == 1) {
 				return "X";
+			}else if(item.getIsSpeaker() == 1) {
+				return "O";
 			}
 		case 3:
 			if(item.getNational() == 1) {
