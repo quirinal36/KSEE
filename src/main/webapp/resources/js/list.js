@@ -5,3 +5,8 @@ function pageGo(pageNum){
 function search(form){
 	$(form).submit();
 }
+function arangeList(sortBy){
+	var url = $("form").attr("action");
+	url = url + "?sortBy="+sortBy;
+	window.location.replace(url);
+}

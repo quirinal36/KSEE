@@ -55,7 +55,26 @@
 				)
 			</if>
 		</where>
-		ORDER BY u.id DESC
+		<choose>
+			<when test="sortBy != null and sortBy.equals('user_role')">
+				ORDER BY u.user_role
+			</when>
+			<when test="sortBy != null and sortBy.equals('username')">
+				ORDER BY u.username
+			</when>
+			<when test="sortBy != null and sortBy.equals('classification')">
+				ORDER BY u.classification
+			</when>
+			<when test="sortBy != null and sortBy.equals('level')">
+				ORDER BY u.level
+			</when>
+			<when test="sortBy != null and sortBy.equals('email')">
+				ORDER BY u.email
+			</when>
+			<otherwise>
+				ORDER BY u.id DESC
+			</otherwise>
+		</choose>
 		LIMIT ${from}, ${pageSize}
 	</select>
 	<select id="select_one" parameterType="user" resultType="user">

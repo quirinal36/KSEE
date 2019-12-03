@@ -8,9 +8,20 @@
 <title>${title }</title>
 <c:import url="/inc/head_admin"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
-<style>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#chk0").change(function(){
+		var isChecked = $(this).is(":checked");
+		$(".chk1").each(function(){
+			$(this).prop("checked", isChecked);
+		});
+	});
+});
+function downloadExcel(){
 	
-</style>
+	window.location.replace("/admin/members/download/excel");
+}
+</script>
 </head>
 <body>
 	<div id="wrap">
@@ -37,27 +48,30 @@
 					<table class="tbl1 td_center">
 						<thead>
 							<tr>
-								<th>선택</th>
-								<th>회원구분</th>
-								<th>이름</th>
-								<th>소속</th>
-								<th>직위</th>
-								<th>이메일</th>
-								<th>가입일</th>
+								<th>
+									<input type="checkbox" id="chk0" class="chk1">
+									<label for="chk0"></label>
+								</th>
+								<th><a href="javascript:arangeList('user_role')">회원구분</a></th>
+								<th><a href="javascript:arangeList('username')">이름</a></th>
+								<th><a href="javascript:arangeList('classification')">소속</a></th>
+								<th><a href="javascript:arangeList('level')">직위</a></th>
+								<th><a href="javascript:arangeList('email')">이메일</a></th>
+								<th><a href="javascript:arangeList('mdate')">가입일</a></th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${members }" var="item">
+							<c:forEach items="${members }" var="item" varStatus="sts">
 								<tr>
 									<td>
-										<input type="checkbox" id="chk1" class="chk1">
-										<label for="chk1"></label>
+										<input type="checkbox" id="chk${sts.count }" class="chk1">
+										<label for="chk${sts.count }"></label>
 									</td>
 									<td>${item.role_name_kr }</td>
 									<td><a href="<c:url value="/admin/members/view/${item.id }"/>">${item.username }</a></td>
 									<td>${item.classification }</td>
 									<td>${item.level }</td>
-									<td>${su:phone(item.phone) }</td>
+									<td>${item.email }@${item.domain }</td>
 									<td>
 										<fmt:formatDate value="${item.mdate}" pattern="yyyy-MM-dd" />
 									</td>
@@ -86,7 +100,7 @@
 					<div class="bt_wrap">
 						<a href="javascript:void(0);" class="bt1" onclick="">선택회원 이메일 발송</a>
 						<a href="javascript:void(0);" class="bt1" onclick="">전체회원 이메일 발송</a>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
+						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel();">엑셀파일로 저장</a>
 					</div>
 				</div>
 			</div>

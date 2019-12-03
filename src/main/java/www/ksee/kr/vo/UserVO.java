@@ -31,6 +31,8 @@ public class UserVO extends Paging{
 	String role_name_kr;
 	String telephone;
 	Date mdate;
+	Date udate;
+	String sortBy;
 	
 	public static final int ROLE_ADMIN = 1;
 	public static final int ROLE_STUDENT = 2;

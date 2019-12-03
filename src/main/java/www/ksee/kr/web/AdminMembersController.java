@@ -1,14 +1,21 @@
 package www.ksee.kr.web;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -75,5 +82,20 @@ public class AdminMembersController {
 		int result = userService.update(user);
 		json.put("result", result);
 		return json.toString();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/download/excel", method = RequestMethod.GET, produces = "ms-vnd/excel; charset=utf8")
+	public void excelDown(HttpServletResponse response,
+			@RequestParam(name="userIds")String[] ids) throws IOException{
+		for(String id: ids) {
+			logger.info("id: " + id);
+		}
+		Workbook wb = new HSSFWorkbook();
+		// 컨텐츠 타입과 파일명
+		response.setHeader("Content-Disposition", "attachment; filename=\"export.xls\"");
+		// 엑셀 출력
+		wb.write(response.getOutputStream());
+		wb.close();
 	}
 }
