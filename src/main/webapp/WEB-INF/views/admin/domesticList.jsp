@@ -14,6 +14,42 @@
 function downloadExcel(sympId){
 	window.location.replace("/admin/apply/list/"+sympId+"/excel");
 }
+function changeStatus(dest){
+	var ids = new Array();
+	
+	$(".applyChk").each(function(){
+		if($(this).is(":checked") ){
+			ids.push($(this).val());
+		}
+	});
+	
+	var param = "status="+dest;
+	param += "&ids="+ids.join(",");
+	
+	var url = "/admin/apply/change";
+	
+	if(confirm("상태를 변경 하시겠습니까?")){
+		$.ajax({
+			url : url,
+			data: param,
+			type: "POST",
+			dataType: "json"
+		}).done(function(json){
+			if(json.result > 0 && alert("변경이 완료되었습니다.")){
+				window.location.reload();
+			}
+		});
+	}
+}
+
+$(document).ready(function(){
+	$("#chk0").change(function(){
+		var isChecked = $(this).is(":checked");
+		$(".chk1").each(function(){
+			$(this).prop("checked", isChecked);
+		});
+	});
+});
 </script>
 </head>
 <body>
@@ -31,19 +67,14 @@ function downloadExcel(sympId){
 							<input type="submit" value="검색">
 						</form>
 					</div>
-					<div class="admin_sort" style="display:none;">
-						<a href="#">신청일</a>
-						<a href="#">구분</a>
-						<a href="#">발표자</a>
-						<a href="#">국적</a>
-						<a href="#">이름</a>
-						<a href="#">소속</a>
-						<a href="#">초록</a>
-					</div>
+					
 					<table class="tbl1 td_center">
 						<thead>
 							<tr>
-								<th>선택</th>
+								<th>
+									<input type="checkbox" id="chk0" class="chk1">
+									<label for="chk0"></label>
+								</th>
 								<th>상태</th>
 								<th>신청일</th>
 								<th>구분</th>
@@ -58,11 +89,11 @@ function downloadExcel(sympId){
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${applyList }" var="item">
+							<c:forEach items="${applyList }" var="item" varStatus="sts">
 								<tr>
 									<td>
-										<input type="checkbox" id="chk1" class="chk1">
-										<label for="chk1"></label>
+										<input type="checkbox" id="chk${sts.count }" class="chk1 applyChk" value="${item.id }">
+										<label for="chk${sts.count }"></label>
 									</td>
 									<td>접수 중</td>
 									<td><fmt:formatDate value="${item.mdate}" pattern="yyyy-MM-dd" /></td>
@@ -103,12 +134,12 @@ function downloadExcel(sympId){
 						</tbody>
 					</table>
 					<div class="bt_wrap">
-						<a href="javascript:void(0);" class="bt1" onclick="">접수 중으로 변경</a>
-						<a href="javascript:void(0);" class="bt1 on" onclick="">접수완료로 변경</a>
-						<a href="javascript:void(0);" class="bt1" onclick="">신청취소</a>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadAllFiles();">초록 일괄다운로드</a>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:history.go(-1)">이전</a>
+						<a href="javascript:changeStatus(1);" class="bt1">접수 중으로 변경</a>
+						<a href="javascript:changeStatus(2);" class="bt1 on" >접수완료로 변경</a>
+						<a href="javascript:changeStatus(3);" class="bt1">신청취소</a>
+						<a class="bt1" href="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
+						<a class="bt1" href="javascript:downloadAllFiles();">초록 일괄다운로드</a>
+						<a class="bt1" href="javascript:history.go(-1)">이전</a>
 					</div>
 				</div>
 			</div>

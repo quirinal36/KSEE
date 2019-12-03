@@ -23,7 +23,9 @@ public class ApplyDAO implements DataAccess<ApplyVO> {
 	public int update(ApplyVO input) {
 		return sqlSession.update(namespace +".update", input);
 	}
-
+	public int update(List<ApplyVO> list) {
+		return sqlSession.update(namespace +".update_list", list);
+	}
 	@Override
 	public int delete(ApplyVO input) {
 		return sqlSession.delete(namespace +".delete", input);

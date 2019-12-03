@@ -169,4 +169,14 @@
 	<select id="roles" resultType="user_role">
 		SELECT * FROM roles
 	</select>
+	
+	<select id="select_all" resultType="user">
+		
+		SELECT u.*, r.role_name, r.role_name_kr FROM 
+		users u 
+			LEFT JOIN roles r on (u.user_role = r.id)
+		<where>
+			u.user_role <![CDATA[<]]> 4;
+		</where>
+	</select>
 </mapper>

@@ -22,7 +22,9 @@ public class ApplyService implements DataService<ApplyVO> {
 	public int update(ApplyVO input) {
 		return dao.update(input);
 	}
-
+	public int update(List<ApplyVO> input) {
+		return dao.update(input);
+	}
 	@Override
 	public int delete(ApplyVO input) {
 		return dao.delete(input);

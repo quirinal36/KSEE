@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.UserService;
+import www.ksee.kr.util.ExcelMaker;
 import www.ksee.kr.vo.UserRole;
 import www.ksee.kr.vo.UserVO;
 
@@ -77,7 +81,6 @@ public class AdminMembersController {
 	@ResponseBody
 	@RequestMapping(value="/edit", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String editUserInfo(UserVO user) {
-		logger.info(user.toString());
 		JSONObject json = new JSONObject();
 		int result = userService.update(user);
 		json.put("result", result);
@@ -86,16 +89,23 @@ public class AdminMembersController {
 	
 	@ResponseBody
 	@RequestMapping(value="/download/excel", method = RequestMethod.GET, produces = "ms-vnd/excel; charset=utf8")
-	public void excelDown(HttpServletResponse response,
-			@RequestParam(name="userIds")String[] ids) throws IOException{
-		for(String id: ids) {
-			logger.info("id: " + id);
-		}
-		Workbook wb = new HSSFWorkbook();
+	public void excelDown(HttpServletResponse response) throws IOException{
+		List<UserVO> userList = userService.select();
+		final String [] header = {"번호", "회원구분", "이름", "소속", "직위", "이메일", "가입일"};
+		
+		final String fileName = "회원리스트";
+		
+		ExcelMaker eMaker = new ExcelMaker();
+		eMaker.makeSheet(fileName);
+		eMaker.makeHead(header);
+		eMaker.makeUserBody(userList, header);
+		
+		
 		// 컨텐츠 타입과 파일명
-		response.setHeader("Content-Disposition", "attachment; filename=\"export.xls\"");
+		final String zipFileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ zipFileName + ".xls\"");
 		// 엑셀 출력
-		wb.write(response.getOutputStream());
-		wb.close();
+		eMaker.getWb().write(response.getOutputStream());
+		eMaker.getWb().close();
 	}
 }

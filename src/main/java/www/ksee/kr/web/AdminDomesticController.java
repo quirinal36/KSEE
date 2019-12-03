@@ -3,6 +3,7 @@ package www.ksee.kr.web;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import www.ksee.kr.service.SymposiumDetailService;
 import www.ksee.kr.service.SymposiumService;
+import www.ksee.kr.util.ExcelMaker;
 import www.ksee.kr.util.FileUtil;
 import www.ksee.kr.util.SymposiumUtil;
 import www.ksee.kr.vo.ApplyVO;
@@ -281,6 +283,14 @@ public class AdminDomesticController extends KseeController{
 		if(query.isPresent()) {
 			apply.setQuery(query.get());
 		}
+		mv.addObject("menu", 1);
+		
+		
+		Symposium symp = new Symposium();
+		symp.setId(sympId);
+		symp = sympService.selectOne(symp);
+		mv.addObject("title", symp.getTitle() + " 신청현황");
+		
 		List<ApplyVO> applyList = applyService.select(apply);
 		mv.addObject("applyList", applyList);
 		mv.addObject("paging", apply);
@@ -289,7 +299,8 @@ public class AdminDomesticController extends KseeController{
 		return mv;
 	}
 	
-	@RequestMapping(value="/apply/list/{sympId}/excel")
+	@ResponseBody
+	@RequestMapping(value="/apply/list/{sympId}/excel", method = RequestMethod.GET, produces = "ms-vnd/excel; charset=utf8")
 	public void excelDown(@PathVariable(value="sympId")Integer sympId,
 			HttpServletResponse response) throws IOException {
 		ApplyVO apply = new ApplyVO();
@@ -299,106 +310,42 @@ public class AdminDomesticController extends KseeController{
 		symposium.setId(sympId);
 		symposium = sympService.selectOne(symposium);
 		
-		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet(symposium.getTitle());
+		final String [] header = {"신청일","구분","발표자","국적","이름","소속","직위","연락처","이메일 주소"};
+		ExcelMaker eMaker = new ExcelMaker();
+		eMaker.makeSheet(symposium.getTitle());
+		eMaker.makeHead(header);
+		eMaker.makeApplicationBody(applyList, header);
 		
-		Row row = null;
-		Cell cell = null;
-		int rowNo = 0;
-		
-		// table header style
-		CellStyle headStyle = wb.createCellStyle();
-		// 가는 경계선
-		headStyle.setBorderTop(BorderStyle.THIN);
-		headStyle.setBorderBottom(BorderStyle.THICK);
-		headStyle.setBorderLeft(BorderStyle.THIN);
-		headStyle.setBorderRight(BorderStyle.THIN);
-		
-		// 베경색
-		headStyle.setFillForegroundColor(HSSFColorPredefined.GREY_25_PERCENT.getIndex());
-		headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		
-		// 데이터 가운데정렬
-		headStyle.setAlignment(HorizontalAlignment.CENTER);
-		
-		// 데이터용 경계 스타일 테두리
-		CellStyle bodyStyle = wb.createCellStyle();
-		bodyStyle.setBorderTop(BorderStyle.THIN);
-		bodyStyle.setBorderBottom(BorderStyle.THIN);
-		bodyStyle.setBorderLeft(BorderStyle.THIN);
-		bodyStyle.setBorderRight(BorderStyle.THIN);
-		
-		// 헤더생성
-		row = sheet.createRow(rowNo++);
-		for(int i = 0; i<header.length; i++) {
-			cell = row.createCell(i);
-			cell.setCellStyle(headStyle);
-			cell.setCellValue(header[i]);
-		}
-		
-		Iterator<ApplyVO> iter = applyList.iterator();
-		while(iter.hasNext()) {
-			ApplyVO item = iter.next();
-			row = sheet.createRow(rowNo++);
-			
-			for(int i = 0; i<header.length; i++) {
-				cell = row.createCell(i);
-				cell.setCellStyle(bodyStyle);
-				cell.setCellValue(getString(item, i));
-			}
-		}
-		
+		// 
+
 		// 컨텐츠 타입과 파일명
-		response.setContentType("ms-vnd/excel");
-		response.setHeader("Content-Disposition", "attachment; filename=\"export.xls\"");
-		response.setCharacterEncoding("UTF-8");
+		final String fileName = "심포지움 신청자 리스트";
+		final String zipFileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ zipFileName + ".xls\"");
 		// 엑셀 출력
-		wb.write(response.getOutputStream());
-		wb.close();
+		eMaker.getWb().write(response.getOutputStream());
+		eMaker.getWb().close();
 	}
 	
-	String [] header = {"신청일","구분","발표자","국적","이름","소속","직위","연락처","이메일 주소"};
-	private String getString(ApplyVO item, int i) {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+	@ResponseBody
+	@RequestMapping(value="/apply/change", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String changeStatus(@RequestParam(name="ids", required = true)Integer[] ids,
+			@RequestParam(name="status", required = true)Integer status) {
+		JSONObject json = new JSONObject();
 
-		switch(i) {
-		case 0:
-			return dateFormat.format(item.getMdate());
-		case 1:
-			if(item.getMemberType() == 2) {
-				return "일반";	
-			}else if(item.getMemberType() == 3) {
-				return "기업";
-			}else if(item.getMemberType() == 4) {
-				return "학생";
-			}
-		case 2:
-			if(item.getIsSpeaker() == 0) {
-				return "X";
-			}else if(item.getIsSpeaker() == 1) {
-				return "O";
-			}
-		case 3:
-			if(item.getNational() == 1) {
-				return "대한민국";
-			}else if(item.getNational() == 2) {
-				return "중국";
-			}else if(item.getNational() == 3) {
-				return "일본";
-			}
-		case 4:
-			return item.getUsername();
-		case 5:
-			return item.getClassification();
-		case 6:
-			return item.getLevel();
-		case 7:
-			return item.getTelephone();
-		case 8:
-			return item.getEmail() +"@" + item.getDomain();
-
+		List<ApplyVO> list = new ArrayList<ApplyVO>();
+		for(Integer id: ids) {
+			ApplyVO apply = new ApplyVO();
+			apply.setId(id);
+			apply.setStatus(status);
+			
+			list.add(apply);
 		}
-		return null;
+		int result = applyService.update(list);
+		json.put("result", result);
+		
+		return json.toString();
 	}
+	
 	
 }

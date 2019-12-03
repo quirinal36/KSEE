@@ -51,6 +51,23 @@
 			id = ${id}
 		</where>
 	</update>
+	
+	<update id="update_list" parameterType="java.util.List">
+		UPDATE Apply
+		<set>
+			status =
+			<foreach collection="list" item="item" open="CASE" close="END">
+				WHEN id = ${item.id} THEN ${item.status}
+			</foreach>
+		</set>
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</update>
+	
 	<select id="select" parameterType="apply" resultType="apply">
 		SELECT *
 		FROM Apply

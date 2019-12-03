@@ -17,8 +17,8 @@ $(document).ready(function(){
 		});
 	});
 });
+
 function downloadExcel(){
-	
 	window.location.replace("/admin/members/download/excel");
 }
 </script>
@@ -64,7 +64,7 @@ function downloadExcel(){
 							<c:forEach items="${members }" var="item" varStatus="sts">
 								<tr>
 									<td>
-										<input type="checkbox" id="chk${sts.count }" class="chk1">
+										<input type="checkbox" id="chk${sts.count }" class="chk1" value="${item.id }">
 										<label for="chk${sts.count }"></label>
 									</td>
 									<td>${item.role_name_kr }</td>
@@ -98,9 +98,11 @@ function downloadExcel(){
 						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
-						<a href="javascript:void(0);" class="bt1" onclick="">선택회원 이메일 발송</a>
-						<a href="javascript:void(0);" class="bt1" onclick="">전체회원 이메일 발송</a>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel();">엑셀파일로 저장</a>
+						<%--
+							<a href="javascript:void(0);" class="bt1" onclick="">선택회원 이메일 발송</a>
+							<a href="javascript:void(0);" class="bt1" onclick="">전체회원 이메일 발송</a>
+						--%>
+						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel();">전체회원 엑셀파일로 저장</a>
 					</div>
 				</div>
 			</div>
