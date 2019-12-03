@@ -213,7 +213,7 @@ function delButtonClick(button){
 											<c:if test = "${apply.fileId gt 0 }">
 												<li>
 													<span>${apply.filename }</span>
-													<input type="button" value="${apply.fileId }" class="bt_del_file" text="삭제">
+													<input type="button" value="${apply.fileId }" class="bt_del_file" text="삭제" onclick="javascript:delButtonClick(this);">
 												</li>
 											</c:if>
 										</ul>
