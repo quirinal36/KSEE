@@ -41,7 +41,7 @@ public class GroupController extends KseeController {
 		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "공지사항");
-		
+		/*
 		board.setBoardType(Board.TYPE_GROUP);
 		board.setPageSize(10);
 		
@@ -51,7 +51,8 @@ public class GroupController extends KseeController {
 		
 		mv.addObject("paging", board);
 		mv.addObject("list", list);
-		mv.setViewName("/group/home");
+		*/
+		mv.setViewName("redirect:/group/notice");
 		return mv;
 	}
 

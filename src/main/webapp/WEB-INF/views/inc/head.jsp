@@ -42,4 +42,9 @@ const toast = swal.mixin({
 	showConfirmButton : false,
 	timer : 1500
 });
+/*
+if (document.location.protocol == 'http:') {
+    document.location.href = document.location.href.replace('http:', 'https:');
+}
+*/
 </script>
