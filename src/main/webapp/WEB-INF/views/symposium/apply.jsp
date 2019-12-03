@@ -39,7 +39,7 @@ function applySubmit(){
 	var isSpeaker = parseInt($("input[name='isSpeaker']:checked").val())== 1? true : false;
 	
 	if(files.length == 0 && isSpeaker){
-		alert("초록을 등록해주세요.");
+		alert(jQuery.i18n.prop("symposium.submit_form"));
 		return false;
 	}
 	
@@ -49,7 +49,7 @@ function applySubmit(){
 		param += "&files="+files.join(",");
 	}
 	
-	if(confirm("제출하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("symposium.to_register"))){
 		$.ajax({
 			url : url,
 			data: param,

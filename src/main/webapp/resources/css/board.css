@@ -154,7 +154,7 @@
 .board_write_file ul { line-height: 160%; }
 .board_write_file ul li { font-size: 14px; font-weight: 300; }
 .board_write_file ul li:last-child { margin-bottom: 20px; }
-.board_write_file .bt_del_file { display: inline-block; width: 16px; height: 16px; margin-left: 5px; vertical-align: middle; background: url(/resources/img/contents/board_file_icon.png) no-repeat 0 0; text-indent: -1000px; overflow: hidden; }
+.board_write_file .bt_del_file { display: inline-block; width: 16px; height: 16px; margin-left: 5px; vertical-align: middle; background: url(/resources/img/contents/board_file_icon.png) no-repeat 0 0 /16px; text-indent: -1000px; overflow: hidden; }
 
 /* 게시판 리스트 - 없을 때 */
 .board_list .noItem { text-align: center; }
