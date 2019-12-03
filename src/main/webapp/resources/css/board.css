@@ -109,11 +109,11 @@
 .board_write_title { padding: 20px 0; border-bottom: 1px solid #ddd; text-align: left; font-size: 0; }
 .board_write_title:first-child { border-top: 1px solid #325cb2; }
 .board_write_title > div { display: inline-block; vertical-align: middle; font-size: 15px; }
-.board_write_title .title { width: 120px; text-indent: 30px; }
-.board_write_title .title_ipt { width: 510px; }
+.board_write_title .title { width: 150px; text-indent: 30px; }
+.board_write_title .title_ipt { width: 480px; }
 .board_write_title .title_ipt input[type="text"] { width: 100%; }
-.board_write_title .writer { width: 120px; text-align: left; text-indent: 45px; }
-.board_write_title .writer_ipt { width: 250px; }
+.board_write_title .writer { width: 150px; text-align: left; text-indent: 45px; }
+.board_write_title .writer_ipt { width: 220px; }
 .board_write_title .writer_ipt input[type="text"] { width: 100%; }
 
 .board_write_title input[type="text"] { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 2px; font-size: 16px; }
@@ -135,12 +135,12 @@
 }
 .board_write_img dt,
 .board_write_file dt {
-	width: 10%;
+	width: 150px;
 	text-indent: 30px;
 }
 .board_write_img dd,
 .board_write_file dd {
-	width: 90%;
+	width: 850px;
 	margin-left: 0;
 }
 
