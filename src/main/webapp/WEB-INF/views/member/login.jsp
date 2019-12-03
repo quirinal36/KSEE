@@ -12,12 +12,11 @@
 	<c:import url="/inc/header"></c:import>
 	<div id="container_wrap">
 		<div id="container">
-			<c:import url="/inc/lnb_wrap">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
-			<c:import url="/inc/contentsTitle">
-				<c:param name="id">${curMenu.id }</c:param>
-			</c:import>
+			<div id="contentsTitle">
+				<div>
+					<h2><spring:message code="member.login" text="member.login"></spring:message></h2>
+				</div>
+			</div>
 			<div id="contentsPrint">
 				<form action="<c:url value="/member/loginProcess"/>" method="POST">
 					<!-- 로그인 -->

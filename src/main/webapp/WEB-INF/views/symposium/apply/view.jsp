@@ -125,6 +125,7 @@
 			</div>
 		</div>
 	</div>
+	<c:import url="/inc/footer"></c:import>
 </div>
 </body>
 </html>

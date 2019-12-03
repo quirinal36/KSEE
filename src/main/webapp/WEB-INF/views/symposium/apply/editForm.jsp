@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -60,7 +61,7 @@ function editSubmit(){
 	var isSpeaker = parseInt($("input[name='isSpeaker']:checked").val())== 1? true : false;
 	
 	if(files.length == 0 && isSpeaker){
-		alert("초록을 등록 해주세요.");
+		alert("초록을 등록해주세요.");
 		return false;
 	}
 	
@@ -115,96 +116,96 @@ function delButtonClick(button){
 					<div class="paper">
 						<form action="<c:url value="/symposium/apply/edit"/>" id="applyForm">
 							<dl class="member_chk">
-								<dt>참가자 구분</dt>
+								<dt><spring:message code="symposium.attendee"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="memberType" id="member_chk1" class="radio1" value="2" <c:if test="${apply.memberType eq 2 }">checked</c:if>>
-											<label for="member_chk1">일반</label>
+											<label for="member_chk1"><spring:message code="symposium.general"/></label>
 										</li>
 										<li>
 											<input type="radio" name="memberType" id="member_chk2" class="radio1" value="3" <c:if test="${apply.memberType eq 3 }">checked</c:if>>
-											<label for="member_chk2">기업</label>
+											<label for="member_chk2"><spring:message code="symposium.apply.view.company"/></label>
 										</li>
 										<li>
 											<input type="radio" name="memberType" id="member_chk3" class="radio1" value="4" <c:if test="${apply.memberType eq 4 }">checked</c:if>>
-											<label for="member_chk3">학생</label>
+											<label for="member_chk3"><spring:message code="symposium.apply.view.student"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl class="member_chk">
-								<dt>발표자 여부</dt>
+								<dt><spring:message code="symposium.apply.view.is_speaker"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="isSpeaker" id="speaker_chk1" class="radio1" value="1" <c:if test="${apply.isSpeaker eq 1 }">checked</c:if>>
-											<label for="speaker_chk1">발표자입니다</label>
+											<label for="speaker_chk1"><spring:message code="symposium.apply.view.speaker"/></label>
 										</li>
 										<li>
 											<input type="radio" name="isSpeaker" id="speaker_chk2" class="radio1" value="2" <c:if test="${apply.isSpeaker eq 2 }">checked</c:if>>
-											<label for="speaker_chk2">발표자가 아닙니다</label>
+											<label for="speaker_chk2"><spring:message code="symposium.apply.view.no_speaker"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl class="member_chk">
-								<dt>국적</dt>
+								<dt><spring:message code="symposium.nationality"/></dt>
 								<dd>
 									<ul class="chk_wrap">
 										<li>
 											<input type="radio" name="national" id="national_chk1" class="radio1" value="1" <c:if test="${apply.national eq 1 }">checked</c:if>>
-											<label for="national_chk1">대한민국</label>
+											<label for="national_chk1"><spring:message code="symposium.korea"/></label>
 										</li>
 										<li>
 											<input type="radio" name="national" id="national_chk2" class="radio1" value="2" <c:if test="${apply.national eq 2 }">checked</c:if>>
-											<label for="national_chk2">중국</label>
+											<label for="national_chk2"><spring:message code="symposium.china"/></label>
 										</li>
 										<li>
 											<input type="radio" name="national" id="national_chk3" class="radio1" value="3" <c:if test="${apply.national eq 3 }">checked</c:if>>
-											<label for="national_chk3">일본</label>
+											<label for="national_chk3"><spring:message code="symposium.japan"/></label>
 										</li>
 									</ul>
 								</dd>
 							</dl>
 							<dl>
-								<dt>이름</dt>
+								<dt><spring:message code="symposium.name"/></dt>
 								<dd>
-									<input type="text" placeholder="이름 입력" class="ipt1" name="username" autocomplete="off" value="${apply.username }">
-									<p class="message error">이름을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_name"/>" class="ipt1" name="username" autocomplete="off" value="${apply.username }">
+									<p class="message error"><spring:message code="member.enter_your_name"/></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>소속</dt>
+								<dt><spring:message code="member.affiliation"/></dt>
 								<dd>
-									<input type="text" placeholder="소속 입력" class="ipt1" name="classification" autocomplete="off" value="${apply.classification }">
-									<p class="message error">소속을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_affiliation"/>" class="ipt1" name="classification" autocomplete="off" value="${apply.classification }">
+									<p class="message error"><spring:message code="member.enter_your_affiliation"/></p>
 								</dd>
 							</dl>
 							<dl>
-								<dt>직위</dt>
+								<dt><spring:message code="symposium.position"/></dt>
 								<dd>
-									<input type="text" placeholder="직위 입력" class="ipt1" name="level" autocomplete="off" value="${apply.level }">
-									<p class="message error">직위를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_position"/>" class="ipt1" name="level" autocomplete="off" value="${apply.level }">
+									<p class="message error"><spring:message code="member.enter_your_position"/></p>
 								</dd>
 							</dl>
 							<dl class="company_tel">
-								<dt>연락처</dt>
+								<dt><spring:message code="symposium.tel"/></dt>
 								<dd>
-									<input type="text" placeholder="연락처 입력" class="ipt1" name="telephone" autocomplete="off" value="${apply.telephone }">
+									<input type="text" placeholder="<spring:message code="symposium.tel.hint"/>" class="ipt1" name="telephone" autocomplete="off" value="${apply.telephone }">
 								</dd>
 							</dl>
 							<dl class="email">
-								<dt>이메일 주소</dt>
+								<dt><spring:message code="symposium.email"/></dt>
 								<dd>
-									<input type="text" placeholder="이메일 아이디 입력" class="ipt1" name="email" autocomplete="off" value="${apply.email }">
+									<input type="text" placeholder="<spring:message code="member.enter_your_email"/>" class="ipt1" name="email" autocomplete="off" value="${apply.email }">
 									<span>@</span>
-									<input type="text" placeholder="도메인 입력" class="ipt1" name="domain" autocomplete="off" value="${apply.domain }">
-									<p class="message error">이메일 아이디를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_domain"/>" class="ipt1" name="domain" autocomplete="off" value="${apply.domain }">
+									<p class="message error"><spring:message code="member.enter_your_email"/></p>
 								</dd>
 							</dl>
 							<dl class="file" <c:if test="${apply.fileId eq 0 }">style="display:none;"</c:if>>
-								<dt>학술대회 초록</dt>
+								<dt><spring:message code="symposium.form"/></dt>
 								<dd>
 									<div class="board_write_file"  id="dropzone-file">
 										<!-- 첨부파일 목록 -->
@@ -225,8 +226,8 @@ function delButtonClick(button){
 								</dd>
 							</dl>
 							<div class="bt3_item2">
-								<input type="button" value="수정완료" class="bt3 on" id="submit" onclick="javascript:editSubmit();">
-								<a href="<c:url value="/symposium/apply/view/${apply.id }"/>" class="bt3">이전 페이지로 이동</a>
+								<input type="button" value="<spring:message code="member.edit_complete"/>" class="bt3 on" id="submit" onclick="javascript:editSubmit();">
+								<a href="<c:url value="/symposium/apply/view/${apply.id }"/>" class="bt3"><spring:message code="symposium.apply.view.prev_page"/></a>
 							</div>
 							<input type="hidden" name="id" value="${apply.id }"/>
 							<input type="hidden" name="sympId" value="${apply.sympId }"/>
@@ -237,6 +238,7 @@ function delButtonClick(button){
 			</div>
 		</div>
 	</div>
+	<c:import url="/inc/footer"></c:import>
 </div>
 </body>
 </html>

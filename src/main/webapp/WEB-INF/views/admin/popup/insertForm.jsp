@@ -177,10 +177,38 @@ $(window).on("beforeunload", function(){
 									<input type="text" placeholder="url 을 입력하세요." class="ipt2 w90" name="link">
 								</td>
 							</tr>
+							<tr class="board_write_img popup_write_img" id="dropzone-img">
+								<th>국문사진</th>
+								<td colspan="3">
+									<!-- 사진 목록 -->
+									<ul>
+										
+									</ul>
+									<!-- 첨부하기 버튼 -->
+									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+								        <div class="progress-bar" style="width: 0%;"></div>
+								    </div>
+								</td>
+							</tr>
+							<tr class="board_write_img popup_write_img" id="dropzone-img-en">
+								<th>영문사진</th>
+								<td colspan="3">
+									<!-- 사진 목록 -->
+									<ul>
+										
+									</ul>
+									<!-- 첨부하기 버튼 -->
+									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+								        <div class="progress-bar" style="width: 0%;"></div>
+								    </div>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</form>
-				<div class="board_write_img popup_write_img" id="dropzone-img">
+				<div class="board_write_img popup_write_img" id="dropzone-img" style="display: none;">
 					<dl>
 						<dt>국문사진</dt>
 						<dd>
@@ -196,7 +224,7 @@ $(window).on("beforeunload", function(){
 						</dd>
 					</dl>
 				</div>
-				<div class="board_write_img popup_write_img" id="dropzone-img-en">
+				<div class="board_write_img popup_write_img" id="dropzone-img-en" style="display: none;">
 					<dl>
 						<dt>영문사진</dt>
 						<dd>

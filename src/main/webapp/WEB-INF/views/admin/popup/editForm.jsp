@@ -178,9 +178,45 @@ function submit(){
 									<input type="text" placeholder="url 을 입력하세요." class="ipt2 w90" name="link" value="${popup.link }">
 								</td>
 							</tr>
+							<tr>
+								<th>국문사진</th>
+								<td colspan="3" class="board_write_img popup_write_img" id="dropzone-img">
+									<!-- 사진 목록 -->
+									<ul>
+										<c:if test="${not empty photo}">
+											<li style="background-image: url(${photo.url});">
+												<input type="button" title="삭제" class="bt_del_img" value="${photo.id }">
+											</li>
+										</c:if>
+									</ul>
+									<!-- 첨부하기 버튼 -->
+									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+								        <div class="progress-bar" style="width: 0%;"></div>
+								    </div>
+								</td>
+							</tr>
+							<tr colspan="3" class="board_write_img popup_write_img" id="dropzone-img-en">
+								<th>영문사진</th>
+								<td>
+									<!-- 사진 목록 -->
+									<ul>
+										<c:if test="${not empty enPhoto}">
+											<li style="background-image: url(${enPhoto.url});">
+												<input type="button" title="삭제" class="bt_del_img" value="${enPhoto.id }">
+											</li>
+										</c:if>
+									</ul>
+									<!-- 첨부하기 버튼 -->
+									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+								        <div class="progress-bar" style="width: 0%;"></div>
+								    </div>
+								</td>
+							</tr>
 						</tbody>
 					</table>
-					<div class="board_write_img popup_write_img" id="dropzone-img">
+					<div class="board_write_img popup_write_img" id="dropzone-img" style="display: none;">
 						<dl>
 							<dt>국문사진</dt>
 							<dd>
@@ -200,7 +236,7 @@ function submit(){
 							</dd>
 						</dl>
 					</div>
-					<div class="board_write_img popup_write_img" id="dropzone-img-en">
+					<div class="board_write_img popup_write_img" id="dropzone-img-en" style="display: none;">
 						<dl>
 							<dt>영문사진</dt>
 							<dd>
