@@ -2,6 +2,8 @@ package www.ksee.kr.util;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import www.ksee.kr.vo.PhotoInfo;
 public class FileUtil {
 
 	/**
-	 * 사진 파일을 저장할 디렉터리 가져오기
+	 * 파일을 저장할 디렉터리 가져오기
 	 * 
 	 * @param userId
 	 * @return
@@ -86,4 +88,21 @@ public class FileUtil {
 		
 		return (int)destFile.length();
 	}
+	public void fileCopy(File inFile, File outFile) {
+		try {
+			FileInputStream fis = new FileInputStream(inFile);
+			FileOutputStream fos = new FileOutputStream(outFile);
+
+			int data = 0;
+			while((data=fis.read())!=-1) {
+				fos.write(data);
+			}
+			fis.close();
+			fos.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

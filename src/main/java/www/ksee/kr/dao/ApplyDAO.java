@@ -41,7 +41,9 @@ public class ApplyDAO implements DataAccess<ApplyVO> {
 	public List<ApplyVO> select(ApplyVO input) {
 		return sqlSession.selectList(namespace +".select", input);
 	}
-
+	public List<ApplyVO> selectFiles(ApplyVO input){
+		return sqlSession.selectList(namespace +".select_files", input);
+	}
 	@Override
 	public ApplyVO selectOne(ApplyVO input) {
 		return sqlSession.selectOne(namespace +".select_one", input);

@@ -11,6 +11,9 @@
 	
 </style>
 <script type="text/javascript">
+function downloadAllFiles(sympId){
+	window.location.replace("/admin/apply/list/"+sympId+"/download");
+}
 function downloadExcel(sympId){
 	window.location.replace("/admin/apply/list/"+sympId+"/excel");
 }
@@ -35,7 +38,8 @@ function changeStatus(dest){
 			type: "POST",
 			dataType: "json"
 		}).done(function(json){
-			if(json.result > 0 && alert("변경이 완료되었습니다.")){
+			alert("변경이 완료되었습니다.");
+			if(json.result > 0){
 				window.location.reload();
 			}
 		});
@@ -95,7 +99,14 @@ $(document).ready(function(){
 										<input type="checkbox" id="chk${sts.count }" class="chk1 applyChk" value="${item.id }">
 										<label for="chk${sts.count }"></label>
 									</td>
-									<td>접수 중</td>
+									<td>
+										<c:choose>
+											<c:when test="${item.status eq 1}">접수 중</c:when>
+											<c:when test="${item.status eq 2}">접수완료</c:when>
+											<c:when test="${item.status eq 3}">취소완료</c:when>
+										</c:choose>
+									
+									</td>
 									<td><fmt:formatDate value="${item.mdate}" pattern="yyyy-MM-dd" /></td>
 									<td>
 										<c:choose>
@@ -137,8 +148,8 @@ $(document).ready(function(){
 						<a href="javascript:changeStatus(1);" class="bt1">접수 중으로 변경</a>
 						<a href="javascript:changeStatus(2);" class="bt1 on" >접수완료로 변경</a>
 						<a href="javascript:changeStatus(3);" class="bt1">신청취소</a>
-						<a class="bt1" href="javascript:downloadExcel('${sympId}');">엑셀파일로 저장</a>
-						<a class="bt1" href="javascript:downloadAllFiles();">초록 일괄다운로드</a>
+						<a class="bt1" href="javascript:downloadExcel('${sympId}');">전체 엑셀파일로 저장</a>
+						<a class="bt1" href="javascript:downloadAllFiles('${sympId}');">초록 일괄다운로드</a>
 						<a class="bt1" href="javascript:history.go(-1)">이전</a>
 					</div>
 				</div>

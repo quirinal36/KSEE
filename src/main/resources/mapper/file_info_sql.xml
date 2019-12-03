@@ -96,4 +96,12 @@
 			id=${id}
 		</where>
 	</delete>
+	
+	<select id="select_apply" parameterType="apply" resultType="fileinfo">
+		SELECT * FROM FileInfo
+		<where>
+			id IN
+			(SELECT fileId FROM Apply WHERE sympId = ${sympId} and isSpeaker=1)
+		</where>
+	</select>
 </mapper>

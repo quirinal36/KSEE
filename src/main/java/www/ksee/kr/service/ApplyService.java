@@ -40,7 +40,9 @@ public class ApplyService implements DataService<ApplyVO> {
 	public List<ApplyVO> select(ApplyVO input) {
 		return dao.select(input);
 	}
-
+	public List<ApplyVO> selectFiles(ApplyVO input){
+		return dao.selectFiles(input);
+	}
 	@Override
 	public ApplyVO selectOne(ApplyVO input) {
 		return dao.selectOne(input);

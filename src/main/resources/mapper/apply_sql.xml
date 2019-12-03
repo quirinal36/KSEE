@@ -110,6 +110,15 @@
 		limit 0, 1
 	</select>
 	
+	<select id="select_files" parameterType="apply">
+		SELECT fileId FROM Apply
+		<where>
+			isSpeaker = 1
+			and
+			sympId = ${sympId}
+		</where>
+	</select>
+	
 	<delete id="delete" parameterType="apply">
 		DELETE FROM Apply
 		<where>

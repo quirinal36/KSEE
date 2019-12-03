@@ -95,7 +95,7 @@
 		$(".date_chk").find("input[name='period']").val(start.format('YYYY-MM-DD') + ' ~ ' + end.format('YYYY-MM-DD'));
 	});
 	
-	$('.imageupload').fileupload({
+	$('#imageupload').fileupload({
     	imageCrop: true,
         dataType: 'json',
         done: function (e, data) {
@@ -124,6 +124,36 @@
         },
  
         dropZone: $('#dropzone-img')
+    });
+	$('#imageupload-en').fileupload({
+    	imageCrop: true,
+        dataType: 'json',
+        done: function (e, data) {
+        	var ul = $(this).parent().find("ul");
+        	var file = data.result.file;
+        	ul.empty();
+        	ul.append(
+       			$("<li>").attr("style", "background-image: url(" + file.url + ");")
+       				.append(
+       						$("<input>").attr("type","button").attr("title","삭제").addClass("bt_del_img")
+       						.attr("onclick", "delButtonClick(this);").val(file.id)
+       				)
+       			);
+
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            
+            $('#progress_img .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+            if(progress == 100){
+            	$('#progress_img .progress-bar').css('width','0%');
+            }
+        },
+ 
+        dropZone: $('#dropzone-img-en')
     });
 });
 $(window).on("beforeunload", function(){
@@ -185,7 +215,7 @@ $(window).on("beforeunload", function(){
 										
 									</ul>
 									<!-- 첨부하기 버튼 -->
-									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+									<input id="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
 								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
 								        <div class="progress-bar" style="width: 0%;"></div>
 								    </div>
@@ -199,7 +229,7 @@ $(window).on("beforeunload", function(){
 										
 									</ul>
 									<!-- 첨부하기 버튼 -->
-									<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
+									<input id="imageupload-en" type="file" name="files[]" accept="image/*" data-url="/upload/image">
 								    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
 								        <div class="progress-bar" style="width: 0%;"></div>
 								    </div>
@@ -208,38 +238,7 @@ $(window).on("beforeunload", function(){
 						</tbody>
 					</table>
 				</form>
-				<div class="board_write_img popup_write_img" id="dropzone-img" style="display: none;">
-					<dl>
-						<dt>국문사진</dt>
-						<dd>
-							<!-- 사진 목록 -->
-							<ul>
-								
-							</ul>
-							<!-- 첨부하기 버튼 -->
-							<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
-						    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						        <div class="progress-bar" style="width: 0%;"></div>
-						    </div>
-						</dd>
-					</dl>
-				</div>
-				<div class="board_write_img popup_write_img" id="dropzone-img-en" style="display: none;">
-					<dl>
-						<dt>영문사진</dt>
-						<dd>
-							<!-- 사진 목록 -->
-							<ul>
-								
-							</ul>
-							<!-- 첨부하기 버튼 -->
-							<input class="imageupload" type="file" name="files[]" accept="image/*" data-url="/upload/image">
-						    <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-						        <div class="progress-bar" style="width: 0%;"></div>
-						    </div>
-						</dd>
-					</dl>
-				</div>
+				
 				<p class="popup_img_guide">팝업 이미지의 사이즈는 624*337이며, 좌우 여백 90px이 확보되어야 합니다.</p>
 				<div class="bt_wrap">
 					<a href="javascript:void(0);" class="bt1 on" onclick="javascript:submit();">등록</a>

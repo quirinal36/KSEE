@@ -12,28 +12,32 @@ function applySearch(){
 	var url = $("form").attr("action");
 	var param = $("form").serialize();
 	
-	$.ajax({
-		url: url,
-		data: param,
-		type: "POST",
-		dataType: "json"
-	}).done(function(json){
-		$(".apply_search_result").each(function(){
-			$(this).hide();
-		});
-		
-		if(json.result > 0){
-			$(".applyId").val(json.applyId);
+	if($("input[name='username']").val().length > 0 && $("input[name='telephone']").val().length > 0){
+		$.ajax({
+			url: url,
+			data: param,
+			type: "POST",
+			dataType: "json"
+		}).done(function(json){
+			$(".apply_search_result").each(function(){
+				$(this).hide();
+			});
 			
-			if(json.status == 1){
-				$(".apply_search_result.apply").show();
-			}else if(json.status == 2){
-				$(".apply_search_result.complete").show();
+			if(json.result > 0){
+				$(".applyId").val(json.applyId);
+				
+				if(json.status == 1){
+					$(".apply_search_result.apply").show();
+				}else if(json.status == 2){
+					$(".apply_search_result.complete").show();
+				}
+			}else{
+				$(".apply_search_result.none").show();
 			}
-		}else{
-			$(".apply_search_result.none").show();
-		}
-	});
+		});
+	}else{
+		alert("정보를 입력 해주세요.");
+	}
 }
 function showView(){
 	var url = $("input[name='viewUrl']").val();

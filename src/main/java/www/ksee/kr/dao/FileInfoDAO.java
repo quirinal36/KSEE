@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import www.ksee.kr.vo.ApplyVO;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 
@@ -55,5 +56,7 @@ public class FileInfoDAO implements DataAccess<FileInfo>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	public List<FileInfo> selectApplications(ApplyVO apply){
+		return sqlSession.selectList(namespace +".select_apply", apply);
+	}
 }

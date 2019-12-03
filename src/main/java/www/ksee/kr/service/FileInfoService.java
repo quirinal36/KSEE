@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import www.ksee.kr.dao.FileInfoDAO;
+import www.ksee.kr.vo.ApplyVO;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 
@@ -54,5 +55,7 @@ public class FileInfoService implements DataService<FileInfo>{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	public List<FileInfo> selectApplications(ApplyVO apply){
+		return dao.selectApplications(apply);
+	}
 }

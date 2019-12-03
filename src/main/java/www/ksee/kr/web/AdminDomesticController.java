@@ -1,16 +1,26 @@
 package www.ksee.kr.web;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
 import org.apache.poi.ss.usermodel.BorderStyle;
@@ -24,6 +34,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,12 +42,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import www.ksee.kr.Config;
 import www.ksee.kr.service.SymposiumDetailService;
 import www.ksee.kr.service.SymposiumService;
 import www.ksee.kr.util.ExcelMaker;
 import www.ksee.kr.util.FileUtil;
 import www.ksee.kr.util.SymposiumUtil;
 import www.ksee.kr.vo.ApplyVO;
+import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 import www.ksee.kr.vo.Symposium;
 import www.ksee.kr.vo.SymposiumDetail;
@@ -297,6 +310,76 @@ public class AdminDomesticController extends KseeController{
 		mv.addObject("sympId", sympId);
 		mv.setViewName("/admin/domesticList");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/apply/list/{sympId}/download", method = RequestMethod.GET, produces = "application/octet-stream; charset=utf8")
+	public void formsDownload(@PathVariable(value="sympId")Integer sympId,
+			HttpServletResponse response) throws IOException {
+		ApplyVO input = new ApplyVO();
+		input.setSympId(sympId);
+		
+		FileUtil fileUtil = new FileUtil();
+		final String uploadPath = fileUtil.makeUserPath();
+		
+		List<FileInfo> fileList = fileInfoService.selectApplications(input);
+		//String files[] = new String[fileList.size()];
+		
+		int i=0;
+		Iterator<FileInfo> iter = fileList.iterator();
+		//while(iter.hasNext()) {
+		//	FileInfo fileInfo = iter.next();
+			//files[i++] = fileInfo.getNewFilename();
+		//}
+		
+		int size = 1024;
+		byte[] buf = new byte[size];
+		String outZipNm = uploadPath + File.separator + UUID.randomUUID() +".zip";
+
+		FileInputStream fis = null;
+		ZipArchiveOutputStream zos = null;
+		BufferedInputStream bis = null;
+
+		try {
+			// Zip 파일생성
+			zos = new ZipArchiveOutputStream(new BufferedOutputStream(new FileOutputStream(outZipNm))); 
+			while(iter.hasNext()) {
+				FileInfo fileInfo = iter.next();
+				zos.setEncoding(Config.ENCODING);
+				
+				fis = new FileInputStream(uploadPath +File.separator + fileInfo.getNewFilename());
+				bis = new BufferedInputStream(fis, size);
+				
+				zos.putArchiveEntry(new ZipArchiveEntry(fileInfo.getName()));
+				
+				int len;
+				while((len = bis.read(buf, 0, size)) != -1) {
+					zos.write(buf,  0,  len);
+				}
+				bis.close();
+				fis.close();
+				zos.closeArchiveEntry();
+			}
+			zos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}finally{
+			if( zos != null ){
+				zos.close();
+			}
+			if( fis != null ){
+				fis.close();
+			}
+			if( bis != null ){
+				bis.close();
+			}
+		}
+		
+		final String fileName = "download.zip";
+		
+		response.setHeader("Content-Disposition", "attachment; filename=\""+ fileName + "\"");
+		InputStream is = new FileInputStream(new File(outZipNm));
+		FileCopyUtils.copy(is, response.getOutputStream());
 	}
 	
 	@ResponseBody
