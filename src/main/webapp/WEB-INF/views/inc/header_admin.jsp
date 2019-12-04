@@ -9,7 +9,7 @@
 				<div>
 					<h1><a href="<c:url value="/admin/"/>">한국효소공학연구회 관리자</a></h1>
 					<ul>
-						<li><a href="<c:url value="/"/>">한국효소공학연구회</a></li>
+						<li><a href="<c:url value="/?lang=ko_KR"/>">한국효소공학연구회</a></li>
 						<li><a href="<c:url value="/j_spring_security_logout"/>">로그아웃</a></li>
 					</ul>
 				</div>
