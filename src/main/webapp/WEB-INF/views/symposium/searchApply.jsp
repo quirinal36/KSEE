@@ -12,7 +12,11 @@ function applySearch(){
 	var url = $("form").attr("action");
 	var param = $("form").serialize();
 	
-	if($("input[name='username']").val().length > 0 && $("input[name='telephone']").val().length > 0){
+	if($("input[name='username']").val().length == 0) {
+		alert(jQuery.i18n.prop("symposium.search.empty.name"));
+	} else if($("input[name='telephone']").val().length == 0) {
+		alert(jQuery.i18n.prop("symposium.search.empty.telephone"));
+	} else {
 		$.ajax({
 			url: url,
 			data: param,
@@ -35,8 +39,6 @@ function applySearch(){
 				$(".apply_search_result.none").show();
 			}
 		});
-	}else{
-		alert("정보를 입력 해주세요.");
 	}
 }
 function showView(){
