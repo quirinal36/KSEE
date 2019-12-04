@@ -94,6 +94,7 @@ public class HomeController extends KseeController {
 			}
 			board.setPageSize(Paging.PAGE_SIZE_LIST);
 			board.setBoardType(boardType);
+			board.setLanguage(locale.getLanguage());
 			int count = boardService.count(board);
 			board.setTotalCount(count);
 			List<Board> boardList = boardService.select(board);
