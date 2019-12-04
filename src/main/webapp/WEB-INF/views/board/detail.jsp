@@ -20,10 +20,10 @@ function writeReply(){
 	var jsonObj = parse($("#replyForm").serializeArray());
 	
 	if(jsonObj['content'].length == 0){
-		alert("댓글을 입력하세요.");
+		alert(jQuery.i18n.prop("board.detail.reply.please-input"));
 		return false;
 	}
-	if(confirm("댓글을 등록하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("board.detail.reply.confirm"))){
 		$.ajax({
 			url : url,
 			data: param,
@@ -60,7 +60,7 @@ function deleteReply(replyId){
 	var url = "/reply/delete";
 	var param = "id="+replyId;
 	
-	if(confirm("삭제하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("board.detail.delete.confirm"))){
 		$.ajax({
 			url : url,
 			data: param,
@@ -104,7 +104,7 @@ $(document).ready(function(){
 function deleteBoard(id){
 	var url = "${del_url}"+id;
 	
-	if(confirm("삭제하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("board.detail.delete.confirm"))){
 		$.ajax({
 			url : url,
 			dataType: 'json',
@@ -153,7 +153,7 @@ function deleteBoard(id){
 					</div>
 					<c:if test="${fn:length(fileList) gt 0}">					
 						<div class="board_view_file">
-							<div class="title">첨부파일</div>
+							<div class="title"><spring:message code="board.attachment"/></div>
 							<div class="file_list">
 								<ul>
 									<c:forEach items="${fileList }" var="item">
@@ -189,7 +189,7 @@ function deleteBoard(id){
 											<span class="repl_date">(<fmt:formatDate value="${reply.mdate}" pattern="yyyy-MM-dd" />)</span>
 										</div>
 										<div class="repl_edit">
-											<textarea placeholder="댓글을 입력하세요." name="content" rows="1" class="repl_content">${reply.content }</textarea>
+											<textarea placeholder="<spring:message code="board.detail.reply.please-input"/>" name="content" rows="1" class="repl_content">${reply.content }</textarea>
 											<input type="hidden" name="id" value="${reply.id }"/>
 											<input type="button" value="저장" class="on" onclick="javascript:updateReply('${reply.id}');">
 											<input type="button" value="취소" onclick="javascript:hideEditView('${reply.id}')">

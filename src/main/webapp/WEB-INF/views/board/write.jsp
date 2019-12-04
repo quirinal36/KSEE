@@ -86,7 +86,7 @@
 				dataType : "json"
 			}).done(function(json){
 				if(json.result > 0){
-					alert("글 작성이 완료되었습니다.");
+					alert(jQuery.i18n.prop("board.write.submit.complete"));
 					window.location.replace($("input[name='listUrl']").val());
 				}
 			});

@@ -26,6 +26,8 @@
 			and
 			d.symposiumId = ${symposiumId}
 		</where>
+		ORDER BY d.id DESC
+		LIMIT 0, 1
 	</select>
 	<select id="select" parameterType="symposium_detail" resultType="symposium_detail">
 		SELECT 

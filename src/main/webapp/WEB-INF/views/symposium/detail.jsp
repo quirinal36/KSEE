@@ -23,7 +23,16 @@
 			<div id="contentsPrint">
 				<div class="board_view symposium">
 					<div class="board_view_title">
-						<div class="title">${symposium.title }</div>
+						<div class="title">
+							<c:choose>
+								<c:when test="${locale.language eq 'en' }">
+									${symposium.title_en }
+								</c:when>
+								<c:otherwise>
+									${symposium.title }
+								</c:otherwise>
+							</c:choose>
+						</div>
 						<div class="file">${fn:length(photos) }</div>
 						<div class="view">${symposium.viewCnt }</div>
 					</div>

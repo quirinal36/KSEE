@@ -98,12 +98,12 @@
 			sympId = ${sympId}
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(username)">
 				and (
-					username like '%${username}%'
+					username = '${username}'
 				)
 			</if>
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(telephone)">
 				and (
-					telephone like '%${telephone}%'
+					telephone = '${telephone}'
 				)
 			</if>
 		</where>

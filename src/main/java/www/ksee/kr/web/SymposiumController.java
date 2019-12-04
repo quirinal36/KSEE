@@ -127,7 +127,7 @@ public class SymposiumController extends KseeController{
 			mv.addObject("photos", photos);
 		}
 		mv.addObject("today", LocalDate.now().toString());
-		
+		mv.addObject("locale", locale);
 		return mv;
 	}
 	

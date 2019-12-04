@@ -53,16 +53,20 @@ public class MemberController extends KseeController{
 	@RequestMapping(value= {"/signup", "/signup/{complete}"}, method = RequestMethod.GET)
 	public ModelAndView getSignupView(ModelAndView mv,
 			HttpServletRequest request, @PathVariable(value="complete")Optional<String> complete) {
-		final String currentUrl = "/member/signup";
-		mv.addObject("curMenu", getCurMenus(currentUrl));
-		mv.addObject("title", "회원가입");
-		
-		if(isLoginedUser(request) && complete.isPresent()) {
-			logger.info("afterSignup present");
-			mv.addObject("afterSignup", complete.get());
+		if(isLoginedUser(request)) {
+			mv.setViewName("redirect:/");
+		}else {
+			final String currentUrl = "/member/signup";
+			mv.addObject("curMenu", getCurMenus(currentUrl));
+			mv.addObject("title", "회원가입");
+			
+			if(isLoginedUser(request) && complete.isPresent()) {
+				logger.info("afterSignup present");
+				mv.addObject("afterSignup", complete.get());
+			}
+			
+			mv.setViewName("/member/signup");
 		}
-		
-		mv.setViewName("/member/signup");
 		return mv;
 	}
 	

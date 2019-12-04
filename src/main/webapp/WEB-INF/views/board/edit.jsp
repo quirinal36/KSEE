@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="baseUrl" value="${pageContext.request.contextPath}"></c:set>
 <!doctype html>
 <html>
@@ -109,11 +110,12 @@
 			dataType : "json"
 		}).done(function(json){
 			if(json.result > 0){
-				alert("글 수정이 완료되었습니다.");
+				alert(jQuery.i18n.prop("board.edit.submit.complete"));
 				window.location.replace($("input[name='detailUrl']").val());
 			}
 		});
 	}
+	<%-- --%>
 	</script>
 </head>
 <body>
@@ -139,12 +141,12 @@
 					
 					<div class="board_write" style="margin-top:60px;">
 						<div class="board_write_title">
-							<div class="title">제목</div>
+							<div class="title"><spring:message code="board.title"/></div>
 							<div class="title_ipt">
-								<input type="text" placeholder="제목 입력" name="title" autocomplete="off" value="${board.title }">
+								<input type="text" placeholder="<spring:message code="board.title"/>" name="title" autocomplete="off" value="${board.title }">
 							</div>
-							<div class="writer">작성자</div>
-							<div class="writer_ipt"><input type="text" placeholder="작성자 입력" value="${board.writerName }" readonly autocomplete="off"></div>
+							<div class="writer"><spring:message code="board.user"/></div>
+							<div class="writer_ipt"><input type="text" placeholder="<spring:message code="board.user"/>" value="${board.writerName }" readonly autocomplete="off"></div>
 						</div>
 						<div class="board_write_cont">
 							<textarea name="editor1" id="editor1" rows="30" cols="80">${board.content }</textarea>
@@ -160,7 +162,7 @@
 						</div>
 						<div class="board_write_img">
 							<dl>
-								<dt>사진</dt>
+								<dt><spring:message code="board.image"/></dt>
 								<dd>
 									<!-- 사진 목록 -->
 									<ul id="picture_ul">
@@ -183,7 +185,7 @@
 						</div>
 						<div class="board_write_file">
 							<dl>
-								<dt>첨부파일</dt>
+								<dt><spring:message code="board.attachment"/></dt>
 								<dd>
 									<!-- 첨부파일 목록 -->
 									<ul id="file_ul">
@@ -205,8 +207,8 @@
 							</dl>
 						</div>
 						<div class="bt_wrap">
-							<a href="javascript:void(0);" onclick="javascript:editBoard();" class="bt1 on">등록</a>
-							<a href="javascript:void(0);" onClick="history.back();" class="bt1">취소</a>
+							<a href="javascript:void(0);" onclick="javascript:editBoard();" class="bt1 on"><spring:message code="board.submit"/></a>
+							<a href="javascript:void(0);" onClick="history.back();" class="bt1"><spring:message code="board.cancel"/></a>
 						</div>
 					</div>
 				</form>

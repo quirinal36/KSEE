@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import www.ksee.kr.util.FileUtil;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.FileMeta;
 import www.ksee.kr.vo.PhotoInfo;
@@ -54,7 +53,7 @@ public class FileController extends KseeController {
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
-            String srcPath = new FileUtil().makeUserPath();
+            String srcPath = makeUserPath();
             //request.getSession().getServletContext().getRealPath("/upload");
 			
 			File newFile = new File(srcPath + "/" + newFilename);
@@ -102,10 +101,13 @@ public class FileController extends KseeController {
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
             
-            String srcPath = new FileUtil().makeUserPath();
+            String srcPath = makeUserPath();
 			String contentType = mpf.getContentType();
 			
-			File newFile = new File(srcPath + "/" + newFilename);
+			File newFile = new File(srcPath + File.separator + newFilename);
+			logger.info(newFile.getAbsolutePath());
+			logger.info("file size : "+newFile.length());
+			
             try {
                 mpf.transferTo(newFile);
                 
@@ -133,7 +135,7 @@ public class FileController extends KseeController {
                 map.put("type", "image");
                 map.put("file", photo);
             } catch(IOException e) {
-                logger.info("Could not upload file "+mpf.getOriginalFilename() + e.getLocalizedMessage());
+                logger.info("Could not upload file " + e.getLocalizedMessage());
                 map.put("result", 0);
             }
         }
@@ -179,7 +181,7 @@ public class FileController extends KseeController {
 		param.setId(id);
 
         PhotoInfo image = photoInfoService.selectOne(param);
-        String srcPath = new FileUtil().makeUserPath();
+        String srcPath = makeUserPath();
         //request.getSession().getServletContext().getRealPath("/upload");
         File imageFile = new File(srcPath+"/"+image.getNewFilename());
         response.setContentType(image.getContentType());
@@ -196,7 +198,7 @@ public class FileController extends KseeController {
     		HttpServletResponse response, @PathVariable int id) {
 		PhotoInfo param = new PhotoInfo();
 		param.setId(id);
-		String srcPath = new FileUtil().makeUserPath(); 
+		String srcPath = makeUserPath(); 
 		//request.getSession().getServletContext().getRealPath("/upload");
 		
 		PhotoInfo image = photoInfoService.selectOne(param);
@@ -222,7 +224,7 @@ public class FileController extends KseeController {
 	public String deleteFile(@PathVariable(value="id", required=true) Integer id,
 			@PathVariable(value="which", required = true)String which) {
 		JSONObject json = new JSONObject();
-		String srcPath = new FileUtil().makeUserPath();
+		String srcPath = makeUserPath();
 		
 		if(which.equalsIgnoreCase("img")) {
 			PhotoInfo photoInfo = new PhotoInfo();
@@ -268,11 +270,32 @@ public class FileController extends KseeController {
 			response.setContentLength(fileInfo.getSize());
 			response.setHeader("Content-disposition", "attachment; charset=UTF-8; filename=\""+URLEncoder.encode(fileInfo.getName(), "UTF-8")+"\"");
 			
-			String srcPath = new FileUtil().makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
+			String srcPath = makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
 			InputStream is = new FileInputStream(new File(srcPath +File.separator + fileInfo.getNewFilename()));
 			FileCopyUtils.copy(is, response.getOutputStream());
 		}catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 사진 파일을 저장할 디렉터리 가져오기
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	private String makeUserPath() {
+		String path = System.getProperty("user.dir");
+		logger.info("path: " + path);
+		
+		StringBuilder builder = new StringBuilder()
+				.append(path).append(File.separator).append("tomcat")
+				.append(File.separator).append("webapps").append(File.separator)
+				.append("repository").append(File.separator)
+				.append("upload").append(File.separator);
+		
+		File file = new File(builder.toString());
+		file.mkdirs();
+		return file.getAbsolutePath();
 	}
 }
