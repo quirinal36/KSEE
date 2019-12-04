@@ -93,3 +93,7 @@
 	background-size: 16px;
 }
 
+
+/* 어드민 에디터 */
+.cke_chrome { border-top: 1px solid #ddd !important; border-bottom: 1px solid #ddd !important; }
+.board_write_img { border-bottom: 1px solid #ddd; }
