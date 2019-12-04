@@ -104,7 +104,7 @@ $(document).ready(function(){
 		var input = $(this).val();
 		if(input == '' || input=='undefined'){
 			$(this).parent().find(".error").show();
-			$(this).parent().find(".error").text(jQuery.i18n.prop("member.signup.check.affiliation"));
+			$(this).parent().find(".error").text(jQuery.i18n.prop("member.enter_your_affiliation"));
 		}else{
 			$(this).parent().find(".error").hide();
 		}
