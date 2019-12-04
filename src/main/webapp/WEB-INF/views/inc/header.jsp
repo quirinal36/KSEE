@@ -169,7 +169,7 @@ $(document).ready(function(){
 				<div class="search_ipt_all">
 					<input type="text" placeholder="<spring:message code="inc.header.query" text="inc.header.query"/>" name="query">
 					<input type="hidden" name="search_url" value="<c:url value="/search"/>">
-					<input type="button" value="<spring:message code="inc.header.search" text="inc.header.search"/>" onclick="javascript:searchAll();">
+					<input type="button" value="<spring:message code="comm.search" text="comm.search"/>" onclick="javascript:searchAll();">
 				</div>
 				<input type="button" value="닫기" class="bt_header_search_close">
 			</div>

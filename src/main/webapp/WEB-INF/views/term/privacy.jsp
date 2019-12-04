@@ -15,7 +15,7 @@
 		<div id="container">
 			<div id="contentsTitle">
 				<div>
-					<h2>개인정보취급방침</h2>
+					<h2><spring:message code="comm.personal_information" text="comm.personal_information"></spring:message></h2>
 				</div>
 			</div>
 			<div id="contentsPrint">

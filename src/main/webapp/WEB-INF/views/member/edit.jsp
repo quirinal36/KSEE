@@ -15,16 +15,16 @@ $(document).ready(function(){
 		var result = validate($("form").serializeArray());
 		if(result == true){
 			if(jscd.browser.indexOf('msie') != -1  ){
-				if(confirm("수정 하시겠습니까?")){
+				if(confirm(jQuery.i18n.prop("symposium.edit_confirm"))){
 					submitEdit();
 				}
 			}else{
 				swal({
-					text : "수정 하시겠습니까?",
+					text : jQuery.i18n.prop("symposium.edit_confirm"),
 					showCancelButton: true,
 					focusConfirm: true,
-					confirmButtonText: "확인",
-					cancelButtonText: "취소",
+					confirmButtonText: jQuery.i18n.prop("member.confirm"),
+					cancelButtonText: jQuery.i18n.prop("member.cancel"),
 					animation: false
 				}).then(function(result){
 					if(result.value){
@@ -130,34 +130,18 @@ function fn_setAddr(){
 								<dt><spring:message code="member.name" text="member.name"></spring:message></dt>
 								<dd>${user.username }</dd>
 							</dl>
-							<dl class="email">
-								<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
-								<dd>
-									<input type="text" placeholder="이메일 아이디 입력" value="${user.email }" class="ipt1" name="email">
-									<span>@</span>
-								 	<input type="text" placeholder="도메인 입력" value="${user.domain }" class="ipt1" name="domain">
-									<p class="message error">이메일 아이디를 입력하세요.</p>
-								</dd>
-							</dl>
 							<dl>
 								<dt><spring:message code="member.affiliation" text="member.affiliation"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="소속 입력" value="${user.classification }" class="ipt1" name="classification">
-									<p class="message error">소속을 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_affiliation" text="member.enter_your_affiliation"></spring:message>" value="${user.classification }" class="ipt1" name="classification">
+									<p class="message error"><spring:message code="member.enter_your_affiliation" text="member.enter_your_affiliation"></spring:message></p>
 								</dd>
 							</dl>
 							<dl>
 								<dt><spring:message code="member.position" text="member.position"></spring:message></dt>
 								<dd>
-									<input type="text" placeholder="직위 입력" value="${user.level }" class="ipt1" name="level">
-									<p class="message error">직위를 입력하세요.</p>
-								</dd>
-							</dl>
-							<dl>
-								<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
-								<dd>
-									<input type="text" placeholder="전화번호 입력" value="${user.phone }" class="ipt1" name="phone">
-									<p class="message error">휴대전화 번호를 입력하세요.</p>
+									<input type="text" placeholder="<spring:message code="member.enter_your_position" text="member.enter_your_position"></spring:message>" value="${user.level }" class="ipt1" name="level">
+									<p class="message error"><spring:message code="member.enter_your_position" text="member.enter_your_position"></spring:message></p>
 								</dd>
 							</dl>
 							<dl class="company_address">
@@ -167,6 +151,22 @@ function fn_setAddr(){
 									<input type="text" placeholder="<spring:message code="member.address" text="member.address"></spring:message>" value="${user.address }" class="mt-10 ipt1" name="address">
 									<input type="text" placeholder="<spring:message code="member.rest_address" text="member.rest_address"></spring:message>" value="${user.addressDetail }" class="mt-10 ipt1" name="addressDetail">
 									<p class="message error"><spring:message code="member.enter_your_address2" text="member.enter_your_address2"></spring:message></p>
+								</dd>
+							</dl>
+							<dl>
+								<dt><spring:message code="member.tel" text="member.tel"></spring:message></dt>
+								<dd>
+									<input type="text" placeholder="<spring:message code="member.tel" text="member.tel"></spring:message>" value="${user.phone }" class="ipt1" name="phone">
+									<p class="message error"><spring:message code="member.enter_your_num" text="member.enter_your_num"></spring:message></p>
+								</dd>
+							</dl>
+							<dl class="email">
+								<dt><spring:message code="member.email" text="member.email"></spring:message></dt>
+								<dd>
+									<input type="text" placeholder="<spring:message code="member.email" text="member.email"></spring:message>" value="${user.email }" class="ipt1" name="email">
+									<span>@</span>
+								 	<input type="text" placeholder="<spring:message code="member.domain" text="member.domain"></spring:message>" value="${user.domain }" class="ipt1" name="domain">
+									<p class="message error"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
 								</dd>
 							</dl>
 							<input type="hidden" value="${user.id }" name="id"/>

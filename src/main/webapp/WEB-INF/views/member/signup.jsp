@@ -197,8 +197,8 @@ $(window).on("beforeunload", function(){
 									<dl>
 										<dt><spring:message code="member.position" text="member.position"></spring:message></dt>
 										<dd>
-											<input type="text" placeholder="<spring:message code="member.position" text="member.position"></spring:message>" class="ipt1" name="level">
-											<p class="message error"><spring:message code="member.position" text="member.position"></spring:message></p>
+											<input type="text" placeholder="<spring:message code="member.enter_your_position" text="member.enter_your_position"></spring:message>" class="ipt1" name="level">
+											<p class="message error"><spring:message code="member.enter_your_position" text="member.enter_your_position"></spring:message></p>
 										</dd>
 									</dl>
 									<dl class="company_address">
