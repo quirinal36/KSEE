@@ -73,7 +73,8 @@ public class GroupController extends KseeController {
 	public ModelAndView getNoticeView(ModelAndView mv,
 			HttpServletRequest request,
 			Board board, 
-			@PathVariable(value="name", required=true)String name) {
+			@PathVariable(value="name", required=true)String name,
+			Locale locale) {
 		BoardInfo boardInfo = BoardInfo.init().get(name);
 		
 		final String currentUrl = boardInfo.getCurrentUrl();
@@ -81,6 +82,8 @@ public class GroupController extends KseeController {
 		mv.addObject("title", boardInfo.getTitle());
 		
 		board.setBoardType(boardInfo.getType());
+		board.setLanguage(locale.getLanguage());
+		
 		int totalCount = boardService.count(board);
 		board.setTotalCount(totalCount);
 		List<Board> boardList = boardService.select(board);
@@ -90,6 +93,7 @@ public class GroupController extends KseeController {
 		mv.addObject("listUrl", boardInfo.getListUrl());
 		mv.addObject("viewUrl", boardInfo.getViewUrl());
 		mv.addObject("writeUrl", boardInfo.getWriteUrl());
+		mv.addObject("locale", locale);
 		
 		mv.setViewName(boardInfo.getListViewName());
 		return mv;

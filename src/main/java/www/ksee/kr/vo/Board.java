@@ -46,4 +46,5 @@ public class Board extends Paging{
 	int replyCnt;
 	String boardName;
 	String boardName_en;
+	String language;
 }

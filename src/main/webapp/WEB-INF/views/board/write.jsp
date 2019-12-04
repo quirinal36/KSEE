@@ -189,7 +189,6 @@ $(document).ready(function(){
     	imageCrop: true,
         dataType: 'json',
         done: function (e, data) {
-        	
         	var file = data.result.file;
         	$("#picture_ul").append(
        			$("<li>").attr("style", "background-image: url(" + file.url + ");")

@@ -53,7 +53,16 @@ pageContext.setAttribute("LF", "\n");
 										<span class="view">${item.viewCount }</span>
 									</div>
 									<div class="cont">
-										<strong class="title">${item.title }</strong>
+										<strong class="title">
+											<c:choose>
+												<c:when test="${locale.language eq 'en' }">
+													${item.title_en }
+												</c:when>
+												<c:otherwise>
+													${item.title }
+												</c:otherwise>
+											</c:choose>
+										</strong>
 										<div class="info">
 											<span class="writer">${item.writerName }</span>
 											<span class="date">

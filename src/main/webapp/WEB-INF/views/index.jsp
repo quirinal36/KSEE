@@ -76,9 +76,18 @@ function resizePopup(){
 	                                        <span><fmt:formatDate value="${item.wdate}" pattern="yyyy-MM" /></span>
 	                                    </div>
 	                                    <div class="cont">
-	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">${item.title }</a><br>
+	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">
+	                                        	<c:choose>
+													<c:when test="${locale.language eq 'en' }">
+														${item.title_en }
+													</c:when>
+													<c:otherwise>
+														${item.title }
+													</c:otherwise>
+												</c:choose>
+	                                        </a><br>
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">
-	                                        	<b>이승구</b> ${ su:removeTag(item.content) }
+	                                        	<b>${item.writerName }</b> ${ su:removeTag(item.content) }
 	                                        </a>
 	                                    </div>
 	                                </li>
@@ -98,7 +107,16 @@ function resizePopup(){
                         <div class="list">
                         	<c:forEach items="${newsBoardList }" var="item" begin="0" end="0">
 	                            <div class="first">
-									<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
+									<a href="<c:url value="/group/news/view/${item.id }"/>">
+										<c:choose>
+											<c:when test="${locale.language eq 'en' }">
+												${item.title_en }
+											</c:when>
+											<c:otherwise>
+												${item.title }
+											</c:otherwise>
+										</c:choose>
+									</a>
 	                                <span>
 		                                ${item.writerName }
 	                                	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
@@ -108,7 +126,16 @@ function resizePopup(){
                             <ul>
                             	<c:forEach items="${newsBoardList }" var="item" begin="1" end="4">
 	                                <li>
-										<a href="<c:url value="/group/news/view/${item.id }"/>">${item.title }</a>
+										<a href="<c:url value="/group/news/view/${item.id }"/>">
+											<c:choose>
+												<c:when test="${locale.language eq 'en' }">
+													${item.title_en }
+												</c:when>
+												<c:otherwise>
+													${item.title }
+												</c:otherwise>
+											</c:choose>
+										</a>
 	                                    <span>
 		                                    ${item.writerName }
 	                                    	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
@@ -131,7 +158,16 @@ function resizePopup(){
 						<div class="list">
 							<c:forEach items="${freeBoardList }" var="item" begin="0" end="0">
 								<div class="first">
-									<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
+									<a href="<c:url value="/group/free/view/${item.id }"/>">
+										<c:choose>
+											<c:when test="${locale.language eq 'en' }">
+												${item.title_en }
+											</c:when>
+											<c:otherwise>
+												${item.title }
+											</c:otherwise>
+										</c:choose>
+									</a>
 									<span>
 										${item.writerName }
 										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
