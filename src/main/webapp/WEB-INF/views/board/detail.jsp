@@ -225,7 +225,7 @@ function deleteBoard(id){
 					</div>
 					<div class="bt_wrap">
 						<a href="<c:url value="${listUrl }"/>" class="bt1 on">
-							<spring:message code="board.detail.list"/>
+							<spring:message code="board.list"/>
 						</a> 
 						<input type="hidden" name="edit_url" value="${edit_url }${board.id}" />
 						<input type="hidden" name="del_url" value="${del_url }${board.id}" />
@@ -234,12 +234,12 @@ function deleteBoard(id){
 						<input type="hidden" value="${board.writer }" />
 						<c:choose>
 							<c:when test="${user.id eq board.writer }">
-								<input type="button" class="bt1 btn_edit" value="<spring:message code="board.detail.edit"/>" onclick="window.location.replace('${edit_url}/${board.id }')">
-								<input type="button" class="bt1 btn_del" value="<spring:message code="board.detail.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
+								<input type="button" class="bt1 btn_edit" value="<spring:message code="board.edit"/>" onclick="window.location.replace('${edit_url}/${board.id }')">
+								<input type="button" class="bt1 btn_del" value="<spring:message code="board.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
 							</c:when>
 							<c:otherwise>
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<input type="button" class="bt1 btn_del" value="<spring:message code="board.detail.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
+									<input type="button" class="bt1 btn_del" value="<spring:message code="board.delete"/>" onclick="javascript:deleteBoard('${board.id}');">
 								</sec:authorize>
 							</c:otherwise>
 						</c:choose>

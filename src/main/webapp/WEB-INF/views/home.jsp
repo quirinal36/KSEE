@@ -28,7 +28,7 @@
 			<div id="contentsTitle">
 				<div>
 					<h2>
-						<spring:message code="comm.search"/>
+						<spring:message code="comm.search_all"/>
 					</h2>
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 				<div class="search_ipt">
 					<form action="<c:url value="/search"/>" method="get">
 						<input type="text" name="query" placeholder="<spring:message code="inc.header.query" text="inc.header.query"/>">
-						<input type="submit" value="<spring:message code="inc.header.search" text="inc.header.search"/>">
+						<input type="submit" value="<spring:message code="comm.search" text="comm.search"/>">
 					</form>
 				</div>
 			</div>

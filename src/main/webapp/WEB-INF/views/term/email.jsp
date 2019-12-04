@@ -15,7 +15,7 @@
 		<div id="container">
 			<div id="contentsTitle">
 				<div>
-					<h2>이메일무단수집거부</h2>
+					<h2><spring:message code="comm.refuse_email" text="comm.refuse_email"></spring:message></h2>
 				</div>
 			</div>
 			<c:import url="/inc/contentsTitle">

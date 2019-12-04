@@ -78,7 +78,7 @@
 		param += "&pictures="+pictures.join(",");
 		param += "&files="+files.join(",");
 		
-		if(confirm(jQuery.i18n.prop("board.before.submit"))){
+		if(confirm(jQuery.i18n.prop("board.submit_msg"))){
 			$.ajax({
 				url : url,
 				data: param,
