@@ -30,7 +30,9 @@ public class ApplyDAO implements DataAccess<ApplyVO> {
 	public int delete(ApplyVO input) {
 		return sqlSession.delete(namespace +".delete", input);
 	}
-
+	public int delete(List<ApplyVO> input) {
+		return sqlSession.delete(namespace +".delete_list", input);
+	}
 	@Override
 	public List<ApplyVO> select() {
 		// TODO Auto-generated method stub

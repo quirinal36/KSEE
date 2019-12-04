@@ -125,4 +125,14 @@
 			id = ${id}
 		</where>
 	</delete>
+	
+	<delete id="delete_list" parameterType="java.util.List">
+		DELETE FROM Apply
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</delete>
 </mapper>

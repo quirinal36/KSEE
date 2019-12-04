@@ -29,7 +29,9 @@ public class ApplyService implements DataService<ApplyVO> {
 	public int delete(ApplyVO input) {
 		return dao.delete(input);
 	}
-
+	public int delete(List<ApplyVO> list) {
+		return dao.delete(list);
+	}
 	@Override
 	public List<ApplyVO> select() {
 		// TODO Auto-generated method stub

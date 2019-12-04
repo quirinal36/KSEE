@@ -424,7 +424,14 @@ public class AdminDomesticController extends KseeController{
 			
 			list.add(apply);
 		}
-		int result = applyService.update(list);
+		
+		
+		int result = 0;
+		if(status < 3) {
+			result = applyService.update(list);
+		}else if(status == 3) {
+			result = applyService.delete(list);
+		}
 		json.put("result", result);
 		
 		return json.toString();
