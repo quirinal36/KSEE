@@ -118,7 +118,7 @@ function submit(){
 	param += "&fileId="+fileId;
 	param += "&enFileId="+enFileId;
 	
-	if(confirm("저장 하시겠습니까?")){
+	if(confirm("저장하시겠습니까?")){
 		$.ajax({
 			url : url,
 			data: param,

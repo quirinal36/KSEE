@@ -44,7 +44,7 @@ function showView(){
 	window.location.replace(url +"/" + $(".applyId").val());
 }
 function deleteApply(){
-	if(confirm("신청 취소 하시겠습니까?")){
+	if(confirm("신청을 취소하시겠습니까?")){
 		var url = $("input[name='deleteUrl']").val();
 		var param = "id="+$(".applyId").val();
 		

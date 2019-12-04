@@ -85,7 +85,7 @@
 	
 	function updateSymposium(){
 		var url = $("input[name='updateUrl']").val();
-		if(confirm("수정 하시겠습니까?")){
+		if(confirm("수정하시겠습니까?")){
 			var param = $("form").serialize();
 			$.ajax({
 				url : url,
