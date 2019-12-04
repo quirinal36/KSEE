@@ -40,7 +40,7 @@
 				dataType: "json"
 			}).done(function(json){
 				if(json.result > 0){
-					alert("저장 되었습니다.");
+					alert("저장되었습니다.");
 					opener.location.reload();
 					window.open('','_self','');
 					window.close();
@@ -59,7 +59,7 @@
 				dataType: "json"
 			}).done(function(json){
 				if(json.result > 0){
-					alert("삭제 되었습니다.");
+					alert("삭제되었습니다.");
 					opener.location.reload();
 					window.open('','_self','');
 					window.close();

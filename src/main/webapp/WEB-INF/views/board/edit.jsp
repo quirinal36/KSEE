@@ -22,7 +22,7 @@
 			if(json.result){
 				
 			}else{
-				alert("로그인 해주세요");
+				alert("로그인하세요.");
 				window.location.replace(loginUrl +"?loginRedirect=" + redirectUrl);
 			}
 		});
