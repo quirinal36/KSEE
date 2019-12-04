@@ -196,9 +196,9 @@ function submit(){
 								    </div>
 								</td>
 							</tr>
-							<tr colspan="3" class="board_write_img popup_write_img" id="dropzone-img-en">
+							<tr>
 								<th>영문사진</th>
-								<td>
+								<td colspan="3" class="board_write_img popup_write_img" id="dropzone-img-en">
 									<!-- 사진 목록 -->
 									<ul>
 										<c:if test="${not empty enPhoto}">

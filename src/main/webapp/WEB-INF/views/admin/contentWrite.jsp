@@ -146,7 +146,7 @@
 					<div class="bt_wrap mb-60">
 						<a href="javascript:registContent();" class="bt1 on">저장</a>
 						<c:if test="${detail.id gt 0 }">
-							<a href="javascript:deleteContent();" class="bt1 on">삭제</a>
+							<a href="javascript:deleteContent();" class="bt1">삭제</a>
 						</c:if>
 						<a href="javascript:history.go(-1)" class="bt1">취소</a>
 					</div>

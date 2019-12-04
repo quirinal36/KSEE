@@ -76,7 +76,7 @@
 						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
-						<a href="<c:url value="/admin/${where }/write"/>" class="bt1">등록</a>
+						<a href="<c:url value="/admin/${where }/write"/>" class="bt1 on">등록</a>
 					</div>
 				</div>
 			</div>
