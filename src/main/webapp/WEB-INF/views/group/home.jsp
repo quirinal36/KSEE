@@ -32,7 +32,7 @@
 				</div>
 				<div class="search_result_message">
 					<c:if test="${not empty paging.query }">
-						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
+						<p><span>“${paging.query }”</span></p>
 					</c:if>
 				</div>
 				<div class="board_list board_list_typeB news">

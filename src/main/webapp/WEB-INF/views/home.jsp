@@ -43,7 +43,7 @@
 			<div id="contentsPrint">
 				<div class="search_result_message">
 					<c:if test="${not empty paging.query }">
-						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
+						<p><span>“${paging.query }”</span></p>
 					</c:if>
 				</div>
 				<c:forEach items="${boardList }" var="list" varStatus="sts">

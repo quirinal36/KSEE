@@ -5,7 +5,7 @@ function move(nextPage){
 			$(".form_step1").hide();
 			$(".form_step2").show();
 		}else{
-			var message = "개인정보처리방침에 동의해주세요.";
+			var message = jQuery.i18n.prop("member.signup.policy");
 			if(jscd.browser.indexOf('msie') != -1){
 				alert(message);
 			}else{
@@ -71,7 +71,7 @@ function registSymposium(){
 		return false;
 	}
 	
-	if(!confirm("등록 하시겠습니까?")){
+	if(!confirm("등록하시겠습니까?")){
 		return false;
 	}
 	

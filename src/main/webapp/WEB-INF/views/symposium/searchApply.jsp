@@ -46,7 +46,7 @@ function showView(){
 	window.location.replace(url +"/" + $(".applyId").val());
 }
 function deleteApply(){
-	if(confirm("신청을 취소하시겠습니까?")){
+	if(confirm(jQuery.i18n.prop("symposium.to_cancel"))){
 		var url = $("input[name='deleteUrl']").val();
 		var param = "id="+$(".applyId").val();
 		
@@ -56,7 +56,7 @@ function deleteApply(){
 			type: "POST",
 			dataType: "json"
 		}).done(function(json){
-			if(json.result > 0 && confirm("취소가 완료되었습니다.")){
+			if(json.result > 0 && confirm(jQuery.i18n.prop("symposium.canceled"))){
 				window.location.replace(json.move);
 			}
 		});

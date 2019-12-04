@@ -25,7 +25,7 @@
 				<div class="board_search">
 					<div class="search_ipt">
 						<form action="<c:url value="${listUrl }"/>">
-							<input type="text" name="query" placeholder="검색어를 입력하세요." value="${paging.query }" autocomplete="off" />
+							<input type="text" name="query" placeholder="<spring:message code="inc.header.query" text="inc.header.query"/>" value="${paging.query }" autocomplete="off" />
 							<input type="hidden" name="pageNo" value="${paging.pageNo }"/>
 							<input type="button" value="검색" onclick="search(this.form);">
 						</form>
@@ -33,7 +33,7 @@
 				</div>
 				<div class="search_result_message">
 					<c:if test="${not empty paging.query }">
-						<p><span>“${paging.query }”</span> 검색 결과입니다.</p>
+						<p><span>“${paging.query }”</span></p>
 					</c:if>
 				</div>
 				<div class="board_list board_list_typeB">
