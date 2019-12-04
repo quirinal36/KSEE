@@ -20,7 +20,7 @@ function writeReply(){
 	var jsonObj = parse($("#replyForm").serializeArray());
 	
 	if(jsonObj['content'].length == 0){
-		alert("댓글을 입력 해주세요.");
+		alert("댓글을 입력하세요.");
 		return false;
 	}
 	if(confirm("댓글을 등록하시겠습니까?")){

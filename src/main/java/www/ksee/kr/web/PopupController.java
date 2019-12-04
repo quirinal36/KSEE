@@ -71,7 +71,7 @@ public class PopupController extends KseeController{
 			}	
 		}else {
 			json.put("result", -1);
-			json.put("msg", "관리자 계정으로 로그인 해주세요.");
+			json.put("msg", "관리자 계정으로 로그인하세요.");
 		}
 		json.put("result", popupService.insert(popup));
 		return json.toString();
@@ -134,7 +134,7 @@ public class PopupController extends KseeController{
 			json.put("result", result);
 		}else {
 			json.put("result", -1);
-			json.put("msg", "관리자 계정으로 로그인 해주세요.");
+			json.put("msg", "관리자 계정으로 로그인하세요.");
 		}
 		return json.toString();
 	}
@@ -173,7 +173,7 @@ public class PopupController extends KseeController{
 			}
 		}else {
 			json.put("result", -1);
-			json.put("msg", "관리자 계정으로 로그인 해주세요.");
+			json.put("msg", "관리자 계정으로 로그인하세요.");
 		}
 		return json.toString();
 	}

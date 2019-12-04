@@ -36,7 +36,7 @@ function applySearch(){
 			}
 		});
 	}else{
-		alert("정보를 입력 해주세요.");
+		alert("정보를 입력하세요.");
 	}
 }
 function showView(){

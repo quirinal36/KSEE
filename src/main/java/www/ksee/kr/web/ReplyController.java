@@ -28,7 +28,7 @@ public class ReplyController extends KseeController{
 			reply.setWriter(user.getId());
 			json.put("result", service.insert(reply));
 		}else {
-			json.put("msg", "로그인 해주세요.");
+			json.put("msg", "로그인이 필요합니다.");
 			json.put("result", -1);
 		}
 		
@@ -43,7 +43,7 @@ public class ReplyController extends KseeController{
 			json.put("result", service.update(reply));
 		}else {
 			json.put("result", -1);
-			json.put("msg", "로그인 해주세요.");
+			json.put("msg", "로그인이 필요합니다.");
 		}
 		return json.toString();
 	}
