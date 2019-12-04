@@ -165,13 +165,14 @@
 					</table>
 					<div class="bt_wrap mb-60">
 						<c:if test="${empty symposium }">
-							<a href="javascript:void(0);" class="bt1" onclick="javascript:registSymposium();">등록</a>
+							<a href="javascript:void(0);" class="bt1 on" onclick="javascript:registSymposium();">등록</a>
+							<a href="#" onclick="history.back();" class="bt1">취소</a>
 						</c:if>
 						<c:if test="${not empty symposium }">
 							<input type="hidden" name="deleteUrl" value="<c:url value="/admin/symposium/delete/${symposium.id }"/>"/>
 							<input type="hidden" name="updateUrl" value="<c:url value="/admin/symposium/update/${symposium.id }"/>"/>
 							<input type="hidden" name="id" value="${symposium.id }"/>
-							<a href="javascript:void(0);" class="bt1" onclick="javascript:updateSymposium();">수정</a>
+							<a href="javascript:void(0);" class="bt1 on" onclick="javascript:updateSymposium();">수정</a>
 							<a href="javascript:void(0);" class="bt1" onclick="javascript:deleteSymposium();">삭제</a>
 						</c:if>
 					</div>
