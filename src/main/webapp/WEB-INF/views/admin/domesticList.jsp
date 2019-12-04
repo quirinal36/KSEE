@@ -31,7 +31,7 @@ function changeStatus(dest){
 	
 	var url = "/admin/apply/change";
 	
-	if(confirm("상태를 변경 하시겠습니까?")){
+	if(confirm("상태를 변경하시겠습니까?")){
 		$.ajax({
 			url : url,
 			data: param,
@@ -136,7 +136,7 @@ $(document).ready(function(){
 									<td>
 										<c:if test="${item.fileId > 0 }">
 											<a href="<c:url value="/upload/get/${item.fileId }"/>">
-												<img src="/resources/img/contents/board_file_icon.png" alt="다운로드">
+												<img src="/resources/img/board/board_file.png" alt="다운로드">
 											</a>
 										</c:if>
 									</td>
