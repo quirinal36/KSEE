@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -405,7 +406,8 @@ public class AdminDomesticController extends KseeController{
 
 		// 컨텐츠 타입과 파일명
 		final String fileName = "심포지움 신청자 리스트";
-		final String zipFileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		//final String zipFileName = new String(fileName.getBytes("UTF-8"), "ISO-8859-1");
+		final String zipFileName = URLEncoder.encode(fileName, Config.ENCODING);
 		response.setHeader("Content-Disposition", "attachment; filename=\""+ zipFileName + ".xls\"");
 		// 엑셀 출력
 		eMaker.getWb().write(response.getOutputStream());
