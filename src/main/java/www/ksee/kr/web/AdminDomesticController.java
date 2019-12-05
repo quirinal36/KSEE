@@ -228,6 +228,8 @@ public class AdminDomesticController extends KseeController{
 		}else if(where.equalsIgnoreCase("international")){
 			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
 		}
+		
+		mv.addObject("menu", 1);
 		mv.addObject("detail", detail);
 		mv.addObject("user", getUser());
 		mv.addObject("where", where);

@@ -86,12 +86,15 @@ public class SymposiumController extends KseeController{
 		SymposiumDetail detail = new SymposiumDetail();
 		if(where.equalsIgnoreCase("domestic")) {
 			mv.addObject("title", Symposium.DOMESTIC_TITLE);
+			String currentUrl = "/symposium/domestic";
+			mv.addObject("curMenu", getCurMenus(currentUrl));
 		}else if(where.equalsIgnoreCase("international")){
 			mv.addObject("title", Symposium.INTERNATIONAL_TITLE);
+			String currentUrl = "/symposium/international";
+			mv.addObject("curMenu", getCurMenus(currentUrl));
 		}
 		
-		final String currentUrl = "/symposium/domestic";
-		mv.addObject("curMenu", getCurMenus(currentUrl));
+		mv.addObject("where", where);
 		
 		if(tab.isPresent()) {
 			detail.setStype(tab.get());

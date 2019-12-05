@@ -40,7 +40,7 @@
 							<li>
 								<div class="num">${item.id}</div>
 								<div class="title">
-									<a href="<c:url value="/symposium/domestic/view/${item.id }"/>">
+									<a href="<c:url value="/symposium/${where }/view/${item.id }"/>">
 										<c:choose>
 											<c:when test="${locale.language eq 'en' }">
 												${item.title_en }

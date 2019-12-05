@@ -78,7 +78,7 @@
                       	<c:if test="${now ge from and now le to }">
 							<a href="<c:url value="/symposium/apply/${symposium.id }"/>" class="bt1 on"><spring:message code="symposium.attendant"/></a>
 						</c:if>
-						<a href="<c:url value="/symposium/"/>" class="bt1"><spring:message code="board.list"/></a>
+						<a href="<c:url value="/symposium/${where }"/>" class="bt1"><spring:message code="board.list"/></a>
 					</div>
 				</div>
 			</div>
