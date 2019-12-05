@@ -162,8 +162,8 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 	box-sizing: border-box;
 	border-radius: 2px;
 	border: 1px solid #ddd;
-	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 90% 50%;
-	background-size: 10px;
+	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 100% 50%;
+	background-size: 20px;
 	font-size: 14px;
 	font-weight: 400;
 }
@@ -174,8 +174,8 @@ input.ipt2 { padding: 10px; box-sizing: border-box; border: 1px solid #ddd; font
 	box-sizing: border-box;
 	border-radius: 2px;
 	border: 1px solid #ddd;
-	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 92% 50%;
-	background-size: 10px;
+	background: #fff url(/resources/img/comm/select1_arrow.png) no-repeat 100% 50%;
+	background-size: 20px;
 	font-size: 15px;
 	font-weight: 400;
 }
