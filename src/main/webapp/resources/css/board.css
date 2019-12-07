@@ -84,8 +84,9 @@
 }
 .repl_add textarea { width: 90%; height: 100px; padding: 20px 30px; box-sizing: border-box; border-left: 1px solid #ddd; font-size: 15px; resize: none; }
 .repl_add .bt_repl_add { width: 10%; height: 100px; background: #325cb2; font-size: 15px; color: #fff; }
+.repl_wrap .repl_list { border-bottom: 1px solid #ddd }
 .repl_wrap li { padding: 20px 30px; border-top: 1px dashed #ddd; }
-.repl_wrap li:first-child { border-top: 1px solid #ddd; }
+.repl_wrap li:first-child { border-top: 0; }
 .repl_wrap .top { margin-bottom: 5px; }
 .repl_wrap .top input[type="button"],
 .repl_edit input[type="button"] {

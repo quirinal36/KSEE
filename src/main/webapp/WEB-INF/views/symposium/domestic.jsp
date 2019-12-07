@@ -38,7 +38,7 @@
 						</li>
 						<c:forEach items="${list }" var="item" varStatus="sts">
 							<li>
-								<div class="num">${item.id}</div>
+								<div class="num">${paging.totalCount - (sts.index) - (paging.pageSize * (paging.pageNo-1))}</div>
 								<div class="title">
 									<a href="<c:url value="/symposium/${where }/view/${item.id }"/>">
 										<c:choose>

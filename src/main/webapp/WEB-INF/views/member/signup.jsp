@@ -8,7 +8,7 @@
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
 <script src="<c:url value="/resources/js/signup.js"/>"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
 <script type="text/javascript">
 var afterSignup = parseInt('${fn:length(afterSignup )}');
 var signupComplete = false;

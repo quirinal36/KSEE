@@ -21,6 +21,12 @@ $(document).ready(function(){
 function downloadExcel(){
 	window.location.replace("/admin/members/download/excel");
 }
+function sendMail(){
+	window.location.replace("/admin/members/mail/write");
+}
+function sendMailAll(){
+	window.location.replace("/admin/members/mail/write");
+}
 </script>
 </head>
 <body>
@@ -98,115 +104,9 @@ function downloadExcel(){
 						<a href="javascript:pageGo(${paging.endPageNo})" class="bt last">마지막 페이지로 가기</a>
 					</div>
 					<div class="bt_wrap">
-						<%--
-							<a href="javascript:void(0);" class="bt1" onclick="">선택회원 이메일 발송</a>
-							<a href="javascript:void(0);" class="bt1" onclick="">전체회원 이메일 발송</a>
-						--%>
-						<a href="javascript:void(0);" class="bt1" onclick="javascript:downloadExcel();">전체회원 엑셀파일로 저장</a>
-					</div>
-					<!-- 메일 보내기 -->
-					<div class="mail_wrap">
-						<form>
-							<table class="tbl1">
-								<tbody>
-									<tr>
-										<th>보내는 사람</th>
-										<td>한국효소공학연구회(admin@ksee.kr)</td>
-									</tr>
-									<tr>
-										<th>받는 사람</th>
-										<td>유단아(with_i5@nate.com), 유단아(with_i5@naver.com), 유단아(with_i5@daum.net)</td>
-									</tr>
-									<tr class="title">
-										<th>제목</th>
-										<td>
-											<input type="text" placeholder="제목 입력">
-										</td>
-									</tr>
-									<tr class="cont">
-										<td colspan="2">에디터</td>
-									</tr>
-									<tr>
-										<th>첨부파일</th>
-										<td>
-											<input type="button" value="파일 등록" class="bt2">
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<div class="bt_wrap">
-								<a href="#" class="bt1 on">발송</a>
-								<a href="#" class="bt1">취소</a>
-							</div>
-						</form>
-					</div>
-					<!-- 목록 -->
-					<div class="mail_wrap list">
-						<table class="tbl1 td_center">
-							<colgroup>
-								<col width="10%">
-								<col width="50%">
-								<col width="15%">
-								<col width="25%">
-							</colgroup>
-							<thead>
-								<tr>
-									<th>번호</th>
-									<th>제목</th>
-									<th>발송인</th>
-									<th>발송일시</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>3</td>
-									<td><a href="#">KSEE 웹사이트 오픈!</a></td>
-									<td>이승구</td>
-									<td>2019-12-04 14:31:00</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td><a href="#">KSEE 웹사이트 오픈!</a></td>
-									<td>염수진</td>
-									<td>2019-12-04 14:31:00</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td><a href="#">KSEE 웹사이트 오픈!</a></td>
-									<td>이승구</td>
-									<td>2019-12-04 14:31:00</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- 보낸 메일함 -->
-					<div class="mail_wrap">
-						<table class="tbl1">
-							<tbody>
-								<tr>
-									<th>보내는 사람</th>
-									<td>한국효소공학연구회(admin@ksee.kr)</td>
-								</tr>
-								<tr>
-									<th>받는 사람</th>
-									<td>유단아(with_i5@nate.com), 유단아(with_i5@naver.com), 유단아(with_i5@daum.net)</td>
-								</tr>
-								<tr class="title">
-									<th>제목</th>
-									<td>한국효소공학연구회입니다.</td>
-								</tr>
-								<tr class="cont">
-									<td colspan="2">안녕하세요. 효소공학연구회입니다.</td>
-								</tr>
-								<tr>
-									<th>첨부파일</th>
-									<td><a href="파일다운로드링크">인사말.png</a></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="bt_wrap">
-							<a href="#" class="bt1 on">목록</a>
-						</div>
+						<a href="javascript:sendMail();" class="bt1">선택회원 이메일 발송</a>
+						<a href="javascript:sendMailAll();" class="bt1">전체회원 이메일 발송</a>
+						<a href="javascript:downloadExcel();" class="bt1">전체회원 엑셀파일로 저장</a>
 					</div>
 				</div>
 			</div>

@@ -60,8 +60,6 @@ public class EmailToken extends PasswordResetToken {
 		// 만료 까지 남은시간
 		Duration timeElapsed = Duration.between(current, end);
 		
-		logger.info("input: " + input);
-		logger.info("this.token : " + this.token);
 		if(timeElapsed.toMillis() > 0 && used == 0 && input.equals(this.token)) {
 			result = true;
 		}

@@ -133,7 +133,12 @@ function deleteBoard(id){
 			<div id="contentsPrint">
 				<div class="board_view" style="margin-top: 60px;">
 					<div class="board_view_title">
-						<div class="title">${board.title }</div>
+						<div class="title">
+							<c:choose>
+								<c:when test="${locale.language eq 'en' }">${board.title_en }</c:when>
+								<c:otherwise>${board.title }</c:otherwise>
+							</c:choose>
+						</div>
 						<div class="writer">${board.writerName }</div>
 						<div class="date">
 							<fmt:formatDate value="${board.wdate}" pattern="yyyy-MM-dd" />

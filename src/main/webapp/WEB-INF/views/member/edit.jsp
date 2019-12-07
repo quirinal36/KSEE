@@ -7,7 +7,7 @@
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
 <script src="<c:url value="/resources/js/memberEdit.js"/>"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#submit").on('click', function(){
