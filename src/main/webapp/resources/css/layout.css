@@ -4,7 +4,7 @@ html, body, #wrap { min-height: 100%; }
 
 /* top_menu */
 #header_wrap .top_menu { width: 90%; min-width: 1000px; max-width: 1300px; margin: 0 auto; padding-top: 10px; text-align: right; }
-#header_wrap .top_menu a { display: inline-block; margin-left: 20px; font-size: 13px; font-weight: 400; color: #888; }
+#header_wrap .top_menu a { display: inline-block; margin-left: 20px; font-size: 13px; font-weight: 400; color: #888; text-transform: uppercase; }
 #header_wrap .top_menu a:first-child { margin-left: 0; }
 #header_wrap .top_menu a.language { border-bottom: 1px solid #888; font-weight: 500; }
 #header_wrap .top_menu a.on { border-color: #172b81; color: #172b81; }

@@ -147,7 +147,7 @@ $(document).ready(function(){
 					<div class="bt_wrap">
 						<a href="javascript:changeStatus(1);" class="bt1">접수 중으로 변경</a>
 						<a href="javascript:changeStatus(2);" class="bt1 on" >접수완료로 변경</a>
-						<a href="javascript:changeStatus(3);" class="bt1">신청취소</a>
+						<a href="javascript:changeStatus(3);" class="bt1">삭제</a>
 						<a class="bt1" href="javascript:downloadExcel('${sympId}');">전체 엑셀파일로 저장</a>
 						<a class="bt1" href="javascript:downloadAllFiles('${sympId}');">초록 일괄다운로드</a>
 						<a class="bt1" href="javascript:history.go(-1)">이전</a>

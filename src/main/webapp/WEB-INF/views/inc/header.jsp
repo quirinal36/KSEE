@@ -48,16 +48,16 @@ $(document).ready(function(){
 	<div id="header_wrap">
 		<div class="top_menu">
 			<sec:authorize access="isAnonymous()">
-				<a href="<c:url value="/member/signup"/>">JOIN</a>
-				<a href="<c:url value="/member/login"/>">LOGIN</a>
+				<a href="<c:url value="/member/signup"/>"><spring:message code="member.join" text="member.join"></spring:message></a>
+				<a href="<c:url value="/member/login"/>"><spring:message code="member.login" text="member.login"></spring:message></a>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-				<a href="<c:url value="/j_spring_security_logout"/>">LOGOUT</a>
-				<a href="<c:url value="/member/myinfo"/>">MY INFO</a>
+				<a href="<c:url value="/j_spring_security_logout"/>"><spring:message code="member.logout" text="member.logout"></spring:message></a>
+				<a href="<c:url value="/member/myinfo"/>"><spring:message code="member.myinfo" text="member.myinfo"></spring:message></a>
 			</sec:authorize>
 			
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<a href="<c:url value="/admin/"/>">ADMIN</a>
+				<a href="<c:url value="/admin/"/>"><spring:message code="member.admin" text="member.admin"></spring:message></a>
 			</sec:authorize>
 			<!-- 
 			<a href="#">CONTACT US</a>

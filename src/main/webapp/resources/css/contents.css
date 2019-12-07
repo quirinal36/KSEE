@@ -87,8 +87,9 @@
 }
 .member dt { width: 30%; font-weight: 500; }
 .member dd { position: relative; width: 70%; }
-.member input.ipt1 { width: 100%; }
+.member input.ipt1 { width: 100%; } 
 .member .member_chk ul { font-size: 0; }
+.member dl.nationality ul { margin-bottom: 10px; }
 .member .member_chk ul li { display: block; margin-top: 10px; }
 .member .member_chk ul li:first-child { margin-top: 0; }
 .member .email dd { font-size: 0; }
@@ -100,6 +101,8 @@
 }
 .member .email input.ipt1 { width: 46%; }
 .member .email span { width: 8%; text-align: center; }
+.member .board_write_file { padding: 3px 0 0 0; }
+.member .board_write_file #file_ul li { margin-bottom: 5px; }
 
 .member .bt_wrap { margin-top: 20px; text-align: center; }
 .member .bt_wrap a { display: inline-block; margin: 0 10px; font-size: 14px; }

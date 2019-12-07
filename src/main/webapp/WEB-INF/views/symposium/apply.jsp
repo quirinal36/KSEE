@@ -149,7 +149,7 @@ function applySubmit(){
 											</ul>
 										</dd>
 									</dl>
-									<dl class="member_chk">
+									<dl class="member_chk nationality">
 										<dt><spring:message code="symposium.nationality"/></dt>
 										<dd>
 											<ul class="chk_wrap">
@@ -165,7 +165,12 @@ function applySubmit(){
 													<input type="radio" name="national" id="national_chk3" class="radio1" value="3">
 													<label for="national_chk3"><spring:message code="symposium.japan"/></label>
 												</li>
+												<li>
+													<input type="radio" name="national" id="national_chk4" class="radio1" value="4">
+													<label for="national_chk4">기타</label>
+												</li>
 											</ul>
+											<input type="text" placeholder="국적을 입력하세요." class="ipt1">
 										</dd>
 									</dl>
 									<dl>
