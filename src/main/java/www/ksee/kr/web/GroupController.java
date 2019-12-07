@@ -31,27 +31,14 @@ public class GroupController extends KseeController {
 	 * 공지사항, 자유게시판, 관련소식 모두 보여주기
 	 * 
 	 * @param mv
-	 * @param board
 	 * @return
 	 */
 	@RequestMapping(value= "/", method = RequestMethod.GET)
-	public ModelAndView getGroupView(ModelAndView mv, 
-			HttpServletRequest request, Board board) {
+	public ModelAndView getGroupView(ModelAndView mv) {
 		final String currentUrl = "/group/notice";
 		mv.addObject("curMenu", getCurMenus(currentUrl));
 		
 		mv.addObject("title", "공지사항");
-		/*
-		board.setBoardType(Board.TYPE_GROUP);
-		board.setPageSize(10);
-		
-		int totalCount = boardService.count(board);
-		board.setTotalCount(totalCount);
-		List<Board> list = boardService.select(board);
-		
-		mv.addObject("paging", board);
-		mv.addObject("list", list);
-		*/
 		mv.setViewName("redirect:/group/notice");
 		return mv;
 	}
@@ -71,7 +58,6 @@ public class GroupController extends KseeController {
 	 */
 	@RequestMapping(value= "/{name}")
 	public ModelAndView getNoticeView(ModelAndView mv,
-			HttpServletRequest request,
 			Board board, 
 			@PathVariable(value="name", required=true)String name,
 			Locale locale) {

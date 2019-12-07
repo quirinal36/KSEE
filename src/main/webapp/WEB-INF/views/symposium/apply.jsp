@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <script src="<c:url value="/resources/js/symposium.js"/>"></script>
 <link href="<c:url value="/resources/css/dropzone.css"/>" type="text/css" rel="stylesheet" />
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
 <title>${title }</title>
 <c:import url="/inc/head"></c:import>
 <script type="text/javascript">

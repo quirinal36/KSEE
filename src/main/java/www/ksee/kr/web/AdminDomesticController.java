@@ -326,14 +326,9 @@ public class AdminDomesticController extends KseeController{
 		final String uploadPath = fileUtil.makeUserPath();
 		
 		List<FileInfo> fileList = fileInfoService.selectApplications(input);
-		//String files[] = new String[fileList.size()];
 		
 		int i=0;
 		Iterator<FileInfo> iter = fileList.iterator();
-		//while(iter.hasNext()) {
-		//	FileInfo fileInfo = iter.next();
-			//files[i++] = fileInfo.getNewFilename();
-		//}
 		
 		int size = 1024;
 		byte[] buf = new byte[size];

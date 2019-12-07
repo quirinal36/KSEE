@@ -19,7 +19,7 @@ public class FileInfoService implements DataService<FileInfo>{
 	public int insert(FileInfo input) {
 		return dao.insert(input);
 	}
-	public int insert(List<PhotoInfo> input) {
+	public int insert(List<FileInfo> input) {
 		return dao.insert(input);
 	}
 	@Override

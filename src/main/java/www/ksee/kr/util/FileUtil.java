@@ -11,12 +11,14 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import org.imgscalr.Scalr;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.PhotoInfo;
 
 public class FileUtil {
-
+	final Logger logger = LoggerFactory.getLogger(getClass());
 	/**
 	 * 파일을 저장할 디렉터리 가져오기
 	 * 
@@ -25,15 +27,21 @@ public class FileUtil {
 	 */
 	public String makeUserPath() {
 		String path = System.getProperty("user.dir");
+		logger.info("path: " + path);
+		
 		StringBuilder builder = new StringBuilder()
-				.append(path.substring(0, path.lastIndexOf(File.separator)))
+				.append(path).append(File.separator).append("tomcat")
 				.append(File.separator).append("webapps").append(File.separator)
 				.append("repository").append(File.separator)
 				.append("upload").append(File.separator);
 		
 		File file = new File(builder.toString());
 		file.mkdirs();
-		return file.getAbsolutePath();
+		
+		final String result = file.getAbsolutePath();
+		
+		logger.info(result);
+		return result;
 	}
 	
 	public List<PhotoInfo> parsePhotoInfo(String[] input, int boardId) throws NumberFormatException{

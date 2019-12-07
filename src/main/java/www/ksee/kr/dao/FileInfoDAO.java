@@ -20,7 +20,7 @@ public class FileInfoDAO implements DataAccess<FileInfo>{
 	public int insert(FileInfo input) {
 		return sqlSession.insert(namespace + ".insert", input);
 	}
-	public int insert(List<PhotoInfo> input) {
+	public int insert(List<FileInfo> input) {
 		return sqlSession.insert(namespace + ".insert_list", input);
 	}
 	@Override
