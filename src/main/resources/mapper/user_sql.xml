@@ -179,4 +179,15 @@
 			u.user_role <![CDATA[<]]> 4;
 		</where>
 	</select>
+	
+	<select id="select_by_id" parameterType="java.util.List" resultType="user">
+		SELECT *
+		FROM users
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</select>
 </mapper>

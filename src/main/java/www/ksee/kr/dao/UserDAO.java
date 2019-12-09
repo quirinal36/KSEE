@@ -58,4 +58,7 @@ public class UserDAO implements DataAccess<UserVO> {
 	public List<UserRole> selectRoles(){
 		return sqlSession.selectList(namespace +".roles");
 	}
+	public List<UserVO> selectByIds(List<UserVO> list){
+		return sqlSession.selectList(namespace +".select_by_id", list);
+	}
 }

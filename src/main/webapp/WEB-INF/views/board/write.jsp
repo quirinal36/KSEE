@@ -7,7 +7,9 @@
 <head>
 	<c:import url="/inc/head"></c:import>
 	<link href="<c:url value="/resources/css/dropzone.css"/>" type="text/css" rel="stylesheet" />
-	<script src="https://cdn.ckeditor.com/4.11.3/standard-all/ckeditor.js"></script>
+	<link rel="stylesheet" href="<c:url value="/resources/css/css.css"/>">
+	<script type="text/javascript" src="<c:url value="/resources/js/service/HuskyEZCreator.js"/>" charset="utf-8"></script>
+	
 	<script type="text/javascript">
 	function replaceAll(str, searchStr, replaceStr){
 		var arr = str.split(searchStr);
@@ -52,14 +54,25 @@
 		});
 	}
 	function insertBoard(){
-		var textContent = CKEDITOR.instances.editor1.getData();
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		var textContent = document.getElementById("ir1").value;
+		textContent = replaceAll(textContent, "'", "&apos;");
 		textContent = replaceAll(textContent, "&nbsp;", " ");
 		textContent = replaceAll(textContent, "&", "%26");
 		
 		var url = $("form").attr("action");
 		
 		var title = $("input[name='title']").val();
+		title = replaceAll(title, "'", "&apos;");
+		title = replaceAll(title, "&nbsp;", " ");
+		title = replaceAll(title, "&", "%26");
+		
 		var title_en = $("input[name='title_en']").val();
+		title_en = replaceAll(title_en, "'", "&apos;");
+		title_en = replaceAll(title_en, "&nbsp;", " ");
+		title_en = replaceAll(title_en, "&", "%26");
+		
 		var content = textContent;
 		var boardType = $("input[name='board_type']").val();
 		var pictures = [];
@@ -71,7 +84,7 @@
 			files.push($(item).val());
 		});
 		
-		var param = "title="+title;
+		var param = "title="+encodeURI(title);
 		param += "&title_en="+title_en;
 		param += "&content="+ encodeURI(content);
 		param += "&boardType="+boardType;
@@ -129,17 +142,7 @@
 							</div>
 						</div>
 						<div class="board_write_cont">
-							<textarea name="editor1" id="editor1" rows="30" cols="80"></textarea>
-	                        <script>
-			                CKEDITOR.replace( 'editor1' ,{
-			                	toolbarGroups: [
-			                                         
-			                    ],
-			                    // Remove the redundant buttons from toolbar groups defined above.
-			                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image,basicStyles'
-			                	,height: 400
-			                });
-			            	</script>
+							<textarea name="content" id="ir1" rows="10" style="width:100%; height:412px; display:none;"></textarea>	                        
 						</div>
 						<div class="board_write_img" id="dropzone-img">
 							<dl>
@@ -184,6 +187,32 @@
 	<c:import url="/inc/footer"></c:import>
 </div>
 <script type="text/javascript">
+var oEditors = [];
+
+var sLang = "ko_KR";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/seSkin",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		},
+		I18N_LOCALE : sLang
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		//oEditors.getById["ir1"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
+	},
+	fCreator: "createSEditor2"
+});
+
 $(document).ready(function(){
     $('#imageupload').fileupload({
     	imageCrop: true,

@@ -58,4 +58,7 @@ public class FileInfoService implements DataService<FileInfo>{
 	public List<FileInfo> selectApplications(ApplyVO apply){
 		return dao.selectApplications(apply);
 	}
+	public List<FileInfo> selectById(List<FileInfo> list){
+		return dao.selectById(list);
+	}
 }

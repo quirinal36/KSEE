@@ -27,7 +27,6 @@ public class FileUtil {
 	 */
 	public String makeUserPath() {
 		String path = System.getProperty("user.dir");
-		logger.info("path: " + path);
 		
 		StringBuilder builder = new StringBuilder()
 				.append(path).append(File.separator).append("tomcat")
@@ -39,8 +38,6 @@ public class FileUtil {
 		file.mkdirs();
 		
 		final String result = file.getAbsolutePath();
-		
-		logger.info(result);
 		return result;
 	}
 	

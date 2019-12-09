@@ -76,6 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.exceptionHandling().accessDeniedPage("/403")
 			.and()
+			.headers().frameOptions().disable()
+			.and()
 			.logout().logoutUrl("/j_spring_security_logout")
 			.deleteCookies("JSESSIONID")
 			.logoutSuccessHandler(logoutSuccessHandler)

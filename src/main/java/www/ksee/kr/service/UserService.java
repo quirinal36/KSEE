@@ -81,4 +81,7 @@ public class UserService implements DataService<UserVO> {
 	public List<UserRole> selectRoles(){
 		return dao.selectRoles();
 	}
+	public List<UserVO> selectByIds(List<UserVO> list){
+		return dao.selectByIds(list);
+	}
 }

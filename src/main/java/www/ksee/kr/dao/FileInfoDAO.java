@@ -59,4 +59,7 @@ public class FileInfoDAO implements DataAccess<FileInfo>{
 	public List<FileInfo> selectApplications(ApplyVO apply){
 		return sqlSession.selectList(namespace +".select_apply", apply);
 	}
+	public List<FileInfo> selectById(List<FileInfo> list){
+		return sqlSession.selectList(namespace +".select_by_id", list);
+	}
 }

@@ -12,7 +12,8 @@ public class Config {
 	public final static String SESSION_LOGIN_FAIL = "다른 장소에서 같은 아이디로 로그인 되어 있습니다.";
 	
 	public final static String UPLOAD_DIR = "/upload/www.ksee.kr/";
-	public final static String ADMIN_EMAIL = "no-reply@ksee.kr";
+	public final static String NO_REPLY_EMAIL = "no-reply@ksee.kr";
+	public final static String ADMIN_EMAIL = "admin@ksee.kr";
 	
 	public final static String OPENGRAPH_API = "1c6351e3-c4ab-4623-8506-535f8ac5cab8";
 }

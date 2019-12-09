@@ -8,6 +8,7 @@
 <title>${title }</title>
 <c:import url="/inc/head_admin"></c:import>
 <script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
+	
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#chk0").change(function(){
@@ -22,7 +23,14 @@ function downloadExcel(){
 	window.location.replace("/admin/members/download/excel");
 }
 function sendMail(){
-	window.location.replace("/admin/members/mail/write");
+	var ids = new Array();
+	$(".chk1").each(function(){
+		if($(this).is(":checked")){
+			ids.push($(this).val());
+		}
+	});
+	var param = ids.join(",");
+	window.location.replace("/admin/members/mail/write?ids=" + param);
 }
 function sendMailAll(){
 	window.location.replace("/admin/members/mail/write");
@@ -55,7 +63,7 @@ function sendMailAll(){
 						<thead>
 							<tr>
 								<th>
-									<input type="checkbox" id="chk0" class="chk1">
+									<input type="checkbox" id="chk0" class="chk1" value="0">
 									<label for="chk0"></label>
 								</th>
 								<th><a href="javascript:arangeList('user_role')">회원구분</a></th>

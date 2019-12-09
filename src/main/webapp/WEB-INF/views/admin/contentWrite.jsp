@@ -6,21 +6,15 @@
 	<title>${title }</title>
 	<c:import url="/inc/head_admin"></c:import>
 	<link href="<c:url value="/resources/css/dropzone.css"/>" type="text/css" rel="stylesheet" />
-	<script src="https://cdn.ckeditor.com/4.11.3/standard-all/ckeditor.js"></script>
-	<style>
-		
-	</style>
+	<script type="text/javascript" src="<c:url value="/resources/js/service/HuskyEZCreator.js"/>" charset="utf-8"></script>
+	
 	<script type="text/javascript">
 	function replaceAll(str, searchStr, replaceStr){
 		var arr = str.split(searchStr);
 		return str.split(searchStr).join(replaceStr);
 	}
 	function registContent(){
-		var textContent = CKEDITOR.instances.editor1.getData();
-		textContent = replaceAll(textContent, "&nbsp;", " ");
-		textContent = replaceAll(textContent, "&", "%26");
-		
-		console.log(textContent);
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
 		
 		var url = $("form").attr("action");
 		var pictures = [];
@@ -29,7 +23,6 @@
 		});
 		var param = $("form").serialize();
 		
-		param += "&content=" + textContent;
 		param += "&pictures="+pictures.join(",");
 		
 		if(confirm("저장할까요?")){
@@ -105,16 +98,7 @@
 					<input type="hidden" name="stype" value="${detail.stype }"/>
 					<input type="hidden" name="del_url" value="<c:url value="/admin/domestic/delete/content"/>"/>
 					<div>
-						<textarea id="editor1" rows="30" cols="80">${detail.content }</textarea>
-                        <script>
-		                CKEDITOR.replace( 'editor1' ,{
-		                	toolbarGroups: [
-		                    ],
-		                    // Remove the redundant buttons from toolbar groups defined above.
-		                    removeButtons: 'Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image'
-		                	,height: 630
-		                });
-		            	</script>
+						<textarea name="content" id="ir1" rows="10" style="width:100%; height:412px; display:none;"></textarea>
 					</div>
 					<div class="board_write_img" id="dropzone-img">
 						<dl>
@@ -156,6 +140,32 @@
 	</div>
 </div>
 <script type="text/javascript">
+var oEditors = [];
+
+var sLang = "ko_KR";	// 언어 (ko_KR/ en_US/ ja_JP/ zh_CN/ zh_TW), default = ko_KR
+
+nhn.husky.EZCreator.createInIFrame({
+	oAppRef: oEditors,
+	elPlaceHolder: "ir1",
+	sSkinURI: "/seSkin",	
+	htParams : {
+		bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+		bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+		//bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+		//aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+		fOnBeforeUnload : function(){
+			//alert("완료!");
+		},
+		I18N_LOCALE : sLang
+	}, //boolean
+	fOnAppLoad : function(){
+		//예제 코드
+		oEditors.getById["ir1"].exec("PASTE_HTML", ['${detail.content}']);
+	},
+	fCreator: "createSEditor2"
+});
+
 $(document).ready(function(){
     $('#imageupload').fileupload({
     	imageCrop: true,

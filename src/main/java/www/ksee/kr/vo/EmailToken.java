@@ -69,7 +69,7 @@ public class EmailToken extends PasswordResetToken {
 			UserVO user,
 			EmailToken usertoken, Locale locale)
 			throws IOException, SendGridException {
-		final String senderEmail = Config.ADMIN_EMAIL;
+		final String senderEmail = Config.NO_REPLY_EMAIL;
 		EmailVO emailVO = new EmailVO(assembleEmail(user), senderEmail);
 		
 		final String template = new StringBuilder()

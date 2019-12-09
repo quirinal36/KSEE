@@ -59,7 +59,6 @@ public class FileController extends KseeController {
             //request.getSession().getServletContext().getRealPath("/upload");
 			
 			File newFile = new File(srcPath + "/" + newFilename);
-			logger.info(newFile.getAbsolutePath());
             try {
                 mpf.transferTo(newFile);
                 FileInfo fileInfo = new FileInfo();
@@ -108,8 +107,6 @@ public class FileController extends KseeController {
 			String contentType = mpf.getContentType();
 			
 			File newFile = new File(srcPath + File.separator + newFilename);
-			logger.info(newFile.getAbsolutePath());
-			logger.info("file size : "+newFile.length());
 			
             try {
                 mpf.transferTo(newFile);
@@ -189,7 +186,6 @@ public class FileController extends KseeController {
         File imageFile = new File(srcPath+"/"+image.getNewFilename());
         response.setContentType(image.getContentType());
         response.setContentLength(image.getSize());
-        logger.info(imageFile.getAbsolutePath());
         try {
             InputStream is = new FileInputStream(imageFile);
             IOUtils.copy(is, response.getOutputStream());
@@ -275,7 +271,6 @@ public class FileController extends KseeController {
 			response.setHeader("Content-disposition", "attachment; charset=UTF-8; filename=\""+URLEncoder.encode(fileInfo.getName(), "UTF-8")+"\"");
 			
 			String srcPath = new FileUtil().makeUserPath(); // request.getSession().getServletContext().getRealPath("/upload");
-			logger.info(srcPath +File.separator + fileInfo.getNewFilename());
 			
 			InputStream is = new FileInputStream(new File(srcPath +File.separator + fileInfo.getNewFilename()));
 			FileCopyUtils.copy(is, response.getOutputStream());

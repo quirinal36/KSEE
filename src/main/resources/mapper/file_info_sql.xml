@@ -104,4 +104,14 @@
 			(SELECT fileId FROM Apply WHERE sympId = ${sympId} and isSpeaker=1)
 		</where>
 	</select>
+	
+	<select id="select_by_id" parameterType="java.util.List" resultType="fileinfo">
+		SELECT * FROM FileInfo
+		<where>
+			id IN
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item.id}
+			</foreach>
+		</where>
+	</select>
 </mapper>
