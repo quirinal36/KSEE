@@ -41,6 +41,8 @@ public class TaskService {
 			}
 			
 			return;
+		}else {
+			
 		}
 		
 		logger.info("--------------------cron finished-------------------------");

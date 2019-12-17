@@ -424,12 +424,13 @@ public class AdminDomesticController extends KseeController{
 			list.add(apply);
 		}
 		
-		
 		int result = 0;
 		if(status < 3) {
 			result = applyService.update(list);
+			json.put("msg","상태가 변경되었습니다.");
 		}else if(status == 3) {
 			result = applyService.delete(list);
+			json.put("msg","삭제되었습니다.");
 		}
 		json.put("result", result);
 		

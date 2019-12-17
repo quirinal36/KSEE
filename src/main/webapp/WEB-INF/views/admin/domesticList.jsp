@@ -38,7 +38,7 @@ function changeStatus(dest){
 			type: "POST",
 			dataType: "json"
 		}).done(function(json){
-			alert("변경이 완료되었습니다.");
+			alert(json.msg);
 			if(json.result > 0){
 				window.location.reload();
 			}

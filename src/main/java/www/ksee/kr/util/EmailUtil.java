@@ -8,6 +8,9 @@ import java.util.Iterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
@@ -65,15 +68,16 @@ public class EmailUtil {
 		email.setSubject(mailVO.getTitle());
 		email.setHtml(mailVO.getContent());
 		
-		FileUtil fileUtil = new FileUtil();
-		final String uploadPath = fileUtil.makeUserPath();
-		Iterator<FileInfo> iter = mailVO.getFiles().iterator();
-		while(iter.hasNext()) {
-			FileInfo fileInfo = iter.next();
-			File attach = new File(uploadPath +File.separator + fileInfo.getNewFilename());
-			email.addAttachment(MimeUtility.encodeText(fileInfo.getName()), attach);
+		if(mailVO.getFiles() != null && mailVO.getFiles().size() > 0) {
+			FileUtil fileUtil = new FileUtil();
+			final String uploadPath = fileUtil.makeUserPath();
+			Iterator<FileInfo> iter = mailVO.getFiles().iterator();
+			while(iter.hasNext()) {
+				FileInfo fileInfo = iter.next();
+				File attach = new File(uploadPath +File.separator + fileInfo.getNewFilename());
+				email.addAttachment(MimeUtility.encodeText(fileInfo.getName()), attach);
+			}
 		}
-		
 		SendGrid.Response response = sendGrid.send(email);
 		
 		if (response.getCode() != 200) {
@@ -84,5 +88,11 @@ public class EmailUtil {
 			
 			return response.getCode();
 		}
+	}
+	
+	public void res() throws UnirestException {
+		HttpResponse<String> response = Unirest.get("https://api.sendgrid.com/v3/messages?limit=10&query=a")
+				  .header("authorization", "__REDACTED_SENDGRID_KEY__")
+				  .asString();
 	}
 }

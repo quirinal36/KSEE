@@ -1,9 +1,12 @@
 package www.ksee.kr.web;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,11 +27,25 @@ public class IncController extends KseeController{
 	@RequestMapping(value = "/header", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getHeaderView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
+		int onlyKorMenus[] = {7,11,14,15};
+		
 		Menus parent = new Menus();
 		parent.setParent(0);
 		
 		List<Menus> parents = menuService.select(parent);
 		List<Menus> children = menuService.select(parents);
+		
+		boolean isUS = locale.equals(Locale.US);
+		logger.info("isUs: " + isUS);
+		
+		if(isUS) {
+			Map<Integer, Menus> childrenMap = children.stream().collect(Collectors.toMap(Menus::getId, menus->menus));
+			children.clear();
+			for(int id : onlyKorMenus) {
+				childrenMap.remove(id);
+			}
+			children = childrenMap.values().stream().collect(Collectors.toList());
+		}
 		
 		mv.addObject("locale", locale);
 		
@@ -47,6 +64,7 @@ public class IncController extends KseeController{
 	@RequestMapping(value = "/footer", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getFooterView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication) {
+		mv.addObject("locale", locale);
 		mv.setViewName("/inc/footer");
 		return mv;
 	}
@@ -85,7 +103,20 @@ public class IncController extends KseeController{
 	public ModelAndView getContentsTitleView(Locale locale, ModelAndView mv,
 			HttpServletRequest req, Authentication authentication,
 			Menus menus) {
+		int onlyKorMenus[] = {7,11,14,15};
+		
 		List<Menus> siblings = menuService.selectSiblings(menus);
+		boolean isUS = locale.equals(Locale.US);
+		
+		if(isUS) {
+			Map<Integer, Menus> childrenMap = siblings.stream().collect(Collectors.toMap(Menus::getId, menu->menu));
+			siblings.clear();
+			for(int id : onlyKorMenus) {
+				childrenMap.remove(id);
+			}
+			siblings = childrenMap.values().stream().collect(Collectors.toList());
+		}
+		
 		siblings.sort(new Comparator<Menus>() {
 			@Override
 			public int compare(Menus o1, Menus o2) {

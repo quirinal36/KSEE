@@ -44,9 +44,9 @@ $(document).ready(function(){
 	$("input[name='isSpeaker']").on('change', function(){
 		var isSpeaker = parseInt($(this).val()) == 1? true : false;
 		if(isSpeaker){
-			$(".file").show();
+			//$(".file").show();
 		}else{
-			$(".file").hide();
+			//$(".file").hide();
 			$("#file_ul").empty();
 		}
 	});
@@ -204,7 +204,7 @@ function delButtonClick(button){
 									<p class="message error"><spring:message code="member.enter_your_email"/></p>
 								</dd>
 							</dl>
-							<dl class="file" <c:if test="${apply.fileId eq 0 }">style="display:none;"</c:if>>
+							<dl class="file">
 								<dt><spring:message code="symposium.form"/></dt>
 								<dd>
 									<div class="board_write_file"  id="dropzone-file">

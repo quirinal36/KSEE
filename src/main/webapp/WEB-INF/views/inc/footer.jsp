@@ -8,9 +8,12 @@
 				<a href="<c:url value="/about/greet"/>">
 					<spring:message code="comm.greetings" text="comm.greetings"></spring:message>
 				</a>
-				<a href="<c:url value="/about/term"/>">
-					<spring:message code="comm.articles_of_ksee" text="comm.articles_of_ksee"></spring:message>
-				</a>
+				<c:if test="${locale.language ne 'en'}">
+					<a href="<c:url value="/about/term"/>">
+						<spring:message code="comm.articles_of_ksee" text="comm.articles_of_ksee"></spring:message>
+					</a>
+				</c:if>
+				
 				<a href="<c:url value="/term/privacy"/>">
 					<spring:message code="comm.personal_information" text="comm.personal_information"></spring:message>
 				</a>

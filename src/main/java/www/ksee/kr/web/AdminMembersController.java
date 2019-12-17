@@ -173,6 +173,8 @@ public class AdminMembersController {
 			@RequestParam(value="title", required=false)Optional<String> title,
 			@RequestParam(value="content", required=false)Optional<String> content,
 			@RequestParam(value="fileIds", required=false)Optional<String> fileIds) throws IOException {
+		JSONObject json = new JSONObject();
+		
 		MemberMail mailVO = new MemberMail();
 		
 		List<UserVO> users = new ArrayList<UserVO>();
@@ -207,12 +209,18 @@ public class AdminMembersController {
 				List<FileInfo> inputs = new ArrayList<FileInfo>();
 				for(String fileId : files) {
 					FileInfo fileInfo = new FileInfo();
-					fileInfo.setId(Integer.parseInt(fileId));
-					inputs.add(fileInfo);
+					try {
+						fileInfo.setId(Integer.parseInt(fileId));
+						inputs.add(fileInfo);
+					}catch(NumberFormatException e) {
+						e.printStackTrace();
+					}
 				}
-				List<FileInfo> fileList = fileService.selectById(inputs);
-				
-				mailVO.setFiles(fileList);
+				if(inputs.size() > 0) {
+					List<FileInfo> fileList = fileService.selectById(inputs);
+					
+					mailVO.setFiles(fileList);
+				}
 			}
 		}
 		
@@ -223,29 +231,29 @@ public class AdminMembersController {
 		
 		EmailUtil emailUtil = new EmailUtil(apiKey);
 		try {
-			emailUtil.sendGridMultiEmail(mailVO);
+			json.put("result", emailUtil.sendGridMultiEmail(mailVO));
 		} catch (SendGridException e) {
 			e.printStackTrace();
+			json.put("result", 0);
 		}
 		
-		JSONObject json = new JSONObject();
 		return json.toString();
 	}
 	@RequestMapping(value="/mail/sent/list")
 	public ModelAndView getSentList(ModelAndView mv) {
+		/*
 		try {
 			JSONArray sentList = getSentList();
-			logger.info(sentList.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+		*/
 		mv.addObject("title", "보낸메일함");
 		mv.addObject("menu", 0);
 		mv.setViewName("/admin/members/sentList");
 		return mv;
 	}
-	
+	/*
 	public JSONArray getSentList() throws IOException {
 		File file = ResourceUtils.getFile("classpath:sendgrid.env");
 		String apiKey = FileUtils.readFileToString(file, Config.ENCODING);
@@ -285,6 +293,7 @@ public class AdminMembersController {
 		JSONArray result = new JSONArray(response);
 		return result;
 	}
+	*/
 	@RequestMapping(value="/mail/sent/detail/{id}")
 	public ModelAndView getSentDetail(ModelAndView mv,
 			@PathVariable(value="id", required = true)Integer id) {

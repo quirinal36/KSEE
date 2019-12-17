@@ -37,6 +37,7 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%--
 							<tr>
 								<td>3</td>
 								<td><a href="#">KSEE 웹사이트 오픈!</a></td>
@@ -55,6 +56,7 @@
 								<td>이승구</td>
 								<td>2019-12-04 14:31:00</td>
 							</tr>
+						 --%>
 						</tbody>
 					</table>
 				</div>
