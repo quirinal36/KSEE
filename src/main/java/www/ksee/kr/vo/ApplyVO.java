@@ -27,6 +27,7 @@ public class ApplyVO extends Paging{
 	Date mdate;
 	int status;
 	String filename;
+	String nationalCustom;
 	
 	@Override
 	public String toString() {

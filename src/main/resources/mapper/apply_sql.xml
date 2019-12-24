@@ -15,7 +15,8 @@
 			email,
 			domain,
 			fileId,
-			sympId
+			sympId,
+			nationalCustom
 		)
 		VALUES
 		(
@@ -29,7 +30,8 @@
 			'${email}',
 			'${domain}',
 			${fileId},
-			${sympId}
+			${sympId},
+			'${nationalCustom}'
 		)
 	</insert>
 	<update id="update" parameterType="apply">
@@ -45,7 +47,8 @@
 			email='${email}',
 			domain='${domain}',
 			fileId=${fileId},
-			sympId=${sympId}
+			sympId=${sympId},
+			nationalCustom='${nationalCustom}'
 		</set>
 		<where>
 			id = ${id}

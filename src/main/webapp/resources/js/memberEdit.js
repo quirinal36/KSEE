@@ -1,7 +1,56 @@
 function validate(data){
 	var result = true;
 	var jsonObj = parse(data);
-	console.log(jsonObj);
+	
+	var classificationInput = $("input[name='classification']");
+	if(jsonObj['classification'] != ''){
+		classificationInput.parent().find(".error").hide();
+	}else{
+		classificationInput.parent().find(".error").show();
+		classificationInput.parent().find(".error").text('소속을 입력하세요.');
+		classificationInput.focus();
+		return false;
+	}
+	
+	var levelInput = $("input[name='level']");
+	if(jsonObj['level'] != ''){
+		levelInput.parent().find(".error").hide();
+	}else{
+		levelInput.parent().find(".error").show();
+		levelInput.parent().find(".error").text('직위를 입력하세요.');
+		levelInput.focus();
+		return false;
+	}
+	
+	var addressInput = $("input[name='address']");
+	if(jsonObj['address'] != ''){
+		addressInput.parent().find(".error").hide();
+	}else{
+		addressInput.parent().find(".error").show();
+		addressInput.parent().find(".error").text('주소를 입력하세요.');
+		addressInput.focus();
+		return false;
+	}
+	
+	var addressDetailInput = $("input[name='addressDetail']");
+	if(jsonObj['addressDetail'] != ''){
+		addressDetailInput.parent().find(".error").hide();
+	}else{
+		addressDetailInput.parent().find(".error").show();
+		addressDetailInput.parent().find(".error").text('상세주소를 입력하세요.');
+		addressDetailInput.focus();
+		return false;
+	}
+	
+	var phoneInput = $("input[name='phone']");
+	if(jsonObj['phone'] != ''){
+		phoneInput.parent().find(".error").hide();
+	}else{
+		phoneInput.parent().find(".error").show();
+		phoneInput.parent().find(".error").text('전화번호를 입력하세요.');
+		phoneInput.focus();
+		return false;
+	}
 	
 	var emailInput = $("input[name='email']");
 	if(jsonObj['email'] != ''){
@@ -28,55 +77,6 @@ function validate(data){
 		domainInput.focus();
 		return false;
 	}
-	var classificationInput = $("input[name='classification']");
-	if(jsonObj['classification'] != ''){
-		classificationInput.parent().find(".error").hide();
-	}else{
-		classificationInput.parent().find(".error").show();
-		classificationInput.parent().find(".error").text('소속을 입력하세요.');
-		classificationInput.focus();
-		return false;
-	}
-	
-	var levelInput = $("input[name='level']");
-	if(jsonObj['level'] != ''){
-		levelInput.parent().find(".error").hide();
-	}else{
-		levelInput.parent().find(".error").show();
-		levelInput.parent().find(".error").text('직위를 입력하세요.');
-		levelInput.focus();
-		return false;
-	}
-	
-	var phoneInput = $("input[name='phone']");
-	if(jsonObj['phone'] != ''){
-		phoneInput.parent().find(".error").hide();
-	}else{
-		phoneInput.parent().find(".error").show();
-		phoneInput.parent().find(".error").text('전화번호를 입력하세요.');
-		phoneInput.focus();
-		return false;
-	}
-	var addressInput = $("input[name='address']");
-	if(jsonObj['address'] != ''){
-		addressInput.parent().find(".error").hide();
-	}else{
-		addressInput.parent().find(".error").show();
-		addressInput.parent().find(".error").text('주소를 입력하세요.');
-		addressInput.focus();
-		return false;
-	}
-	
-	var addressDetailInput = $("input[name='addressDetail']");
-	if(jsonObj['addressDetail'] != ''){
-		addressDetailInput.parent().find(".error").hide();
-	}else{
-		addressDetailInput.parent().find(".error").show();
-		addressDetailInput.parent().find(".error").text('상세주소를 입력하세요.');
-		addressDetailInput.focus();
-		return false;
-	}
-	
 	return result;
 }
 function parse(data){

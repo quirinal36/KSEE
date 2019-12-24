@@ -15,6 +15,11 @@ public class ApplyService implements DataService<ApplyVO> {
 	
 	@Override
 	public int insert(ApplyVO input) {
+		if(input.getNationalCustom() != null && input.getNationalCustom().length() > 0) {
+			final String first = input.getNationalCustom().substring(0, 1).toUpperCase();
+			final String all = new StringBuilder().append(first).append(input.getNationalCustom().substring(1, input.getNationalCustom().length())).toString();
+			input.setNationalCustom(all);
+		}
 		return dao.insert(input);
 	}
 

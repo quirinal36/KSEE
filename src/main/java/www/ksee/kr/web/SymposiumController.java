@@ -173,15 +173,21 @@ public class SymposiumController extends KseeController{
 	@ResponseBody
 	@RequestMapping(value="/apply", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String applySend(ApplyVO apply,
-			@RequestParam(value="files")Optional<String> files) {
-		if(files.isPresent()) {
-			for(String fileId : files.get().split(",")) {
-				apply.setFileId(Integer.parseInt(fileId));
-			}
-		}
-		
+			@RequestParam(value="files")Optional<String> files, Locale locale) {
 		JSONObject json = new JSONObject();
-		json.put("result", applyService.insert(apply));
+		ApplyVO searchResult = applyService.search(apply);
+		if(searchResult != null && searchResult.getId() > 0) {
+			json.put("msg", messageSource.getMessage("symposium.apply.duplicated", null, locale));
+			json.put("result", 0);
+		}else {
+			if(files.isPresent()) {
+				for(String fileId : files.get().split(",")) {
+					apply.setFileId(Integer.parseInt(fileId));
+				}
+			}
+			
+			json.put("result", applyService.insert(apply));
+		}
 		return json.toString();
 	}
 }

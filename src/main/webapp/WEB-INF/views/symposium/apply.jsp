@@ -20,6 +20,26 @@ $(document).ready(function(){
 			$("#file_ul").empty();
 		}
 	});
+	$(".nationality .radio1").on('change', function(){
+		$(".nationality .radio1").each(function(i, item){
+			var value = parseInt($(item).val());
+			if(value == 4 && $(item).prop("checked")){
+				$("input[name='nationalCustom']").attr("disabled", false);
+				$("input[name='nationalCustom']").show();
+			}else {
+				$("input[name='nationalCustom']").val('');
+				$("input[name='nationalCustom']").attr("disabled", true);
+				$("input[name='nationalCustom']").hide();
+			}
+		});
+	});
+	$("input[name='telephone']").keyup(function(e){
+		if(e.keyCode >= 96 && e.keyCode <=105){
+			
+		}else{
+			$(this).val($(this).val().replace(/[^0-9]/g,""));
+		}
+	});
 });
 function delButtonClick(button){
 	var id = $(button).val();
@@ -49,6 +69,35 @@ function applySubmit(){
 		param += "&files="+files.join(",");
 	}
 	
+	if($("#national_chk4").prop("checked") == true && $("input[name='nationalCustom']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.national.empty"));
+		return false;
+	}
+	if($("input[name='username']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.name"));
+		return false;
+	}	
+	if($("input[name='classification']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.affiliation"));
+		return false;
+	}	
+	if($("input[name='level']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.position"));
+		return false;
+	}	
+	if($("input[name='telephone']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.telephone"));
+		return false;
+	}	
+	if($("input[name='email']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.email"));
+		return false;
+	}
+	if($("input[name='domain']").val() == ''){
+		alert(jQuery.i18n.prop("symposium.empty.email"));
+		return false;
+	}
+		
 	if(confirm(jQuery.i18n.prop("symposium.to_register"))){
 		$.ajax({
 			url : url,
@@ -58,6 +107,8 @@ function applySubmit(){
 		}).done(function(json){
 			if(json.result > 0){
 				move(2);
+			}else{
+				alert(json.msg);
 			}
 		});
 	}
@@ -167,10 +218,12 @@ function applySubmit(){
 												</li>
 												<li>
 													<input type="radio" name="national" id="national_chk4" class="radio1" value="4">
-													<label for="national_chk4">기타</label>
+													<label for="national_chk4">
+														<spring:message code="symposium.national.etc"/>
+													</label>
 												</li>
 											</ul>
-											<input type="text" placeholder="국적을 입력하세요." class="ipt1">
+											<input type="text" placeholder="국적을 입력하세요." class="ipt1" name="nationalCustom" style="display:none;">
 										</dd>
 									</dl>
 									<dl>
