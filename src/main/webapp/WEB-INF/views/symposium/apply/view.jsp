@@ -63,7 +63,8 @@
 									<c:choose>
 										<c:when test="${apply.national eq 1}"><spring:message code="symposium.korea"/></c:when>
 										<c:when test="${apply.national eq 2}"><spring:message code="symposium.china"/></c:when>
-										<c:otherwise><spring:message code="symposium.japan"/></c:otherwise>
+										<c:when test="${apply.national eq 3}"><spring:message code="symposium.japan"/></c:when>
+										<c:otherwise>${apply.nationalCustom }</c:otherwise>
 									</c:choose>
 								</dd>
 							</dl>

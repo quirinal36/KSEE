@@ -16,15 +16,16 @@ public class ApplyService implements DataService<ApplyVO> {
 	@Override
 	public int insert(ApplyVO input) {
 		if(input.getNationalCustom() != null && input.getNationalCustom().length() > 0) {
-			final String first = input.getNationalCustom().substring(0, 1).toUpperCase();
-			final String all = new StringBuilder().append(first).append(input.getNationalCustom().substring(1, input.getNationalCustom().length())).toString();
-			input.setNationalCustom(all);
+			input.setNationalCustom(firstCharToUpper(input.getNationalCustom()));
 		}
 		return dao.insert(input);
 	}
 
 	@Override
 	public int update(ApplyVO input) {
+		if(input.getNationalCustom() != null && input.getNationalCustom().length() > 0) {
+			input.setNationalCustom(firstCharToUpper(input.getNationalCustom()));
+		}
 		return dao.update(input);
 	}
 	public int update(List<ApplyVO> input) {
@@ -62,5 +63,18 @@ public class ApplyService implements DataService<ApplyVO> {
 	}
 	public ApplyVO search(ApplyVO input) {
 		return dao.search(input);
+	}
+	
+	/**
+	 * 첫 글자는 대문자료 변경
+	 * 
+	 * @param input
+	 * @return
+	 */
+	public String firstCharToUpper(String input) {
+		final String first = input.substring(0, 1).toUpperCase();
+		final String all = new StringBuilder().append(first).append(input.substring(1, input.length())).toString();
+		
+		return all;
 	}
 }
