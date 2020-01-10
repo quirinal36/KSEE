@@ -1,11 +1,11 @@
 package www.ksee.kr.web;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +27,7 @@ import www.ksee.kr.vo.UserVO;
 public class GroupController extends KseeController {
 	@Autowired
 	ReplyService replyService;
+	
 	/**
 	 * 공지사항, 자유게시판, 관련소식 모두 보여주기
 	 * 
@@ -73,6 +74,12 @@ public class GroupController extends KseeController {
 		int totalCount = boardService.count(board);
 		board.setTotalCount(totalCount);
 		List<Board> boardList = boardService.select(board);
+		Iterator<Board> iter = boardList.iterator();
+		while(iter.hasNext()) {
+			Board item = iter.next();
+			String[] tags = {"img", "br", "p"};
+			item.setContent(removeHTML(item.getContent(), tags));
+		}
 		
 		mv.addObject("list", boardList);
 		mv.addObject("paging", board);
@@ -83,6 +90,23 @@ public class GroupController extends KseeController {
 		
 		mv.setViewName(boardInfo.getListViewName());
 		return mv;
+	}
+	private String removeHTML(String input, String ... allowTags) {
+		String pattern = "<(\\/?)(?!\\/####)([^<|>]+)?>";
+
+		// String[] allowTags = "img,br,p".split(",");
+
+		StringBuffer buffer = new StringBuffer();
+		for (int i = 0; i < allowTags.length; i++) {
+			buffer.append("|" + allowTags[i].trim() + "(?!\\w)");
+		}
+
+		pattern = pattern.replace("####",buffer.toString());
+
+		String msg = input.replaceAll(pattern,"");
+		logger.info(msg);
+		
+		return msg;
 	}
 	/**
 	 * 공지사항 글쓰기 화면

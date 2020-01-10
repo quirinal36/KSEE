@@ -160,7 +160,7 @@
 								</dd>
 							</dl>
 						</div>
-						<div class="board_write_file"  id="dropzone-file">
+						<div class="board_write_file" id="dropzone-file">
 							<dl>
 								<dt><spring:message code="board.attachment" text="board.attachment"></spring:message></dt>
 								<dd>

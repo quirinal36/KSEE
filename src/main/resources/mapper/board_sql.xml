@@ -86,7 +86,9 @@
 				<when test="boardType eq 7">
 					boardType = 1 or
 					boardType = 2 or
-					boardType = 3
+					boardType = 3 or
+					boardType = 4 or
+					boardType = 5
 				</when>
 				<otherwise>
 					boardType = ${boardType}
