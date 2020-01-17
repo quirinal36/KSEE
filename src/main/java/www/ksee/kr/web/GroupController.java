@@ -77,7 +77,7 @@ public class GroupController extends KseeController {
 		Iterator<Board> iter = boardList.iterator();
 		while(iter.hasNext()) {
 			Board item = iter.next();
-			String[] tags = {"img", "br", "p"};
+			String[] tags = {"img"};
 			item.setContent(removeHTML(item.getContent(), tags));
 		}
 		

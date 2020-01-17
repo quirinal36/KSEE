@@ -194,8 +194,7 @@
 .board_list_typeA .cont .info { margin: 5px 0 10px 0; }
 .board_list_typeA .cont .info span { display: inline-block; margin-left: 10px; font-size: 14px; font-weight: 300; color: #888; }
 .board_list_typeA .cont .info span:first-child { margin-left: 0; }
-.board_list_typeA .cont .content { line-height: 160%; font-size: 15px; color: #888; }
-.board_list_typeA .cont .content p { height: 48px; overflow: hidden; text-overflow: ellipsis; }
+.board_list_typeA .cont .content { height: 48px; line-height: 160%; font-size: 15px; color: #888; overflow: hidden; text-overflow: ellipsis; white-space: normal; }
 .board_list .page { margin-top: 30px; text-align: center; font-size: 0; }
 .board_list .page a { display: inline-block; vertical-align: middle; }
 .board_list .page a.bt { width: 30px; height: 30px; border-radius: 100px; background-color: #ccc; background-image: url(/resources/img/board/page_arrow.png); background-repeat: no-repeat; text-indent: -1000px; overflow: hidden; }
