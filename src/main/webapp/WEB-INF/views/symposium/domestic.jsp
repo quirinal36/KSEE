@@ -23,8 +23,8 @@
 			</c:import>
 			<div id="contentsPrint">
             	<div class="symposium_title_img">
-	            	<a href="<c:url value="/symposium/domestic/view/28"/>">
-	            		<img src="/resources/img/contents/2019_symposium.png" alt="2019 심포지엄">
+	            	<a href="<c:url value="/symposium/domestic/view/33"/>">
+	            		<img src="/resources/img/contents/2020_symposium1.png" alt="2020 동계 심포지엄">
 	            	</a>
             	</div>
 				<div class="board_list board_list_typeB symposium">
