@@ -17,5 +17,6 @@
 		<typeAlias type="www.ksee.kr.vo.ApplyVO" alias="apply"/>
 		<typeAlias type="www.ksee.kr.vo.Reply" alias="reply"/>
 		<typeAlias type="www.ksee.kr.vo.Popup" alias="popup"/>
+		<typeAlias type="www.ksee.kr.vo.EmailResult" alias="emailResult"/>
     </typeAliases>
 </configuration>

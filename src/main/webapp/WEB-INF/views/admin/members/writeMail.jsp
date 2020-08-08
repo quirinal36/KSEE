@@ -23,6 +23,7 @@ function submitForm(){
 	$("input[name='fileIds']").val(param);
 	
 	if(confirm("메일을 전송하시겠습니까?")){
+		
 		$.ajax({
 			url : $("form").attr("action"),
 			data: $("form").serialize(),
@@ -30,7 +31,11 @@ function submitForm(){
 			dataType : "json"
 		}).done(function(json){
 			if(json.result > 0){
-				window.location.replace("/admin/members/")
+				if(confirm("발송완료")){
+					window.location.replace("/admin/members/");
+				}
+			}else{
+				alert("메일 전송에 문제가 발생했습니다.");
 			}
 		});
 	}
@@ -68,7 +73,7 @@ function delFileClick(button){
 									<td>
 										<c:forEach items="${list }" var="item" varStatus="sts">
 											<input type="hidden" name="userId" value="${item.id }"/>
-											${item.username }(${item.email }@${item.domain })
+											${item.username }<input type="button" onclick="deleteReciever();"/>
 											<c:if test="${not sts.last }">,</c:if>
 										</c:forEach>
 									</td>
@@ -148,8 +153,10 @@ $(document).ready(function(){
            		$("<li>").append(
            			$("<span>").text(file.name)
            		).append(
-           			$("<input>").attr("type","button").addClass("bt_del_file").attr("title","삭제")
-           				.attr("onclick", "delFileClick(this);").val(file.id)
+           			$("<input>").attr("type","button")
+           				.attr("onclick", "delFileClick(this);").val("삭제")
+           		).append(
+           			$("<input>").attr("type","hidden").addClass("bt_del_file").val(file.id)		
            		)
            	);
         },

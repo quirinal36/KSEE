@@ -130,7 +130,7 @@ $(document).ready(function(){
 						<ul class="dep1">
 							<c:forEach items="${parents }" var="pmenu">
 							<li>
-								<a href="javascript:void(0);">
+								<a href="#:;">
 									<c:choose>
 										<c:when test="${locale.language eq 'en'}">
 											${pmenu.title_en }			

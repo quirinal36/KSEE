@@ -260,7 +260,7 @@ function submit(){
 					<p class="popup_img_guide">팝업 이미지의 사이즈는 624*337이며, 좌우 여백 90px이 확보되어야 합니다.</p>
 					
 					<div class="bt_wrap">
-						<a href="javascript:void(0)" class="bt1 on" onclick="javascript:submit();">수정</a>
+						<a href="#:" class="bt1 on" onclick="javascript:submit();">수정</a>
 						<a href="javascript:history.go(-1)" class="bt1">취소</a>
 					</div>
 					<input type="hidden" name="id" value="${popup.id }"/>

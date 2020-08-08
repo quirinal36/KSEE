@@ -224,8 +224,8 @@
 							</dl>
 						</div>
 						<div class="bt_wrap">
-							<a href="javascript:void(0);" onclick="javascript:editBoard();" class="bt1 on"><spring:message code="board.submit"/></a>
-							<a href="javascript:void(0);" onClick="history.back();" class="bt1"><spring:message code="board.cancel"/></a>
+							<a href="#:;" onclick="javascript:editBoard();" class="bt1 on"><spring:message code="board.submit"/></a>
+							<a href="#:;" onClick="history.back();" class="bt1"><spring:message code="board.cancel"/></a>
 						</div>
 					</div>
 				</form>

@@ -181,10 +181,10 @@ $(document).ready(function(){
 								<p>
 									<spring:message code="symposium.apply.search.being_processing"/>
 								</p>
-								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">
+								<a href="#:;" onclick="javascript:showView();" class="bt2 on">
 									<spring:message code="symposium.apply.search.show_my_application"/>
 								</a>
-								<a href="javascript:void(0);" onclick="javascript:deleteApply();" class="bt2">
+								<a href="#:;" onclick="javascript:deleteApply();" class="bt2">
 									<spring:message code="symposium.apply.search.cancel_apply"/>
 								</a>
 								<input type="hidden" value="" class="applyId"/>
@@ -196,7 +196,7 @@ $(document).ready(function(){
 								<p>
 									<spring:message code="symposium.is_completed"/>
 								</p>
-								<a href="javascript:void(0);" onclick="javascript:showView();" class="bt2 on">
+								<a href="#:;" onclick="javascript:showView();" class="bt2 on">
 									<spring:message code="symposium.apply.search.show_my_application"/>
 								</a>
 							</div>

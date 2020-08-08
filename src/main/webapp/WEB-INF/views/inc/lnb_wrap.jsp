@@ -8,7 +8,7 @@
 			<div class="dep1">
 				<c:forEach items="${parents }" var="item">
 					<c:if test="${item.id eq curMenu.parent }">
-						<a href="javascript:void(0)">
+						<a href="#:">
 							<c:choose>
 								<c:when test="${locale.language eq 'en'}">
 									${item.title_en }					
@@ -38,7 +38,7 @@
 				</ul>
 			</div>
 			<div class="dep2">
-				<a href="javascript:void(0)">
+				<a href="#:">
 					<c:choose>
 						<c:when test="${locale.language eq 'en'}">
 							${curMenu.title_en }					

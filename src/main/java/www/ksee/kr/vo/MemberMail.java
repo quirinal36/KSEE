@@ -12,5 +12,6 @@ public class MemberMail {
 	String title;
 	String content;
 	List<FileInfo> files;
+	String receiver;
 	String[] receivers;
 }

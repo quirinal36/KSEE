@@ -197,7 +197,7 @@ function resizePopup(){
 				<a href="https://www.doosan.com/kr" target="_blank"><img src="<c:url value="/resources/img/index/b5.png"/>" alt="두산"></a>
 				<a href="http://www.mh2.co.kr" target="_blank"><img src="<c:url value="/resources/img/index/b6.png"/>" alt="MH2 BIO CHEMICAL"></a>
 				<a href="http://www.amicogen.com" target="_blank"><img src="<c:url value="/resources/img/index/b7.png"/>" alt="Amicogen"></a>
-				<a href="javascript:void(0);"><img src="<c:url value="/resources/img/index/b8.png"/>" alt="AP"></a>
+				<a href="#:;"><img src="<c:url value="/resources/img/index/b8.png"/>" alt="AP"></a>
 				<a href="https://www.cj.net" target="_blank"><img src="<c:url value="/resources/img/index/b9.png"/>" alt="CJ"></a>
 				<a href="https://www.gist.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b10.png"/>" alt="광주과학기술원"></a>
 				<a href="https://www.kaist.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b11.png"/>" alt="한국과학기술원"></a>

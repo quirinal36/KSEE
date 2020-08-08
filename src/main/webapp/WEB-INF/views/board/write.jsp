@@ -176,8 +176,8 @@
 							</dl>
 						</div>
 						<div class="bt_wrap">
-							<a href="javascript:void(0);" onclick="javascript:insertBoard();" class="bt1 on"><spring:message code="board.submit" text="board.submit"></spring:message></a>
-							<a href="javascript:void(0);" onClick="history.back();" class="bt1"><spring:message code="board.cancel" text="board.cancel"></spring:message></a>
+							<a href="#:;" onclick="javascript:insertBoard();" class="bt1 on"><spring:message code="board.submit" text="board.submit"></spring:message></a>
+							<a href="#:;" onClick="history.back();" class="bt1"><spring:message code="board.cancel" text="board.cancel"></spring:message></a>
 						</div>
 					</div>
 				</form>

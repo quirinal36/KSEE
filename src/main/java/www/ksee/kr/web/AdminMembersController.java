@@ -46,6 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sendgrid.SendGridException;
 
 import www.ksee.kr.Config;
+import www.ksee.kr.service.EmailResultService;
 import www.ksee.kr.service.FileInfoService;
 import www.ksee.kr.service.UserService;
 import www.ksee.kr.util.EmailUtil;
@@ -61,6 +62,8 @@ import www.ksee.kr.vo.UserVO;
 public class AdminMembersController {
 	@Autowired
 	UserService userService;
+	@Autowired
+	EmailResultService emailService;
 	
 	@Autowired
 	FileInfoService fileService;
@@ -184,10 +187,15 @@ public class AdminMembersController {
 			users.add(user);
 		}
 		list = userService.selectByIds(users);
-		String[] receivers = new String[list.size()];
+		String[] receivers = new String[list.size()-1];
 		for(int i=0; i<list.size(); i++) {
 			UserVO user = list.get(i);
-			receivers[i] = new StringBuilder().append(user.getEmail()).append("@").append(user.getDomain()).toString(); 
+			String receiver = new StringBuilder().append(user.getEmail()).append("@").append(user.getDomain()).toString();
+			if(i == 0) {
+				mailVO.setReceiver(receiver);
+				continue;
+			}
+			receivers[i-1] = receiver;
 		}
 		mailVO.setReceivers(receivers);
 		
@@ -213,7 +221,8 @@ public class AdminMembersController {
 						fileInfo.setId(Integer.parseInt(fileId));
 						inputs.add(fileInfo);
 					}catch(NumberFormatException e) {
-						e.printStackTrace();
+						//e.printStackTrace();
+						logger.info(e.getMessage());
 					}
 				}
 				if(inputs.size() > 0) {
