@@ -190,7 +190,7 @@ public class AdminMembersController {
 		String[] receivers = new String[list.size()-1];
 		for(int i=0; i<list.size(); i++) {
 			UserVO user = list.get(i);
-			String receiver = new StringBuilder().append(user.getEmail()).append("@").append(user.getDomain()).toString();
+			String receiver = new StringBuilder().append(user.getEmail().trim()).append("@").append(user.getDomain().trim()).toString();
 			if(i == 0) {
 				mailVO.setReceiver(receiver);
 				continue;
@@ -243,7 +243,6 @@ public class AdminMembersController {
 			json.put("result", emailUtil.sendGridMultiEmail(mailVO));
 		} catch (SendGridException e) {
 			e.printStackTrace();
-			json.put("result", 0);
 		}
 		
 		return json.toString();

@@ -10,11 +10,75 @@
 <script type="text/javascript" src="<c:url value="/resources/js/list.js"/>"></script>
 	
 <script type="text/javascript">
+var setCookie = function(name, value){
+	var date = new Date();
+	date.setTime(date.getTime() + 60*60*1000);// 1시간
+	document.cookie = name + '=' + value + ';expired=' + date.toUTCString() + "; path=/";
+}
+var getCookie = function(name){
+	var value = document.cookie.match('(^|;) ?'+name+'=([^;]*)(;|$)');
+	return value? value[2] : null;
+}
+var deleteCookie = function(name){
+	var date = new Date();
+	document.cookie = name + "= " + "; expires=" + date.toUTCString() + "; path=/";
+}
 $(document).ready(function(){
+	var delim = ",";
+	var cookieName = "receivers";
+	if(getCookie(cookieName) != null){
+		var receivers = getCookie(cookieName).split(delim);
+		$(".chk1").each(function(){
+			for(var i in receivers){
+				if(receivers[i] == $(this).val()){
+					$(this).prop("checked", true);
+				}
+			}
+		});
+	}
+	
+	$(".chk1").change(function(){
+		var isChecked = $(this).is(":checked");
+		var receiversCookie = getCookie(cookieName);
+		
+		if(isChecked){
+			if(receiversCookie != null){
+				//console.log(recieversCookie);
+				var insertValue = receiversCookie + delim + $(this).val();
+				setCookie(cookieName, insertValue);
+			}else{
+				setCookie(cookieName, $(this).val());
+			}
+		}else{
+			var ids = receiversCookie.split(delim);
+			var insertValue="";
+			for(var i in ids){
+				if($(this).val() == ids[i]){
+					continue;
+				}
+				if(i > 0){
+					insertValue += delim;
+				}
+				insertValue += ids[i];
+			}
+			setCookie(cookieName, insertValue);
+		}
+	});
 	$("#chk0").change(function(){
 		var isChecked = $(this).is(":checked");
+		
 		$(".chk1").each(function(){
 			$(this).prop("checked", isChecked);
+			if(isChecked){
+				var receiversCookie = getCookie(cookieName);
+				if(receiversCookie != null){
+					//console.log(recieversCookie);
+					var insertValue = receiversCookie + delim + $(this).val();
+					setCookie(cookieName, insertValue);
+				}else{
+					setCookie(cookieName, $(this).val());
+				}
+			}
 		});
 	});
 });
@@ -23,14 +87,15 @@ function downloadExcel(){
 	window.location.replace("/admin/members/download/excel");
 }
 function sendMail(){
-	var ids = new Array();
-	$(".chk1").each(function(){
-		if($(this).is(":checked")){
-			ids.push($(this).val());
-		}
-	});
-	var param = ids.join(",");
-	window.location.replace("/admin/members/mail/write?ids=" + param);
+	var cookieName = "receivers";
+	var param = getCookie(cookieName);
+	if(param.charAt(0) == ','){
+		param = param.substring(1, param.length);
+	}	
+	if(confirm("메일 작성화면으로 이동 하시겠습니까?")){
+		deleteCookie(cookieName);
+		window.location.replace("/admin/members/mail/write?ids=" + param);
+	}
 }
 function sendMailAll(){
 	window.location.replace("/admin/members/mail/write");

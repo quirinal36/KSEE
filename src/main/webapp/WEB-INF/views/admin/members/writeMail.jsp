@@ -30,12 +30,12 @@ function submitForm(){
 			type: "POST",
 			dataType : "json"
 		}).done(function(json){
-			if(json.result > 0){
+			if(json.result.code > 0){
 				if(confirm("발송완료")){
 					window.location.replace("/admin/members/");
 				}
 			}else{
-				alert("메일 전송에 문제가 발생했습니다.");
+				alert("메일 전송에 문제가 발생했습니다. " + json.result.message);
 			}
 		});
 	}

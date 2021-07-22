@@ -27,6 +27,12 @@ public class UserService implements DataService<UserVO> {
 	@Override
 	public int insert(UserVO input) {
 		input.setPassword(passwordEncoder.encode(input.getPassword()));
+		input.setLogin(input.getLogin().trim());
+		input.setEmail(input.getEmail().trim());
+		input.setDomain(input.getDomain().trim());
+		input.setUsername(input.getUsername().trim());
+		input.setTelephone(input.getTelephone().trim());
+		
 		return dao.insert(input);
 	}
 	public int insert(List<UserVO> list) {

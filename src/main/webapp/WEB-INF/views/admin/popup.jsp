@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$("tbody").on("sortupdate", function(event, ui){
 		var productOrder = $(this).sortable('toArray');
 		var positions = productOrder.join(';');
-		console.log("positions: " + positions);
+		
 		var url = "/admin/popup/arange";
 		var param = "ids="+positions;
 		

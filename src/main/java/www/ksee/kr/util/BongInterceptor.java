@@ -21,6 +21,8 @@ public class BongInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler)
 			throws Exception {
+		logger.info("preHandle");
+		
 		Map<String, String[]> parameters = request.getParameterMap();
 		Iterator<String> keys = parameters.keySet().iterator();
 		while(keys.hasNext()) {

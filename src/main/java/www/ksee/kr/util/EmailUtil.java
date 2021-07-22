@@ -3,10 +3,8 @@ package www.ksee.kr.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,9 +13,8 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
+import javax.mail.internet.MimeUtility;
 
-import www.ksee.kr.vo.EmailResult;
 import www.ksee.kr.vo.EmailVO;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.MemberMail;
@@ -62,7 +59,9 @@ public class EmailUtil {
 		}
 	}
 	
-	public int sendGridMultiEmail(MemberMail mailVO) throws FileNotFoundException, IOException, SendGridException {
+	public String sendGridMultiEmail(MemberMail mailVO) throws FileNotFoundException, IOException, SendGridException {
+		JSONObject json = new JSONObject();
+		
 		SendGrid.Email sendEmail = new SendGrid.Email();
 		sendEmail.addBcc(mailVO.getReceivers());
 		sendEmail.setFrom(mailVO.getSender());
@@ -85,28 +84,21 @@ public class EmailUtil {
 		SendGrid.Response response = sendGrid.send(sendEmail);
 		
 		logger.info("mail sent result: " + response.getMessage());
+		json.put("code", response.getCode());
 		
 		if (response.getCode() != 200) {
 			System.out.print(String.format("An error occured: %s", response.getMessage()));
-			return 0;
 		}else {
 			logger.info(response.getMessage());
-			return response.getCode();
+			json.put("message", response.getMessage());
 		}
+		
+		return json.toString();
 	}
 	
 	public void res() throws UnirestException {
 		HttpResponse<String> response = Unirest.get("https://api.sendgrid.com/v3/messages?limit=10&query=a")
 				  .header("authorization", "__REDACTED_SENDGRID_KEY__")
 				  .asString();
-	}
-	
-	public static void main(String[] args) {
-		EmailUtil util = new EmailUtil("");
-		try {
-			util.res();
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
 	}
 }
