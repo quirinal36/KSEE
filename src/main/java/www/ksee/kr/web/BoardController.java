@@ -147,8 +147,8 @@ public class BoardController extends KseeController{
 			HttpServletRequest request) throws IOException {
 		UserVO user = getUser();
 		board.setWriter(user.getId());
-
-		board.setContent(URLDecoder.decode(board.getContent(), Config.ENCODING));
+//		logger.info(board.getContent());
+//		board.setContent(URLDecoder.decode(board.getContent(), Config.ENCODING));
 		logger.info(board.toString());
 		
 		int result = boardService.insert(board);

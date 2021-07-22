@@ -202,19 +202,23 @@ public class GroupController extends KseeController {
 			mv.addObject("title", boardInfo.getTitle());
 			
 			Board board= boardService.selectOne(Board.newInstance(id));
-			
-			if(user.getId() == board.getWriter()) {
-				List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
-				List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
-				
-				mv.addObject("fileList", fileList);
-				mv.addObject("photoList", photoList);
-				mv.addObject("board", board);
-				mv.addObject("detailUrl", currentUrl+"/view/"+board.getId());
-				mv.setViewName(boardInfo.getEditViewName());	
-			}else {
-				mv.setViewName("redirect:/member/login");
-			}			
+			try {
+				if(user.getId() == board.getWriter()) {
+					List<FileInfo> fileList = fileInfoService.select(FileInfo.newInstance(id));
+					List<PhotoInfo> photoList = photoInfoService.select(PhotoInfo.newInstance(id));
+					
+					mv.addObject("fileList", fileList);
+					mv.addObject("photoList", photoList);
+					mv.addObject("board", board);
+					mv.addObject("detailUrl", currentUrl+"/view/"+board.getId());
+					mv.setViewName(boardInfo.getEditViewName());	
+				}else {
+					mv.setViewName("redirect:/member/login");
+				}
+			}catch(NullPointerException e) {
+				e.printStackTrace();
+				mv.setViewName("redirect:/group/"+name);
+			}
 		}else {
 			mv.setViewName("redirect:/member/login");
 		}

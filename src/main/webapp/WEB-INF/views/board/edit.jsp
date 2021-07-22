@@ -115,8 +115,8 @@
 		var param = "title="+encodeURI(title);
 		param += "&title_en="+title_en;
 		param += "&id="+ $("form").find("input[name='id']").val();
-		param += "&viewCount" + $("form").find("input[name='view_count']").val();
-		param += "&content="+content;
+		param += "&viewCount=" + $("form").find("input[name='view_count']").val();
+		param += "&content="+encodeURI(content);
 		param += "&boardType="+boardType;
 		param += "&pictures="+pictures.join(",");
 		param += "&files="+files.join(",");
