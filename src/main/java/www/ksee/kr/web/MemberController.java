@@ -80,13 +80,16 @@ public class MemberController extends KseeController{
 	public String saveUser(UserVO user,
 			HttpServletRequest request) {
 		final String inputPwd = user.getPassword();
-		int result = userService.insert(user);
-		
-		// 회원가입 직후 로그인
-		login(user.getLogin(), inputPwd, request);
-
 		JSONObject json = new JSONObject();
-		json.put("result", result);
+		try {
+			int result = userService.insert(user);
+			json.put("result", result);
+			// 회원가입 직후 로그인
+			login(user.getLogin(), inputPwd, request);
+		}catch(NullPointerException e) {
+			json.put("result", -1);
+		}
+		
 		return json.toString();
 	}
 	private void login(String login, String inputPwd, HttpServletRequest request) {

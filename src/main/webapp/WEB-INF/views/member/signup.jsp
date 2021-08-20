@@ -68,6 +68,8 @@ $(document).ready(function(){
 						}
 					});
 				}
+			}else{
+				alert(jQuery.i18n.prop("member.signup.fail"));
 			}
 		}).fail(function(xhr, status, error){
 			

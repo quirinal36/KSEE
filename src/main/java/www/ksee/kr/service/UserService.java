@@ -25,13 +25,13 @@ public class UserService implements DataService<UserVO> {
 	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public int insert(UserVO input) {
+	public int insert(UserVO input) throws NullPointerException{
 		input.setPassword(passwordEncoder.encode(input.getPassword()));
 		input.setLogin(input.getLogin().trim());
 		input.setEmail(input.getEmail().trim());
 		input.setDomain(input.getDomain().trim());
 		input.setUsername(input.getUsername().trim());
-		input.setTelephone(input.getTelephone().trim());
+		input.setPhone(input.getPhone().trim());
 		
 		return dao.insert(input);
 	}
