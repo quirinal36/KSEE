@@ -192,10 +192,10 @@ public class AppConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(localeChangeInterceptor());
 		
-		BongInterceptor uffdaInterceptor = new BongInterceptor();
+//		BongInterceptor uffdaInterceptor = new BongInterceptor();
 		
-		registry.addInterceptor(uffdaInterceptor)
-				.addPathPatterns("/**");
+//		registry.addInterceptor(uffdaInterceptor)
+//				.addPathPatterns("/**");
 	}
 
 	@Bean
@@ -206,6 +206,7 @@ public class AppConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		registry.addResourceHandler("/.well-known/pki-validation/**").addResourceLocations("/.well-known/pki-validation/");
 	}
 
 	@Override
