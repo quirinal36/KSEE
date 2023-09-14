@@ -89,7 +89,8 @@ public class EmailUtil {
 		if (response.getCode() != 200) {
 			System.out.print(String.format("An error occured: %s", response.getMessage()));
 		}else {
-			logger.info(response.getMessage());
+			logger.info("code : " + response.getCode());
+			logger.info("message : " + response.getMessage());
 			json.put("message", response.getMessage());
 		}
 		

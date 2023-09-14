@@ -211,6 +211,8 @@ function resizePopup(){
 				<a href="http://www.jnu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b19.png"/>" alt="전남대학교"></a>
 				<a href="http://www.jejunu.ac.kr" target="_blank"><img src="<c:url value="/resources/img/index/b20.png"/>" alt="제주대학교"></a>
 				<a href="https://www.krict.re.kr/" target="_blank"><img src="<c:url value="/resources/img/index/b21.png"/>" alt="한국화학연구원"></a>
+				<a href="https://www.acrc.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b22.png"/>" alt="국민권익위원회"></a>
+				<a href="https://www.msit.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b23.png"/>" alt="과학기술정보통신부"></a>
 			</div>
 		</div>
 	</div>
