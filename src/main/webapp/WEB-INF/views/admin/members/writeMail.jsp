@@ -30,11 +30,7 @@ function submitForm(){
 			type: "POST",
 			dataType : "json"
 		}).done(function(json){
-			console.log(json);
-			result = JSON.parse(json.result);
-			
-			if(result.code > 0){
-				console.log(result.message);
+			if(json.result.code > 0){
 				if(confirm("발송완료")){
 					window.location.replace("/admin/members/");
 				}
