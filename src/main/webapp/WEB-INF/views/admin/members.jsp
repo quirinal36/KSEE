@@ -100,6 +100,24 @@ function sendMail(){
 function sendMailAll(){
 	window.location.replace("/admin/members/mail/write");
 }
+function deleteUser(url){
+	console.log("url: " + url);
+	if (confirm("이 회원을 삭제하시겠습니까?")){
+		$.ajax({
+			type:"post",
+			url: url,
+			dataType: 'json'
+		}).done((result) => {
+			var usr = JSON.parse(result.user)
+			console.log(usr);
+			if (result.result == 1 && confirm(usr.username + "회원을 삭제했습니다.")) {
+				window.location.reload();
+			}			
+		}).fail((err) => {
+			console.log(err);
+		});
+	}
+}
 </script>
 </head>
 <body>
@@ -137,6 +155,7 @@ function sendMailAll(){
 								<th><a href="javascript:arangeList('level')">직위</a></th>
 								<th><a href="javascript:arangeList('email')">이메일</a></th>
 								<th><a href="javascript:arangeList('mdate')">가입일</a></th>
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -153,6 +172,10 @@ function sendMailAll(){
 									<td>${item.email }@${item.domain }</td>
 									<td>
 										<fmt:formatDate value="${item.mdate}" pattern="yyyy-MM-dd" />
+									</td>
+									<td>
+										
+										<a href="javascript:deleteUser('<c:url value="/admin/members/delete/${item.id }"/>');" class="bt1">삭제</a>
 									</td>
 								</tr>
 							</c:forEach>

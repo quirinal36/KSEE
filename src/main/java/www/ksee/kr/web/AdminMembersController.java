@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -309,5 +310,20 @@ public class AdminMembersController {
 		mv.addObject("menu", 0);
 		mv.setViewName("/admin/members/sentDetail");
 		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.POST, produces = "application/json; charset=utf8")
+	public String deleteUser(Locale locale, @PathVariable(value="id")Integer id ) {
+		UserVO searchUser = new UserVO();
+		searchUser.setId(id);
+		UserVO user = userService.selectOne(searchUser);
+		
+		JSONObject json = new JSONObject();
+		if(user != null) {
+			json.put("user", user.toJsonString());
+			json.put("result", userService.delete(user));			
+		}
+		return json.toString();
 	}
 }

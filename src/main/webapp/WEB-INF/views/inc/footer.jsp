@@ -20,6 +20,9 @@
 				<a href="<c:url value="/term/email"/>">
 					<spring:message code="comm.refuse_email" text="comm.refuse_email"></spring:message>
 				</a>
+				<a href="https://www.nts.go.kr">
+					<spring:message code="comm.ntx" text="comm.ntx"></spring:message>
+				</a>
 			</div>
 		</div>
 		<div class="text">
