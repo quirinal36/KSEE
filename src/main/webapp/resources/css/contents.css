@@ -36,7 +36,7 @@
 }
 
 /* 심포지엄 이미지 */
-.symposium_title_img { width: 90%; min-width: 1000px; max-width: 1300px; margin: 60px auto 0 auto; }
+.symposium_title_img { width: 90%; min-width: 1000px; max-width: 1300px; margin: 60px auto 0 auto; display:none;}
 .symposium_title_img img { width: 100%; }
 @media ( max-width: 800px ) {
 	.symposium_title_img { width: 100%; min-width: auto; max-width: unset; margin-top: 0; }
