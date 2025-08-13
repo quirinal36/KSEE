@@ -9,6 +9,7 @@
 <c:import url="/inc/head"></c:import>
 <script src="<c:url value="/resources/js/signup.js"/>"></script>
 <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <script type="text/javascript">
 var afterSignup = parseInt('${fn:length(afterSignup )}');
 var signupComplete = false;
@@ -68,6 +69,14 @@ $(document).ready(function(){
 						}
 					});
 				}
+			}else if(json.result == -2){
+				// reCAPTCHA 실패
+				$("#recaptcha-error").show();
+				$("#recaptcha-error").text(json.message);
+				grecaptcha.reset();
+				$('html, body').animate({
+					scrollTop: $(".g-recaptcha").offset().top - 100
+				}, 500);
 			}else{
 				alert(jQuery.i18n.prop("member.signup.fail"));
 			}
@@ -228,7 +237,14 @@ $(window).on("beforeunload", function(){
 											<p class="message error"><spring:message code="member.enter_your_email" text="member.enter_your_email"></spring:message></p>
 										</dd>
 									</dl>
-									<input type="button" value="<spring:message code="member.member_registration" text="member.member_registration"></spring:message>" class="bt3 on" id="submit">
+									<dl>
+										<dt></dt>
+										<dd>
+											<div class="g-recaptcha" data-sitekey="${recaptchaSiteKey}"></div>
+											<p id="recaptcha-error" class="message error" style="display:none;"></p>
+										</dd>
+									</dl>
+								<input type="button" value="<spring:message code="member.member_registration" text="member.member_registration"></spring:message>" class="bt3 on" id="submit">
 								</form>
 							</div>
 						</div>

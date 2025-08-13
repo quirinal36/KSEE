@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,16 +24,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sendgrid.SendGridException;
 
 import www.ksee.kr.vo.EmailToken;
+import www.ksee.kr.service.RecaptchaService;
+import www.ksee.kr.service.TokenService;
 import www.ksee.kr.vo.UserVO;
 
 @RequestMapping("/member")
 @Controller
 public class MemberController extends KseeController{
+	
+	@Autowired
+	private TokenService tokenService;
+	
+	@Autowired
+	private RecaptchaService recaptchaService;
 	
 	@RequestMapping("/login")
 	public ModelAndView getLoginView(ModelAndView mv,
@@ -59,6 +67,7 @@ public class MemberController extends KseeController{
 			final String currentUrl = "/member/signup";
 			mv.addObject("curMenu", getCurMenus(currentUrl));
 			mv.addObject("title", "회원가입");
+			mv.addObject("recaptchaSiteKey", recaptchaService.getSiteKey());
 			
 			if(isLoginedUser(request) && complete.isPresent()) {
 				logger.info("afterSignup present");
@@ -78,9 +87,21 @@ public class MemberController extends KseeController{
 	@ResponseBody
 	@RequestMapping(value="/signup", method = RequestMethod.POST, produces = "application/json; charset=utf8")
 	public String saveUser(UserVO user,
-			HttpServletRequest request) {
+			@RequestParam(value = "g-recaptcha-response", required = false) String recaptchaResponse,
+			HttpServletRequest request, Locale locale) {
 		final String inputPwd = user.getPassword();
 		JSONObject json = new JSONObject();
+		
+		// reCAPTCHA 검증
+		String clientIp = recaptchaService.getClientIp(request);
+		boolean isRecaptchaValid = recaptchaService.verifyRecaptcha(recaptchaResponse, clientIp);
+		
+		if (!isRecaptchaValid) {
+			json.put("result", -2);
+			json.put("message", messageSource.getMessage("member.signup.recaptcha.fail", null, locale));
+			return json.toString();
+		}
+		
 		try {
 			int result = userService.insert(user);
 			json.put("result", result);

@@ -54,10 +54,11 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
+@PropertySource("classpath:db.properties")
+@PropertySource("classpath:recaptcha.properties")
+@MapperScan(basePackages = "www.ksee.kr.dao")
 @EnableWebMvc
 @EnableScheduling
-@PropertySource("classpath:db.properties")
-@MapperScan(basePackages = {"www.ksee.kr"})
 public class AppConfig implements WebMvcConfigurer {
 
 	// db.properties 파일을 읽어옴

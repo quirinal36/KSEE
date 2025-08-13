@@ -284,6 +284,20 @@ function validate(data){
 		domainInput.focus();
 		return false;
 	}
+	
+	// reCAPTCHA 검증
+	var recaptchaResponse = grecaptcha.getResponse();
+	if (!recaptchaResponse) {
+		$("#recaptcha-error").show();
+		$("#recaptcha-error").text(jQuery.i18n.prop("member.signup.recaptcha.required"));
+		$('html, body').animate({
+			scrollTop: $(".g-recaptcha").offset().top - 100
+		}, 500);
+		return false;
+	} else {
+		$("#recaptcha-error").hide();
+	}
+	
 	return result;
 }
 function fn_setAddr(){
