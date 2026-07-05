@@ -20,38 +20,38 @@
 		)
 		VALUES
 		(
-			${memberType},
-			${isSpeaker},
-			${national},
-			'${username}',
-			'${classification}',
-			'${level}',
-			'${telephone}',
-			'${email}',
-			'${domain}',
-			${fileId},
-			${sympId},
-			'${nationalCustom}'
+			#{memberType},
+			#{isSpeaker},
+			#{national},
+			#{username},
+			#{classification},
+			#{level},
+			#{telephone},
+			#{email},
+			#{domain},
+			#{fileId},
+			#{sympId},
+			#{nationalCustom}
 		)
 	</insert>
 	<update id="update" parameterType="apply">
 		UPDATE Apply
 		<set>
-			memberType=${memberType},
-			isSpeaker=${isSpeaker},
-			national=${national},
-			username='${username}',
-			classification='${classification}',
-			level='${level}',
-			telephone='${telephone}',
-			email='${email}',
-			domain='${domain}',
-			fileId=${fileId},
-			sympId=${sympId},
-			nationalCustom='${nationalCustom}'
+			memberType=#{memberType},
+			isSpeaker=#{isSpeaker},
+			national=#{national},
+			username=#{username},
+			classification=#{classification},
+			level=#{level},
+			telephone=#{telephone},
+			email=#{email},
+			domain=#{domain},
+			fileId=#{fileId},
+			sympId=#{sympId},
+			nationalCustom=#{nationalCustom}
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</update>
 	
@@ -60,13 +60,13 @@
 		<set>
 			status =
 			<foreach collection="list" item="item" open="CASE" close="END">
-				WHEN id = ${item.id} THEN ${item.status}
+				WHEN id = #{item.id} THEN #{item.status}
 			</foreach>
 		</set>
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</update>
@@ -75,12 +75,12 @@
 		SELECT *
 		FROM Apply
 		<where>
-			sympId = ${sympId}
+			sympId = #{sympId}
 			<if test="query != ''">
 				and (
-					username like '%${query}%'
+					username like CONCAT('%', #{query}, '%')
 					or
-					classification like '%${query}%'
+					classification like CONCAT('%', #{query}, '%')
 				)
 			</if>
 		</where>
@@ -90,7 +90,7 @@
 			(SELECT name FROM FileInfo WHERE id=fileId) AS filename
 		FROM Apply
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</select>
 	
@@ -98,15 +98,15 @@
 		SELECT *
 		FROM Apply
 		<where>
-			sympId = ${sympId}
+			sympId = #{sympId}
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(username)">
 				and (
-					username = '${username}'
+					username = #{username}
 				)
 			</if>
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(telephone)">
 				and (
-					telephone = '${telephone}'
+					telephone = #{telephone}
 				)
 			</if>
 		</where>
@@ -118,14 +118,14 @@
 		<where>
 			isSpeaker = 1
 			and
-			sympId = ${sympId}
+			sympId = #{sympId}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="apply">
 		DELETE FROM Apply
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</delete>
 	
@@ -134,7 +134,7 @@
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</delete>

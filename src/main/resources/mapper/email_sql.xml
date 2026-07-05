@@ -11,9 +11,9 @@
 		)
 		VALUES
 		<foreach collection="list" item="item" open="(" separator="),(" close=")">
-			'${item.receiver}',
-			${item.response},
-			'${item.title}'
+			#{item.receiver},
+			#{item.response},
+			#{item.title}
 		</foreach>
 	</insert>
 	<select id="select" parameterType="emailResult">
@@ -23,6 +23,6 @@
 		
 		</where>
 		order by id desc
-		LIMIT ${from}, ${pageSize}
+		LIMIT #{from}, #{pageSize}
 	</select>
 </mapper>

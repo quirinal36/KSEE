@@ -11,7 +11,7 @@
 					parent is null
 				</when>
 				<otherwise>
-					parent = ${parent}
+					parent = #{parent}
 				</otherwise>
 			</choose>
 		</where>
@@ -22,7 +22,7 @@
 		<where>
 			parent IN
 			<foreach collection="list" separator="," open="(" close=")" item="item">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</select>
@@ -32,10 +32,10 @@
 		<where>
 			<choose>
 				<when test="id gt 0">
-					id = ${id}
+					id = #{id}
 				</when>
 				<otherwise>
-					url = '${url}'
+					url = #{url}
 				</otherwise>
 			</choose>
 		</where>
@@ -44,7 +44,7 @@
 	<select id="select_siblings" parameterType="menus" resultType="menus">
 		SELECT * FROM Menus
 		<where>
-			parent = (SELECT parent FROM Menus WHERE id = ${id})
+			parent = (SELECT parent FROM Menus WHERE id = #{id})
 		</where>
 	</select>
 </mapper>

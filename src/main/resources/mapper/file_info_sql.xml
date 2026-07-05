@@ -16,12 +16,12 @@
 		values
 		
 		<foreach collection="list" item="elem" index="i" open="(" separator="),(" close=")">
-			'${elem.url}',
-			'${elem.name}',
-			'${elem.newFilename}',
-			${elem.size},
-			'${elem.contentType}',
-			${elem.uploader}
+			#{elem.url},
+			#{elem.name},
+			#{elem.newFilename},
+			#{elem.size},
+			#{elem.contentType},
+			#{elem.uploader}
 		</foreach>
 		
 	</insert>
@@ -38,12 +38,12 @@
 		values
 		
 		(
-			'${url}',
-			'${name}',
-			'${newFilename}',
-			${size},
-			'${contentType}',
-			${uploader}
+			#{url},
+			#{name},
+			#{newFilename},
+			#{size},
+			#{contentType},
+			#{uploader}
 		)
 		
 	</insert>
@@ -51,7 +51,7 @@
 		select *
 		from FileInfo
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 		
 	</select>
@@ -59,10 +59,10 @@
 	<update id="update" parameterType="fileinfo">
 		UPDATE FileInfo
 		<set>
-			url = '${url}',
+			url = #{url},
 		</set>
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</update>
 	
@@ -71,13 +71,13 @@
 		<set>
 			boardId =
 			<foreach collection="list" item="item" open="CASE" close="END">
-				WHEN id = ${item.id} THEN ${item.boardId}
+				WHEN id = #{item.id} THEN #{item.boardId}
 			</foreach>
 		</set>
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach> 
 		</where>
 	</update>
@@ -86,14 +86,14 @@
 		SELECT * 
 		FROM FileInfo
 		<where>
-			boardId = ${boardId}
+			boardId = #{boardId}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="fileinfo">
 		DELETE FROM FileInfo
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</delete>
 	
@@ -101,7 +101,7 @@
 		SELECT * FROM FileInfo
 		<where>
 			id IN
-			(SELECT fileId FROM Apply WHERE sympId = ${sympId} and isSpeaker=1)
+			(SELECT fileId FROM Apply WHERE sympId = #{sympId} and isSpeaker=1)
 		</where>
 	</select>
 	
@@ -110,7 +110,7 @@
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</select>

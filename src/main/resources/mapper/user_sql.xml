@@ -21,25 +21,25 @@
 		)
 		VALUES
 		(
-			${user_role},
-			'${login}',
-			'${password}',
-			'${username}',
-			'${phone}',
-			'${email}',
-			'${classification}',
-			'${level}',
-			'${address}',
-			'${telephone}',
-			'${domain}',
-			'${addressDetail}'
+			#{user_role},
+			#{login},
+			#{password},
+			#{username},
+			#{phone},
+			#{email},
+			#{classification},
+			#{level},
+			#{address},
+			#{telephone},
+			#{domain},
+			#{addressDetail}
 		)
 		
 	</insert> 
 	<select id="select" parameterType="user" resultType="user">
 		SELECT * FROM users
 		<where>
-		login = '${login}'
+		login = #{login}
 		</where>
 	</select>
 	<select id="search" parameterType="user" resultType="user">
@@ -51,7 +51,7 @@
 			<if test="query != ''">
 				and
 				(
-					u.username like '%${query}%'
+					u.username like CONCAT('%', #{query}, '%')
 				)
 			</if>
 		</where>
@@ -75,7 +75,7 @@
 				ORDER BY u.id DESC
 			</otherwise>
 		</choose>
-		LIMIT ${from}, ${pageSize}
+		LIMIT #{from}, #{pageSize}
 	</select>
 	<select id="select_one" parameterType="user" resultType="user">
 		SELECT u.*, r.role_name, r.role_name_kr FROM 
@@ -84,10 +84,10 @@
 		<where>
 			<choose>
 				<when test="id > 0">
-					u.id = ${id}
+					u.id = #{id}
 				</when>
 				<otherwise>
-					u.login = '${login}'
+					u.login = #{login}
 				</otherwise>
 			</choose>
 		</where>
@@ -97,9 +97,9 @@
 		users u 
 			LEFT JOIN roles r on (u.user_role = r.id)
 		<where>
-			u.username = '${username}'
+			u.username = #{username}
 			and
-			u.phone = '${phone}'
+			u.phone = #{phone}
 		</where>
 	</select>
 	<select id="select_no_pwd_user" parameterType="user" resultType="user">
@@ -107,7 +107,7 @@
 		users u 
 			LEFT JOIN roles r on (u.user_role = r.id)
 		<where>
-		login = '${login}'
+		login = #{login}
 		</where>
 	</select>
 	
@@ -115,35 +115,35 @@
 		UPDATE users
 		<set>
 			<if test="user_role > 0">
-				user_role = ${user_role},
+				user_role = #{user_role},
 			</if>
 			<if test="password != null and !password.equals('')">
-				password = '${password}',
+				password = #{password},
 			</if>
 			<if test="phone != null and !phone.equals('')">
-				phone = '${phone}',
+				phone = #{phone},
 			</if>
 			<if test="email != null and !email.equals('')">
-				email = '${email}',
+				email = #{email},
 			</if>
 			<if test="classification != null and !classification.equals('')">
-				classification = '${classification}',
+				classification = #{classification},
 			</if>
 			<if test="level != null and !level.equals('')">
-				level = '${level}',
+				level = #{level},
 			</if>
 			<if test="address != null and !address.equals('')">
-				address = '${address}',
+				address = #{address},
 			</if>
 			<if test="domain != null and !domain.equals('')">
-				domain = '${domain}',
+				domain = #{domain},
 			</if>
 			<if test="addressDetail != null and !addressDetail.equals('')">
-				addressDetail = '${addressDetail}',
+				addressDetail = #{addressDetail},
 			</if>
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</update>
 	
@@ -153,7 +153,7 @@
 			<if test="query != ''">
 				and
 				(
-					username like '%${query}%'
+					username like CONCAT('%', #{query}, '%')
 				)
 			</if>
 		</where>
@@ -162,7 +162,7 @@
 	<delete id="delete" parameterType="user">
 		DELETE FROM users
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</delete>
 	
@@ -186,7 +186,7 @@
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</select>

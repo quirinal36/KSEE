@@ -20,11 +20,11 @@
 				LEFT JOIN Symposium s 		on d.symposiumId = s.id
 				LEFT JOIN users u 			on d.writer = u.id
 		<where>
-			d.lang = '${lang}'
+			d.lang = #{lang}
 			and
-			d.stype = ${stype}
+			d.stype = #{stype}
 			and
-			d.symposiumId = ${symposiumId}
+			d.symposiumId = #{symposiumId}
 		</where>
 		ORDER BY d.id DESC
 		LIMIT 0, 1
@@ -47,10 +47,10 @@
 				LEFT JOIN Symposium s 		on d.symposiumId = s.id
 				LEFT JOIN users u 			on d.writer = u.id
 		<where>
-			symposiumId = ${symposiumId}
+			symposiumId = #{symposiumId}
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(lang)">
 				and
-				d.lang = '${lang}'
+				d.lang = #{lang}
 			</if>
 		</where>
 		order by d.stype
@@ -66,21 +66,21 @@
 		)
 		VALUES
 		(
-			${writer},
-			${symposiumId},
-			${stype},
-			'${lang}',
-			'${content}'
+			#{writer},
+			#{symposiumId},
+			#{stype},
+			#{lang},
+			#{content}
 		)
 	</insert>
 	
 	<update id="update" parameterType="symposium_detail">
 		UPDATE SymposiumDetail
 		<set>
-			content = '${content}'
+			content = #{content}
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</update>
 	
@@ -90,7 +90,7 @@
 		FROM 
 			Symposium
 		<where>
-			id = ${symposiumId}
+			id = #{symposiumId}
 		</where>
 	</select>
 	<select id="select_type_title" parameterType="symposium_detail" resultType="java.lang.String">
@@ -99,18 +99,18 @@
 		FROM 
 			SymposiumTypes
 		<where>
-			id = ${stype}
+			id = #{stype}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="symposium_detail">
 		DELETE FROM SymposiumDetail
 		<where>
-			symposiumId = ${symposiumId}
+			symposiumId = #{symposiumId}
 			and
-			stype = ${stype}
+			stype = #{stype}
 			and
-			lang = '${lang}'
+			lang = #{lang}
 		</where>
 	</delete>
 	
@@ -119,13 +119,13 @@
 		<set>
 			symposiumDetailId =
 			<foreach collection="list" item="item" open="CASE" close="END"> 
-				WHEN id = ${item.id} THEN ${item.boardId}
+				WHEN id = #{item.id} THEN #{item.boardId}
 			</foreach>
 		</set>
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</update>
@@ -134,7 +134,7 @@
 		SELECT * 
 		FROM PhotoInfo
 		<where>
-			symposiumDetailId = ${id}
+			symposiumDetailId = #{id}
 		</where>
 	</select>
 	
@@ -143,7 +143,7 @@
 		<where>
 			id IN 
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach>
 		</where>
 	</delete>

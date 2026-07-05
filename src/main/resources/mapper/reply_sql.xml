@@ -12,20 +12,20 @@
 		)
 		VALUES
 		(
-			${writer},
-			${parent},
-			${boardId},
-			'${content}'
+			#{writer},
+			#{parent},
+			#{boardId},
+			#{content}
 		)
 	</insert>
 	
 	<update id="update" parameterType="reply">
 		UPDATE Reply
 		<set>
-			content = '${content}'
+			content = #{content}
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</update>
 	
@@ -41,7 +41,7 @@
 		FROM
 			Reply r LEFT JOIN users u ON r.writer = u.id
 		<where>
-			r.boardId = ${boardId}
+			r.boardId = #{boardId}
 		</where>
 		ORDER BY r.id DESC
 	</select>
@@ -57,7 +57,7 @@
 		FROM
 			Reply r LEFT JOIN users u ON r.writer = u.id
 		<where>
-			r.id = ${id}
+			r.id = #{id}
 		</where>
 	</select>
 	
@@ -67,14 +67,14 @@
 		FROM
 			Reply r LEFT JOIN users u ON r.writer = u.id
 		<where>
-			r.boardId = ${boardId}
+			r.boardId = #{boardId}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="reply">
 		DELETE FROM Reply
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</delete>
 </mapper>

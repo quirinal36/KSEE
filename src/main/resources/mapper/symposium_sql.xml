@@ -17,40 +17,40 @@
 		)
 		VALUES
 		(
-			'${title}',
-			'${place}',
-			'${title_en}',
-			'${place_en}',
-			'${startDate}',
-			'${finishDate}',
-			'${applyStart}',
-			'${applyFinish}',
-			${sympType}
+			#{title},
+			#{place},
+			#{title_en},
+			#{place_en},
+			#{startDate},
+			#{finishDate},
+			#{applyStart},
+			#{applyFinish},
+			#{sympType}
 		)
 	</insert>
 	<update id="update"  parameterType="symposium">
 		UPDATE Symposium
 		<set>
-			title 		= '${title}',
-			place 		= '${place}',
-			title_en	= '${title_en}',
-			place_en	= '${place_en}',
-			startDate	= '${startDate}',
-			finishDate	= '${finishDate}',
-			applyStart	= '${applyStart}',
-			applyFinish	= '${applyFinish}'
+			title 		= #{title},
+			place 		= #{place},
+			title_en	= #{title_en},
+			place_en	= #{place_en},
+			startDate	= #{startDate},
+			finishDate	= #{finishDate},
+			applyStart	= #{applyStart},
+			applyFinish	= #{applyFinish}
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where> 
 	</update>
 	<select id="count" parameterType="symposium" resultType="int">
 		SELECT COUNT(*)
 		FROM Symposium
 		<where>
-			sympType = ${sympType}
+			sympType = #{sympType}
 			<if test="query != ''">
-				and title like '%${query}%'
+				and title like CONCAT('%', #{query}, '%')
 			</if>
 		</where>
 	</select>
@@ -67,22 +67,22 @@
 					)
 				</when>
 				<otherwise>
-					sympType = ${sympType}
+					sympType = #{sympType}
 				</otherwise> 
 			</choose>
 			<if test="query != ''">
-				and title like '%${query}%'
+				and title like CONCAT('%', #{query}, '%')
 			</if>
 		</where>
 		ORDER BY startDate DESC
-		LIMIT ${from}, ${pageSize}
+		LIMIT #{from}, #{pageSize}
 	</select>
 	
 	<select id="select_one" parameterType="symposium" resultType="symposium">
 		SELECT *
 		FROM Symposium
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</select>
 	
@@ -97,14 +97,14 @@
 			viewCnt = viewCnt + 1
 		</set>
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</update>
 	
 	<delete id="delete" parameterType="symposium">
 		DELETE FROM Symposium
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</delete>
 </mapper>

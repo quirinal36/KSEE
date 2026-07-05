@@ -15,12 +15,12 @@
 		)
 		VALUES
 		(
-			'${popupTitle}',
-			'${startDate}',
-			'${finishDate}',
-			${fileId},
-			${enFileId},
-			'${link}',
+			#{popupTitle},
+			#{startDate},
+			#{finishDate},
+			#{fileId},
+			#{enFileId},
+			#{link},
 			(SELECT MAX(p.porder) + 1 FROM popup p)
 		)
 	</insert>
@@ -28,16 +28,16 @@
 	<update id="update" parameterType="popup">
 		UPDATE popup
 		<set>
-			popupTitle = '${popupTitle}',
-			startDate = '${startDate}',
-			finishDate = '${finishDate}',
-			fileId = ${fileId},
-			enFileId =${enFileId},
-			link = '${link}',
-			porder = ${porder}
+			popupTitle = #{popupTitle},
+			startDate = #{startDate},
+			finishDate = #{finishDate},
+			fileId = #{fileId},
+			enFileId =#{enFileId},
+			link = #{link},
+			porder = #{porder}
 		</set>
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</update>
 	
@@ -46,13 +46,13 @@
 		<set>
 			porder =
 			<foreach collection="list" item="item" open="CASE" close="END"> 
-				WHEN id = ${item.id} THEN ${item.porder}
+				WHEN id = #{item.id} THEN #{item.porder}
 			</foreach>
 		</set>
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach> 
 		</where>
 	</update>
@@ -60,7 +60,7 @@
 	<delete id="delete" parameterType="popup">
 		DELETE FROM popup
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</delete>
 	
@@ -92,9 +92,9 @@
 		<where>
 			<if test="@www.ksee.kr.util.StringUtil@notEmpty(today)">
 				<![CDATA[
-				startDate <= '${today}'
+				startDate <= #{today}
 				AND
-				finishDate >= '${today}'
+				finishDate >= #{today}
 				]]>
 			</if>
 		</where>
@@ -126,7 +126,7 @@
 			link 
 		FROM popup
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</select>
 	

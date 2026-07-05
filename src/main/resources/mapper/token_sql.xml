@@ -12,25 +12,25 @@
 		)
 		values
 		(
-			${userId},
-			'${token}',
-			${isPwd}
+			#{userId},
+			#{token},
+			#{isPwd}
 		)
 	</insert>
 	
 	<select id="select_one" parameterType="token" resultType="token">
 		SELECT * FROM Tokens
 		<where>
-			token = '${token}'
+			token = #{token}
 			and
-			userId = '${userId}'
+			userId = #{userId}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="token">
 		DELETE FROM Tokens
 		<where>
-			userId = ${userId}
+			userId = #{userId}
 		</where>
 	</delete>
 </mapper>

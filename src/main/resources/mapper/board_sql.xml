@@ -13,23 +13,23 @@
 		)
 		values
 		(
-			'${title}',
-			'${title_en}',
-			'${content}',
-			${writer},
-			${boardType}
+			#{title},
+			#{title_en},
+			#{content},
+			#{writer},
+			#{boardType}
 		)
 	</insert>
 	<update id="update" parameterType="board">
 		UPDATE Board
 		<set>
-			viewCount = ${viewCount},
-			title = '${title}',
-			title_en = '${title_en}',
-			content = '${content}'
+			viewCount = #{viewCount},
+			title = #{title},
+			title_en = #{title_en},
+			content = #{content}
 		</set>
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</update>
 	<select id="select" parameterType="board" resultType="board">
@@ -55,15 +55,15 @@
 					) 
 				</when>
 				<otherwise>
-					board.boardType = ${boardType}
+					board.boardType = #{boardType}
 				</otherwise>
 			</choose>
 			<if test="query != ''">
 			and 
 				(
-				board.title like '%${query}%'
+				board.title like CONCAT('%', #{query}, '%')
 				or
-				board.content like '%${query}%'
+				board.content like CONCAT('%', #{query}, '%')
 				)
 			</if>
 			<choose>
@@ -76,7 +76,7 @@
 			</choose>
 		</where>
 		order by board.id desc
-		LIMIT ${from}, ${pageSize}
+		LIMIT #{from}, #{pageSize}
 	</select>
 	
 	<select id="count" parameterType="board" resultType="int">
@@ -91,7 +91,7 @@
 					boardType = 5
 				</when>
 				<otherwise>
-					boardType = ${boardType}
+					boardType = #{boardType}
 				</otherwise>
 			</choose>
 			<choose>
@@ -112,14 +112,14 @@
 		FROM 
 			Board board LEFT JOIN users usr ON (board.writer = usr.id)
 		<where>
-			board.id = ${id}
+			board.id = #{id}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="board">
 		DELETE FROM Board
 		<where>
-			id = ${id}		
+			id = #{id}		
 		</where>
 	</delete>
 </mapper>

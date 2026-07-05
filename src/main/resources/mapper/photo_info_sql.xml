@@ -18,14 +18,14 @@
 		values
 		
 		<foreach collection="list" item="elem" index="i" open="(" separator="),(" close=")">
-			'${elem.url}',
-			'${elem.name}',
-			'${elem.thumbnailFilename}',
-			'${elem.newFilename}',
-			${elem.size},
-			${elem.thumbnailSize},
-			'${elem.contentType}',
-			${elem.uploader}
+			#{elem.url},
+			#{elem.name},
+			#{elem.thumbnailFilename},
+			#{elem.newFilename},
+			#{elem.size},
+			#{elem.thumbnailSize},
+			#{elem.contentType},
+			#{elem.uploader}
 		</foreach>
 		
 	</insert>
@@ -44,14 +44,14 @@
 		values
 		
 		(
-			'${url}',
-			'${name}',
-			'${thumbnailFilename}',
-			'${newFilename}',
-			${size},
-			${thumbnailSize},
-			'${contentType}',
-			${uploader}
+			#{url},
+			#{name},
+			#{thumbnailFilename},
+			#{newFilename},
+			#{size},
+			#{thumbnailSize},
+			#{contentType},
+			#{uploader}
 		)
 		
 	</insert>
@@ -59,7 +59,7 @@
 		select *
 		from PhotoInfo
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 		
 	</select>
@@ -67,12 +67,12 @@
 	<update id="update" parameterType="photoinfo">
 		UPDATE PhotoInfo
 		<set>
-			url = '${url}',
-			thumbnailUrl = '${thumbnailUrl}',
-			size = ${size}
+			url = #{url},
+			thumbnailUrl = #{thumbnailUrl},
+			size = #{size}
 		</set>
 		<where>
-			id=${id}
+			id=#{id}
 		</where>
 	</update>
 	
@@ -81,14 +81,14 @@
 		<set>
 			boardId =
 			<foreach collection="list" item="item" open="CASE" close="END">
-				WHEN id = ${item.id} THEN ${item.boardId}
+				WHEN id = #{item.id} THEN #{item.boardId}
 			</foreach>
 			
 		</set>
 		<where>
 			id IN
 			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item.id}
+				#{item.id}
 			</foreach> 
 		</where>
 	</update>
@@ -97,14 +97,14 @@
 		SELECT * 
 		FROM PhotoInfo
 		<where>
-			boardId = ${boardId}
+			boardId = #{boardId}
 		</where>
 	</select>
 	
 	<delete id="delete" parameterType="photoinfo">
 		DELETE FROM PhotoInfo
 		<where>
-			id = ${id}
+			id = #{id}
 		</where>
 	</delete>
 </mapper>
