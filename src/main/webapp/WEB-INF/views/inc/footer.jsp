@@ -41,3 +41,4 @@
 		</div>
 	</div>
 </footer>
+<c:import url="/inc/chatbot"/>

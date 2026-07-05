@@ -159,9 +159,18 @@ public class IncController extends KseeController{
 		return mv;
 	}
 	
+	@RequestMapping(value = "/chatbot", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView getChatbotView(Locale locale, ModelAndView mv,
+			HttpServletRequest req, Authentication authentication) {
+		mv.addObject("locale", locale);
+		mv.addObject("chatbotIsAdmin", req.isUserInRole(www.ksee.kr.vo.UserVO.ADMIN));
+		mv.setViewName("/inc/chatbot");
+		return mv;
+	}
+
 	@RequestMapping(value="/term")
 	public ModelAndView getTermView(ModelAndView mv) {
-		
+
 		return mv;
 	}
 

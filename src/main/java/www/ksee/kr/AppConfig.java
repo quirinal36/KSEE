@@ -56,6 +56,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 @PropertySource("classpath:db.properties")
 @PropertySource("classpath:recaptcha.properties")
+@PropertySource(value = "classpath:chatbot.properties", ignoreResourceNotFound = true)
 @MapperScan(basePackages = "www.ksee.kr.dao")
 @EnableWebMvc
 @EnableScheduling
