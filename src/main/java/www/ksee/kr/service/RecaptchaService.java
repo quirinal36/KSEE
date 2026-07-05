@@ -29,13 +29,14 @@ public class RecaptchaService {
     
     private static final Logger logger = LoggerFactory.getLogger(RecaptchaService.class);
     
-    @Value("${recaptcha.secret.key}")
+    // 환경변수(RECAPTCHA_*) 우선, 없으면 recaptcha.properties 값 사용
+    @Value("${RECAPTCHA_SECRET_KEY:${recaptcha.secret.key:}}")
     private String secretKey;
-    
-    @Value("${recaptcha.site.key}")
+
+    @Value("${RECAPTCHA_SITE_KEY:${recaptcha.site.key:}}")
     private String siteKey;
-    
-    @Value("${recaptcha.verify.url}")
+
+    @Value("${recaptcha.verify.url:https://www.google.com/recaptcha/api/siteverify}")
     private String verifyUrl;
     
     /**

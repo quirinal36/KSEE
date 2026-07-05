@@ -1,0 +1,6 @@
+# Google reCAPTCHA 설정 템플릿. 실제 값은 커밋하지 마세요.
+# 주입 우선순위: 환경변수 > recaptcha.properties
+#   환경변수(권장): RECAPTCHA_SITE_KEY, RECAPTCHA_SECRET_KEY
+recaptcha.site.key=YOUR_SITE_KEY
+recaptcha.secret.key=YOUR_SECRET_KEY
+recaptcha.verify.url=https://www.google.com/recaptcha/api/siteverify

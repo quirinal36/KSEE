@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.ResourceUtils;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
@@ -15,18 +17,39 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.SendGridException;
 import javax.mail.internet.MimeUtility;
 
+import www.ksee.kr.Config;
 import www.ksee.kr.vo.EmailVO;
 import www.ksee.kr.vo.FileInfo;
 import www.ksee.kr.vo.MemberMail;
 
 public class EmailUtil {
 	Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	final private String apiKey;
 
 	public EmailUtil(String apiKey) {
 		super();
 		this.apiKey = apiKey;
+	}
+
+	/**
+	 * SendGrid API 키를 해석한다.
+	 * 1순위: 환경변수 SENDGRID_API_KEY (권장, Git 에 남지 않음)
+	 * 2순위: classpath:sendgrid.env 파일
+	 */
+	public static String resolveApiKey() {
+		String env = System.getenv("SENDGRID_API_KEY");
+		if (env != null && !env.trim().isEmpty()) {
+			return env.trim();
+		}
+		try {
+			File file = ResourceUtils.getFile("classpath:sendgrid.env");
+			return FileUtils.readFileToString(file, Config.ENCODING).trim();
+		} catch (IOException e) {
+			LoggerFactory.getLogger(EmailUtil.class)
+					.warn("SendGrid API key not found (env SENDGRID_API_KEY or classpath:sendgrid.env)");
+			return "";
+		}
 	}
 
 	public void sendGridEmailHtml(EmailVO info) throws SendGridException {

@@ -103,10 +103,7 @@ public class EmailToken extends PasswordResetToken {
 		emailVO.setSubject(subject);
 		emailVO.setMessage(data);
 
-		File file = ResourceUtils.getFile("classpath:sendgrid.env");
-		String apiKey = FileUtils.readFileToString(file, Config.ENCODING);
-		
-		EmailUtil emailUtil = new EmailUtil(apiKey);
+		EmailUtil emailUtil = new EmailUtil(EmailUtil.resolveApiKey());
 		emailUtil.sendGridEmailHtml(emailVO);
 	}
 	private String assembleEmail(UserVO user) {

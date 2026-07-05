@@ -73,11 +73,24 @@ public class AppConfig implements WebMvcConfigurer {
 	@Bean
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("mysql.driver"));
-		dataSource.setUrl(env.getProperty("mysql.jdbcUrl"));
-		dataSource.setUsername(env.getProperty("mysql.username"));
-		dataSource.setPassword(env.getProperty("mysql.password"));
+		// 환경변수 우선(MYSQL_*), 없으면 db.properties 값 사용
+		dataSource.setDriverClassName(resolve("MYSQL_DRIVER", "mysql.driver"));
+		dataSource.setUrl(resolve("MYSQL_JDBC_URL", "mysql.jdbcUrl"));
+		dataSource.setUsername(resolve("MYSQL_USERNAME", "mysql.username"));
+		dataSource.setPassword(resolve("MYSQL_PASSWORD", "mysql.password"));
 		return dataSource;
+	}
+
+	/**
+	 * 환경변수(envKey)가 있으면 그 값을, 없으면 프로퍼티(propKey) 값을 반환한다.
+	 * (env.getProperty 는 OS 환경변수도 조회하므로 비밀 값을 코드/파일 밖으로 뺄 수 있다.)
+	 */
+	private String resolve(String envKey, String propKey) {
+		String v = env.getProperty(envKey);
+		if (v != null && !v.trim().isEmpty()) {
+			return v;
+		}
+		return env.getProperty(propKey);
 	}
 	
 	/**

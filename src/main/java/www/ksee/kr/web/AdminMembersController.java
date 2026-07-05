@@ -236,10 +236,7 @@ public class AdminMembersController {
 		
 		mailVO.setSender(sender);
 		
-		File file = ResourceUtils.getFile("classpath:sendgrid.env");
-		String apiKey = FileUtils.readFileToString(file, Config.ENCODING);
-		
-		EmailUtil emailUtil = new EmailUtil(apiKey);
+		EmailUtil emailUtil = new EmailUtil(EmailUtil.resolveApiKey());
 		try {
 			json.put("result", emailUtil.sendGridMultiEmail(mailVO));
 		} catch (SendGridException e) {
