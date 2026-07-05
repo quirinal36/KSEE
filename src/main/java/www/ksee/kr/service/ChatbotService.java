@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +60,12 @@ public class ChatbotService {
 
 	/** 최근 대화 히스토리 중 서버가 실제로 모델에 전달할 최대 메시지 수 (프롬프트 폭주 방지). */
 	private static final int MAX_HISTORY_MESSAGES = 20;
+
+	/** 도구 호출(agentic) 루프의 최대 반복 횟수 (무한루프 방지). */
+	private static final int MAX_TOOL_STEPS = 6;
+
+	@Autowired
+	private ChatbotToolService toolService;
 
 	/**
 	 * API 키가 설정되어 있는지 여부.
@@ -249,6 +256,166 @@ public class ChatbotService {
 		} catch (Exception e) {
 			logger.debug("Skip unparseable stream chunk: {}", payload);
 			return null;
+		}
+	}
+
+	// ==================================================================
+	// Phase 2: 관리자 도구 호출 (function calling) — 비스트리밍 agentic 루프
+	// ==================================================================
+
+	/**
+	 * 관리자용 도구 호출 대화. 모델이 도구를 요청하면 서버가 실행하고 결과를 되먹여,
+	 * 모델이 최종 자연어 답변을 낼 때까지 반복한다. 최종 답변 문자열을 반환한다.
+	 *
+	 * @param history     이전 대화 히스토리
+	 * @param userMessage 이번 사용자 입력
+	 * @param adminUserId 작성자 기록용 관리자 user id
+	 */
+	public String chatWithTools(List<ChatMessage> history, String userMessage, int adminUserId)
+			throws IOException {
+		if (!isConfigured()) {
+			throw new IOException("OpenRouter API key is not configured");
+		}
+
+		JSONArray messages = new JSONArray();
+		messages.put(new JSONObject()
+				.put("role", "system")
+				.put("content", buildAdminToolSystemPrompt()));
+
+		for (ChatMessage m : trimHistory(history)) {
+			if (m == null || m.getRole() == null || m.getContent() == null) {
+				continue;
+			}
+			if (!"user".equals(m.getRole()) && !"assistant".equals(m.getRole())) {
+				continue;
+			}
+			messages.put(new JSONObject().put("role", m.getRole()).put("content", m.getContent()));
+		}
+		messages.put(new JSONObject().put("role", "user").put("content", userMessage));
+
+		JSONArray tools = toolService.getToolDefinitions();
+
+		for (int step = 0; step < MAX_TOOL_STEPS; step++) {
+			JSONObject assistantMsg = callOnce(messages, tools);
+			JSONArray toolCalls = assistantMsg.optJSONArray("tool_calls");
+
+			if (toolCalls != null && toolCalls.length() > 0) {
+				// 모델이 도구 실행을 요청함 → assistant 메시지를 그대로 대화에 추가
+				messages.put(assistantMsg);
+
+				for (int i = 0; i < toolCalls.length(); i++) {
+					JSONObject tc = toolCalls.optJSONObject(i);
+					if (tc == null) {
+						continue;
+					}
+					String callId = tc.optString("id", "call_" + i);
+					JSONObject function = tc.optJSONObject("function");
+					String toolName = function != null ? function.optString("name", "") : "";
+
+					JSONObject argsObj = new JSONObject();
+					if (function != null) {
+						String argStr = function.optString("arguments", "{}");
+						try {
+							argsObj = new JSONObject(argStr == null || argStr.trim().isEmpty() ? "{}" : argStr);
+						} catch (Exception e) {
+							logger.debug("Bad tool arguments: {}", argStr);
+						}
+					}
+
+					// 서버측에서 관리자 권한을 재확인하며 실행 (callerIsAdmin=true 는 컨트롤러가 이미 검증)
+					JSONObject result = toolService.execute(toolName, argsObj, true, adminUserId);
+
+					messages.put(new JSONObject()
+							.put("role", "tool")
+							.put("tool_call_id", callId)
+							.put("name", toolName)
+							.put("content", result.toString()));
+				}
+				continue; // 결과를 반영해 다시 모델 호출
+			}
+
+			// 도구 요청이 없으면 최종 답변
+			return assistantMsg.optString("content", "");
+		}
+
+		return "요청을 처리하는 데 단계가 너무 많이 필요합니다. 좀 더 구체적으로 말씀해 주세요.";
+	}
+
+	/**
+	 * 관리자 도구 호출용 시스템 프롬프트.
+	 */
+	private String buildAdminToolSystemPrompt() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("당신은 '한국효소공학연구회(KSEE)' 웹사이트의 관리자 어시스턴트입니다. 현재 관리자로 로그인한 사용자를 돕습니다.\n");
+		sb.append("제공된 도구를 사용해 게시판 작업을 대신 수행할 수 있습니다:\n");
+		sb.append("- list_posts: 게시판 글 목록 조회\n");
+		sb.append("- get_post: 게시글 상세 조회\n");
+		sb.append("- create_post: 새 게시글 작성\n");
+		sb.append("- update_post: 게시글 수정(제공한 항목만)\n");
+		sb.append("- delete_post: 게시글 삭제\n");
+		sb.append("게시판 종류: notice(공지사항), news(관련소식), member(회원동정), speaker(연사제안), free(자유게시판).\n");
+		sb.append("규칙:\n");
+		sb.append("- 한국어로 간결하고 명확하게 답합니다.\n");
+		sb.append("- 수정/삭제하려면 대상 게시글 id 가 필요합니다. id 를 모르면 먼저 list_posts 로 찾습니다.\n");
+		sb.append("- 삭제(delete_post)는 되돌릴 수 없습니다. 반드시 사용자에게 어떤 글을 지울지 알리고 명시적 동의를 받은 뒤에만 confirm=true 로 실행합니다. 동의 전에는 실행하지 않습니다.\n");
+		sb.append("- 작성/수정/삭제를 실행한 뒤에는 결과(제목, 게시판, 가능하면 링크 경로)를 사용자에게 알려줍니다.\n");
+		sb.append("- 도구 결과가 실패(success=false)이면 지어내지 말고 실패 사실과 이유를 그대로 전달합니다.\n");
+		return sb.toString();
+	}
+
+	/**
+	 * 도구를 포함한 비스트리밍 단일 호출. choices[0].message 를 반환한다.
+	 */
+	private JSONObject callOnce(JSONArray messages, JSONArray tools) throws IOException {
+		JSONObject body = new JSONObject();
+		body.put("model", model);
+		body.put("stream", false);
+		body.put("max_tokens", maxTokens);
+		body.put("messages", messages);
+		if (tools != null && tools.length() > 0) {
+			body.put("tools", tools);
+			body.put("tool_choice", "auto");
+		}
+
+		RequestConfig requestConfig = RequestConfig.custom()
+				.setConnectTimeout(10_000)
+				.setSocketTimeout(120_000)
+				.build();
+
+		try (CloseableHttpClient httpClient = HttpClients.custom()
+				.setDefaultRequestConfig(requestConfig)
+				.build()) {
+
+			HttpPost post = new HttpPost(apiUrl);
+			post.setHeader("Authorization", "Bearer " + apiKey);
+			post.setHeader("Content-Type", "application/json");
+			post.setHeader("HTTP-Referer", referer);
+			post.setHeader("X-Title", appTitle);
+			post.setEntity(new StringEntity(body.toString(), StandardCharsets.UTF_8));
+
+			try (CloseableHttpResponse response = httpClient.execute(post)) {
+				int status = response.getStatusLine().getStatusCode();
+				HttpEntity entity = response.getEntity();
+				String responseString = entity != null
+						? new String(readAll(entity.getContent()), StandardCharsets.UTF_8)
+						: "";
+
+				if (status < 200 || status >= 300) {
+					logger.warn("OpenRouter (tools) error status={} body={}", status, responseString);
+					throw new IOException("OpenRouter returned status " + status);
+				}
+
+				JSONObject json = new JSONObject(responseString);
+				JSONArray choices = json.optJSONArray("choices");
+				if (choices == null || choices.length() == 0) {
+					throw new IOException("OpenRouter returned no choices");
+				}
+				JSONObject message = choices.getJSONObject(0).optJSONObject("message");
+				if (message == null) {
+					throw new IOException("OpenRouter returned no message");
+				}
+				return message;
+			}
 		}
 	}
 

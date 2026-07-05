@@ -50,6 +50,9 @@ public class ChatbotController {
 	@Autowired
 	private ChatbotService chatbotService;
 
+	@Autowired
+	private www.ksee.kr.service.UserService userService;
+
 	@Value("${chatbot.ratelimit.per.minute:15}")
 	private int rateLimitPerMinute;
 
@@ -136,10 +139,18 @@ public class ChatbotController {
 
 		final PrintWriter writer = response.getWriter();
 		try {
-			chatbotService.streamChat(history, message, admin, token -> {
-				writer.write("data: " + JSONObject.quote(token) + "\n\n");
-				writer.flush();
-			});
+			if (admin) {
+				// 관리자: 도구 호출(agentic) 루프로 처리한 뒤 최종 답변을 스트림처럼 전송
+				int adminUserId = getAdminUserId(request);
+				String finalText = chatbotService.chatWithTools(history, message, adminUserId);
+				emitAsStream(writer, finalText);
+			} else {
+				// 일반 방문자: 토큰 단위 실시간 스트리밍
+				chatbotService.streamChat(history, message, false, token -> {
+					writer.write("data: " + JSONObject.quote(token) + "\n\n");
+					writer.flush();
+				});
+			}
 			writer.write("event: done\ndata: {}\n\n");
 			writer.flush();
 		} catch (IOException e) {
@@ -148,6 +159,31 @@ public class ChatbotController {
 			writer.write("data: " + JSONObject.quote("답변 생성 중 오류가 발생했습니다.") + "\n\n");
 			writer.flush();
 		}
+	}
+
+	/** 완성된 텍스트를 SSE data 이벤트로 잘게 나눠 보내 스트리밍 느낌을 준다. */
+	private void emitAsStream(PrintWriter writer, String text) {
+		if (text == null || text.isEmpty()) {
+			text = "(응답이 없습니다.)";
+		}
+		final int chunk = 60;
+		for (int i = 0; i < text.length(); i += chunk) {
+			String part = text.substring(i, Math.min(text.length(), i + chunk));
+			writer.write("data: " + JSONObject.quote(part) + "\n\n");
+			writer.flush();
+		}
+	}
+
+	/** 현재 로그인한 관리자의 user id. 실패 시 0. */
+	private int getAdminUserId(HttpServletRequest request) {
+		String login = request.getRemoteUser();
+		if (login == null || login.isEmpty()) {
+			return 0;
+		}
+		UserVO param = new UserVO();
+		param.setLogin(login);
+		UserVO user = userService.selectOne(param);
+		return user != null ? user.getId() : 0;
 	}
 
 	// ------------------------------------------------------------------

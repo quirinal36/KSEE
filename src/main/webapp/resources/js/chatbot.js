@@ -34,6 +34,11 @@
 		closeBtn.addEventListener('click', closePanel);
 		form.addEventListener('submit', onSubmit);
 
+		// 관리자에게는 게시판 작업이 가능함을 안내
+		if (cfg.isAdmin) {
+			appendMessage('bot', '관리자로 로그인하셨습니다. 게시판 글 조회·작성·수정·삭제를 채팅으로 요청할 수 있어요. 예) "공지사항 최근 글 목록 보여줘", "자유게시판에 \'회비 안내\' 제목으로 공지 올려줘"');
+		}
+
 		// 입력창 자동 높이 + Enter 전송(Shift+Enter 줄바꿈)
 		textEl.addEventListener('input', autoGrow);
 		textEl.addEventListener('keydown', function (e) {
