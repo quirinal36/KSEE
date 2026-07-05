@@ -20,7 +20,7 @@
 			</c:import>
 			<div id="contentsPrint">
 				<img src="/resources/img/contents/history.jpg" style="display: none; width: 90%; max-width: 1000px; margin: 60px auto;">
-				<spring:message code="cont.history_wrap" text="cont.history_wrap"></spring:message>
+				<c:choose><c:when test="${not empty pageContent}">${pageContent}</c:when><c:otherwise><spring:message code="cont.history_wrap" text="cont.history_wrap"></spring:message></c:otherwise></c:choose>
 			</div>
 		</div>
 	</div>

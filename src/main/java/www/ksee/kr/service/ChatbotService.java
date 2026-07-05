@@ -353,12 +353,16 @@ public class ChatbotService {
 		sb.append("- create_post: 새 게시글 작성\n");
 		sb.append("- update_post: 게시글 수정(제공한 항목만)\n");
 		sb.append("- delete_post: 게시글 삭제\n");
+		sb.append("- list_pages: 편집 가능한 정적 페이지(인사말, 연혁 등) 목록\n");
+		sb.append("- get_page: 정적 페이지의 현재 내용 조회\n");
+		sb.append("- update_page: 정적 페이지 내용 수정(HTML)\n");
 		sb.append("게시판 종류: notice(공지사항), news(관련소식), member(회원동정), speaker(연사제안), free(자유게시판).\n");
 		sb.append("규칙:\n");
 		sb.append("- 한국어로 간결하고 명확하게 답합니다.\n");
 		sb.append("- 수정/삭제하려면 대상 게시글 id 가 필요합니다. id 를 모르면 먼저 list_posts 로 찾습니다.\n");
 		sb.append("- 삭제(delete_post)는 되돌릴 수 없습니다. 반드시 사용자에게 어떤 글을 지울지 알리고 명시적 동의를 받은 뒤에만 confirm=true 로 실행합니다. 동의 전에는 실행하지 않습니다.\n");
 		sb.append("- 작성/수정/삭제를 실행한 뒤에는 결과(제목, 게시판, 가능하면 링크 경로)를 사용자에게 알려줍니다.\n");
+		sb.append("- 정적 페이지를 수정할 때는 먼저 get_page 로 현재 내용을 확인한 뒤, 사용자의 요청을 반영한 전체 HTML 을 update_page 의 content 로 저장합니다.\n");
 		sb.append("- 도구 결과가 실패(success=false)이면 지어내지 말고 실패 사실과 이유를 그대로 전달합니다.\n");
 		return sb.toString();
 	}

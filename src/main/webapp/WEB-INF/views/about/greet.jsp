@@ -29,7 +29,12 @@
 					</div>
 				</div>
 				<div class="greet_txt">
-					<spring:message code="cont.greet_text" text="cont.greet_text"></spring:message>
+					<c:choose>
+						<c:when test="${not empty pageContent}">${pageContent}</c:when>
+						<c:otherwise>
+							<spring:message code="cont.greet_text" text="cont.greet_text"></spring:message>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

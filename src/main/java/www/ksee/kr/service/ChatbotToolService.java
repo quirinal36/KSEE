@@ -2,6 +2,7 @@ package www.ksee.kr.service;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -32,6 +33,9 @@ public class ChatbotToolService {
 
 	@Autowired
 	private ChatbotBoardDAO chatbotBoardDAO;
+
+	@Autowired
+	private PageContentService pageContentService;
 
 	/** 게시글 조회/목록 시 모델에 넘길 본문 최대 길이 (토큰 절약). */
 	private static final int CONTENT_PREVIEW_LEN = 1500;
@@ -120,6 +124,29 @@ public class ChatbotToolService {
 										.put("description", "사용자가 삭제에 명시적으로 동의했으면 true")))
 						.put("required", new JSONArray().put("id").put("confirm"))));
 
+		// --- 정적 페이지 콘텐츠 (Phase 3) ---
+		// list_pages
+		tools.put(fn("list_pages", "챗봇으로 편집 가능한 정적 페이지(인사말, 연혁 등) 목록을 조회한다.",
+				new JSONObject().put("type", "object").put("properties", new JSONObject())));
+
+		// get_page
+		tools.put(fn("get_page", "정적 페이지의 현재 내용을 조회한다. (DB 값이 있으면 그것을, 없으면 기존 기본 내용을 반환)",
+				new JSONObject()
+						.put("type", "object")
+						.put("properties", new JSONObject()
+								.put("pageKey", str("페이지 키. 예: about.greet(인사말), about.history(연혁)")))
+						.put("required", new JSONArray().put("pageKey"))));
+
+		// update_page
+		tools.put(fn("update_page", "정적 페이지의 내용을 새 HTML 로 저장한다. content(한국어)는 필수, content_en(영문)은 선택.",
+				new JSONObject()
+						.put("type", "object")
+						.put("properties", new JSONObject()
+								.put("pageKey", str("페이지 키. 예: about.greet, about.history"))
+								.put("content", str("새 내용(한국어 HTML)"))
+								.put("content_en", str("새 내용(영문 HTML, 선택)")))
+						.put("required", new JSONArray().put("pageKey").put("content"))));
+
 		return tools;
 	}
 
@@ -151,6 +178,12 @@ public class ChatbotToolService {
 					return updatePost(args);
 				case "delete_post":
 					return deletePost(args);
+				case "list_pages":
+					return listPages();
+				case "get_page":
+					return getPage(args);
+				case "update_page":
+					return updatePage(args);
 				default:
 					return err("알 수 없는 도구입니다: " + name);
 			}
@@ -331,6 +364,68 @@ public class ChatbotToolService {
 					.put("deletedTitle", nz(existing.getTitle()));
 		}
 		return err("게시글 삭제에 실패했습니다.");
+	}
+
+	// ------------------------------------------------------------------
+	// 정적 페이지 도구 (Phase 3)
+	// ------------------------------------------------------------------
+
+	private JSONObject listPages() {
+		JSONArray pages = new JSONArray();
+		for (PageContentService.PageInfo info : pageContentService.listPages()) {
+			pages.put(new JSONObject()
+					.put("pageKey", info.key)
+					.put("title", info.title)
+					.put("url", info.url)
+					.put("hasDbContent", pageContentService.hasDbRow(info.key)));
+		}
+		return new JSONObject().put("success", true).put("pages", pages);
+	}
+
+	private JSONObject getPage(JSONObject args) {
+		String key = args.optString("pageKey", "").trim();
+		if (!pageContentService.isKnown(key)) {
+			return err("편집 가능한 페이지가 아닙니다. list_pages 로 가능한 페이지를 확인하세요. pageKey=" + key);
+		}
+		PageContentService.PageInfo info = pageContentService.getInfo(key);
+		String ko = pageContentService.getEffectiveContent(key, Locale.KOREA);
+		String en = pageContentService.getEffectiveContent(key, Locale.US);
+		return new JSONObject()
+				.put("success", true)
+				.put("pageKey", key)
+				.put("title", info.title)
+				.put("url", info.url)
+				.put("source", pageContentService.hasDbRow(key) ? "db" : "default")
+				.put("content", ko)
+				.put("content_en", en);
+	}
+
+	private JSONObject updatePage(JSONObject args) {
+		String key = args.optString("pageKey", "").trim();
+		if (!pageContentService.isKnown(key)) {
+			return err("편집 가능한 페이지가 아닙니다. list_pages 로 가능한 페이지를 확인하세요. pageKey=" + key);
+		}
+		String content = args.optString("content", "");
+		if (content.trim().isEmpty()) {
+			return err("저장할 내용(content)이 필요합니다.");
+		}
+		String contentEn = args.has("content_en") ? args.optString("content_en", null) : null;
+
+		try {
+			int r = pageContentService.upsert(key, content, contentEn);
+			if (r > 0) {
+				PageContentService.PageInfo info = pageContentService.getInfo(key);
+				logger.info("Chatbot admin updated page content key={}", key);
+				return new JSONObject()
+						.put("success", true)
+						.put("pageKey", key)
+						.put("url", info.url);
+			}
+			return err("페이지 내용 저장에 실패했습니다.");
+		} catch (Exception e) {
+			logger.warn("Page upsert failed key=" + key, e);
+			return err("페이지 내용 저장에 실패했습니다. page_content 테이블이 준비되었는지 확인이 필요합니다: " + e.getMessage());
+		}
 	}
 
 	// ------------------------------------------------------------------
