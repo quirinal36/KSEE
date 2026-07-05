@@ -2,6 +2,11 @@
 # 주입 우선순위: 환경변수 > db.properties
 #   환경변수(권장): MYSQL_DRIVER, MYSQL_JDBC_URL, MYSQL_USERNAME, MYSQL_PASSWORD
 mysql.driver=com.mysql.cj.jdbc.Driver
-mysql.jdbcUrl=jdbc:mysql://DB_HOST:3306/DB_NAME?useSSL=true&serverTimezone=UTC
+
+# TLS 권장: sslMode=VERIFY_IDENTITY 로 서버 인증서를 검증하세요(MITM 방지).
+#   - 서버 인증서(또는 CA)를 JVM truststore 에 신뢰 등록해야 합니다.
+#   - 자체서명 인증서로 검증이 어렵다면 최소 sslMode=REQUIRED(암호화, 검증 없음)를
+#     쓰고, verifyServerCertificate=false(검증 비활성) 는 사용하지 마세요.
+mysql.jdbcUrl=jdbc:mysql://DB_HOST:3306/DB_NAME?sslMode=VERIFY_IDENTITY&serverTimezone=UTC
 mysql.username=YOUR_DB_USER
 mysql.password=YOUR_DB_PASSWORD

@@ -41,6 +41,33 @@ export OPENROUTER_API_KEY="sk-or-...."
 
 재발급한 값은 위 환경변수로만 주입하고, 파일에는 남기지 마세요.
 
+## DB 연결 TLS 인증서 검증 (MITM 방지)
+
+현재 `db.properties` 의 접속 URL 은 `verifyServerCertificate=false` 로 서버
+인증서를 **검증하지 않습니다.** 연결은 암호화되지만 중간자 공격(MITM)에
+취약합니다.
+
+권장 설정(환경변수 `MYSQL_JDBC_URL` 또는 `db.properties` 에 적용):
+
+```
+# 인증서까지 검증 (가장 안전). 서버 인증서/CA 를 JVM truststore 에 신뢰 등록 필요
+jdbc:mysql://DB_HOST:3306/DB_NAME?sslMode=VERIFY_IDENTITY&serverTimezone=UTC
+
+# 자체서명 등으로 검증이 어렵다면 최소 이 설정(암호화 O, 검증 X)
+jdbc:mysql://DB_HOST:3306/DB_NAME?sslMode=REQUIRED&serverTimezone=UTC
+```
+
+⚠️ 이 변경은 DB 서버의 인증서 신뢰 설정에 따라 **연결이 끊길 수 있어**,
+운영에서 인증서 준비를 마친 뒤 적용하세요. (그래서 코드/라이브 파일은
+자동으로 바꾸지 않았습니다.)
+
+## CSRF 보호 (미적용, 검토 필요)
+
+`WebSecurityConfig` 에서 `csrf().disable()` 로 CSRF 보호가 꺼져 있습니다.
+재활성화하면 게시판 작성/회원정보 수정/관리자 작업 등 모든 상태변경 요청과
+다수의 AJAX 호출에 CSRF 토큰을 실어야 하므로, 폼·스크립트 전반을 함께
+수정해야 합니다(침습적). 별도 작업으로 진행 권장.
+
 ## Git 히스토리 정리 (선택, 권장)
 
 파일에서 값을 지워도 **과거 커밋 히스토리에는 남아 있습니다.**
