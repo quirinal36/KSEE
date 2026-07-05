@@ -7,9 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.imageio.ImageIO;
@@ -37,23 +40,50 @@ import www.ksee.kr.vo.UserVO;
 
 @Controller
 public class FileController extends KseeController {
-	
+
+	/** 이미지 업로드 허용 확장자. */
+	private static final Set<String> ALLOWED_IMAGE_EXT = new HashSet<String>(Arrays.asList(
+			"jpg", "jpeg", "png", "gif", "bmp", "webp"));
+
+	/** 일반 파일 업로드 허용 확장자(문서/이미지/압축). 실행·스크립트 파일은 차단. */
+	private static final Set<String> ALLOWED_FILE_EXT = new HashSet<String>(Arrays.asList(
+			"pdf", "hwp", "hwpx", "doc", "docx", "xls", "xlsx", "ppt", "pptx",
+			"txt", "csv", "zip", "jpg", "jpeg", "png", "gif", "bmp", "webp"));
+
+	/** 원본 파일명에서 소문자 확장자 추출(점 없으면 빈 문자열). */
+	private String getExtension(String filename) {
+		if (filename == null) {
+			return "";
+		}
+		int i = filename.lastIndexOf('.');
+		if (i < 0 || i == filename.length() - 1) {
+			return "";
+		}
+		return filename.substring(i + 1).toLowerCase();
+	}
+
 	@ResponseBody
 	@RequestMapping(value="/upload/file", method = {RequestMethod.GET, RequestMethod.POST})
-	public Map uploadFile(MultipartHttpServletRequest request, 
+	public Map uploadFile(MultipartHttpServletRequest request,
     		HttpServletResponse response) {
 		UserVO user = null;
 		if(request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_USER")) {
 			user = getUser();
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
         if (itr.hasNext()) {
             mpf = request.getFile(itr.next());
+            String ext = getExtension(mpf.getOriginalFilename());
+            if (!ALLOWED_FILE_EXT.contains(ext)) {
+                map.put("result", 0);
+                map.put("error", "허용되지 않는 파일 형식입니다.");
+                return map;
+            }
             String newFilenameBase = UUID.randomUUID().toString();
-            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+            String originalFileExtension = "." + ext;
             String newFilename = newFilenameBase + originalFileExtension;
             String srcPath = new FileUtil().makeUserPath();
             //request.getSession().getServletContext().getRealPath("/upload");
@@ -99,12 +129,19 @@ public class FileController extends KseeController {
         MultipartFile mpf;
         if (itr.hasNext()) {
             mpf = request.getFile(itr.next());
+            String ext = getExtension(mpf.getOriginalFilename());
+            String contentType = mpf.getContentType();
+            if (!ALLOWED_IMAGE_EXT.contains(ext)
+                    || contentType == null || !contentType.toLowerCase().startsWith("image/")) {
+                map.put("result", 0);
+                map.put("error", "허용되지 않는 이미지 형식입니다.");
+                return map;
+            }
             String newFilenameBase = UUID.randomUUID().toString();
-            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+            String originalFileExtension = "." + ext;
             String newFilename = newFilenameBase + originalFileExtension;
-            
+
             String srcPath = new FileUtil().makeUserPath();
-			String contentType = mpf.getContentType();
 			
 			File newFile = new File(srcPath + File.separator + newFilename);
 			
