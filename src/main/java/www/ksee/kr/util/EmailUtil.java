@@ -99,7 +99,7 @@ public class EmailUtil {
 	
 	public void res() throws UnirestException {
 		HttpResponse<String> response = Unirest.get("https://api.sendgrid.com/v3/messages?limit=10&query=a")
-				  .header("authorization", "__REDACTED_SENDGRID_KEY__")
+				  .header("authorization", this.apiKey)
 				  .asString();
 	}
 }
