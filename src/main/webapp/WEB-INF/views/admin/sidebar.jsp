@@ -22,6 +22,9 @@
 			<li <c:if test="${menu eq 3}">class="on"</c:if>>
 				<a href="<c:url value="/admin/popup/"/>">팝업 관리</a>
 			</li>
+			<li <c:if test="${menu eq 4}">class="on"</c:if>>
+				<a href="<c:url value="/admin/page/"/>">페이지 관리</a>
+			</li>
 		</ul>
 	</div>
 </aside>

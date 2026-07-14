@@ -20,17 +20,24 @@
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<div class="greet_title">
-					<div>
+				<c:choose>
+				<c:when test="${not empty pageContent and (not empty pageContent.content or (pageContent.viewType eq 'FILE' and not empty pageContent.fileId))}">
+					<%@ include file="/WEB-INF/views/inc/pageContent.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<div class="greet_title">
 						<div>
-							<span><spring:message code="cont.greet_tit1" text="cont.greet_tit1"></spring:message></span>
-							<strong><spring:message code="cont.greet_tit2" text="cont.greet_tit2"></spring:message></strong>
+							<div>
+								<span><spring:message code="cont.greet_tit1" text="cont.greet_tit1"></spring:message></span>
+								<strong><spring:message code="cont.greet_tit2" text="cont.greet_tit2"></spring:message></strong>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="greet_txt">
-					<spring:message code="cont.greet_text" text="cont.greet_text"></spring:message>
-				</div>
+					<div class="greet_txt">
+						<spring:message code="cont.greet_text" text="cont.greet_text"></spring:message>
+					</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

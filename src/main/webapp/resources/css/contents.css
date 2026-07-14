@@ -4,15 +4,16 @@
 .greet_title > div > div { display: table-cell; padding-left: 100px; vertical-align: middle; }
 .greet_title span { display: block; margin-bottom: 10px; font-size: 16px; font-weight: 500; color: #7698c0; }
 .greet_title strong { display: block; font-size: 48px; font-weight: 500; color: #fff; letter-spacing: -2px; }
-.greet_txt { width: 100%; max-width: 1300px; margin: 0 auto 60px auto; padding: 60px 100px; box-sizing: border-box; background: #f5f5f5; line-height: 180%; font-size: 16px; }
-.greet_txt .writer { text-align: left; }
-.greet_txt .writer span { display: inline-block; margin-left: 5px; font-size: 24px; }
+.greet_txt { width: 100%; max-width: 1300px; margin: 0 auto 60px auto; padding: 60px 100px; box-sizing: border-box; background: #f5f5f5; line-height: 160%; font-size: 18px; word-break: keep-all; }
+.greet_txt > p { margin: 0 0 1.6em; }
+.greet_txt .writer { margin-bottom: 0; text-align: left; }
+.greet_txt .writer span { display: inline-block; margin-left: 5px; font-size: 24px; font-weight: 700; }
 @media ( max-width: 800px ) {
 	.greet_title { width: auto; min-width: auto; max-width: unset; height: 100px; margin-top: 0; }
 	.greet_title > div > div { padding: 0; text-align: center; }
 	.greet_title span { margin-bottom: 2px; font-size: 12px; }
 	.greet_title strong { font-size: 18px; letter-spacing: -0.5px; }
-	.greet_txt { padding: 20px; font-size: 12px; word-break: keep-all; }
+	.greet_txt { padding: 20px; font-size: 14px; }
 }
 
 /* 정관 */
@@ -153,6 +154,19 @@
 .tbl2 thead { border-top: 2px solid #325cb2; background: #6f8dc9; }
 .tbl2 th { border: 1px solid #325cb2; border-top: 0; color: #fff; }
 .tbl2 td { border: 1px solid #929292; }
+.tbl2 .secretary-name { position: relative; }
+.tbl2 .secretary-role {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 26.667%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	border-right: 1px solid #929292;
+}
 @media ( max-width: 800px ) {
 	.tbl2 { width: calc( 100% - 40px ); min-width: auto; max-width: unset; margin: 20px auto; }
 	.tbl2 th, .tbl2 td { padding: 5px 0; font-size: 12px; }

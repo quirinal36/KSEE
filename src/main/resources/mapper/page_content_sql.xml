@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="page_content_sql">
+
+	<!-- page_key 기준 저장(없으면 insert, 있으면 update). 내용은 #{} 로 안전하게 바인딩 -->
+	<insert id="save" parameterType="page_content">
+		INSERT INTO page_content
+			(page_key, view_type, content, file_id, file_type, updated_by, updated_at)
+		VALUES
+			(#{pageKey}, #{viewType}, #{content}, #{fileId}, #{fileType}, #{updatedBy}, NOW())
+		ON DUPLICATE KEY UPDATE
+			view_type  = #{viewType},
+			content    = #{content},
+			file_id    = #{fileId},
+			file_type  = #{fileType},
+			updated_by = #{updatedBy},
+			updated_at = NOW()
+	</insert>
+
+	<delete id="delete" parameterType="page_content">
+		DELETE FROM page_content
+		<where>
+			page_key = #{pageKey}
+		</where>
+	</delete>
+
+	<!-- 전체 조회(관리자 목록용) -->
+	<select id="select" resultType="page_content">
+		SELECT
+			page_key   AS pageKey,
+			view_type  AS viewType,
+			content,
+			file_id    AS fileId,
+			file_type  AS fileType,
+			updated_by AS updatedBy,
+			updated_at AS updatedAt
+		FROM page_content
+	</select>
+
+	<!-- page_key 로 1건 조회 -->
+	<select id="select_one" parameterType="page_content" resultType="page_content">
+		SELECT
+			page_key   AS pageKey,
+			view_type  AS viewType,
+			content,
+			file_id    AS fileId,
+			file_type  AS fileType,
+			updated_by AS updatedBy,
+			updated_at AS updatedAt
+		FROM page_content
+		<where>
+			page_key = #{pageKey}
+		</where>
+	</select>
+
+	<select id="count" parameterType="page_content" resultType="int">
+		SELECT COUNT(*) FROM page_content
+	</select>
+
+</mapper>

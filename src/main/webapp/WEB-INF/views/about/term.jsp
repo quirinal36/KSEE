@@ -29,9 +29,16 @@ $(function(){
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<div class="term_list">
-					<c:import url="/inc/term"></c:import>
-				</div>
+				<c:choose>
+				<c:when test="${not empty pageContent and (not empty pageContent.content or (pageContent.viewType eq 'FILE' and not empty pageContent.fileId))}">
+					<%@ include file="/WEB-INF/views/inc/pageContent.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<div class="term_list">
+						<c:import url="/inc/term"></c:import>
+					</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>

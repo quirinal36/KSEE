@@ -12,6 +12,8 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
      	<jaction.xml.version>1.9.13</jaction.xml.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -309,6 +311,8 @@
 				
 	</dependencies>
     <build>
+        <!-- 루트 컨텍스트(/) 배포용 산출물 이름: target/ROOT.war -->
+        <finalName>ROOT</finalName>
         <plugins>
 	        <plugin>
 			  <artifactId>maven-war-plugin</artifactId>
@@ -346,6 +350,40 @@
                 <version>1.2.1</version>
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
+                </configuration>
+            </plugin>
+            <!-- 로컬 실행: mvn clean package cargo:run 으로 Tomcat 9를 자동 다운로드하여 WAR를 ROOT(/)로 구동 -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <version>1.10.28</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat9x</containerId>
+                        <zipUrlInstaller>
+                            <url>https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.109/bin/apache-tomcat-9.0.109.zip</url>
+                            <downloadDir>${project.build.directory}/cargo/downloads</downloadDir>
+                            <extractDir>${project.build.directory}/cargo/extracts</extractDir>
+                        </zipUrlInstaller>
+                    </container>
+                    <configuration>
+                        <type>standalone</type>
+                        <home>${project.build.directory}/tomcat9x</home>
+                        <properties>
+                            <cargo.servlet.port>8080</cargo.servlet.port>
+                            <cargo.tomcat.uriencoding>UTF-8</cargo.tomcat.uriencoding>
+                        </properties>
+                    </configuration>
+                    <deployables>
+                        <deployable>
+                            <groupId>www.ksee</groupId>
+                            <artifactId>kr</artifactId>
+                            <type>war</type>
+                            <properties>
+                                <context>/</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
                 </configuration>
             </plugin>
         </plugins>

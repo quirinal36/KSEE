@@ -19,8 +19,15 @@
 				<c:param name="id">${curMenu.id }</c:param>
 			</c:import>
 			<div id="contentsPrint">
-				<img src="/resources/img/contents/history.jpg" style="display: none; width: 90%; max-width: 1000px; margin: 60px auto;">
-				<spring:message code="cont.history_wrap" text="cont.history_wrap"></spring:message>
+				<c:choose>
+				<c:when test="${not empty pageContent and (not empty pageContent.content or (pageContent.viewType eq 'FILE' and not empty pageContent.fileId))}">
+					<%@ include file="/WEB-INF/views/inc/pageContent.jsp" %>
+				</c:when>
+				<c:otherwise>
+					<img src="/resources/img/contents/history.jpg" style="display: none; width: 90%; max-width: 1000px; margin: 60px auto;">
+					<spring:message code="cont.history_wrap" text="cont.history_wrap"></spring:message>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
