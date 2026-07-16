@@ -213,6 +213,7 @@ function resizePopup(){
 				<a href="https://www.krict.re.kr/" target="_blank"><img src="<c:url value="/resources/img/index/b21.png"/>" alt="한국화학연구원"></a>
 				<a href="https://www.acrc.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b22.png"/>" alt="국민권익위원회"></a>
 				<a href="https://www.msit.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b23.png"/>" alt="과학기술정보통신부"></a>
+				<a href="https://www.nts.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b24.png"/>" alt="국세청"></a>
 			</div>
 		</div>
 	</div>
