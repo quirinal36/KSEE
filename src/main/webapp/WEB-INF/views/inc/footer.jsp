@@ -41,3 +41,7 @@
 		</div>
 	</div>
 </footer>
+<script type="text/javascript">
+window.KSEE_CONTEXT_PATH = "${pageContext.request.contextPath}";
+</script>
+<script type="text/javascript" src="<c:url value="/resources/js/docs-chatbot.js"><c:param name="v" value="20260730-3"/></c:url>"></script>

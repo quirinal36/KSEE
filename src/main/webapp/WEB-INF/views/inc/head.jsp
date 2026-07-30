@@ -32,9 +32,10 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/common.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/layout.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/contents.css"/>">
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/index.css"><c:param name="v" value="20260730-1"/></c:url>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/board.css"/>">
-
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/docs-chatbot.css"><c:param name="v" value="20260730-2"/></c:url>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/docs-chatbot-portal.css"><c:param name="v" value="20260730-1"/></c:url>">
 <script type="text/javascript">
 const toast = swal.mixin({
 	toast : true,

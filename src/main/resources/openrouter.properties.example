@@ -1,0 +1,10 @@
+# Copy this file to openrouter.properties and paste your OpenRouter key.
+# Never commit openrouter.properties.
+openrouter.api.key=<OPENROUTER_API_KEY>
+
+# OpenRouter model slug. The free router works without choosing a provider model.
+openrouter.model=openrouter/free
+
+# Optional app attribution headers sent to OpenRouter.
+openrouter.site.url=http://localhost:8080
+openrouter.site.title=KSEE Docs Assistant

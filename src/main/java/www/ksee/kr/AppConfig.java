@@ -56,6 +56,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 @PropertySource("classpath:db.properties")
 @PropertySource("classpath:recaptcha.properties")
+@PropertySource(value = "classpath:openrouter.properties", ignoreResourceNotFound = true)
+@PropertySource(value = "file:${user.dir}/.env", ignoreResourceNotFound = true)
 @MapperScan(basePackages = "www.ksee.kr.dao")
 @EnableWebMvc
 @EnableScheduling

@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
+
 public class StringUtil {
 	private final static String[] days = {"일","월","화","수","목","금","토"};
 	/**
@@ -20,7 +22,10 @@ public class StringUtil {
 	 * @throws Exception  
 	 */
 	public static String removeTag(String html) throws Exception {
-		return html.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+		if (html == null) {
+			return "";
+		}
+		return Jsoup.parse(html).text();
 	}
 	
 	

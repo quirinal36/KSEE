@@ -4,7 +4,9 @@ target/test-classes/log4j.xml
 target/**
 
 # 로컬 시크릿 파일 (커밋 금지 — .example 템플릿을 복사해 값을 채워 사용)
+.env
 src/main/resources/db.properties
 src/main/resources/recaptcha.properties
+src/main/resources/openrouter.properties
 src/main/resources/sendgrid.env
 src/main/resources/sendgrid2.env

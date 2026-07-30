@@ -1,0 +1,31 @@
+/*
+ * 챗봇 전용 viewport portal.
+ * 홈 콘텐츠와 별도의 fixed stacking context를 만들어 열고 닫을 때 문서 흐름에
+ * 어떤 폭, 높이, 여백도 추가하지 않는다.
+ */
+#ksee-chatbot-root {
+	position: fixed;
+	inset: 0;
+	z-index: 10019;
+	pointer-events: none;
+	contain: layout paint;
+	isolation: isolate;
+	font-family: "Noto Sans KR", "Noto Sans", sans-serif;
+}
+
+#ksee-chatbot-root,
+#ksee-chatbot-root * {
+	box-sizing: border-box;
+}
+
+#ksee-chatbot-root > .ksee-chatbot-panel {
+	position: absolute;
+	z-index: 1;
+	pointer-events: auto;
+}
+
+#ksee-chatbot-root > .ksee-chatbot-toggle {
+	position: absolute;
+	z-index: 2;
+	pointer-events: auto;
+}
