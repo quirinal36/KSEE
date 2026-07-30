@@ -48,17 +48,17 @@ function resizePopup(){
 				</div>
 			</div>
 			<div class="idx_cont">
-            	<div>
-                    <div class="idx_popup_wrap">
+            	<div class="idx_card_grid">
+                    <div class="idx_popup_wrap idx_card idx_card_popup">
 						<div class="idx_popup">
 							<c:forEach items="${popups }" var="item">
 								<div class="item">
-									<a href="<c:url value="${item.link }"/>" style="background-image: url(<c:url value="${item.url }"/>);">${item.popupTitle }</a>
+									<a href="<c:url value="${item.link }"/>" style="background-image: url(<c:url value="${item.url }"/>);"><c:out value="${item.popupTitle }"/></a>
 								</div>
 							</c:forEach>
 						</div>
                     </div>
-                    <div class="idx_notice_list">
+                    <div class="idx_notice_list idx_card idx_card_notice">
                         <div class="title">
                             <a href="<c:url value="/group/notice/"/>" class="name">
                             	<spring:message code="comm.announcements" text="comm.announcements"></spring:message>
@@ -79,15 +79,16 @@ function resizePopup(){
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="title">
 	                                        	<c:choose>
 													<c:when test="${locale.language eq 'en' }">
-														${item.title_en }
+														<c:out value="${item.title_en }"/>
 													</c:when>
 													<c:otherwise>
-														${item.title }
+														<c:out value="${item.title }"/>
 													</c:otherwise>
 												</c:choose>
 	                                        </a><br>
 	                                        <a href="<c:url value="/group/notice/view/${item.id }"/>" class="text">
-	                                        	<b>${item.writerName }</b> ${ su:removeTag(item.content) }
+	                                        	<b><c:out value="${item.writerName }"/></b>
+	                                        	<c:out value="${su:removeTag(item.content)}"/>
 	                                        </a>
 	                                    </div>
 	                                </li>
@@ -95,7 +96,7 @@ function resizePopup(){
                             </ul>
                         </div>
                     </div>
-                    <div class="idx_board_list">
+                    <div class="idx_board_list idx_card idx_card_news">
                         <div class="title">
                             <a href="<c:url value="/group/news/"/>" class="name">
                             	<spring:message code="comm.relevant_news" text="comm.relevant_news"></spring:message>
@@ -110,15 +111,15 @@ function resizePopup(){
 									<a href="<c:url value="/group/news/view/${item.id }"/>">
 										<c:choose>
 											<c:when test="${locale.language eq 'en' }">
-												${item.title_en }
+												<c:out value="${item.title_en }"/>
 											</c:when>
 											<c:otherwise>
-												${item.title }
+												<c:out value="${item.title }"/>
 											</c:otherwise>
 										</c:choose>
 									</a>
 	                                <span>
-		                                ${item.writerName }
+		                                <c:out value="${item.writerName }"/>
 	                                	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 	                                </span>
 	                            </div>
@@ -129,15 +130,15 @@ function resizePopup(){
 										<a href="<c:url value="/group/news/view/${item.id }"/>">
 											<c:choose>
 												<c:when test="${locale.language eq 'en' }">
-													${item.title_en }
+													<c:out value="${item.title_en }"/>
 												</c:when>
 												<c:otherwise>
-													${item.title }
+													<c:out value="${item.title }"/>
 												</c:otherwise>
 											</c:choose>
 										</a>
 	                                    <span>
-		                                    ${item.writerName }
+		                                    <c:out value="${item.writerName }"/>
 	                                    	<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 	                                    </span>
 	                                </li>
@@ -145,8 +146,8 @@ function resizePopup(){
                                 
                             </ul>
                         </div>
-					</div>
-                    <div class="idx_board_list">
+                    </div>
+                    <div class="idx_board_list idx_card idx_card_free">
                         <div class="title">
                             <a href="<c:url value="/group/free/"/>" class="name">
                             	<spring:message code="comm.bulletin_board" text="comm.bulletin_board"></spring:message>
@@ -161,15 +162,15 @@ function resizePopup(){
 									<a href="<c:url value="/group/free/view/${item.id }"/>">
 										<c:choose>
 											<c:when test="${locale.language eq 'en' }">
-												${item.title_en }
+												<c:out value="${item.title_en }"/>
 											</c:when>
 											<c:otherwise>
-												${item.title }
+												<c:out value="${item.title }"/>
 											</c:otherwise>
 										</c:choose>
 									</a>
 									<span>
-										${item.writerName }
+										<c:out value="${item.writerName }"/>
 										<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 									</span>
 								</div>
@@ -177,9 +178,9 @@ function resizePopup(){
 							<ul>
 								<c:forEach items="${freeBoardList }" var="item" begin="1" end="4">
 									<li>
-										<a href="<c:url value="/group/free/view/${item.id }"/>">${item.title }</a>
+										<a href="<c:url value="/group/free/view/${item.id }"/>"><c:out value="${item.title }"/></a>
 										<span>
-											${item.writerName }
+											<c:out value="${item.writerName }"/>
 											<fmt:formatDate value="${item.wdate}" pattern="yyyy-MM-dd" />
 										</span>
 									</li>
@@ -213,7 +214,7 @@ function resizePopup(){
 				<a href="https://www.krict.re.kr/" target="_blank"><img src="<c:url value="/resources/img/index/b21.png"/>" alt="한국화학연구원"></a>
 				<a href="https://www.acrc.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b22.png"/>" alt="국민권익위원회"></a>
 				<a href="https://www.msit.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b23.png"/>" alt="과학기술정보통신부"></a>
-				<a href="https://www.nts.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b24.png"/>" alt="국세청"></a>
+				<a href="https://www.nts.go.kr" target="_blank"><img src="<c:url value="/resources/img/index/b24.jpg"/>" alt="국세청"></a>
 			</div>
 		</div>
 	</div>

@@ -8,24 +8,33 @@
 
 /* idx_cont */
 .idx_cont { padding: 50px 0; background: #f5f6f7; }
-.idx_cont > div { width: 90%; max-width: 1300px; min-width: 1000px; margin: 0 auto; font-size: 0; }
-.idx_cont > div > div { display: inline-block; width: 48%; margin-top: 50px; vertical-align: top; }
-.idx_cont > div > div:nth-child(odd) { margin-right: 4%; }
-.idx_cont > div > div:nth-child(1),
-.idx_cont > div > div:nth-child(2) {
-	margin-top: 0;
+.idx_cont > .idx_card_grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-areas:
+		"popup notice"
+		"news free";
+	column-gap: 4%;
+	row-gap: 50px;
+	width: 90%;
+	max-width: 1300px;
+	min-width: 1000px;
+	margin: 0 auto;
+	font-size: 0;
 }
+.idx_card_grid > .idx_card { width: 100%; min-width: 0; height: 337px; margin: 0; box-sizing: border-box; vertical-align: top; }
+.idx_card_popup { grid-area: popup; }
+.idx_card_notice { grid-area: notice; }
+.idx_card_news { grid-area: news; }
+.idx_card_free { grid-area: free; }
 .idx_popup_wrap,
 .idx_notice_list {
-	display: inline-block;
 	vertical-align: top;
 }
-.idx_popup_wrap { width: 48%; height: 337px; margin-right: 4%; border-radius: 15px; overflow: hidden; }
+.idx_popup_wrap { border-radius: 15px; overflow: hidden; }
 .idx_popup_wrap .item a { display: block; width: 100%; height: 337px; background-position: 50% 50%; background-repeat: no-repeat; background-size: cover; }
 .idx_notice_list,
 .idx_board_list {
-	width: 48%;
-	height: 337px;
 	background: #fff;
 }
 
@@ -104,7 +113,6 @@
 .idx_banner a img { width: 85%; }
 
 
-
 /* 반응형 */
 @media ( max-width: 800px ) {
 	.idx_intro { min-width: auto; padding: 40px 0 44px 0; }
@@ -113,9 +121,20 @@
 	.idx_intro > .text { font-size: 12px; }
 	.idx_intro > .text span { font-size: 14px; }
 	.idx_cont { padding: 10px 0; }
-	.idx_cont > div { width: auto; min-width: auto; max-width: unset; }
-	.idx_cont > div > div { width: 100%; height: auto; margin-top: 10px !important; }
-	.idx_cont > div > div:nth-child(odd) { margin-right: 0; }
+	.idx_cont > .idx_card_grid {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+			"popup"
+			"notice"
+			"news"
+			"free";
+		column-gap: 0;
+		row-gap: 10px;
+		width: auto;
+		min-width: auto;
+		max-width: unset;
+	}
+	.idx_card_grid > .idx_card { width: 100%; height: auto; margin: 0; }
 	.idx_popup_wrap { border-radius: 0; }
 	.idx_popup_wrap .item a { height: calc( 100% ); }
 	.idx_notice_list > .title, .idx_board_list > .title { height: 47px; padding: 19px 20px 0 20px; }
